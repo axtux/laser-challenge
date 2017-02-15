@@ -7,6 +7,11 @@ import be.ac.umons.sgl.lazer.g06.LazerChallenge;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "Lazer Challenge";
+		config.useGL30=true;
+		config.width=1000;
+		config.height=720;
+		
 		new LwjglApplication(new LazerChallenge(), config);
 	}
 }
