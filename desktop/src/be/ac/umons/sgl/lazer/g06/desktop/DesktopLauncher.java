@@ -9,8 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Lazer Challenge";
 		config.useGL30=true;
-		config.width=1000;
-		config.height=720;
+		config.width=LazerChallenge.WIDTH;
+		config.height=LazerChallenge.HEIGHT;
 		
 		new LwjglApplication(new LazerChallenge(), config);
 	}

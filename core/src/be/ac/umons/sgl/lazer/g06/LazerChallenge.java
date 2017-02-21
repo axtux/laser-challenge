@@ -5,11 +5,15 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class LazerChallenge extends Game {
 	SpriteBatch batch;
-	Texture img;
+	public static int WIDTH=1000;
+	public static int HEIGHT=720;
+	
 	
 	@Override
 	public void create () {
@@ -17,7 +21,7 @@ public class LazerChallenge extends Game {
 		this.setScreen(new MainMenu(this));
 	}
 	
-	public void renden(){
+	public void render(){
 		super.render();
 	}
 }
