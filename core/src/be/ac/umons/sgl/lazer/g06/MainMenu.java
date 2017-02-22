@@ -18,7 +18,8 @@ public class MainMenu implements Screen {
 	
 	LazerChallenge game;
 	Texture playButtonOn;
-	Texture playButtonOff, exitButtonOn, exitButtonOff;
+	Texture playButtonOff, exitButtonOn, exitButtonOff, logo,compteLocalOff,
+			compteLocalOn,compteFacebookOff;
 	
 	public MainMenu(LazerChallenge game){
 		this.game=game;
@@ -29,11 +30,14 @@ public class MainMenu implements Screen {
 		//img = new Texture("badlogic.jpg");
 		
 		//creation des images des boutons
-		playButtonOn=new Texture("play_button_active.png");
-		playButtonOff=new Texture("play_button_inactive.png");
+		playButtonOn=new Texture("connexion_anonyme_button_on.png");
+		playButtonOff=new Texture("connexion_anonyme_button.png");
+		compteLocalOff= new Texture("compte_local_off.png");
+		compteLocalOn= new Texture("compte_local_on.png");
+		compteFacebookOff = new Texture("connexion_facebook_button_off.png");
 		exitButtonOn=new Texture("exit_button_active.png");
 		exitButtonOff= new Texture("exit_button_inactive.png");
-		
+		logo = new Texture("LazerChallengeLogo.png");
 	}
 	
 	public void render(float delta) {
@@ -41,25 +45,63 @@ public class MainMenu implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//On commence le batch qui va traiter l image ou les images
 		game.batch.begin();
+		game.batch.draw(logo,Gdx.graphics.getWidth()/2-190,Gdx.graphics.getHeight()/2+250,400,100);
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0,Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
-		if (Gdx.input.getX() < ((Gdx.graphics.getWidth()/2)+50) && Gdx.input.getX()> ((Gdx.graphics.getWidth()/2)-90)
-				&& Gdx.input.getY() < (Gdx.graphics.getHeight()/2)-170 && Gdx.input.getY() > (Gdx.graphics.getHeight()/2)-270) {
-				
-				
-				game.batch.draw(playButtonOn,Gdx.graphics.getWidth()/2-90,Gdx.graphics.getHeight()/2+100,140,170);
+		if (Gdx.input.getX() < ((Gdx.graphics.getWidth()/2)+140) && Gdx.input.getX()> ((Gdx.graphics.getWidth()/2)-90)
+				&& Gdx.input.getY() < (Gdx.graphics.getHeight()/2)+1 && Gdx.input.getY() > (Gdx.graphics.getHeight()/2)-170) {
+			
+			game.batch.draw(playButtonOn,Gdx.graphics.getWidth()/2-110,Gdx.graphics.getHeight()/2+50,250,100);
+			
+			if ( Gdx.input.isTouched()){
+				this.dispose();
+				game.setScreen(new Window());
+				}
 			}
 			
 		else 
-				game.batch.draw(playButtonOff,Gdx.graphics.getWidth()/2-90,Gdx.graphics.getHeight()/2+100,140,170);
+			game.batch.draw(playButtonOff,Gdx.graphics.getWidth()/2-110,Gdx.graphics.getHeight()/2+50,250,100);
 		
-		if (Gdx.input.getX() < ((Gdx.graphics.getWidth()/2)+50) && Gdx.input.getX()> ((Gdx.graphics.getWidth()/2)-90)
+		
+		if (Gdx.input.getX() < ((Gdx.graphics.getWidth()/2)+140) && Gdx.input.getX()> ((Gdx.graphics.getWidth()/2)-90)
+				&& Gdx.input.getY() < (Gdx.graphics.getHeight()/2)-99 && Gdx.input.getY() > (Gdx.graphics.getHeight()/2)-170) {
+			
+			game.batch.draw(compteLocalOn,Gdx.graphics.getWidth()/2-110,Gdx.graphics.getHeight()/2-100,250,100);
+			
+			if ( Gdx.input.isTouched()){
+				this.dispose();
+				game.setScreen(new Window());
+				}
+			}
+			
+		else 
+			game.batch.draw(compteLocalOff,Gdx.graphics.getWidth()/2-110,Gdx.graphics.getHeight()/2-100,250,100);
+		
+		
+		
+		if (Gdx.input.getX() < ((Gdx.graphics.getWidth()/2)+140) && Gdx.input.getX()> ((Gdx.graphics.getWidth()/2)-90)
+				&& Gdx.input.getY() < (Gdx.graphics.getHeight()/2)+1 && Gdx.input.getY() > (Gdx.graphics.getHeight()/2)-170) {
+			
+			game.batch.draw(compteFacebookOff,Gdx.graphics.getWidth()/2-110,Gdx.graphics.getHeight()/2-280,250,130);
+			
+			if ( Gdx.input.isTouched()){
+				this.dispose();
+				game.setScreen(new Window());
+				}
+			}
+			
+		else 
+			game.batch.draw(compteFacebookOff,Gdx.graphics.getWidth()/2-110,Gdx.graphics.getHeight()/2-280,250,130);
+		
+		/*if (Gdx.input.getX() < ((Gdx.graphics.getWidth()/2)+50) && Gdx.input.getX()> ((Gdx.graphics.getWidth()/2)-90)
 				&& Gdx.input.getY() < (Gdx.graphics.getHeight()/2)+300 && Gdx.input.getY() > (Gdx.graphics.getHeight()/2)+170) {
 				
-				game.batch.draw(exitButtonOn,Gdx.graphics.getWidth()/2-90,Gdx.graphics.getHeight()/2-300,140,170);
+			game.batch.draw(exitButtonOn,Gdx.graphics.getWidth()/2-90,Gdx.graphics.getHeight()/2-300,140,170);
+			if ( Gdx.input.isTouched())
+				Gdx.app.exit();
 			}
 		else
 			game.batch.draw(exitButtonOff,Gdx.graphics.getWidth()/2-90,Gdx.graphics.getHeight()/2-300,140,170);
-
+*/
 		game.batch.end();
 		
 	}
