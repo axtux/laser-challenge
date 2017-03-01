@@ -1,9 +1,11 @@
-package be.ac.umons.sgl.lazer.g06.Graphic;
+package be.ac.umons.sgl.lazer.g06.graphic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class MainMenu implements Screen {
 	
@@ -32,12 +34,18 @@ public class MainMenu implements Screen {
 	}
 	
 	public void render(float delta) {
+		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+		TextButton btn = new TextButton("Coucou petite perruche !", textButtonStyle);
+		BitmapFont font = new BitmapFont();
+		textButtonStyle.font = font;
+		
 		Gdx.gl.glClearColor(.25f, .25f, .25f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//On commence le batch qui va traiter l image ou les images
 		game.batch.begin();
 		game.batch.draw(logo,Gdx.graphics.getWidth()/2-190,Gdx.graphics.getHeight()/2+250,400,100);
 		game.batch.draw(connexion,Gdx.graphics.getWidth()/2-390,Gdx.graphics.getHeight()/2+170,200,100);
+		game.stage.addActor(btn);
 		game.batch.getProjectionMatrix().setToOrtho2D(0, 0,Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
 		
 		//Gestion du bouton Anonyme

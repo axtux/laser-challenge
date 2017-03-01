@@ -1,4 +1,4 @@
-package be.ac.umons.sgl.lazer.g06.Graphic;
+package be.ac.umons.sgl.lazer.g06.graphic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
