@@ -14,8 +14,18 @@ public class MainMenu implements Screen {
 	Texture playButtonOff, exitButtonOn, exitButtonOff, logo,compteLocalOff,
 			compteLocalOn,compteFacebookOff,compteFacebookOn,connexion;
 	
+	static MainMenu instance;
+	
 	public MainMenu(LazerChallenge game){
 		this.game=game;
+	}
+	
+	public static MainMenu getInstance(LazerChallenge game) {
+		if(MainMenu.instance == null) {
+			MainMenu.instance = new MainMenu(game);
+		}
+		
+		return MainMenu.instance;
 	}
 	
 	public void show() {
