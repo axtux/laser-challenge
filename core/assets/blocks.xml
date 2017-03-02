@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE blocks [
+	<!ELEMENT blocks (block*) >
+	<!ELEMENT block (image,name,inputs)>
+	<!ELEMENT image (#PCDATA)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT inputs (input*) >
+	<!ELEMENT input (output*) >
+	<!ATTLIST input orientation CDATA #IMPLIED >
+	<!ELEMENT output EMPTY >
+	<!ATTLIST output orientation CDATA #IMPLIED >
+	]>
+<blocks>
+	<block>
+		<image>path_to_img</image>
+		<name>blocker</name>
+		<inputs>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>gate</name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="DOWN"/>
+			</input>
+			<input orientation="DOWN">
+				<output orientation="UP"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>one-laser source</name>
+		<inputs>
+			<input>
+				<output orientation ="UP"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>two-laser-angled source</name>
+		<inputs>
+			<input>
+				<output orientation ="UP"/>
+				<output orientation ="RIGHT"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>two-laser-straight source</name>
+		<inputs>
+			<input>
+				<output orientation ="UP"/>
+				<output orientation ="DOWN"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>three-laser source</name>
+		<inputs>
+			<input>
+				<output orientation ="UP"/>
+				<output orientation ="RIGHT"/>
+				<output orientation ="LEFT"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>four-laser source</name>
+		<inputs>
+			<input>
+				<output orientation ="UP"/>
+				<output orientation ="RIGHT"/>
+				<output orientation ="DOWN"/>
+				<output orientation ="LEFT"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>one-laser target</name>
+		<inputs>
+			<input orientation ="UP"/>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>two-laser-angled target</name>
+		<inputs>
+			<input orientation ="UP"/>
+			<input orientation ="RIGHT"/>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>two-laser-straight target</name>
+		<inputs>
+			<input orientation ="UP"/>
+			<input orientation ="DOWN"/>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>three-laser target</name>
+		<inputs>
+			<input orientation ="UP"/>
+			<input orientation ="RIGHT"/>
+			<input orientation ="LEFT"/>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>four-laser target</name>
+		<inputs>
+			<input orientation ="UP"/>
+			<input orientation ="RIGHT"/>
+			<input orientation ="DOWN"/>
+			<input orientation ="LEFT"/>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>one-way mirror</name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="RIGHT"/>
+			</input>
+			<input orientation="RIGHT">
+				<output orientation="UP"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>two-way mirror</name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="RIGHT"/>
+			</input>
+			<input orientation="RIGHT">
+				<output orientation="UP"/>
+			</input>
+			<input orientation="DOWN">
+				<output orientation="LEFT"/>
+			</input>
+			<input orientation="LEFT">
+				<output orientation="DOWN"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>two-way-straight splitter </name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="LEFT"/>
+				<output orientation ="RIGHT"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>two-way-angled-right splitter </name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="DOWN"/>
+				<output orientation ="RIGHT"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>two-way-angled-left splitter </name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="LEFT"/>
+				<output orientation ="DOWN"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>three-way splitter </name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="RIGHT"/>
+				<output orientation ="LEFT"/>
+				<output orientation ="DOWN"/>
+			</input>
+		</inputs>
+	</block>
+	
+</blocks>
