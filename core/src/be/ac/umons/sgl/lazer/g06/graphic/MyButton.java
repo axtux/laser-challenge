@@ -8,17 +8,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 //*/
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class MyButton {
-	TextButton button;
-	TextButtonStyle textButtonStyle;
+public class MyButton extends TextButton {
 	
 	public MyButton(String text) {
+		// call to super constructor with minimum style
+		super(text, new TextButtonStyle(null, null, null, new BitmapFont()));
+		
+		TextButtonStyle myButtonStyle = new TextButtonStyle();
 		// default 15pt Arial
-		BitmapFont font = new BitmapFont();
-
+		myButtonStyle.font = new BitmapFont();
+		
 		/* Textures from packfile
 		TextureAtlas buttonAtlas = new TextureAtlas("relative/from/assets/to/file.pack");
 		Skin skin.addRegions(buttonAtlas);
@@ -28,24 +29,17 @@ public class MyButton {
 		TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(tex));
 		//*/
 		
-		TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.font = font;
-
 		/* Textures from packfile
-		textButtonStyle.up = skin.getDrawable("up-button");
-		textButtonStyle.down = skin.getDrawable("down-button");
-		textButtonStyle.checked = skin.getDrawable("checked-button");
+		myButtonStyle.up = skin.getDrawable("up-button");
+		myButtonStyle.down = skin.getDrawable("down-button");
+		myButtonStyle.checked = skin.getDrawable("checked-button");
 		//*/
 		//* Individual textures
-		textButtonStyle.up = drawable;
-		textButtonStyle.down = drawable;
-		textButtonStyle.checked = drawable;
+		myButtonStyle.up = drawable;
+		myButtonStyle.down = drawable;
+		myButtonStyle.checked = drawable;
 		//*/
-		
-		button = new TextButton(text, textButtonStyle);
+		super.setStyle(myButtonStyle);
 	}
 	
-	public TextButton getButton() {
-		return button;
-	}
 }
