@@ -8,20 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 //*/
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class MyButton extends TextButton {
-	static TextButtonStyle defaultStyle;
-	
-	public static void init() {
-		defaultStyle = new TextButtonStyle();
-		defaultStyle.font = new BitmapFont();
-	}
 	
 	public MyButton(String text) {
-		// call to constructor
-		super(text, defaultStyle);
+		// call to super constructor with minimum style
+		super(text, new TextButtonStyle(null, null, null, new BitmapFont()));
 		
 		TextButtonStyle myButtonStyle = new TextButtonStyle();
 		// default 15pt Arial

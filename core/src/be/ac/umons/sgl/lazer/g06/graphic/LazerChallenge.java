@@ -21,7 +21,6 @@ public class LazerChallenge extends Game {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		
-		MyButton.init();
 		MyButton btn = new MyButton("Coucou petite perruche !");
 		ButtonListener bl = new ButtonListener("MENU");
 		btn.addListener(bl);
