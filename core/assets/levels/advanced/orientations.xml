@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE orientations [
+	<!ELEMENT orientations (orientation+) >
+	<!ELEMENT orientation (#PCDATA)>
+	]>
+<orientations>
+	<orientation>UP</orientation>
+	<orientation>UP-RIGHT</orientation>
+	<orientation>RIGHT</orientation>
+	<orientation>DOWN-RIGHT</orientation>
+	<orientation>DOWN</orientation>
+	<orientation>DOWN-LEFT</orientation>
+	<orientation>LEFT</orientation>
+	<orientation>UP-LEFT</orientation>
+	<
+</orientations>
+	
