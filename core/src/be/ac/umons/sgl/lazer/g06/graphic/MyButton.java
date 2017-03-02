@@ -25,8 +25,10 @@ public class MyButton extends TextButton {
 		Skin skin.addRegions(buttonAtlas);
 		//*/
 		//* Individual textures
-		Texture tex = new Texture("images/MainMenu/connexion_anonyme_button_on.png");
+		Texture tex = new Texture("images/button.png");
+		Texture tex2 = new Texture("images/button_over.png");
 		TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(tex));
+		TextureRegionDrawable drawable2 = new TextureRegionDrawable(new TextureRegion(tex2));
 		//*/
 		
 		/* Textures from packfile
@@ -36,8 +38,8 @@ public class MyButton extends TextButton {
 		//*/
 		//* Individual textures
 		myButtonStyle.up = drawable;
-		myButtonStyle.down = drawable;
-		myButtonStyle.checked = drawable;
+		myButtonStyle.down = drawable2;
+		myButtonStyle.checked = drawable2;
 		//*/
 		super.setStyle(myButtonStyle);
 	}
