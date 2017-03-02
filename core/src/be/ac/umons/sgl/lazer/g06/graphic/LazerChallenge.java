@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import be.ac.umons.sgl.lazer.g06.listeners.ButtonListener;
+
 public class LazerChallenge extends Game {
 	SpriteBatch batch;
 	public static int WIDTH=1000;
@@ -19,8 +21,11 @@ public class LazerChallenge extends Game {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		
-		MyButton btn = new MyButton("Coucou");
-		stage.addActor(btn.getButton());
+		MyButton.init();
+		MyButton btn = new MyButton("Coucou petite perruche !");
+		ButtonListener bl = new ButtonListener("MENU");
+		btn.addListener(bl);
+		stage.addActor(btn);
 		//stage.add(batch);
 		//stage.addActor(actor);
 		//*/
