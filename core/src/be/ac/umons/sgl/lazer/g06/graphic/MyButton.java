@@ -1,34 +1,31 @@
 package be.ac.umons.sgl.lazer.g06.graphic;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /* Textures from packfile
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 //*/
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+/* Individual textures
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+//*/
 
 public class MyButton extends TextButton {
 	
-	public MyButton(String text) {
+	public MyButton(MySkin skin, String text) {
 		// call to super constructor with minimum style
 		super(text, new TextButtonStyle(null, null, null, new BitmapFont()));
-		
-		TextButtonStyle myButtonStyle = new TextButtonStyle();
-		// default 15pt Arial
-		myButtonStyle.font = new BitmapFont();
 		
 		/* Textures from packfile
 		TextureAtlas buttonAtlas = new TextureAtlas("relative/from/assets/to/file.pack");
 		Skin skin.addRegions(buttonAtlas);
 		//*/
-		//* Individual textures
+		/* Individual textures
 		Texture tex = new Texture("images/button.png");
-		Texture tex2 = new Texture("images/button_over.png");
 		TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(tex));
-		TextureRegionDrawable drawable2 = new TextureRegionDrawable(new TextureRegion(tex2));
 		//*/
 		
 		/* Textures from packfile
@@ -37,11 +34,16 @@ public class MyButton extends TextButton {
 		myButtonStyle.checked = skin.getDrawable("checked-button");
 		//*/
 		//* Individual textures
-		myButtonStyle.up = drawable;
-		myButtonStyle.down = drawable2;
-		myButtonStyle.checked = drawable2;
+		
+		this.getStyle().up = skin.getColor(Color.DARK_GRAY);
+		this.getStyle().over = skin.getColor(Color.GRAY);
+		this.getStyle().down = skin.getColor(Color.LIGHT_GRAY);
+		
+		this.getStyle().font = skin.getFont(40, Color.WHITE, 2, Color.BLACK);
+		
 		//*/
-		super.setStyle(myButtonStyle);
+		// force style update
+		super.setStyle(this.getStyle());
 	}
 	
 }
