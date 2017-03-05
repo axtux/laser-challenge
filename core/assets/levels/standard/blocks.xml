@@ -1,15 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE blocks [
-	<!ELEMENT blocks (block*) >
-	<!ELEMENT block (image,name,inputs)>
-	<!ELEMENT image (#PCDATA)>
-	<!ELEMENT name (#PCDATA)>
-	<!ELEMENT inputs (input*) >
-	<!ELEMENT input (output*) >
-	<!ATTLIST input orientation CDATA #IMPLIED >
-	<!ELEMENT output EMPTY >
-	<!ATTLIST output orientation CDATA #IMPLIED >
-	]>
 <blocks>
 	<block>
 		<image>path_to_img</image>
