@@ -4,37 +4,76 @@ import java.io.IOException;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.XmlReader;
 
-import be.ac.umons.sgl.lazer.g06.listeners.ButtonListener;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.ConnexionStage;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.ModeSelectionStage;
 
 public class LazerChallenge extends Game {
-	SpriteBatch batch;
+	Batch batch;
 	public static int WIDTH=1000;
 	public static int HEIGHT=720;
 	Stage stage;
+	MySkin skin;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
+		//batch = new SpriteBatch();
 		//this.setScreen(new MainMenu(this));
 		//*
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
+		skin = new MySkin();
+		this.setStage(new ConnexionStage(this));
+		batch = stage.getBatch();
 		
-		MyButton btn = new MyButton("Coucou petite perruche !");
-		ButtonListener bl = new ButtonListener("MENU");
-		btn.addListener(bl);
-		stage.addActor(btn);
-		//stage.add(batch);
-		//stage.addActor(actor);
-		//*/
 	}
 	
-	public void render(){
+	public MySkin getSkin() {
+		return skin;
+	}
+	
+	public void resize (int width, int height) {
+		stage.getViewport().update(width, height, true);
+	}
+	
+	public void render() {
 		super.render();
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
+	}
+	
+	public void dispose() {
+		stage.dispose();
+		skin.dispose();
+	}
+	
+	public void setStage(Stage newStage) {
+		Stage oldStage = this.stage;
+		Gdx.input.setInputProcessor(newStage);
+		this.stage = newStage;
+		this.render();
+		if(oldStage != null && oldStage != newStage)
+		oldStage.dispose();
+	}
+	
+	public void act(String action) {
+		System.out.println("Got action "+action+"");
+		switch(action) {
+		case "CONNECTION_ANONYMOUS":
+			setStage(new ModeSelectionStage(this));
+			break;
+		case "CONNECTION_LOCAL":
+			//setStage(new Stage(this));
+			break;
+		case "CONNECTION_TWITTER":
+			//setStage(new Stage(this));
+			break;
+		default:
+			System.out.println("Action "+action+" not implemented");
+		}
+		
 	}
 }
