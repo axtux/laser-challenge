@@ -2,20 +2,12 @@ package be.ac.umons.sgl.lazer.g06.graphic;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-import be.ac.umons.sgl.lazer.g06.listeners.ButtonListener;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.ConnexionStage;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.ModeSelectionStage;
 
 public class LazerChallenge extends Game {
 	Batch batch;
@@ -30,9 +22,7 @@ public class LazerChallenge extends Game {
 		//this.setScreen(new MainMenu(this));
 		//*
 		skin = new MySkin();
-		
 		this.setStage(new ConnexionStage(this));
-		
 		batch = stage.getBatch();
 		
 	}
@@ -58,8 +48,29 @@ public class LazerChallenge extends Game {
 	}
 	
 	public void setStage(Stage newStage) {
+		Stage oldStage = this.stage;
 		Gdx.input.setInputProcessor(newStage);
 		this.stage = newStage;
 		this.render();
+		if(oldStage != null && oldStage != newStage)
+		oldStage.dispose();
+	}
+	
+	public void act(String action) {
+		System.out.println("Got action "+action+"");
+		switch(action) {
+		case "CONNECTION_ANONYMOUS":
+			setStage(new ModeSelectionStage(this));
+			break;
+		case "CONNECTION_LOCAL":
+			//setStage(new Stage(this));
+			break;
+		case "CONNECTION_TWITTER":
+			//setStage(new Stage(this));
+			break;
+		default:
+			System.out.println("Action "+action+" not implemented");
+		}
+		
 	}
 }
