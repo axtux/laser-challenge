@@ -3,36 +3,45 @@ package be.ac.umons.sgl.lazer.g06.graphic;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import be.ac.umons.sgl.lazer.g06.graphic.stages.ConnexionStage;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelSelectionStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.ModeSelectionStage;
+import be.ac.umons.sgl.lazer.g06.users.User;
 
 public class LazerChallenge extends Game {
-	Batch batch;
 	public static int WIDTH=1000;
 	public static int HEIGHT=720;
 	Stage stage;
 	MySkin skin;
+	User user;
+	String mode = "";
 	
-	@Override
 	public void create () {
-		//batch = new SpriteBatch();
-		//this.setScreen(new MainMenu(this));
-		//*
 		skin = new MySkin();
-		this.setStage(new ConnexionStage(this));
-		batch = stage.getBatch();
-		
+		act("MENU_CONNECTION");
 	}
 	
 	public MySkin getSkin() {
 		return skin;
 	}
+
+	public User getUser() {
+		return user;
+	}
+	
+	public String getMode() {
+		return mode;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, true);
+		render();
 	}
 	
 	public void render() {
@@ -48,19 +57,37 @@ public class LazerChallenge extends Game {
 	}
 	
 	public void setStage(Stage newStage) {
-		Stage oldStage = this.stage;
+		if(newStage == stage) {
+			return;
+		}
+		
+		Stage oldStage = stage;
+		
 		Gdx.input.setInputProcessor(newStage);
 		this.stage = newStage;
 		this.render();
-		if(oldStage != null && oldStage != newStage)
-		oldStage.dispose();
+		
+		if(oldStage != null) {
+			oldStage.dispose();
+		}
 	}
 	
 	public void act(String action) {
 		System.out.println("Got action "+action+"");
 		switch(action) {
+		
+		case "EXIT":
+			Gdx.app.exit();
+		case "LOGOUT":
+			logout();
+		case "MENU_CONNECTION":
+			setStage(new ConnexionStage(this));
+			break;
+		
+		// from connection menu
 		case "CONNECTION_ANONYMOUS":
-			setStage(new ModeSelectionStage(this));
+			setUser(new User());
+			act("MENU_MODE_SELECTION");
 			break;
 		case "CONNECTION_LOCAL":
 			//setStage(new Stage(this));
@@ -68,9 +95,37 @@ public class LazerChallenge extends Game {
 		case "CONNECTION_TWITTER":
 			//setStage(new Stage(this));
 			break;
+		
+		case "MENU_MODE_SELECTION":
+			setStage(new ModeSelectionStage(this));
+			break;
+		
+		// from mode selection
+		case "MODE_ARCADE":
+			mode = "ARCADE";
+			act("MENU_LEVEL_SELECTION");
+			break;
+		case "MODE_TRAINING":
+			mode = "TRAINING";
+			act("MENU_LEVEL_SELECTION");
+			break;
+		
+		case "MENU_LEVEL_SELECTION":
+			setStage(new LevelSelectionStage(this));
+			break;
+		
 		default:
 			System.out.println("Action "+action+" not implemented");
 		}
 		
+	}
+	
+	private void logout() {
+		if(user == null) {
+			return;
+		}
+		
+		user.logout();
+		user = null;
 	}
 }
