@@ -67,7 +67,7 @@ public abstract class AbstractStage extends Stage {
 		TextButton exit = new TextButton("Quitter", skin, "menu");
 		exit.getLabelCell().pad(10);
 		exit.addListener(new MyClickListener(game, Input.Buttons.LEFT, "EXIT"));
-		leftHeader.add(exit).space(10);
+		leftHeader.add(exit).pad(10);
 		// back button, default disabled
 		TextButton back;
 		if(backAction != null && backAction != "") {
