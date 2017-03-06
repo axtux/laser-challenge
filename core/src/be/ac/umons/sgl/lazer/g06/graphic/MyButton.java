@@ -18,7 +18,7 @@ public class MyButton extends TextButton {
 	public MyButton(MySkin skin, String text) {
 		// call to super constructor with minimum style
 		super(text, new TextButtonStyle(null, null, null, new BitmapFont()));
-		
+		// TODO remove this class, kept only for texture example
 		/* Textures from packfile
 		TextureAtlas buttonAtlas = new TextureAtlas("relative/from/assets/to/file.pack");
 		Skin skin.addRegions(buttonAtlas);
