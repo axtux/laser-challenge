@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.useGL30=false;
 		config.width=LazerChallenge.WIDTH;
 		config.height=LazerChallenge.HEIGHT;
+		config.fullscreen = true;
 		
 		new LwjglApplication(new LazerChallenge(), config);
 	}
