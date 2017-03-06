@@ -59,35 +59,32 @@ public abstract class AbstractStage extends Stage {
 		container.row().top().fillX();
 		container.add(header2).fillX();
 		header2.setBackground(skin.getColor(Color.SKY));
-		header2.pad(10);
+		//header2.pad(10);
 		
 		Table leftHeader = new Table();
-		header2.add(leftHeader).width(300);
-		// back button
-		if(backAction != null && backAction != "") {
-			TextButton back = new TextButton("Retour", skin, "menu");
-			back.getLabelCell().pad(10);
-			back.addListener(new MyClickListener(game, Input.Buttons.LEFT, backAction));
-			leftHeader.add(back).uniform();
-		}
+		header2.add(leftHeader).prefWidth(400);
 		// exit button
-		leftHeader.row();
 		TextButton exit = new TextButton("Quitter", skin, "menu");
 		exit.getLabelCell().pad(10);
 		exit.addListener(new MyClickListener(game, Input.Buttons.LEFT, "EXIT"));
 		leftHeader.add(exit).space(10);
+		// back button, default disabled
+		TextButton back;
+		if(backAction != null && backAction != "") {
+			back = new TextButton("Retour", skin, "menu");
+			back.addListener(new MyClickListener(game, Input.Buttons.LEFT, backAction));
+		} else {
+			back = new TextButton("Retour", skin, "disabled-menu");
+		}
+		back.getLabelCell().pad(10);
+		leftHeader.add(back);
 		
-		/* titles
-		Table titles = new Table();
-		header.add(titles).expandY();
-		//titles.pad(20);
-		//*/
 		
 		label = new Label(title, skin, "subtitle");
-		header2.add(label).expandY();
-
+		header2.add(label).expand();
+		
 		Table rightHeader = new Table();
-		header2.add(rightHeader).width(300);
+		header2.add(rightHeader).prefWidth(400);
 		// user
 		if(game.getUser() != null) {
 			Table user = new Table();
@@ -105,7 +102,9 @@ public abstract class AbstractStage extends Stage {
 			logout.getLabelCell().pad(5);
 			user.add(logout).right();
 		}
-		
+		/*
+		header.debug();
+		header2.debug();//*/
 	}
 	
 	protected void addMenuButton(String text, String action) {
@@ -131,7 +130,7 @@ public abstract class AbstractStage extends Stage {
 		ls = new LabelStyle();
 		ls.font = skin.getFont(20, Color.WHITE, 2, Color.BLACK);
 		skin.add("small-title", ls);
-		
+
 		// Menu button
 		TextButtonStyle tbs = new TextButtonStyle();
 		tbs.up = skin.getColor(Color.DARK_GRAY);
@@ -139,6 +138,13 @@ public abstract class AbstractStage extends Stage {
 		tbs.down = skin.getColor(Color.LIGHT_GRAY);
 		tbs.font = skin.getFont(40, Color.WHITE, 2, Color.BLACK);
 		skin.add("menu", tbs);
+		// Menu button (disabled)
+		tbs = new TextButtonStyle();
+		tbs.up = skin.getColor(Color.DARK_GRAY);
+		tbs.over = skin.getColor(Color.DARK_GRAY);
+		tbs.down = skin.getColor(Color.DARK_GRAY);
+		tbs.font = skin.getFont(40, Color.DARK_GRAY, 2, Color.BLACK);
+		skin.add("disabled-menu", tbs);
 		
 		tbs = new TextButtonStyle();
 		tbs.up = skin.getColor(Color.DARK_GRAY);
