@@ -1,12 +1,10 @@
 package be.ac.umons.sgl.lazer.g06.graphic;
 
-import java.io.IOException;
-
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.XmlReader;
 
 import be.ac.umons.sgl.lazer.g06.graphic.stages.ConnexionStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelSelectionStage;
@@ -24,6 +22,9 @@ public class LazerChallenge extends Game {
 	public void create () {
 		skin = new MySkin();
 		act("MENU_CONNECTION");
+		/*
+		Gdx.app.setLogLevel(Application.LOG_NONE);
+		//*/Gdx.app.setLogLevel(Application.LOG_DEBUG);
 	}
 	
 	public MySkin getSkin() {
@@ -76,7 +77,7 @@ public class LazerChallenge extends Game {
 	}
 	
 	public void act(String action) {
-		System.out.println("Got action "+action+"");
+		Gdx.app.debug("ACTION", action);
 		switch(action) {
 		
 		case "EXIT":
@@ -118,7 +119,7 @@ public class LazerChallenge extends Game {
 			break;
 		
 		default:
-			System.out.println("Action "+action+" not implemented");
+			Gdx.app.error("ACTION_NOT_IMPLEMENTED", action);
 		}
 		
 	}
