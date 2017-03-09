@@ -1,13 +1,19 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
+import java.util.Hashtable;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.graphic.MySkin;
@@ -18,6 +24,7 @@ public abstract class AbstractStage extends Stage {
 	MySkin skin;
 	Table container;
 	Table content;
+	Hashtable<String, TextField> fields;
 	
 	public AbstractStage(LazerChallenge game, String title) {
 		this(game, title, null);
@@ -41,6 +48,8 @@ public abstract class AbstractStage extends Stage {
 		content = new Table();
 		container.add(content).expand();
 		content.pad(20);
+		
+		this.fields = new Hashtable<String, TextField>();
 	}
 	
 	protected void addHeader(String title, String backAction) {
@@ -66,7 +75,7 @@ public abstract class AbstractStage extends Stage {
 		// exit button
 		TextButton exit = new TextButton("Quitter", skin, "menu");
 		exit.getLabelCell().pad(10);
-		exit.addListener(new MyClickListener(game, Input.Buttons.LEFT, "EXIT"));
+		exit.addListener(new MyClickListener(game, Input.Buttons.LEFT, "ACTION_EXIT"));
 		leftHeader.add(exit).pad(10);
 		// back button, default disabled
 		TextButton back;
@@ -97,8 +106,8 @@ public abstract class AbstractStage extends Stage {
 			user.add(username).pad(5);
 			user.row();
 			
-			TextButton logout = new TextButton("Logout", skin, "small-menu");
-			logout.addListener(new MyClickListener(game, Input.Buttons.LEFT, "LOGOUT"));
+			TextButton logout = new TextButton("Déconnexion", skin, "small-menu");
+			logout.addListener(new MyClickListener(game, Input.Buttons.LEFT, "ACTION_LOGOUT"));
 			logout.getLabelCell().pad(5);
 			user.add(logout).right();
 		}
@@ -108,11 +117,52 @@ public abstract class AbstractStage extends Stage {
 	}
 	
 	protected void addMenuButton(String text, String action) {
-		TextButton btn = new TextButton(text, skin, "menu");
+		addButton(text, action).minSize(800, 80).space(50);
+		content.row();
+	}
+
+	protected Cell<TextButton> addButton(String text, String action) {
+		return addButton(text, action, "menu");
+	}
+	
+	protected Cell<TextButton> addButton(String text, String action, String styleName) {
+		TextButton btn = new TextButton(text, skin, styleName);
 		btn.getLabelCell().pad(10);
 		btn.addListener(new MyClickListener(game, Input.Buttons.LEFT, action));
-		content.add(btn).minSize(800, 80).space(50);
-		content.row();
+		return content.add(btn);
+	}
+
+	protected TextField addTextField(String label, String fieldname) {
+		return addTextField(label, fieldname, "");
+	}
+	protected TextField addTextField(String label, String fieldname, String defaultValue) {
+		content.row().fillX();
+		
+		Label l = new Label(label+" : ", skin, "label");
+		Table lContainer = new Table();
+		lContainer.add(l).pad(10).expandX().right();
+		content.add(lContainer);
+		
+		TextField tf = new TextField(defaultValue, skin, "field");
+		Table tfContainer = new Table();
+		tfContainer.background(skin.getColor(Color.DARK_GRAY));
+		tfContainer.add(tf).pad(5).prefWidth(400);
+		content.add(tfContainer).pad(5);
+		
+		fields.put(fieldname, tf);
+		tf.setPasswordMode(true);
+		
+		return tf;
+	}
+	
+	public String getFieldValue(String fieldname) {
+		TextField tf = fields.get(fieldname);
+		if(tf == null) {
+			Gdx.app.error("ERROR", "field "+fieldname+" was not found");
+			return null;
+		}
+		
+		return tf.getText();
 	}
 	
 	protected void createStyles() {
@@ -121,16 +171,36 @@ public abstract class AbstractStage extends Stage {
 		ls.font = skin.getFont(80, Color.WHITE, 2, Color.BLACK);
 		skin.add("title", ls);
 
-		// Subitle label
+		// Subtitle label
 		ls = new LabelStyle();
 		ls.font = skin.getFont(40, Color.WHITE, 2, Color.BLACK);
 		skin.add("subtitle", ls);
 		
-		// Subitle label
+		// error label
+		ls = new LabelStyle();
+		ls.font = skin.getFont(20, Color.RED);
+		skin.add("error", ls);
+		
+		// Small subtitle label
 		ls = new LabelStyle();
 		ls.font = skin.getFont(20, Color.WHITE, 2, Color.BLACK);
 		skin.add("small-title", ls);
-
+		
+		// Field label
+		ls = new LabelStyle();
+		ls.font = skin.getFont(40, Color.BLACK);
+		skin.add("label", ls);
+		
+		// Field
+		TextFieldStyle tfs = new TextFieldStyle();
+		tfs.background = skin.getColor(Color.WHITE);
+		tfs.focusedBackground = skin.getColor(Color.LIGHT_GRAY);
+		tfs.font = ls.font;
+		tfs.fontColor = Color.BLACK;
+		tfs.cursor = skin.getColor(Color.BLACK);
+		tfs.selection = skin.getColor(Color.GRAY);
+		skin.add("field", tfs);
+		
 		// Menu button
 		TextButtonStyle tbs = new TextButtonStyle();
 		tbs.up = skin.getColor(Color.DARK_GRAY);
