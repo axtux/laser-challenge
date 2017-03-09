@@ -6,16 +6,23 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
+	public static void main (String[] args) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Lazer Challenge";
 		config.useGL30 = false;
-		//config.fullscreen = true;
+		
+		config.width = LazerChallenge.WIDTH;
+		config.height = LazerChallenge.HEIGHT;
+		//*
+		config.fullscreen = false;
+		//*/config.fullscreen = true;
 		
 		new LwjglApplication(new LazerChallenge(), config);
-		// maximize window
-		config.height = Gdx.graphics.getHeight();
-		config.width = Gdx.graphics.getWidth();
 		
+		if(!config.fullscreen) {
+			// maximize window
+			config.height = Gdx.graphics.getHeight();
+			config.width = Gdx.graphics.getWidth();
+		}
 	}
 }
