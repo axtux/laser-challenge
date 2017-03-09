@@ -9,11 +9,15 @@ public class User {
 	}
 	
 	public User(String username, String image) {
-		login(username, image);
+		setUsername(username);
+		setImage(image);
 	}
 	
-	public void login(String username, String image) {
+	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public void setImage(String image) {
 		this.image = image;
 	}
 	
