@@ -141,13 +141,13 @@ public abstract class AbstractStage extends Stage {
 		Label l = new Label(label+" : ", skin, "label");
 		Table lContainer = new Table();
 		lContainer.add(l).pad(10).expandX().right();
-		content.add(lContainer);
+		content.add(lContainer).uniform();
 		
 		TextField tf = new TextField(defaultValue, skin, "field");
 		Table tfContainer = new Table();
 		tfContainer.background(skin.getColor(Color.DARK_GRAY));
-		tfContainer.add(tf).pad(5).prefWidth(400);
-		content.add(tfContainer).pad(5);
+		tfContainer.add(tf).pad(5).fillX().expandX();
+		content.add(tfContainer).pad(5).fillX().uniform();
 		
 		fields.put(fieldname, tf);
 		tf.setPasswordMode(true);
