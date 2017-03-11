@@ -8,11 +8,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
@@ -23,14 +20,11 @@ public abstract class AbstractStage extends Stage {
 	LazerChallenge game;
 	MySkin skin;
 	Table container;
+	Table leftHeader;
 	Table content;
 	Hashtable<String, TextField> fields;
 	
 	public AbstractStage(LazerChallenge game, String title) {
-		this(game, title, null);
-	}
-	
-	public AbstractStage(LazerChallenge game, String title, String backAction) {
 		super();
 		
 		this.game = game;
@@ -41,7 +35,7 @@ public abstract class AbstractStage extends Stage {
 		container.setFillParent(true);
 		container.setBackground(skin.getColor(Color.WHITE));
 		
-		addHeader(title, backAction);
+		addHeader(title);
 		
 		container.row();
 		content = new Table();
@@ -51,7 +45,7 @@ public abstract class AbstractStage extends Stage {
 		this.fields = new Hashtable<String, TextField>();
 	}
 	
-	protected void addHeader(String title, String backAction) {
+	protected void addHeader(String title) {
 		container.row().top().fillX();
 		
 		Table header = new Table();
@@ -67,37 +61,24 @@ public abstract class AbstractStage extends Stage {
 		container.row().top().fillX();
 		container.add(header2).fillX();
 		header2.setBackground(skin.getColor(Color.SKY));
-		//header2.pad(10);
 		
-		Table leftHeader = new Table();
-		header2.add(leftHeader).prefWidth(400);
+		leftHeader = new Table();
+		header2.add(leftHeader).uniform();
 		// exit button
-		TextButton exit = new TextButton("Quitter", skin, "menu");
-		exit.getLabelCell().pad(10);
-		exit.addListener(new MyClickListener(game, Input.Buttons.LEFT, "ACTION_EXIT"));
-		leftHeader.add(exit).pad(10);
-		// back button, default disabled
-		TextButton back;
-		if(backAction != null && backAction != "") {
-			back = new TextButton("Retour", skin, "menu");
-			back.addListener(new MyClickListener(game, Input.Buttons.LEFT, backAction));
-		} else {
-			back = new TextButton("Retour", skin, "disabled-menu");
-		}
-		back.getLabelCell().pad(10);
-		leftHeader.add(back);
+		addHeaderButton("Quitter", "ACTION_EXIT").pad(10);
 		
-		
+		Table middleHeader = new Table();
 		label = new Label(title, skin, "subtitle");
-		header2.add(label).expand();
+		middleHeader.add(label).center().pad(10);
+		header2.add(middleHeader).expand().center();
 		
 		Table rightHeader = new Table();
-		header2.add(rightHeader).prefWidth(400);
+		header2.add(rightHeader).uniform().fill();
 		// user
 		if(game.getUser() != null) {
 			Table user = new Table();
 			user.setBackground(skin.getColor(Color.SLATE));
-			rightHeader.add(user);
+			rightHeader.add(user).expand().right().pad(10);
 			
 			// TODO add image
 			
@@ -110,25 +91,32 @@ public abstract class AbstractStage extends Stage {
 			logout.getLabelCell().pad(5);
 			user.add(logout).right();
 		}
-		/*
-		header.debug();
-		header2.debug();//*/
+		
 	}
-
+	
+	protected Cell<TextButton> addHeaderButton(String title, String action) {
+		return addButton(leftHeader, title, action).pad(10).padLeft(0);
+	}
+	
+	protected void addExpandingBlock(Table container) {
+		Table block = new Table();
+		container.add(block).expand().fill();
+	}
+	
 	protected void addMenuButton(String text, String action) {
-		addButton(text, action).minSize(800, 80).space(50);
+		addButton(content, text, action).minSize(800, 80).space(50);
 		content.row();
 	}
 	
-	protected Cell<TextButton> addButton(String text, String action) {
-		return addButton(text, action, "menu");
+	protected Cell<TextButton> addButton(Table container, String text, String action) {
+		return addButton(container, text, action, "menu");
 	}
 	
-	protected Cell<TextButton> addButton(String text, String action, String styleName) {
+	protected Cell<TextButton> addButton(Table container, String text, String action, String styleName) {
 		TextButton btn = new TextButton(text, skin, styleName);
 		btn.getLabelCell().pad(10);
 		btn.addListener(new MyClickListener(game, Input.Buttons.LEFT, action));
-		return content.add(btn);
+		return container.add(btn);
 	}
 	
 	protected TextField addTextField(String label, String fieldname) {
