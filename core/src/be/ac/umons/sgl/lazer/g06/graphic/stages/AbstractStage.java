@@ -35,7 +35,6 @@ public abstract class AbstractStage extends Stage {
 		
 		this.game = game;
 		this.skin = game.getSkin();
-		createStyles();
 		
 		container = new Table();
 		this.addActor(container);
@@ -46,8 +45,8 @@ public abstract class AbstractStage extends Stage {
 		
 		container.row();
 		content = new Table();
-		container.add(content).expand();
-		content.pad(20);
+		container.add(content).expand().fill();
+		//content.pad(20);
 		
 		this.fields = new Hashtable<String, TextField>();
 	}
@@ -115,12 +114,12 @@ public abstract class AbstractStage extends Stage {
 		header.debug();
 		header2.debug();//*/
 	}
-	
+
 	protected void addMenuButton(String text, String action) {
 		addButton(text, action).minSize(800, 80).space(50);
 		content.row();
 	}
-
+	
 	protected Cell<TextButton> addButton(String text, String action) {
 		return addButton(text, action, "menu");
 	}
@@ -131,7 +130,7 @@ public abstract class AbstractStage extends Stage {
 		btn.addListener(new MyClickListener(game, Input.Buttons.LEFT, action));
 		return content.add(btn);
 	}
-
+	
 	protected TextField addTextField(String label, String fieldname) {
 		return addTextField(label, fieldname, "");
 	}
@@ -165,62 +164,4 @@ public abstract class AbstractStage extends Stage {
 		return tf.getText();
 	}
 	
-	protected void createStyles() {
-		// Title label
-		LabelStyle ls = new LabelStyle();
-		ls.font = skin.getFont(80, Color.WHITE, 2, Color.BLACK);
-		skin.add("title", ls);
-
-		// Subtitle label
-		ls = new LabelStyle();
-		ls.font = skin.getFont(40, Color.WHITE, 2, Color.BLACK);
-		skin.add("subtitle", ls);
-		
-		// error label
-		ls = new LabelStyle();
-		ls.font = skin.getFont(20, Color.RED);
-		skin.add("error", ls);
-		
-		// Small subtitle label
-		ls = new LabelStyle();
-		ls.font = skin.getFont(20, Color.WHITE, 2, Color.BLACK);
-		skin.add("small-title", ls);
-		
-		// Field label
-		ls = new LabelStyle();
-		ls.font = skin.getFont(40, Color.BLACK);
-		skin.add("label", ls);
-		
-		// Field
-		TextFieldStyle tfs = new TextFieldStyle();
-		tfs.background = skin.getColor(Color.WHITE);
-		tfs.focusedBackground = skin.getColor(Color.LIGHT_GRAY);
-		tfs.font = ls.font;
-		tfs.fontColor = Color.BLACK;
-		tfs.cursor = skin.getColor(Color.BLACK);
-		tfs.selection = skin.getColor(Color.GRAY);
-		skin.add("field", tfs);
-		
-		// Menu button
-		TextButtonStyle tbs = new TextButtonStyle();
-		tbs.up = skin.getColor(Color.DARK_GRAY);
-		tbs.over = skin.getColor(Color.GRAY);
-		tbs.down = skin.getColor(Color.LIGHT_GRAY);
-		tbs.font = skin.getFont(40, Color.WHITE, 2, Color.BLACK);
-		skin.add("menu", tbs);
-		// Menu button (disabled)
-		tbs = new TextButtonStyle();
-		tbs.up = skin.getColor(Color.DARK_GRAY);
-		tbs.over = skin.getColor(Color.DARK_GRAY);
-		tbs.down = skin.getColor(Color.DARK_GRAY);
-		tbs.font = skin.getFont(40, Color.DARK_GRAY, 2, Color.BLACK);
-		skin.add("disabled-menu", tbs);
-		
-		tbs = new TextButtonStyle();
-		tbs.up = skin.getColor(Color.DARK_GRAY);
-		tbs.over = skin.getColor(Color.GRAY);
-		tbs.down = skin.getColor(Color.LIGHT_GRAY);
-		tbs.font = skin.getFont(20, Color.WHITE, 2, Color.BLACK);
-		skin.add("small-menu", tbs);
-	}
 }
