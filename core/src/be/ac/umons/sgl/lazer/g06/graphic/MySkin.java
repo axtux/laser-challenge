@@ -51,36 +51,38 @@ public class MySkin extends Skin {
 		return fonts.getFont(defaultFont, size, color, border, borderColor);
 	}
 	
-
 	private void createStyles() {
 		int defaultBorder = 2;
+		int bigFont = 100;
+		int defaultFont = 50;
+		int smallFont = 30;
 		// Title label
 		LabelStyle ls = new LabelStyle();
-		ls.font = getFont(80, Color.WHITE, defaultBorder, Color.BLACK);
+		ls.font = getFont(bigFont, Color.WHITE, defaultBorder, Color.BLACK);
 		add("title", ls);
 
 		// Subtitle label
 		ls = new LabelStyle();
-		ls.font = getFont(40, Color.WHITE, defaultBorder, Color.BLACK);
+		ls.font = getFont(defaultFont, Color.WHITE, defaultBorder, Color.BLACK);
 		add("subtitle", ls);
 		
 		// error label
 		ls = new LabelStyle();
-		ls.font = getFont(20, Color.RED);
+		ls.font = getFont(smallFont, Color.RED);
 		add("error", ls);
 		
 		// Small subtitle label
 		ls = new LabelStyle();
-		ls.font = getFont(20, Color.WHITE, defaultBorder, Color.BLACK);
+		ls.font = getFont(smallFont, Color.WHITE, defaultBorder, Color.BLACK);
 		add("small-title", ls);
 
 		// Field label
 		ls = new LabelStyle();
-		ls.font = getFont(40, Color.BLACK);
+		ls.font = getFont(defaultFont, Color.BLACK);
 		add("label", ls);
 		// Field small label
 		ls = new LabelStyle();
-		ls.font = getFont(20, Color.BLACK);
+		ls.font = getFont(smallFont, Color.BLACK);
 		add("small-label", ls);
 		
 		// Field
@@ -98,21 +100,21 @@ public class MySkin extends Skin {
 		tbs.up = getColor(Color.DARK_GRAY);
 		tbs.over = getColor(Color.GRAY);
 		tbs.down = getColor(Color.LIGHT_GRAY);
-		tbs.font = getFont(40, Color.WHITE, defaultBorder, Color.BLACK);
+		tbs.font = getFont(defaultFont, Color.WHITE, defaultBorder, Color.BLACK);
 		add("menu", tbs);
 		// Menu button (disabled)
 		tbs = new TextButtonStyle();
 		tbs.up = getColor(Color.DARK_GRAY);
 		tbs.over = getColor(Color.DARK_GRAY);
 		tbs.down = getColor(Color.DARK_GRAY);
-		tbs.font = getFont(40, Color.DARK_GRAY, defaultBorder, Color.BLACK);
+		tbs.font = getFont(defaultFont, Color.DARK_GRAY, defaultBorder, Color.BLACK);
 		add("disabled-menu", tbs);
 		
 		tbs = new TextButtonStyle();
 		tbs.up = getColor(Color.DARK_GRAY);
 		tbs.over = getColor(Color.GRAY);
 		tbs.down = getColor(Color.LIGHT_GRAY);
-		tbs.font = getFont(20, Color.WHITE, defaultBorder, Color.BLACK);
+		tbs.font = getFont(smallFont, Color.WHITE, defaultBorder, Color.BLACK);
 		add("small-menu", tbs);
 	}
 }
