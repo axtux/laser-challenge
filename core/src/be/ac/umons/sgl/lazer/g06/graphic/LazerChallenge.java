@@ -32,7 +32,7 @@ public class LazerChallenge extends Game {
 		
 		Gdx.app.debug("LOCAL_PATH", Gdx.files.getLocalStoragePath());
 		
-		skin = new MySkin();
+		skin = new MySkin("josefin_sans_bold");
 		act("MENU_LOGINS");
 		
 	}
