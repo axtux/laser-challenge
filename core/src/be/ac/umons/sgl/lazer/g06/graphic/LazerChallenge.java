@@ -158,7 +158,7 @@ public class LazerChallenge extends Game {
 		try {
 			User user = new LocalUser(username, password, create);
 			setUser(user);
-			setStage(new LevelsStage(this));
+			setStage(new ModesStage(this));
 		} catch (LoginException e) {
 			setStage(new LocalLoginStage(this, username, password, e.getMessage()));
 			
