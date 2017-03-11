@@ -5,7 +5,7 @@ public class User {
 	private String image;
 
 	public User() {
-		this("Anonymous", "anonymous.png");
+		this("Anonyme", "anonymous.png");
 	}
 	
 	public User(String username, String image) {
