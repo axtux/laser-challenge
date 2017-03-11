@@ -13,13 +13,36 @@ public class LevelsStage extends AbstractStage {
 	
 	String mode;
 	boolean scores;
-	
+	boolean center;
+
 	public LevelsStage(LazerChallenge game) {
-		super(game, "Mode "+game.getMode()+" : Choix du niveau", "MENU_MODES");
+		this(game, true);
+	}
+	
+	public LevelsStage(LazerChallenge game, boolean center) {
+		super(game, "Mode "+game.getMode()+" : Choix du niveau");
 		setMode(game.getMode());
+		this.center = center;
 		
-		addLevelsBlock("Niveaux standards");
-		addLevelsBlock("Niveaux avancés");
+		addHeaderButton("Retour", "MENU_MODES");
+		
+		int[] standardLevels = new int[10];
+		int[] advancedLevels = new int[9];
+		for(int i = 0; i < standardLevels.length; ++i) {
+			standardLevels[i] = i+1;
+		}
+		for(int i = 0; i < advancedLevels.length; ++i) {
+			advancedLevels[i] = i+1;
+		}
+		
+		addLevelsBlock("Niveaux standards", "STANDARD", standardLevels);
+		addLevelsBlock("Niveaux avancés", "ADVANCED", advancedLevels);
+		
+		content.row();
+		
+		if(!center) {
+			addExpandingBlock(content);
+		}
 	}
 	
 	private boolean setMode(String mode) {
@@ -36,8 +59,8 @@ public class LevelsStage extends AbstractStage {
 			return false;
 		}
 	}
-	
-	private void addLevelsBlock(String name) {
+
+	private void addLevelsBlock(String name, String type, int[] levels) {
 		Table block = new Table();
 		
 		Label title = new Label(name+" : ", skin, "label");
@@ -45,25 +68,30 @@ public class LevelsStage extends AbstractStage {
 		block.add(title).pad(20).padLeft(100).left();
 		
 		Table levelsContainer = new Table();
-		for(int i = 1; i <= 10; ++i) {
-			addLevelButton(levelsContainer, i, false);
+		for(int i : levels) {
+			addLevelButton(levelsContainer, type, i, false);
 		}
 		
 		block.row();
-		block.add(levelsContainer).expand().top();
+		if(center) {
+			block.add(levelsContainer).expand().top();
+		} else {
+			block.add(levelsContainer).expand().top().left();
+		}
 		
 		content.row();
-		content.add(block).expandX().fillX().top().left();
+		content.add(block).expandX().fillX();
 	}
 	
-	protected void addLevelButton(Table container, int number, boolean locked) {
+	protected void addLevelButton(Table container, String type, int number, boolean locked) {
 		String str_number = Integer.toString(number);
+		String action = "ACTION_LEVEL_"+mode+"_"+type+"_"+str_number;
 		Table levelContainer = new Table();
 		
 		TextButton btn = new TextButton(str_number, skin, locked ? "disabled-menu" : "menu");
 		btn.getLabelCell().pad(10);
 		if(!locked) {
-			btn.addListener(new MyClickListener(game, Input.Buttons.LEFT, "ACTION_LEVEL_"+mode+"_"+str_number));
+			btn.addListener(new MyClickListener(game, Input.Buttons.LEFT, action));
 		}
 		levelContainer.add(btn).minSize(80, 80).pad(10);
 		levelContainer.row();
@@ -77,8 +105,7 @@ public class LevelsStage extends AbstractStage {
 			levelContainer.add(score);
 		}
 		
-		container.add(levelContainer).pad(20);
-		levelContainer.debug();
+		container.add(levelContainer).pad(20).left();
 	}
 
 }
