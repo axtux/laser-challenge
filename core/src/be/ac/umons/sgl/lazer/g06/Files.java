@@ -58,7 +58,7 @@ public class Files {
 		
 		return true;
 	}
-	
+
 	public static boolean exists(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
@@ -73,6 +73,22 @@ public class Files {
 		}
 		
 		return fh.exists();
+	}
+	
+	public static FileHandle[] list(String path) {
+		FileHandle fh = Gdx.files.local(path);
+		
+		if(fh == null) {
+			Gdx.app.debug("Files.list", "Got null pointer for path "+path);
+			return null;
+		}
+		
+		if(!fh.isDirectory()) {
+			Gdx.app.debug("Files.list", path+" is not a directory");
+			return null;
+		}
+		
+		return fh.list();
 	}
 	
 }
