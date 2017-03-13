@@ -8,6 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LoginsStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.AbstractStage;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelFinishedStage;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelInfosStage;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelPausedStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelsStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LocalLoginStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.ModesStage;
@@ -90,8 +93,23 @@ public class LazerChallenge extends Game {
 		}
 	}
 	
+	public void levelInfo(String mode, String type, int number, boolean launch) {
+		AbstractStage s;
+		if(launch) {
+			// TODO launch game
+			s = null;
+		} else {
+			s = new LevelInfosStage(this, type, number);
+		}
+		setStage(s);
+	}
+	
 	public void act(String action) {
 		Gdx.app.debug("ACTION", action);
+		if(action.startsWith("ACTION_LEVEL_")) {
+			
+		}
+		
 		switch(action) {
 		
 		// ACTIONs from headers
@@ -140,9 +158,17 @@ public class LazerChallenge extends Game {
 			mode = "TRAINING";
 			act("MENU_LEVELS");
 			break;
-		
+
 		case "MENU_LEVELS":
 			setStage(new LevelsStage(this));
+			break;
+
+		case "MENU_LEVEL_PAUSE":
+			setStage(new LevelPausedStage(this, "ARCADE", 10));
+			break;
+
+		case "MENU_LEVEL_FINISHED":
+			setStage(new LevelFinishedStage(this, "ARCADE", 10));
 			break;
 		
 		default:

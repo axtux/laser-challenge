@@ -141,6 +141,38 @@ public abstract class AbstractStage extends Stage {
 		
 		return tf;
 	}
+
+	protected void addDoubleLabel(String label1, String label2) {
+		content.row().fillX();
+		
+		Label l1 = new Label(label1+" : ", skin, "label");
+		Table l1Container = new Table();
+		l1Container.add(l1).pad(10).expandX().right();
+		content.add(l1Container).uniform();
+		
+		Label l2 = new Label(label2, skin, "label");
+		Table l2Container = new Table();
+		l2Container.add(l2).pad(10).expandX().left();
+		content.add(l2Container).uniform();
+	}
+	
+	protected void addDoubleButton(String label1, String action1, String label2, String action2) {
+		content.row().fillX();
+
+		TextButton btn1 = new TextButton(label1, skin, "menu");
+		btn1.getLabelCell().pad(10);
+		btn1.addListener(new MyClickListener(game, Input.Buttons.LEFT, action1));
+		Table container1 = new Table();
+		container1.add(btn1).pad(10).expandX();
+		content.add(container1).uniform();
+		
+		TextButton btn2 = new TextButton(label2, skin, "menu");
+		btn2.getLabelCell().pad(10);
+		btn2.addListener(new MyClickListener(game, Input.Buttons.LEFT, action2));
+		Table container2 = new Table();
+		container2.add(btn2).pad(10).expandX();
+		content.add(container2).uniform();
+	}
 	
 	public String getFieldValue(String fieldname) {
 		TextField tf = fields.get(fieldname);

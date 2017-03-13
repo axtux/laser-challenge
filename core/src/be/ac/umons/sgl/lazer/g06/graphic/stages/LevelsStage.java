@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
+import be.ac.umons.sgl.lazer.g06.listeners.LevelInfosListener;
 import be.ac.umons.sgl.lazer.g06.listeners.MyClickListener;
 
 public class LevelsStage extends AbstractStage {
@@ -85,13 +86,15 @@ public class LevelsStage extends AbstractStage {
 	
 	protected void addLevelButton(Table container, String type, int number, boolean locked) {
 		String str_number = Integer.toString(number);
-		String action = "ACTION_LEVEL_"+mode+"_"+type+"_"+str_number;
 		Table levelContainer = new Table();
 		
 		TextButton btn = new TextButton(str_number, skin, locked ? "disabled-menu" : "menu");
 		btn.getLabelCell().pad(10);
 		if(!locked) {
-			btn.addListener(new MyClickListener(game, Input.Buttons.LEFT, action));
+			//String action = "ACTION_LEVEL_"+mode+"_"+type+"_"+str_number;
+			//btn.addListener(new MyClickListener(game, Input.Buttons.LEFT, action));
+			btn.addListener(new LevelInfosListener(game, Input.Buttons.LEFT, mode, type, number, false));
+			
 		}
 		levelContainer.add(btn).minSize(80, 80).pad(10);
 		levelContainer.row();
