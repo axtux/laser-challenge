@@ -125,12 +125,25 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>one-way mirror</name>
+		<name>one-way-right mirror</name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
 			</input>
 			<input orientation="RIGHT">
+				<output orientation="UP"/>
+			</input>
+		</inputs>
+	</block>
+
+	<block>
+		<image>path_to_img</image>
+		<name>one-way-left mirror</name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="LEFT"/>
+			</input>
+			<input orientation="LEFT">
 				<output orientation="UP"/>
 			</input>
 		</inputs>
