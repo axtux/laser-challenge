@@ -75,7 +75,7 @@ public class Files {
 		return fh.exists();
 	}
 	
-	public static FileHandle[] list(String path) {
+	public static String[] list(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
 		if(fh == null) {
@@ -88,7 +88,14 @@ public class Files {
 			return null;
 		}
 		
-		return fh.list();
+		FileHandle files[] = fh.list();
+		String fileNames[] = new String[files.length];
+		
+		for(int i = 0; i < files.length; ++i) {
+			fileNames[i] = files[i].name();
+		}
+		
+		return fileNames;
 	}
 	
 }
