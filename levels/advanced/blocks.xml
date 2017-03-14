@@ -173,7 +173,7 @@
 				<output orientation ="UP-RIGHT"/>
 				<output orientation ="UP-LEFT"/>
 				<output orientation ="DOWN-LEFT"/>
-				<output orientation ="LEFT-RIGHT"/>
+				<output orientation ="DOWN-RIGHT"/>
 			</input>
 		</inputs>
 	</block>
@@ -439,7 +439,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>one-way mirror</name>
+		<name>one-way-right mirror</name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -449,15 +449,15 @@
 			</input>
 		</inputs>
 	</block>
-	
+
 	<block>
 		<image>path_to_img</image>
-		<name>one-way-little-agnled mirror</name>
+		<name>one-way-left mirror</name>
 		<inputs>
 			<input orientation="UP">
-				<output orientation ="UP-RIGHT"/>
+				<output orientation ="LEFT"/>
 			</input>
-			<input orientation="UP-RIGHT">
+			<input orientation="LEFT">
 				<output orientation="UP"/>
 			</input>
 		</inputs>
