@@ -27,6 +27,9 @@ public class LevelsStage extends AbstractStage {
 		
 		addHeaderButton("Retour", "MENU_MODES");
 		
+		String types[] = {"STANDARD", "ADVANCED"};
+		Gdx.app.debug("types", String.join("|", types));
+		
 		int[] standardLevels = new int[10];
 		int[] advancedLevels = new int[9];
 		for(int i = 0; i < standardLevels.length; ++i) {
