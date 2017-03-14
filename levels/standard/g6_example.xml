@@ -1,0 +1,6 @@
+<level name="Level name" map="g6_MAPID" difficulty="(easy|medium|hard)" id="(unsigned integer)">
+  <grid type="(rectangular|hexagonal)" x="5" y="5" />
+  <blocks>
+    <block type="(source|target|blocker|mirror|splitter|gate|amplifier)" kind="(one-way|two-way|three-way)" fixedposition="(true|false)" x="1" y="1" orientation="(right|up|left|down)" fixedorientation="(true|false)" />
+  </blocks>
+</level>
