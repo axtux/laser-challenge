@@ -1,14 +1,13 @@
 package be.ac.umons.sgl.lazer.g06.graphic;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
-import be.ac.umons.sgl.lazer.g06.Files;
 
 public class MyFonts {
 	
@@ -37,13 +36,12 @@ public class MyFonts {
 		}
 		
 		if(font == null) {
-			//String fontFile = "fonts/opificio/opificio_regular.ttf";
-			String fontFile = "fonts/"+name+".ttf";
-			if(!Files.exists(fontFile)) {
+			FileHandle file = Gdx.files.internal("fonts/"+name+".ttf");
+			if(file == null || !file.exists()) {
 				Gdx.app.error("MyFonts.getFont", "Font "+name+"does not exists");
 				return null;
 			}
-			FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontFile));
+			FreeTypeFontGenerator generator = new FreeTypeFontGenerator(file);
 			FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 			parameter.size = size;
 			parameter.color = color;
