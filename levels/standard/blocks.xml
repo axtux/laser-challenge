@@ -31,53 +31,6 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-laser-angled_source</name>
-		<inputs>
-			<input>
-				<output orientation ="UP"/>
-				<output orientation ="RIGHT"/>
-			</input>
-		</inputs>
-	</block>
-	
-	<block>
-		<image>path_to_img</image>
-		<name>two-laser-straight_source</name>
-		<inputs>
-			<input>
-				<output orientation ="UP"/>
-				<output orientation ="DOWN"/>
-			</input>
-		</inputs>
-	</block>
-	
-	<block>
-		<image>path_to_img</image>
-		<name>three-laser_source</name>
-		<inputs>
-			<input>
-				<output orientation ="UP"/>
-				<output orientation ="RIGHT"/>
-				<output orientation ="LEFT"/>
-			</input>
-		</inputs>
-	</block>
-	
-	<block>
-		<image>path_to_img</image>
-		<name>four-laser_source</name>
-		<inputs>
-			<input>
-				<output orientation ="UP"/>
-				<output orientation ="RIGHT"/>
-				<output orientation ="DOWN"/>
-				<output orientation ="LEFT"/>
-			</input>
-		</inputs>
-	</block>
-	
-	<block>
-		<image>path_to_img</image>
 		<name>one-laser_target</name>
 		<inputs>
 			<input orientation ="UP"/>
@@ -86,27 +39,8 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-laser-angled_target</name>
+		<name>two-laser_target</name>
 		<inputs>
-			<input orientation ="UP"/>
-			<input orientation ="RIGHT"/>
-		</inputs>
-	</block>
-	
-	<block>
-		<image>path_to_img</image>
-		<name>two-laser-straight_target</name>
-		<inputs>
-			<input orientation ="UP"/>
-			<input orientation ="DOWN"/>
-		</inputs>
-	</block>
-	
-	<block>
-		<image>path_to_img</image>
-		<name>three-laser_target</name>
-		<inputs>
-			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
 			<input orientation ="LEFT"/>
 		</inputs>
