@@ -1,0 +1,20 @@
+<level name="Level 2" map="g6-A-3" difficulty="easy">
+	<grid type="rectangular" width="6" height="6"/>
+	
+	<blocks>
+		<block type="source" color="grey" fixedposition="true"fixedorientation="true"/>
+			<kind name="four-laser"/>
+		<block type="target" color="red" fixedposition="true" fixedorientation="true"/>
+			<kind name="three-laser"/>
+			<kind name="two-laser-angled"/>
+		<block type="blocker"/>
+			<position x="3" y="2"/>
+			<position x="3" y="6"/>
+			<position x="5" y="1"/>
+		<block type="mirror" color="yellow" fixedposition="false" orientation="right" fixedorientation="false"/>
+			<kind name="one-way-right"/>
+			<kind name="one-way-left"/>
+		<block type="splitter" color="yellow" fixedposition="false" orientation="right" fixedorientation="false"/>
+			<kind name="two-way-straight"/>
+	</blocks>
+</level>
