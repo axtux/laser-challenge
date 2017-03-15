@@ -1,5 +1,5 @@
-<level name="Level 1" map="g6-A-1" difficulty="easy">
-	<grid type="rectangular" width="3" height="3"/>
+<level name="Level 3" map="g6-A-3" difficulty="medium">
+	<grid type="rectangular" width="10" height="10"/>
 	
 	<blocks>
 		<block type="source" color="grey" fixedposition="true" orientation="right" fixedorientation="false"/>
@@ -10,3 +10,6 @@
 		<block type="two-way-straight splitter" color="yellow" fixedposition="false" orientation="right" fixedorientation="false"/>
 	</blocks>
 </level>
+		
+		
+

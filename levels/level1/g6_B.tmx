@@ -1,52 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="3" height="3" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024">
   <image source="../../sprite/terrain.png" width="1024" height="1024"/>
-  <tile id="187">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="277">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="278">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="279">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="309">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="311">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="373">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="374">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="375">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
   <tile id="620">
    <properties>
     <property name="source" value="1"/>
@@ -60,10 +15,15 @@
  </tileset>
  <tileset firstgid="1025" name="blocker" tilewidth="32" tileheight="32" tilecount="1">
   <image source="../../sprite/blocker.png" width="32" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
  </tileset>
- <layer name="Calque de Tile 1" width="10" height="10">
+ <layer name="Calque de Tile 1" width="3" height="3">
   <data encoding="base64" compression="zlib">
-   eJzLY2Jg0GbEj/OgahhZUGlkjE0MHxYDYnEglkAT38OAis2AYuZAbEFAXRhQLByIIwjYWwbE5UBcQUAdIT+S6l8QzsUR1sjiAHjIFyU=
+   eJzLY2Jg0GZExYwsCHYuUB4AJzIB7Q==
   </data>
  </layer>
 </map>
