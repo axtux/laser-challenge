@@ -5,6 +5,7 @@
 		<block type="source" color="grey" fixedposition="true" orientation="right" fixedorientation="false"/>
 		<block type="target" color="red" fixedposition="true" orientation="right" fixedorientation="false"/>
 		<block type="blocker"/>
+			<position x="2" y="3"/>
 		<block type="one-way-right mirror" color="yellow" fixedposition="false" orientation="right" fixedorientation="false"/>
 		<block type="one-way-left mirror" color="yellow" fixedposition="false" orientation="right" fixedorientation="false"/>
 		<block type="two-way-straight splitter" color="yellow" fixedposition="false" orientation="right" fixedorientation="false"/>
