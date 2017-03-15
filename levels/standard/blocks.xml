@@ -21,7 +21,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>one-laser source</name>
+		<name>one-laser_source</name>
 		<inputs>
 			<input>
 				<output orientation ="UP"/>
@@ -31,7 +31,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-laser-angled source</name>
+		<name>two-laser-angled_source</name>
 		<inputs>
 			<input>
 				<output orientation ="UP"/>
@@ -42,7 +42,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-laser-straight source</name>
+		<name>two-laser-straight_source</name>
 		<inputs>
 			<input>
 				<output orientation ="UP"/>
@@ -53,7 +53,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>three-laser source</name>
+		<name>three-laser_source</name>
 		<inputs>
 			<input>
 				<output orientation ="UP"/>
@@ -65,7 +65,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>four-laser source</name>
+		<name>four-laser_source</name>
 		<inputs>
 			<input>
 				<output orientation ="UP"/>
@@ -78,7 +78,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>one-laser target</name>
+		<name>one-laser_target</name>
 		<inputs>
 			<input orientation ="UP"/>
 		</inputs>
@@ -86,7 +86,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-laser-angled target</name>
+		<name>two-laser-angled_target</name>
 		<inputs>
 			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
@@ -95,7 +95,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-laser-straight target</name>
+		<name>two-laser-straight_target</name>
 		<inputs>
 			<input orientation ="UP"/>
 			<input orientation ="DOWN"/>
@@ -104,7 +104,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>three-laser target</name>
+		<name>three-laser_target</name>
 		<inputs>
 			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
@@ -114,7 +114,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>four-laser target</name>
+		<name>four-laser_target</name>
 		<inputs>
 			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
@@ -125,7 +125,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>one-way-right mirror</name>
+		<name>one-way-right_mirror</name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -138,7 +138,7 @@
 
 	<block>
 		<image>path_to_img</image>
-		<name>one-way-left mirror</name>
+		<name>one-way-left_mirror</name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT"/>
@@ -151,7 +151,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-way-right mirror</name>
+		<name>two-way-right_mirror</name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -170,7 +170,7 @@
 
 	<block>
 		<image>path_to_img</image>
-		<name>two-way-left mirror</name>
+		<name>two-way-left_mirror</name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT"/>
@@ -189,7 +189,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-way-straight splitter </name>
+		<name>two-way-straight_splitter </name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT"/>
@@ -200,7 +200,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-way-angled-right splitter </name>
+		<name>two-way-angled-right_splitter </name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN"/>
@@ -211,7 +211,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-way-angled-left splitter </name>
+		<name>two-way-angled-left_splitter </name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT"/>
@@ -222,7 +222,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>three-way splitter </name>
+		<name>three-way_splitter </name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
