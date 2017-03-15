@@ -14,11 +14,11 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 
 public class Orientation {
 	
-	Hashtable orientationForIndice = new Hashtable();
-	String[] indiceForOrientation;
+	private Hashtable<String,Integer> orientationToIndice = new Hashtable<String ,Integer>();
+	private String[] indiceToOrientation;
 
 
-	/** @author Maazouz Mehdi
+	/**
 	 * this constructor return a hashtable and string[] element who contain directions from xml document
 	 * @param xml it is a document on xml format
 	 * @throws IOException
@@ -27,13 +27,27 @@ public class Orientation {
 		XmlReader reader= new XmlReader();
 		Element root = reader.parse(xml);
 		Array<Element> orientations = root.getChildrenByName("orientation");
-		indiceForOrientation=new String[orientations.size];
+		indiceToOrientation=new String[orientations.size];
 		int indice=0;
 		for (Element child : orientations ){
-			indiceForOrientation[indice]=child.getText().toString();
-			orientationForIndice.put(child.getText().toString(), indice);
+			indiceToOrientation[indice]=child.getText().toString();
+			orientationToIndice.put(child.getText().toString(), indice);
 			indice+=1;
 		}
 			
+	}
+	
+	/**
+	 * this method return the attribut orientationToIndice from object
+	 */
+	public Hashtable<String,Integer> getOrientationToIndice(){
+		return orientationToIndice;
+	}
+	
+	/**
+	 * this method return the attribut indiceToOrientation from object
+	 */
+	public String[] getIndiceToOrientation(){
+		return indiceToOrientation;
 	}
 }
