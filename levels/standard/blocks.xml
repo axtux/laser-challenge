@@ -151,7 +151,7 @@
 	
 	<block>
 		<image>path_to_img</image>
-		<name>two-way mirror</name>
+		<name>two-way-right mirror</name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -163,6 +163,25 @@
 				<output orientation="LEFT"/>
 			</input>
 			<input orientation="LEFT">
+				<output orientation="DOWN"/>
+			</input>
+		</inputs>
+	</block>
+
+	<block>
+		<image>path_to_img</image>
+		<name>two-way-left mirror</name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="LEFT"/>
+			</input>
+			<input orientation="LEFT">
+				<output orientation="UP"/>
+			</input>
+			<input orientation="DOWN">
+				<output orientation="RIGHT"/>
+			</input>
+			<input orientation="RIGHT">
 				<output orientation="DOWN"/>
 			</input>
 		</inputs>
