@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024">
-  <image source="../../core/assets/sprite/terrain.png" width="1024" height="1024"/>
+  <image source="../../core/assets/sprite_TMX/terrain.png" width="1024" height="1024"/>
   <tile id="187">
    <properties>
     <property name="unavailable" value="1"/>
@@ -65,7 +65,7 @@
   </tile>
  </tileset>
  <tileset firstgid="1025" name="blocker" tilewidth="32" tileheight="32" tilecount="1">
-  <image source="../../core/assets/sprite/blocker.png" width="32" height="32"/>
+  <image source="../../core/assets/sprite_standard/blocker.png" width="32" height="32"/>
  </tileset>
  <layer name="Calque de Tile 1" width="10" height="10">
   <data encoding="base64" compression="zlib">
