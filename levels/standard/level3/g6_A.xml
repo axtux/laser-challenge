@@ -2,25 +2,30 @@
 	<grid type="rectangular" width="10" height="10"/>
 	
 	<blocks>
-		<block type="source" color="grey" fixedposition="true" fixedorientation="false"/>
+		<block type="source" color="grey" fixedposition="true" fixedorientation="false">
 			<kind name="one-laser" orientation="UP"/>
-		<block type="target" color="red" fixedposition="true" fixedorientation="true"/>
+		</block>
+		<block type="target" color="red" fixedposition="true" fixedorientation="true">
 			<kind name="one-laser" orientation="UP"/>
-		<block type="blocker"/>
+		</block>
+		<block type="blocker">
 			<position x="3" y="1"/>
 			<position x="3" y="6"/>
 			<position x="3" y="9"/>
 			<position x="9" y="2"/>
 			<position x="9" y="4"/>
 			<position x="9" y="9"/>
-		<block type="mirror" color="yellow" fixedposition="false" fixedorientation="false"/>
+		</block>
+		<block type="mirror" color="yellow" fixedposition="false" fixedorientation="false">
 			<kind name="one-way-right"  orientation="UP"/>
 			<kind name="one-way-left"  orientation="UP"/>
 			<kind name="two-way-right"  orientation="UP"/>
 			<kind name="two-way-left"  orientation="UP"/>
-		<block type="splitter" color="yellow" fixedposition="false" fixedorientation="false"/>
+		</block>
+		<block type="splitter" color="yellow" fixedposition="false" fixedorientation="false">
 			<kind name="one-laser"  orientation="UP"/>
 			<kind name="two-way-angled-left"  orientation="UP"/> 
+		</block>
 	</blocks>
 </level>
 		

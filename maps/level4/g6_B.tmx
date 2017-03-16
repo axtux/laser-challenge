@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024">
-  <image source="../../core/assets/sprite/terrain.png" width="1024" height="1024"/>
+  <image source="../../core/assets/sprite_TMX/terrain.png" width="1024" height="1024"/>
   <tile id="187">
    <properties>
     <property name="unavailable" value="1"/>
@@ -25,7 +25,6 @@
   <tile id="298">
    <properties>
     <property name="mirror" value="1"/>
-    <property name="splitter" value="1"/>
    </properties>
   </tile>
   <tile id="309">
@@ -55,7 +54,6 @@
   </tile>
   <tile id="370">
    <properties>
-    <property name="mirror" value="1"/>
     <property name="splitter" value="1"/>
    </properties>
   </tile>
@@ -91,7 +89,7 @@
   </tile>
  </tileset>
  <tileset firstgid="1025" name="blocker" tilewidth="32" tileheight="32" tilecount="1">
-  <image source="../../core/assets/sprite/blocker.png" width="32" height="32"/>
+  <image source="../../core/assets/sprite_standard/blocker.png" width="32" height="32"/>
   <tile id="0">
    <properties>
     <property name="unavailable" value="1"/>
@@ -100,7 +98,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJyVk00SgjAMRtvKGdA7uBfWcAdwrWvZiMDhPJxfhskINWnj4s20mb406c8QnDv7FV98xxaGoDvtwYbkUk6r//S/pOqNY2+3R/O5z7jfnC/VR4zgZfRLcAQnZX2qf5pfQAVqwdfunWPkd6AHV8VPQf4EZrAIfpN5C7nzk/xUPzG5/aU8jOb/84+2/iOsWOpmbvDugh/n4dgWin0ACMdLeg==
+   eJzLY2Jg0GYkD+fh0evMTBymVH8xIyYmxb17GFAxPv3YMCH92NwHwiVAXEqkfjEgFgdiCRzq8fkfxDcDYnMgtsCin5D/QPrDgDgciCPI1F8GxOVAXIFFvxOBtEAo/AjpJ4QHk/5cJggmRX8SUF8yFv3YzIHJI6sDAA3NTZw=
   </data>
  </layer>
 </map>
