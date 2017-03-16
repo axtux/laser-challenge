@@ -28,6 +28,16 @@
 			</input>
 		</inputs>
 	</block>
+
+	<block>
+		<image>path_to_img</image>
+		<name>one-laser-oriented_source</name>
+		<inputs>
+			<input>
+				<output orientation ="UP-LEFT"/>
+			</input>
+		</inputs>
+	</block>
 	
 	<block>
 		<image>path_to_img</image>
