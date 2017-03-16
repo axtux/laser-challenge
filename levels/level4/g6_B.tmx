@@ -22,6 +22,12 @@
     <property name="unavailable" value="1"/>
    </properties>
   </tile>
+  <tile id="298">
+   <properties>
+    <property name="mirror" value="1"/>
+    <property name="splitter" value="1"/>
+   </properties>
+  </tile>
   <tile id="309">
    <properties>
     <property name="unavailable" value="1"/>
@@ -45,6 +51,12 @@
   <tile id="343">
    <properties>
     <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="370">
+   <properties>
+    <property name="mirror" value="1"/>
+    <property name="splitter" value="1"/>
    </properties>
   </tile>
   <tile id="373">
@@ -88,7 +100,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJzLY2Jg0GaEYEYWBJtYjEuPMzNxGJeZxOovZsTEpLh/DwMqxqUf5k90/xLSj819IFwCxKVE6hcDYnEglsChHp//QXwzIDYHYgss+nHFIUwMpD8MiMOBOAKHfnwYpL8MiMuBuAKLficCaYFQ+GHTj88/6JiQ/djMgWFc+knJR4TsJ2RWElBfMgnuB+FcpDwPAMtwSNo=
+   eJyVk00SgjAMRtvKGdA7uBfWcAdwrWvZiMDhPJxfhskINWnj4s20mb406c8QnDv7FV98xxaGoDvtwYbkUk6r//S/pOqNY2+3R/O5z7jfnC/VR4zgZfRLcAQnZX2qf5pfQAVqwdfunWPkd6AHV8VPQf4EZrAIfpN5C7nzk/xUPzG5/aU8jOb/84+2/iOsWOpmbvDugh/n4dgWin0ACMdLeg==
   </data>
  </layer>
 </map>

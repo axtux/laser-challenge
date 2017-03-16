@@ -7,6 +7,12 @@
     <property name="unavailable" value="1"/>
    </properties>
   </tile>
+  <tile id="298">
+   <properties>
+    <property name="mirror" value="1"/>
+    <property name="splitter" value="1"/>
+   </properties>
+  </tile>
   <tile id="620">
    <properties>
     <property name="source" value="1"/>
@@ -28,7 +34,7 @@
  </tileset>
  <layer name="Calque de Tile 1" width="6" height="6">
   <data encoding="base64" compression="zlib">
-   eJzLY2Jg0GZExXlAMUYWTHFkvJcBFYPE0PUQMgMd5wLtBQCn1gjL
+   eJzTZmRg0MaCGVkgdB4Tdvm9DKgYWQ+6GcTgXCYIBgCAfgjK
   </data>
  </layer>
 </map>

@@ -3,12 +3,12 @@
 	
 	<blocks>
 		<block type="source" color="grey" fixedposition="true" fixedorientation="true"/>
-			<kind name="four-laser"/>
+			<kind name="one-laser" orientation="UP"/>
 		<block type="target" color="red" fixedposition="true" fixedorientation="true"/>
-			<kind name="four-laser"/>
+			<kind name="one-laser" orientation="UP"/>
 		<block type="blocker"/>
 			<position x="2" y="3"/>
-		<block type="mirror" color="yellow" fixedposition="false" orientation="right" fixedorientation="false">
-			<kind name="one-way-right"/>
+		<block type="mirror" color="yellow" fixedposition="false" fixedorientation="false">
+			<kind name="one-way-right" orientation="UP"/>
 	</blocks>
 </level>
