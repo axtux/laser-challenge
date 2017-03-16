@@ -1,4 +1,4 @@
-<level name="Level 1" map="g6-A-1" difficulty="easy">
+<level name="Level 1" map="g6_1" difficulty="easy">
 	<grid type="rectangular" width="3" height="3"/>
 	
 	<blocks>
