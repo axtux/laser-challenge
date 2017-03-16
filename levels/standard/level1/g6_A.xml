@@ -10,7 +10,6 @@
 		</block>
 		<block type="blocker" orientation="UP" fixedorientation="true" fixedposition="true"/>
 			<position x="2" y="3"/>
-		<block type="one-way-right_mirror" orientation="UP" fixedposition="false" fixedorientation="false">
-		</block>
+		<block type="one-way-right_mirror" orientation="UP" fixedposition="false" fixedorientation="false"/>
 	</blocks>
 </level>
