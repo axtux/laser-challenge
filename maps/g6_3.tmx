@@ -25,12 +25,16 @@
   <tile id="298">
    <properties>
     <property name="mirror" value="1"/>
-    <property name="splitter" value="1"/>
    </properties>
   </tile>
   <tile id="309">
    <properties>
     <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="310">
+   <properties>
+    <property name="splitter" value="1"/>
    </properties>
   </tile>
   <tile id="311">

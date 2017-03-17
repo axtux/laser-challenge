@@ -2,28 +2,41 @@
 	<grid type="rectangular" width="10" height="10"/>
 	
 	<blocks>
-		<block type="source" color="grey" fixedposition="true" fixedorientation="false">
+		<block type="one-laser_source" fixedposition="true">
+			<position x="1" y="2"/>
 		</block>
-		<block type="target" color="red" fixedposition="true" fixedorientation="true">
+		<block type="one-laser_source" fixedposition="true">
+			<position x="1" y="8"/>
+		</block>
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true">
+			<position x="10" y="1"/>
+		</block>
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true">
+			<position x="10" y="10"/>
 		</block>
 		<block type="blocker">
 			<position x="3" y="1"/>
+		</block>
+		<block type="blocker">
 			<position x="3" y="6"/>
+		</block>
+		<block type="blocker">
 			<position x="3" y="9"/>
+		</block>
+		<block type="blocker">
 			<position x="9" y="2"/>
+		</block>
+		<block type="blocker">
 			<position x="9" y="4"/>
+		</block>
+		<block type="blocker">
 			<position x="9" y="9"/>
 		</block>
-		<block type="mirror" color="yellow" fixedposition="false" fixedorientation="false">
-			<kind name="one-way-right"  orientation="UP"/>
-			<kind name="one-way-left"  orientation="UP"/>
-			<kind name="two-way-right"  orientation="UP"/>
-			<kind name="two-way-left"  orientation="UP"/>
-		</block>
-		<block type="splitter" color="yellow" fixedposition="false" fixedorientation="false">
-			<kind name="one-laser"  orientation="UP"/>
-			<kind name="two-way-angled-left"  orientation="UP"/> 
-		</block>
+		<block type="one-way_mirror"/>
+		<block type="two-way_mirror"/>
+		<block type="two-way-straight_splitter"/>
+		<block type="two-way-angled-left_splitter"/>
+		<block type="two-way-angled-right_splitter"/>
 	</blocks>
 </level>
 		
