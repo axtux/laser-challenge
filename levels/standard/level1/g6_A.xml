@@ -1,15 +1,14 @@
-<level name="Level 1" map="g6_1" difficulty="easy">
-	<grid type="rectangular" width="3" height="3"/>
-	
+<level name="Level 1" map="g6_1" difficulty="easy">	
 	<blocks>
 		<block type="one-laser_source" fixedposition="true" fixedorientation="true">
-			<position x="2" y="2"/>
+			<position x="2" y="0"/>
 		</block>
 		<block type="one-laser_target" fixedposition="true" fixedorientation="true">
-			<position x="0" y="0"/>
+			<position x="0" y="2"/>
 		</block>
-		<block type="blocker" fixedorientation="false" fixedposition="false"/>
+		<block type="blocker">
 			<position x="2" y="1"/>
+		</block>
 		<block type="one-way_mirror"/>
 	</blocks>
 </level>
