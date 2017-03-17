@@ -4,7 +4,7 @@
   <image source="terrain.png" width="1024" height="1024"/>
  </tileset>
  <tileset firstgid="1025" name="one-laser_source" tilewidth="32" tileheight="32" tilecount="1">
-  <image source="../sprite_standard/one-laser_source.png" width="32" height="32"/>
+  <image source="../core/assets/sprite_standard/one-laser_source.png" width="32" height="32"/>
   <tile id="0">
    <properties>
     <property name="unavailable" value="1"/>
@@ -12,7 +12,7 @@
   </tile>
  </tileset>
  <tileset firstgid="1026" name="one-laser_target" tilewidth="32" tileheight="32" tilecount="1">
-  <image source="../sprite_standard/one-laser_target.png" width="32" height="32"/>
+  <image source="../core/assets/sprite_standard/one-laser_target.png" width="32" height="32"/>
   <tile id="0">
    <properties>
     <property name="unavailable" value="1"/>
