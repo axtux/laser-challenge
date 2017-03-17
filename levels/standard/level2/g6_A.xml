@@ -2,15 +2,14 @@
 	<grid type="rectangular" width="6" height="6"/>
 	
 	<blocks>
-		<block type="one-laser_source" orientation="UP" fixedposition="false" fixedorientation="true"/>
-		<block type="four-laser_target"  orientation="UP" fixedposition="true" fixedorientation="true">
+		<block type="one-laser_source" fixedorientation="true"/>
+		<block type="four-laser_target" fixedposition="true" fixedorientation="true">
 			<position x="5" y="3"/>
 		</block>
 		<block type="blocker" orientation="UP" fixedposition="true" fixedorientation="true">
 			<position x="3" y="3"/>
 		</block>
-		<block type="one-way-right_mirror" orientation="UP" fixedposition="false" fixedorientation="false"/>
-		<block type="one-way-left_mirror" orientation="UP" fixedposition="false" fixedorientation="false"/>
-		<block type="two-way-straight_splitter" orientation="UP" fixedposition="false" fixedorientation="false"/>
+		<block type="one-way_mirror"/>
+		<block type="two-way-straight_splitter"/>
 	</blocks>
 </level>

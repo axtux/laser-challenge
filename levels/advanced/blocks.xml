@@ -97,7 +97,7 @@
 			
 	<block>
 		<image>path_to_img</image>
-		<name>one-way-right_mirror</name>
+		<name>one-way_mirror</name>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -108,19 +108,6 @@
 		</inputs>
 	</block>
 
-	<block>
-		<image>path_to_img</image>
-		<name>one-way-left_mirror</name>
-		<inputs>
-			<input orientation="UP">
-				<output orientation ="LEFT"/>
-			</input>
-			<input orientation="LEFT">
-				<output orientation="UP"/>
-			</input>
-		</inputs>
-	</block>
-	
 	<block>
 		<image>path_to_img</image>
 		<name>two-way_mirror</name>
