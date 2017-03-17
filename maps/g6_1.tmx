@@ -3,23 +3,7 @@
  <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024">
   <image source="terrain.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="1025" name="one-laser_source" tilewidth="32" tileheight="32" tilecount="1">
-  <image source="../core/assets/sprite_standard/one-laser_source.png" width="32" height="32"/>
-  <tile id="0">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="1026" name="one-laser_target" tilewidth="32" tileheight="32" tilecount="1">
-  <image source="../core/assets/sprite_standard/one-laser_target.png" width="32" height="32"/>
-  <tile id="0">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
- </tileset>
- <layer name="Calque de Tile 1" width="3" height="3">
+ <layer name="ground" width="3" height="3">
   <data encoding="base64" compression="zlib">
    eJzTZmRg0CaAAR8LAY0=
   </data>

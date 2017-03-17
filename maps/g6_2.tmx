@@ -33,7 +33,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Calque de Tile 1" width="6" height="6">
+ <layer name="ground" width="6" height="6">
   <data encoding="base64" compression="zlib">
    eJzTZmRg0MaD85iwi+9lQMXo8sVQjM9sZJzLBMEAw3cJzw==
   </data>

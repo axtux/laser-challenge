@@ -73,7 +73,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Calque de Tile 1" width="10" height="10">
+ <layer name="ground" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJzLY2Jg0GbEj/OIUEMIF6NhMSAWB2IJNHV7GFCxGVDMHIgtoPpwqQsDioUDcQSaOnR7y4C4HIgrSHAzpX6H4Vwc4YgsDgD/yxtv
   </data>
