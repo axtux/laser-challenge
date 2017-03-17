@@ -42,6 +42,11 @@
     <property name="unavailable" value="1"/>
    </properties>
   </tile>
+  <tile id="370">
+   <properties>
+    <property name="splitter" value="1"/>
+   </properties>
+  </tile>
   <tile id="373">
    <properties>
     <property name="unavailable" value="1"/>
@@ -68,12 +73,9 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="1025" name="blocker" tilewidth="32" tileheight="32" tilecount="1">
-  <image source="../core/assets/sprite_standard/blocker.png" width="32" height="32"/>
- </tileset>
  <layer name="Calque de Tile 1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJzLY2Jg0GbEj/OgahhZUGlkjE0MHxYDYnEglkAT38OAis2AYuZAbEFAXRhQLByIIwjYWwbE5UBcQUAdIT+S6l8QzsUR1sjiAHjIFyU=
+   eJzLY2Jg0GbEj/OIUEMIF6NhMSAWB2IJNHV7GFCxGVDMHIgtoPpwqQsDioUDcQSaOnR7y4C4HIgrSHAzpX6H4Vwc4YgsDgD/yxtv
   </data>
  </layer>
 </map>
