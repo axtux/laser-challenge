@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.graphic.MySkin;
@@ -25,7 +26,8 @@ public abstract class AbstractStage extends Stage {
 	Hashtable<String, TextField> fields;
 	
 	public AbstractStage(LazerChallenge game, String title) {
-		super();
+		// use ScreenViewport instead of ScalingViewport for elements to keep their size
+		super(new ScreenViewport());
 		
 		this.game = game;
 		this.skin = game.getSkin();
