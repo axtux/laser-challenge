@@ -36,14 +36,7 @@ public class LevelPlayingStage extends AbstractStage {
 	}
 	
 	public void draw() {
-		//super.draw();
-		render();
-	}
-	
-	public void render () {
-		// clear the screen
-		Gdx.gl.glClearColor(0.55f, 0.55f, 0.55f, 1f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		super.draw();
 		renderer.render();
 	}
 	
@@ -58,7 +51,8 @@ public class LevelPlayingStage extends AbstractStage {
 			throw new GdxRuntimeException("Tile width does not match tile height.");
 		}
 		
-		renderer = new OrthogonalTiledMapRenderer(level.getMap(), 1/(float)tx);
+		//renderer = new OrthogonalTiledMapRenderer(level.getMap(), 1/(float)tx);
+		renderer = new OrthogonalTiledMapRenderer(level.getMap(), this.getBatch());
 		OrthographicCamera camera = new OrthographicCamera();
 		
 		int x = props.get("width", -1, int.class);
@@ -68,10 +62,13 @@ public class LevelPlayingStage extends AbstractStage {
 		}
 		
 		// always display all map for this game
-		camera.setToOrtho(false, x, y);
+		//camera.setToOrtho(false, x, y);
+		camera.setToOrtho(false, x*tx, y*tx);
+		//camera.translate(0*tx, 5);
+		//camera.rotate(45);
 		camera.update();
 		renderer.setView(camera);
-		render();
+		//renderer.setView((OrthographicCamera) getCamera());
 	}
 	
 	private boolean setMode(String mode) {
@@ -87,6 +84,11 @@ public class LevelPlayingStage extends AbstractStage {
 			Gdx.app.error("LevelPlayingStage.setMode", "mode "+mode+" not implemented");
 			return false;
 		}
+	}
+	
+	public void dispose() {
+		renderer.dispose();
+		super.dispose();
 	}
 	
 
