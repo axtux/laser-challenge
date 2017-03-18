@@ -4,13 +4,19 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LoginsStage;
+import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.AbstractStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelFinishedStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelInfosStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelPausedStage;
+import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelPlayingStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelsStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LocalLoginStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.ModesStage;
@@ -28,6 +34,9 @@ public class LazerChallenge extends Game {
 	User user;
 	String mode = "";
 	
+	Level level;
+	OrthogonalTiledMapRenderer renderer;
+	
 	public void create () {
 		/*
 		Gdx.app.setLogLevel(Application.LOG_NONE);
@@ -36,7 +45,8 @@ public class LazerChallenge extends Game {
 		Gdx.app.debug("LOCAL_PATH", Gdx.files.getLocalStoragePath());
 		
 		skin = new MySkin("josefin_sans_bold");
-		act("MENU_LOGINS");
+		//act("MENU_LOGINS");
+		act("ACTION_LEVEL_PLAY");
 		
 	}
 	
@@ -52,6 +62,10 @@ public class LazerChallenge extends Game {
 		return mode;
 	}
 	
+	public Level getLevel() {
+		return level;
+	}
+	
 	public void setUser(User user) {
 		if(this.user != null) {
 			this.user.logout();
@@ -60,20 +74,36 @@ public class LazerChallenge extends Game {
 		this.user = user;
 	}
 	
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+	
 	public void resize (int width, int height) {
-		stage.getViewport().update(width, height, true);
-		render();
+		if(stage != null) {
+			stage.getViewport().update(width, height, true);
+		}
+		
 	}
 	
 	public void render() {
 		super.render();
+		Gdx.gl.glClearColor(0.55f, 0.55f, 0.55f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
+		
+		if(renderer != null) {
+			renderer.render();
+		} else {
+			stage.act(Gdx.graphics.getDeltaTime());
+			stage.draw();
+		}
+		
 	}
 	
 	public void dispose() {
-		stage.dispose();
+		if(stage != null) {
+			stage.dispose();
+		}
+		
 		skin.dispose();
 	}
 	
@@ -83,14 +113,17 @@ public class LazerChallenge extends Game {
 		}
 		
 		Stage oldStage = stage;
-		
-		Gdx.input.setInputProcessor(newStage);
 		stage = newStage;
-		render();
+		
+		Gdx.input.setInputProcessor(stage);
+		stage.draw();
+		
+		//render();
 		
 		if(oldStage != null) {
 			oldStage.dispose();
 		}
+		
 	}
 	
 	public void levelInfo(String mode, String type, int number, boolean launch) {
@@ -171,10 +204,43 @@ public class LazerChallenge extends Game {
 			setStage(new LevelFinishedStage(this, "ARCADE", 10));
 			break;
 		
+		case "ACTION_LEVEL_PLAY":
+			setLevel(new Level("levels/standard/level2/g6_A.xml"));
+			displayGame();
+			//setStage(new LevelPlayingStage(this, "ARCADE", 10));
+			break;
+		
 		default:
 			Gdx.app.error("ACTION_NOT_IMPLEMENTED", action);
 		}
 		
+	}
+	
+	private void displayGame() {
+		MapProperties props = level.getMap().getProperties();
+		int tx = props.get("tilewidth", -1, int.class);
+		int ty = props.get("tileheight", -1, int.class);
+		if(tx < 1 || ty < 1) {
+			throw new GdxRuntimeException("Tile width or tile height is < 1 or missing.");
+		}
+		if(tx != ty) {
+			throw new GdxRuntimeException("Tile width does not match tile height.");
+		}
+		
+		renderer = new OrthogonalTiledMapRenderer(level.getMap(), 1/(float)tx);
+		OrthographicCamera camera = new OrthographicCamera();
+		
+		int x = props.get("width", -1, int.class);
+		int y = props.get("height", -1, int.class);
+		if(x < 1 || y < 1) {
+			throw new GdxRuntimeException("Map width or map height is < 1 or missing.");
+		}
+		
+		// always display all map for this game
+		camera.setToOrtho(false, x, y);
+		camera.update();
+		renderer.setView(camera);
+		render();
 	}
 	
 	private void local_user(boolean create) {
