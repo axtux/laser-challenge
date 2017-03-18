@@ -4,11 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LoginsStage;
 import be.ac.umons.sgl.lazer.g06.game.Level;
@@ -35,7 +31,6 @@ public class LazerChallenge extends Game {
 	String mode = "";
 	
 	Level level;
-	OrthogonalTiledMapRenderer renderer;
 	
 	public void create () {
 		/*
@@ -79,9 +74,7 @@ public class LazerChallenge extends Game {
 	}
 	
 	public void resize (int width, int height) {
-		if(stage != null) {
-			stage.getViewport().update(width, height, true);
-		}
+		stage.getViewport().update(width, height, true);
 		
 	}
 	
@@ -90,20 +83,13 @@ public class LazerChallenge extends Game {
 		Gdx.gl.glClearColor(0.55f, 0.55f, 0.55f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		if(renderer != null) {
-			renderer.render();
-		} else {
-			stage.act(Gdx.graphics.getDeltaTime());
-			stage.draw();
-		}
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 		
 	}
 	
 	public void dispose() {
-		if(stage != null) {
-			stage.dispose();
-		}
-		
+		stage.dispose();
 		skin.dispose();
 	}
 	
@@ -117,8 +103,6 @@ public class LazerChallenge extends Game {
 		
 		Gdx.input.setInputProcessor(stage);
 		stage.draw();
-		
-		//render();
 		
 		if(oldStage != null) {
 			oldStage.dispose();
@@ -206,41 +190,13 @@ public class LazerChallenge extends Game {
 		
 		case "ACTION_LEVEL_PLAY":
 			setLevel(new Level("levels/standard/level2/g6_A.xml"));
-			displayGame();
-			//setStage(new LevelPlayingStage(this, "ARCADE", 10));
+			setStage(new LevelPlayingStage(this, "ARCADE"));
 			break;
 		
 		default:
 			Gdx.app.error("ACTION_NOT_IMPLEMENTED", action);
 		}
 		
-	}
-	
-	private void displayGame() {
-		MapProperties props = level.getMap().getProperties();
-		int tx = props.get("tilewidth", -1, int.class);
-		int ty = props.get("tileheight", -1, int.class);
-		if(tx < 1 || ty < 1) {
-			throw new GdxRuntimeException("Tile width or tile height is < 1 or missing.");
-		}
-		if(tx != ty) {
-			throw new GdxRuntimeException("Tile width does not match tile height.");
-		}
-		
-		renderer = new OrthogonalTiledMapRenderer(level.getMap(), 1/(float)tx);
-		OrthographicCamera camera = new OrthographicCamera();
-		
-		int x = props.get("width", -1, int.class);
-		int y = props.get("height", -1, int.class);
-		if(x < 1 || y < 1) {
-			throw new GdxRuntimeException("Map width or map height is < 1 or missing.");
-		}
-		
-		// always display all map for this game
-		camera.setToOrtho(false, x, y);
-		camera.update();
-		renderer.setView(camera);
-		render();
 	}
 	
 	private void local_user(boolean create) {
