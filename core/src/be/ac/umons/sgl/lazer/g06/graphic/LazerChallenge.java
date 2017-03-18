@@ -40,8 +40,8 @@ public class LazerChallenge extends Game {
 		Gdx.app.debug("LOCAL_PATH", Gdx.files.getLocalStoragePath());
 		
 		skin = new MySkin("josefin_sans_bold");
-		//act("MENU_LOGINS");
-		act("ACTION_LEVEL_PLAY");
+		act("MENU_LOGINS");
+		//act("ACTION_LEVEL_PLAY");
 		
 	}
 	
@@ -75,7 +75,6 @@ public class LazerChallenge extends Game {
 	
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, true);
-		
 	}
 	
 	public void render() {
