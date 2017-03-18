@@ -15,7 +15,7 @@ public class Files {
 			Gdx.app.debug("Files.getContent", "Got null pointer for path "+path);
 			return null;
 		}
-
+		
 		if(fh.isDirectory()) {
 			Gdx.app.debug("Files.getContent", path+" is a directory");
 			return null;
@@ -31,7 +31,7 @@ public class Files {
 		
 		return content;
 	}
-
+	
 	public static boolean putContent(String path, String content) {
 		return putContent(path, content, false);
 	}
@@ -58,7 +58,7 @@ public class Files {
 		
 		return true;
 	}
-
+	
 	public static boolean exists(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
@@ -67,8 +67,35 @@ public class Files {
 			return false;
 		}
 		
+		return fh.exists();
+	}
+	
+	public static boolean isFile(String path) {
+		FileHandle fh = Gdx.files.local(path);
+		
+		if(fh == null) {
+			Gdx.app.debug("Files.isFile", "Got null pointer for path "+path);
+			return false;
+		}
+		
 		if(fh.isDirectory()) {
-			Gdx.app.debug("Files.exists", path+" is a directory");
+			Gdx.app.debug("Files.isFile", path+" is a directory");
+			return false;
+		}
+		
+		return fh.exists();
+	}
+	
+	public static boolean isDir(String path) {
+		FileHandle fh = Gdx.files.local(path);
+		
+		if(fh == null) {
+			Gdx.app.debug("Files.isFile", "Got null pointer for path "+path);
+			return false;
+		}
+		
+		if(!fh.isDirectory()) {
+			Gdx.app.debug("Files.isFile", path+" is a directory");
 			return false;
 		}
 		
