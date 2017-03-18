@@ -1,51 +1,49 @@
 <level name="Level 4" map="g6_4" difficulty="medium">
-	<grid type="rectangular" width="16" height="16"/>
-	
 	<blocks>
 		<block type="one-laser_source"/>
 		<block type="one-laser_source"/>
 		<block type="one-laser_source"/>
 		<block type="one-laser_target" fixedposition="true">
-			<position x="0" y="0"/>
+			<position x="0" y="15"/>
 		</block>
 		<block type="one-laser_target" fixedposition="true">
-			<position x="15" y="0"/>
+			<position x="15" y="15"/>
 		</block>
 		<block type="two-laser_target" fixedposition="true">
-			<position x="11" y="3"/>
+			<position x="11" y="12"/>
 		</block>
 		<block type="blocker">
-			<position x="14" y="14"/>
+			<position x="14" y="1"/>
 		</block>
 		<block type="blocker">
-			<position x="4" y="13"/>
+			<position x="4" y="2"/>
 		</block>
 		<block type="blocker">
-			<position x="12" y="12"/>
+			<position x="12" y="3"/>
 		</block>
 		<block type="blocker">
-			<position x="14" y="12"/>
+			<position x="14" y="3"/>
 		</block>
 		<block type="blocker">
-			<position x="6" y="11"/>
+			<position x="6" y="4"/>
 		</block>
 		<block type="blocker">
-			<position x="11" y="11"/>
+			<position x="11" y="4"/>
 		</block>
 		<block type="blocker">
-			<position x="1" y="8"/>
+			<position x="1" y="7"/>
 		</block>
 		<block type="blocker">
-			<position x="6" y="8"/>
+			<position x="6" y="7"/>
 		</block>
 		<block type="blocker">
-			<position x="8" y="4"/>
+			<position x="8" y="11"/>
 		</block>
 		<block type="blocker">
-			<position x="12" y="4"/>
+			<position x="12" y="11"/>
 		</block>
 		<block type="blocker">
-			<position x="0" y="1"/>
+			<position x="0" y="14"/>
 		</block>
 		<block type="one-way_mirror"/>
 		<block type="two-way_mirror"/>

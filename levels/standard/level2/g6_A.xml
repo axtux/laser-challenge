@@ -1,13 +1,11 @@
 <level name="Level 2" map="g6_2" difficulty="easy">
-	<grid type="rectangular" width="6" height="6"/>
-	
 	<blocks>
 		<block type="one-laser_source" fixedorientation="true"/>
 		<block type="four-laser_target" fixedposition="true" fixedorientation="true">
-			<position x="2" y="1"/>
+			<position x="2" y="4"/>
 		</block>
-		<block type="blocker" orientation="UP" fixedposition="true" fixedorientation="true">
-			<position x="2" y="3"/>
+		<block type="blocker" fixedposition="true" fixedorientation="true">
+			<position x="2" y="2"/>
 		</block>
 		<block type="one-way_mirror"/>
 		<block type="two-way-straight_splitter"/>
