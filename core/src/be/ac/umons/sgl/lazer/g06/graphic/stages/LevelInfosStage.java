@@ -26,7 +26,7 @@ public class LevelInfosStage extends AbstractStage {
 		
 		addDoubleLabel("Autre info", "TEST_OK");
 		
-		addDoubleButton("Charger", "ACTION_LOAD", "Lancer", "ACTION_LAUNCH");
+		addDoubleButton("Charger", "ACTION_LOAD", "Lancer", "ACTION_LEVEL_PLAY");
 	}
 	
 	private boolean setMode(String mode) {
