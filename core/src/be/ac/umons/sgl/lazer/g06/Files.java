@@ -2,6 +2,7 @@ package be.ac.umons.sgl.lazer.g06;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class Files {
@@ -101,8 +102,8 @@ public class Files {
 		
 		return fh.exists();
 	}
-	
-	public static String[] list(String path) {
+
+	public static Array<String> list(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
 		if(fh == null) {
@@ -116,13 +117,39 @@ public class Files {
 		}
 		
 		FileHandle files[] = fh.list();
-		String fileNames[] = new String[files.length];
+		Array<String> fileNames = new Array<String>(files.length);
 		
-		for(int i = 0; i < files.length; ++i) {
-			fileNames[i] = files[i].name();
+		for(FileHandle file : files) {
+			fileNames.add(file.name());
 		}
 		
 		return fileNames;
 	}
 	
+	public static Array<String> listFiles(String path) {
+		FileHandle fh = Gdx.files.local(path);
+		
+		if(fh == null) {
+			Gdx.app.debug("Files.listFiles", "Got null pointer for path "+path);
+			return null;
+		}
+		
+		if(!fh.isDirectory()) {
+			Gdx.app.debug("Files.listFiles", path+" is not a directory");
+			return null;
+		}
+		
+		FileHandle files[] = fh.list();
+		Array<String> fileNames = new Array<String>(files.length);
+		
+		for(FileHandle file : files) {
+			if(file.isDirectory()) {
+				continue;
+			}
+			
+			fileNames.add(file.name());
+		}
+		
+		return fileNames;
+	}
 }
