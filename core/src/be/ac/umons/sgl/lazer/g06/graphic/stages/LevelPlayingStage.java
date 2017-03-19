@@ -1,10 +1,8 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -13,17 +11,27 @@ import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 public class LevelPlayingStage extends AbstractStage {
-	String mode;
-	boolean score;
+	boolean displayScore;
 	
 	Table map;
 	
 	Level level;
 	OrthogonalTiledMapRenderer renderer;
 	
-	public LevelPlayingStage(LazerChallenge game, String mode) {
-		super(game, "Jeu : Niveau");
-		setMode(mode);
+	public LevelPlayingStage(LazerChallenge game) {
+		super(game, game.getLevel().getName());
+		
+		if(game.getMode() == null) {
+			throw new GdxRuntimeException("game mode cannot be null.");
+		}
+		displayScore = game.getMode().equals("ARCADE");
+		
+		addHeaderButton("Retour", "MENU_LEVEL_INFOS");
+		
+		if(game.getLevel() == null) {
+			throw new GdxRuntimeException("game level cannot be null.");
+		}
+		level = game.getLevel();
 		
 		map = new Table();
 		content.row();
@@ -31,7 +39,6 @@ public class LevelPlayingStage extends AbstractStage {
 		
 		addMenuButton("Lancer le lazer", "ACTION_GAME_LAZER");
 		
-		level = game.getLevel();
 		initMapRenderer();
 	}
 	
@@ -41,7 +48,7 @@ public class LevelPlayingStage extends AbstractStage {
 	}
 	
 	private void initMapRenderer() {
-		MapProperties props = level.getMap().getProperties();
+		MapProperties props = level.getMap().getTiledMap().getProperties();
 		int tx = props.get("tilewidth", -1, int.class);
 		int ty = props.get("tileheight", -1, int.class);
 		if(tx < 1 || ty < 1) {
@@ -52,7 +59,7 @@ public class LevelPlayingStage extends AbstractStage {
 		}
 		
 		//renderer = new OrthogonalTiledMapRenderer(level.getMap(), 1/(float)tx);
-		renderer = new OrthogonalTiledMapRenderer(level.getMap(), this.getBatch());
+		renderer = new OrthogonalTiledMapRenderer(level.getMap().getTiledMap(), this.getBatch());
 		OrthographicCamera camera = new OrthographicCamera();
 		
 		int x = props.get("width", -1, int.class);
@@ -69,21 +76,6 @@ public class LevelPlayingStage extends AbstractStage {
 		camera.update();
 		renderer.setView(camera);
 		//renderer.setView((OrthographicCamera) getCamera());
-	}
-	
-	private boolean setMode(String mode) {
-		score = false;
-		
-		switch(mode) {
-		case "ARCADE":
-			score = true;
-		case "TRAINING":
-			this.mode = mode;
-			return true;
-		default:
-			Gdx.app.error("LevelPlayingStage.setMode", "mode "+mode+" not implemented");
-			return false;
-		}
 	}
 	
 	public void dispose() {
