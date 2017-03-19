@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="5" height="3" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="terrain.png" width="1024" height="1024"/>
+  <tile id="620">
+   <properties>
+    <property name="source" value="1"/>
+   </properties>
+  </tile>
+  <tile id="621">
+   <properties>
+    <property name="target" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="ground" width="5" height="3">
+  <data encoding="base64" compression="zlib">
+   eJzLY2Jg0GYkHuciqQcAZb8DHA==
+  </data>
+ </layer>
+</map>

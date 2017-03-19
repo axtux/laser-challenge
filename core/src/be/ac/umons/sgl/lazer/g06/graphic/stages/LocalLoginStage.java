@@ -14,6 +14,7 @@ public class LocalLoginStage extends AbstractStage {
 		addHeaderButton("Retour", "MENU_LOGINS");
 		
 		addTextField("Nom d'utilisateur", "USERNAME", usernameFieldValue);
+		// TODO find why password mode does not make characters displayed as *
 		addTextField("Mot de passe", "PASSWORD", passwordFieldValue).setPasswordMode(true);
 		
 		content.row();

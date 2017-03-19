@@ -106,7 +106,7 @@ public abstract class AbstractStage extends Stage {
 	}
 	
 	protected void addMenuButton(String text, String action) {
-		addButton(content, text, action).minSize(800, 80).space(50);
+		addButton(content, text, action).minSize(800, 80).pad(30);
 		content.row();
 	}
 	
@@ -139,8 +139,6 @@ public abstract class AbstractStage extends Stage {
 		content.add(tfContainer).pad(5).fillX().uniform();
 		
 		fields.put(fieldname, tf);
-		tf.setPasswordMode(true);
-		
 		return tf;
 	}
 
