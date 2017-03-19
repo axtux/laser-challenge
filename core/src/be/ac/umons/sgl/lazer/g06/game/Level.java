@@ -195,7 +195,17 @@ public class Level {
 	 * TRAINING mode has no time limit, no score and continuous laser.
 	 */
 	public enum Mode {
-		ARCADE, TRAINING;
+		ARCADE ("Mode arcade"),
+		TRAINING("Mode entrainement");
+		
+		String s;
+		private Mode(String s) {
+			this.s = s;
+		}
+		public String toString() {
+			return s;
+		}
+		
 		public boolean hasScore() {
 			return this.equals(ARCADE);
 		}
