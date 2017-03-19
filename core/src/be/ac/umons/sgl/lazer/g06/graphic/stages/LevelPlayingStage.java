@@ -15,13 +15,13 @@ public class LevelPlayingStage extends AbstractStage {
 	Level level;
 	MyMap mapActor;
 	
-	public LevelPlayingStage(LazerChallenge game) {
-		super(game, game.getLevel().getName());
+	public LevelPlayingStage() {
+		super(LazerChallenge.getInstance().getMode().toString()+" : "+LazerChallenge.getInstance().getLevel().getName());
 		
 		if(game.getMode() == null) {
 			throw new GdxRuntimeException("game mode cannot be null.");
 		}
-		displayScore = game.getMode().equals("ARCADE");
+		displayScore = game.getMode().equals(Level.Mode.ARCADE);
 		
 		addHeaderButton("Retour", "MENU_LEVEL_INFOS");
 		

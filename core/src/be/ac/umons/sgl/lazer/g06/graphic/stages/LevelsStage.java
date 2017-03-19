@@ -14,12 +14,12 @@ public class LevelsStage extends AbstractStage {
 	boolean displayScore;
 	boolean center;
 	
-	public LevelsStage(LazerChallenge game) {
-		this(game, true);
+	public LevelsStage() {
+		this(true);
 	}
 	
-	public LevelsStage(LazerChallenge game, boolean center) {
-		super(game, game.getMode()+" : Choix du niveau");
+	public LevelsStage(boolean center) {
+		super(LazerChallenge.getInstance().getMode().toString()+" : Choix du niveau");
 		
 		if(game.getMode() == null) {
 			throw new GdxRuntimeException("game mode cannot be null.");
@@ -30,8 +30,8 @@ public class LevelsStage extends AbstractStage {
 		
 		addHeaderButton("Retour", "MENU_MODES");
 		
-		addLevelsBlock("Niveaux standards", "STANDARD");
-		addLevelsBlock("Niveaux avancés", "ADVANCED");
+		addLevelsBlock("Niveaux standards", Level.Type.STANDARD);
+		addLevelsBlock("Niveaux avancés", Level.Type.ADVANCED);
 		
 		content.row();
 		
@@ -40,7 +40,7 @@ public class LevelsStage extends AbstractStage {
 		}
 	}
 	
-	private void addLevelsBlock(String name, String type) {
+	private void addLevelsBlock(String name, Level.Type type) {
 		Table block = new Table();
 		
 		Label title = new Label(name+" : ", skin, "label");
@@ -72,7 +72,7 @@ public class LevelsStage extends AbstractStage {
 		TextButton btn = new TextButton(str_number, skin, locked ? "disabled-menu" : "menu");
 		btn.getLabelCell().pad(10);
 		if(!locked) {
-			btn.addListener(new LevelSelectorListener(game, Input.Buttons.LEFT, "MENU_LEVEL_INFOS", level));
+			btn.addListener(new LevelSelectorListener(Input.Buttons.LEFT, "MENU_LEVEL_INFOS", level));
 			
 		}
 		levelContainer.add(btn).minSize(80, 80).pad(10);

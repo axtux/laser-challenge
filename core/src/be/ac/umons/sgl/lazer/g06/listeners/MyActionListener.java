@@ -38,7 +38,7 @@ public class MyActionListener implements ActionListener {
 			break;
 		
 		case "MENU_LOGINS":
-			game.setStage(new LoginsStage(game));
+			game.setStage(new LoginsStage());
 			break;
 		// ACTIONs from MENU_LOGINS
 		case "ACTTION_LOGIN_ANONYMOUS":
@@ -53,7 +53,7 @@ public class MyActionListener implements ActionListener {
 			break;
 		
 		case "MENU_LOGIN_LOCAL":
-			game.setStage(new LocalLoginStage(game));
+			game.setStage(new LocalLoginStage());
 			break;
 		// ACTIONs from LOGIN_LOCAL
 		case "ACTION_LOCAL_LOGIN":
@@ -64,7 +64,7 @@ public class MyActionListener implements ActionListener {
 			break;
 			
 		case "MENU_MODES":
-			game.setStage(new ModesStage(game));
+			game.setStage(new ModesStage());
 			break;
 		// ACTIONs from MENU_MODES
 		case "ACTION_MODE_ARCADE":
@@ -77,12 +77,12 @@ public class MyActionListener implements ActionListener {
 			break;
 		
 		case "MENU_LEVELS":
-			game.setStage(new LevelsStage(game));
+			game.setStage(new LevelsStage());
 			break;
 		
 		// ACTIONs from MENU_LEVELS
 		case "MENU_LEVEL_INFOS":
-			game.setStage(new LevelInfosStage(game));
+			game.setStage(new LevelInfosStage());
 			break;
 		
 		// ACTIONs from MENU_LEVEL_INFOS
@@ -90,7 +90,7 @@ public class MyActionListener implements ActionListener {
 			// TODO load level
 			break;
 		case "ACTION_LEVEL_LAUNCH":
-			game.setStage(new LevelPlayingStage(game));
+			game.setStage(new LevelPlayingStage());
 			break;
 
 		case "MENU_LEVEL_PAUSE": // TODO remove parameters
@@ -114,9 +114,9 @@ public class MyActionListener implements ActionListener {
 		try {
 			User user = new LocalUser(username, password, create);
 			game.setUser(user);
-			game.setStage(new ModesStage(game));
+			game.setStage(new ModesStage());
 		} catch (LoginException e) {
-			game.setStage(new LocalLoginStage(game, username, password, e.getMessage()));
+			game.setStage(new LocalLoginStage(username, password, e.getMessage()));
 			
 			//e.printStackTrace();
 		}

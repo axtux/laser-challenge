@@ -25,11 +25,11 @@ public abstract class AbstractStage extends Stage {
 	Table content;
 	Hashtable<String, TextField> fields;
 	
-	public AbstractStage(LazerChallenge game, String title) {
+	public AbstractStage(String title) {
 		// use ScreenViewport instead of ScalingViewport for elements to keep their size
 		super(new ScreenViewport());
 		
-		this.game = game;
+		this.game = LazerChallenge.getInstance();
 		this.skin = game.getSkin();
 		
 		container = new Table();
@@ -89,7 +89,7 @@ public abstract class AbstractStage extends Stage {
 			user.row();
 			
 			TextButton logout = new TextButton("Déconnexion", skin, "small-menu");
-			logout.addListener(new MyClickListener(game, Input.Buttons.LEFT, "ACTION_LOGOUT"));
+			logout.addListener(new MyClickListener(Input.Buttons.LEFT, "ACTION_LOGOUT"));
 			logout.getLabelCell().pad(5);
 			user.add(logout).right();
 		}
@@ -117,7 +117,7 @@ public abstract class AbstractStage extends Stage {
 	protected Cell<TextButton> addButton(Table container, String text, String action, String styleName) {
 		TextButton btn = new TextButton(text, skin, styleName);
 		btn.getLabelCell().pad(10);
-		btn.addListener(new MyClickListener(game, Input.Buttons.LEFT, action));
+		btn.addListener(new MyClickListener(Input.Buttons.LEFT, action));
 		return container.add(btn);
 	}
 	
@@ -161,14 +161,14 @@ public abstract class AbstractStage extends Stage {
 
 		TextButton btn1 = new TextButton(label1, skin, "menu");
 		btn1.getLabelCell().pad(10);
-		btn1.addListener(new MyClickListener(game, Input.Buttons.LEFT, action1));
+		btn1.addListener(new MyClickListener(Input.Buttons.LEFT, action1));
 		Table container1 = new Table();
 		container1.add(btn1).pad(10).expandX();
 		content.add(container1).uniform();
 		
 		TextButton btn2 = new TextButton(label2, skin, "menu");
 		btn2.getLabelCell().pad(10);
-		btn2.addListener(new MyClickListener(game, Input.Buttons.LEFT, action2));
+		btn2.addListener(new MyClickListener(Input.Buttons.LEFT, action2));
 		Table container2 = new Table();
 		container2.add(btn2).pad(10).expandX();
 		content.add(container2).uniform();

@@ -13,8 +13,8 @@ public class LevelFinishedStage extends AbstractStage {
 	String mode;
 	boolean score;
 	
-	public LevelFinishedStage(LazerChallenge game, String type, int level) {
-		super(game, "Niveau terminé");
+	public LevelFinishedStage(String type, int level) {
+		super("Niveau terminé");
 		setMode(game.getMode());
 		
 		addDoubleLabel("Niveau", Integer.toString(level));
