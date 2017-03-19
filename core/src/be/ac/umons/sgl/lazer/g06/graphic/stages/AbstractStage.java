@@ -20,10 +20,16 @@ import be.ac.umons.sgl.lazer.g06.listeners.MyClickListener;
 public abstract class AbstractStage extends Stage {
 	LazerChallenge game;
 	MySkin skin;
+	Hashtable<String, TextField> fields;
+	
+	Label title;
 	Table container;
 	Table leftHeader;
 	Table content;
-	Hashtable<String, TextField> fields;
+
+	public AbstractStage() {
+		this("");
+	}
 	
 	public AbstractStage(String title) {
 		// use ScreenViewport instead of ScalingViewport for elements to keep their size
@@ -31,23 +37,33 @@ public abstract class AbstractStage extends Stage {
 		
 		this.game = LazerChallenge.getInstance();
 		this.skin = game.getSkin();
+		this.fields = new Hashtable<String, TextField>();
 		
+		initContainer();
+		addHeader();
+		addSubHeader(title);
+		initContent();
+	}
+	
+	protected void setTitle(String title) {
+		this.title.setText(title);
+	}
+	
+	protected void initContainer() {
 		container = new Table();
 		this.addActor(container);
 		container.setFillParent(true);
 		container.setBackground(skin.getColor(Color.WHITE));
-		
-		addHeader(title);
-		
+	}
+	
+	protected void initContent() {
 		container.row();
 		content = new Table();
 		container.add(content).expand().fill();
 		//content.pad(20);
-		
-		this.fields = new Hashtable<String, TextField>();
 	}
 	
-	protected void addHeader(String title) {
+	protected void addHeader() {
 		container.row().top().fillX();
 		
 		Table header = new Table();
@@ -58,24 +74,26 @@ public abstract class AbstractStage extends Stage {
 		Label label = new Label("Lazer Challenge", skin, "title");
 		header.add(label);
 		header.row();
-		
-		Table header2 = new Table();
+	}
+	
+	protected void addSubHeader(String title) {
+		Table header = new Table();
 		container.row().top().fillX();
-		container.add(header2).fillX();
-		header2.setBackground(skin.getColor(Color.SKY));
+		container.add(header).fillX();
+		header.setBackground(skin.getColor(Color.SKY));
 		
 		leftHeader = new Table();
-		header2.add(leftHeader).uniform();
+		header.add(leftHeader).uniform();
 		// exit button
 		addHeaderButton("Quitter", "ACTION_EXIT").pad(10);
 		
-		Table middleHeader = new Table();
-		label = new Label(title, skin, "subtitle");
-		middleHeader.add(label).center().pad(10);
-		header2.add(middleHeader).expand().center();
+		Table centerHeader = new Table();
+		Label label = this.title = new Label(title, skin, "subtitle");
+		centerHeader.add(label).center().pad(10);
+		header.add(centerHeader).expand().center();
 		
 		Table rightHeader = new Table();
-		header2.add(rightHeader).uniform().fill();
+		header.add(rightHeader).uniform().fill();
 		// user
 		if(game.getUser() != null) {
 			Table user = new Table();

@@ -7,11 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Level;
-import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.listeners.LevelSelectorListener;
 
 public class LevelsStage extends AbstractStage {
-	boolean displayScore;
 	boolean center;
 	
 	public LevelsStage() {
@@ -19,12 +17,12 @@ public class LevelsStage extends AbstractStage {
 	}
 	
 	public LevelsStage(boolean center) {
-		super(LazerChallenge.getInstance().getMode().toString()+" : Choix du niveau");
+		super();
 		
 		if(game.getMode() == null) {
 			throw new GdxRuntimeException("game mode cannot be null.");
 		}
-		displayScore = game.getMode().equals("ARCADE");
+		setTitle(game.getMode().toString()+" : Choix du niveau");
 		
 		this.center = center;
 		
@@ -62,7 +60,7 @@ public class LevelsStage extends AbstractStage {
 		}
 		
 		content.row();
-		content.add(block).expandX().fillX();
+		content.add(block).growX();
 	}
 	
 	protected void addLevelButton(Table container, Level level, int number, boolean locked) {
@@ -82,7 +80,7 @@ public class LevelsStage extends AbstractStage {
 		levelContainer.add(subtitle);
 		levelContainer.row();
 		
-		if(displayScore) {
+		if(game.getMode().hasScore()) {
 			Label score = new Label("Score : 0", skin, "small-label");
 			levelContainer.add(score);
 		}

@@ -5,7 +5,7 @@ public class LevelPausedStage extends AbstractLevelStage {
 		super("Niveau en pause");
 		
 		addDoubleLabel("Niveau", level.getName());
-		if(level.getMode().score()) {
+		if(game.getMode().hasScore()) {
 			// TODO load score
 			addDoubleLabel("Score", "");
 		}
