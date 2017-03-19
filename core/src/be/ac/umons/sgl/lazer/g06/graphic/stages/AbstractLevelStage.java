@@ -8,6 +8,10 @@ import be.ac.umons.sgl.lazer.g06.game.Level;
  */
 public class AbstractLevelStage extends AbstractStage {
 	Level level;
+
+	protected AbstractLevelStage() {
+		this("");
+	}
 	
 	protected AbstractLevelStage(String title) {
 		super(title);

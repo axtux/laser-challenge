@@ -21,7 +21,6 @@ public class Level {
 	LazerChallenge game;
 	String name;
 	Map map;
-	Mode mode;
 	Difficulty difficulty;
 	Type type;
 	
@@ -40,7 +39,6 @@ public class Level {
 		}
 		
 		game = LazerChallenge.getInstance();
-		this.mode = game.getMode();
 		
 		Gdx.app.debug("Level.Level", "creating level from file "+file);
 		XmlReader reader = new XmlReader();
@@ -95,34 +93,24 @@ public class Level {
 		}
 	}
 	/**
-	 * 
 	 * @return name
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
-	 * 
 	 * @return map
 	 */
 	public Map getMap() {
 		return map;
 	}
 	/**
-	 * @return mode
-	 */
-	public Mode getMode() {
-		return mode;
-	}
-	/**
-	 * 
 	 * @return difficulty
 	 */
 	public Difficulty getDifficulty() {
 		return difficulty;
 	}
 	/**
-	 * 
 	 * @return type
 	 */
 	public Type getType() {
@@ -207,8 +195,18 @@ public class Level {
 	 * TRAINING mode has no time limit, no score and continuous laser.
 	 */
 	public enum Mode {
-		ARCADE, TRAINING;
-		public boolean score() {
+		ARCADE ("Mode arcade"),
+		TRAINING("Mode entrainement");
+		
+		String s;
+		private Mode(String s) {
+			this.s = s;
+		}
+		public String toString() {
+			return s;
+		}
+		
+		public boolean hasScore() {
 			return this.equals(ARCADE);
 		}
 	}

@@ -13,7 +13,7 @@ public class LevelInfosStage extends AbstractLevelStage {
 		addDoubleLabel("Taille", Integer.toString(width)+"x"+Integer.toString(height));
 		
 		addDoubleLabel("Mode", game.getMode().toString());
-		if(game.getMode().score()) {
+		if(game.getMode().hasScore()) {
 			// TODO load score
 			addDoubleLabel("Score", "");
 		}
