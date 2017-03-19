@@ -27,12 +27,19 @@ public class Orientation {
 		XmlReader reader= new XmlReader();
 		Element root = reader.parse(xml);
 		Array<Element> orientations = root.getChildrenByName("orientation");
-		indiceToOrientation=new String[orientations.size];
 		int indice=0;
 		for (Element child : orientations ){
-			indiceToOrientation[indice]=child.getText().toString();
-			orientationToIndice.put(child.getText().toString(), indice);
-			indice+=1;
+			if(!this.getOrientationToIndice().containsKey(child.getText().toString())){
+				//indiceToOrientation[indice]=child.getText().toString();
+				orientationToIndice.put(child.getText().toString(), indice);
+				indice+=1;
+			}
+		}
+		indiceToOrientation=new String[orientationToIndice.size()];
+		Object[] key= orientationToIndice.keySet().toArray();
+		for(int i=0; i< orientationToIndice.size();i++){
+			indiceToOrientation[i]=key[i].toString();
+			
 		}
 			
 	}
@@ -49,5 +56,9 @@ public class Orientation {
 	 */
 	public String[] getIndiceToOrientation(){
 		return indiceToOrientation;
+	}
+	
+	public int size(){
+		return this.orientationToIndice.size();
 	}
 }
