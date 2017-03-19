@@ -139,8 +139,6 @@ public abstract class AbstractStage extends Stage {
 		content.add(tfContainer).pad(5).fillX().uniform();
 		
 		fields.put(fieldname, tf);
-		tf.setPasswordMode(true);
-		
 		return tf;
 	}
 
