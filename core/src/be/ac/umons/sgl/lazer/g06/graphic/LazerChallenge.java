@@ -29,7 +29,6 @@ public class LazerChallenge extends Game {
 	MySkin skin;
 	User user;
 	String mode = "";
-	
 	Level level;
 	
 	public void create () {
@@ -109,28 +108,15 @@ public class LazerChallenge extends Game {
 		
 	}
 	
-	public void levelInfo(String mode, String type, int number, boolean launch) {
-		AbstractStage s;
-		if(launch) {
-			// TODO launch game
-			s = null;
-		} else {
-			s = new LevelInfosStage(this, type, number);
-		}
-		setStage(s);
-	}
-	
 	public void act(String action) {
 		Gdx.app.debug("ACTION", action);
-		if(action.startsWith("ACTION_LEVEL_")) {
-			
-		}
 		
 		switch(action) {
 		
 		// ACTIONs from headers
 		case "ACTION_EXIT":
 			Gdx.app.exit();
+			break; // required
 		case "ACTION_LOGOUT":
 			setUser(null);
 			act("MENU_LOGINS");
@@ -174,9 +160,22 @@ public class LazerChallenge extends Game {
 			mode = "TRAINING";
 			act("MENU_LEVELS");
 			break;
-
+		
 		case "MENU_LEVELS":
 			setStage(new LevelsStage(this));
+			break;
+		
+		// ACTIONs from MENU_LEVELS
+		case "MENU_LEVEL_INFOS":
+			setStage(new LevelInfosStage(this));
+			break;
+		
+		// ACTIONs from MENU_LEVEL_INFOS
+		case "MENU_LEVEL_LOAD":
+			// TODO load level
+			break;
+		case "ACTION_LEVEL_LAUNCH":
+			setStage(new LevelPlayingStage(this));
 			break;
 
 		case "MENU_LEVEL_PAUSE":
@@ -185,11 +184,6 @@ public class LazerChallenge extends Game {
 
 		case "MENU_LEVEL_FINISHED":
 			setStage(new LevelFinishedStage(this, "ARCADE", 10));
-			break;
-		
-		case "ACTION_LEVEL_PLAY":
-			setLevel(new Level("levels/standard/level2/g6_A.xml"));
-			setStage(new LevelPlayingStage(this, "ARCADE"));
 			break;
 		
 		default:
