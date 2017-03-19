@@ -8,8 +8,8 @@ import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 public class LevelSelectorListener extends MyClickListener {
 	Level level;
 
-	public LevelSelectorListener(LazerChallenge game, int mouseButton, String action, Level level) {
-		super(game, mouseButton, action);
+	public LevelSelectorListener(int mouseButton, String action, Level level) {
+		super(mouseButton, action);
 		this.level = level;
 	}
 	

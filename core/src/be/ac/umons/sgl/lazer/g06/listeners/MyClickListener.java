@@ -9,9 +9,9 @@ public class MyClickListener extends ClickListener {
 	LazerChallenge game;
 	String action;
 	
-	public MyClickListener(LazerChallenge game, int mouseButton, String action) {
+	public MyClickListener(int mouseButton, String action) {
 		super(mouseButton);
-		this.game = game;
+		this.game = LazerChallenge.getInstance();
 		this.action = action;
 	}
 	

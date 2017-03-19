@@ -39,7 +39,7 @@ public class LazerChallenge extends Game {
 			throw new GdxRuntimeException("Singleton pattern does not allow multiple intances.");
 		}
 		LazerChallenge.instance = this;
-		al = new MyActionListener(this);
+		al = new MyActionListener();
 	}
 	/**
 	 * @return Singleton pattern instance.

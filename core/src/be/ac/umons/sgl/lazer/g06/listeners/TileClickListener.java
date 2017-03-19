@@ -4,13 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
-import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
-
 public class TileClickListener extends MyClickListener {
 	int tileX, tileY;
 	
 	public TileClickListener(int mouseButton, int tileX, int tileY, String action) {
-		super(null, mouseButton, action);
+		super(mouseButton, action);
 		this.tileX = tileX;
 		this.tileY = tileY;
 	}
