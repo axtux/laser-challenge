@@ -106,7 +106,7 @@ public abstract class AbstractStage extends Stage {
 	}
 	
 	protected void addMenuButton(String text, String action) {
-		addButton(content, text, action).minSize(800, 80).space(50);
+		addButton(content, text, action).minSize(800, 80).pad(30);
 		content.row();
 	}
 	
