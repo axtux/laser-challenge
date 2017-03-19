@@ -4,10 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+/**
+ * To easily manage files using @Gdx.files.local interface
+ */
 public class Files {
-	/*
-	 * Get string content or null if an error occured
+	/**
+	 * Get whole file content into a string.
+	 * @param path Relative path to application root.
+	 * @return String containing whole file content or null if an error occurred.
 	 */
 	public static String getContent(String path) {
 		FileHandle fh = Gdx.files.local(path);
@@ -32,11 +36,21 @@ public class Files {
 		
 		return content;
 	}
-	
+	/**
+	 * default append value is false
+	 * @see putContent
+	 */
 	public static boolean putContent(String path, String content) {
 		return putContent(path, content, false);
 	}
-	
+	/**
+	 * Write string to file.
+	 * @param path Relative path to application root.
+	 * @param content Whole file content as a string.
+	 * @param append Whether the content has to be added at the end of the file.
+	 * If not, any existing file will be overwritten.
+	 * @return True on success, false on error.
+	 */
 	public static boolean putContent(String path, String content, boolean append) {
 		FileHandle fh = Gdx.files.local(path);
 		
@@ -59,7 +73,11 @@ public class Files {
 		
 		return true;
 	}
-	
+	/**
+	 * Check that a file exists.
+	 * @param path Relative path to application root.
+	 * @return True if file exists, false otherwise.
+	 */
 	public static boolean exists(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
@@ -70,7 +88,11 @@ public class Files {
 		
 		return fh.exists();
 	}
-	
+	/**
+	 * Check that path is real file.
+	 * @param path Relative path to application root.
+	 * @return True if path is a file, false otherwise (path could be directory or not exist).
+	 */
 	public static boolean isFile(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
@@ -86,7 +108,11 @@ public class Files {
 		
 		return fh.exists();
 	}
-	
+	/**
+	 * Check that @path is a directory.
+	 * @param path Relative path to application root.
+	 * @return True if path is a directory. False otherwise (path could be a file or not exist).
+	 */
 	public static boolean isDir(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
@@ -102,7 +128,11 @@ public class Files {
 		
 		return fh.exists();
 	}
-
+	/**
+	 * List directory.
+	 * @param path Relative path to application root.
+	 * @return Array of string filenames (relative to their own directory).
+	 */
 	public static Array<String> list(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
@@ -125,7 +155,11 @@ public class Files {
 		
 		return fileNames;
 	}
-	
+	/**
+	 * Just as @list but make sure entries are real files (not directory).
+	 * @param path Relative path to application root.
+	 * @return Array of string filenames (relative to their own directory).
+	 */
 	public static Array<String> listFiles(String path) {
 		FileHandle fh = Gdx.files.local(path);
 		
