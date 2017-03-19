@@ -15,14 +15,18 @@ import be.ac.umons.sgl.lazer.g06.graphic.stages.ModesStage;
 import be.ac.umons.sgl.lazer.g06.users.LocalUser;
 import be.ac.umons.sgl.lazer.g06.users.User;
 import be.ac.umons.sgl.lazer.g06.users.LocalUser.LoginException;
-
+/**
+ * Manage actions from UI
+ */
 public class MyActionListener implements ActionListener {
 	LazerChallenge game;
 	
 	public MyActionListener() {
 		this.game = LazerChallenge.getInstance();
 	}
-	
+	/**
+	 * Called by LaserChallenge.act(String)
+	 */
 	public void act(String action) {
 		Gdx.app.debug("ACTION", action);
 		
@@ -106,7 +110,10 @@ public class MyActionListener implements ActionListener {
 		}
 		
 	}
-	
+	/**
+	 * Manage local user connection.
+	 * @param create If true, user will be created. If false, user will be logged in.
+	 */
 	private void local_user(boolean create) {
 		String username = game.getStage().getFieldValue("USERNAME");
 		String password = game.getStage().getFieldValue("PASSWORD");
@@ -116,9 +123,8 @@ public class MyActionListener implements ActionListener {
 			game.setUser(user);
 			game.setStage(new ModesStage());
 		} catch (LoginException e) {
+			// keep username, password and display error message
 			game.setStage(new LocalLoginStage(username, password, e.getMessage()));
-			
-			//e.printStackTrace();
 		}
 		
 	}
