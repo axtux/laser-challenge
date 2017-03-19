@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.listeners.TileClickListener;
 
-public class MyMap extends Table {
+public class MapTable extends Table {
 	TiledMap map;
 	OrthogonalTiledMapRenderer renderer;
 	
@@ -24,7 +24,7 @@ public class MyMap extends Table {
 	TiledMapTileLayer ground;
 	Button[][] buttons;
 	
-	public MyMap(TiledMap map) {
+	public MapTable(TiledMap map) {
 		this.map = map;
 		MapProperties props = map.getProperties();
 		
