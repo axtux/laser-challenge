@@ -1,17 +1,11 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.graphic.MyMap;
-import be.ac.umons.sgl.lazer.g06.listeners.MyClickListener;
 
 public class LevelPlayingStage extends AbstractStage {
 	boolean displayScore;
