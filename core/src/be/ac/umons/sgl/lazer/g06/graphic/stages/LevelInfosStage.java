@@ -2,6 +2,7 @@ package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
+import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 public class LevelInfosStage extends AbstractStage {
@@ -10,7 +11,8 @@ public class LevelInfosStage extends AbstractStage {
 	public LevelInfosStage(LazerChallenge game) {
 		super(game, "Informations sur le niveau");
 		
-		if(game.getLevel() == null) {
+		Level level = game.getLevel();
+		if(level == null) {
 			throw new GdxRuntimeException("game level cannot be null.");
 		}
 		if(game.getMode() == null) {
@@ -19,8 +21,11 @@ public class LevelInfosStage extends AbstractStage {
 		displayScore = game.getMode().equals("ARCADE");
 		
 		addHeaderButton("Retour", "MENU_LEVELS");
-		
-		addDoubleLabel("Nom", game.getLevel().getName());
+
+		addDoubleLabel("Nom", level.getName());
+		int width = level.getMap().getIntProp("width");
+		int height = level.getMap().getIntProp("height");
+		addDoubleLabel("Taille", Integer.toString(width)+"x"+Integer.toString(height));
 		if(displayScore) {
 			// TODO load score
 			addDoubleLabel("Score", "");
