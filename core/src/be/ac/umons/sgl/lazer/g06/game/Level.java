@@ -26,7 +26,7 @@ public class Level {
 	
 	/**
 	 * Create level from file
-	 * @param XML filename from which to load level
+	 * @param file XML filename from which to load level
 	 * @throws GdxRuntimeException if file does not exists in levels directory,
 	 * if XML format is not valid (description into level_desc.txt),
 	 * if map TMX file referenced into XML is not fount or is not valid,
