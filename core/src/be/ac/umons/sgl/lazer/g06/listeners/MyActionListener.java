@@ -94,11 +94,11 @@ public class MyActionListener implements ActionListener {
 			break;
 
 		case "MENU_LEVEL_PAUSE": // TODO remove parameters
-			game.setStage(new LevelPausedStage(game, "ARCADE", 10));
+			game.setStage(new LevelPausedStage());
 			break;
 
 		case "MENU_LEVEL_FINISHED":
-			game.setStage(new LevelFinishedStage(game, "ARCADE", 10));
+			game.setStage(new LevelFinishedStage());
 			break;
 		
 		default:
