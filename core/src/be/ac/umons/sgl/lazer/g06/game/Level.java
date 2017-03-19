@@ -11,6 +11,8 @@ import be.ac.umons.sgl.lazer.g06.Files;
 public class Level {
 	static final String LEVEL_PATH = "levels";
 	
+	private static Array<Level> levels;
+	
 	String name;
 	Map map;
 	String difficulty;
@@ -92,17 +94,15 @@ public class Level {
 		ARCADE, TRAINING
 	}
 	
-	public static Array<Level> getLevels() {
-		return getLevels("STANDARD");
-	}
-	
-	public static Array<Level> getLevels(String type) {
+	public static void refreshLevels() {
 		Array<String> levelFiles = Files.listFiles(LEVEL_PATH);
 		if(levelFiles == null) {
 			throw new GdxRuntimeException("Got null while listing directory "+LEVEL_PATH);
 		}
+		levelFiles.sort();
+		Gdx.app.debug("Level.getLevels files", String.join("|", levelFiles));
 		
-		Array<Level> levels = new Array<Level>(levelFiles.size);
+		levels = new Array<Level>(levelFiles.size);
 		Level tmp;
 		for(String file : levelFiles) {
 			if(!file.endsWith(".xml")) {
@@ -116,12 +116,36 @@ public class Level {
 				continue;
 			}
 			
-			if(tmp.getType().equals(type)) {
-				levels.add(tmp);
-			}
-			
+			levels.add(tmp);
 		}
 		
+	}
+	
+	public static Array<Level> getLevels() {
+		return getLevels(false);
+	}
+	
+	public static Array<Level> getLevels(boolean refresh) {
+		if(refresh || levels == null) {
+			refreshLevels();
+		}
 		return levels;
+	}
+	
+	public static Array<Level> getLevels(String type) {
+		return getLevels(type, false);
+	}
+	
+	public static Array<Level> getLevels(String type, boolean refresh) {
+		getLevels(refresh);
+		Array<Level> filtered = new Array<Level>(levels.size);
+		
+		for(Level level : levels) {
+			if(level.getType().equals(type)) {
+				filtered.add(level);
+			}
+		}
+		
+		return filtered;
 	}
 }
