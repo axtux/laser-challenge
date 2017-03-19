@@ -2,6 +2,7 @@ package be.ac.umons.sgl.lazer.g06.listeners;
 
 import com.badlogic.gdx.Gdx;
 
+import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelFinishedStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelInfosStage;
@@ -18,8 +19,8 @@ import be.ac.umons.sgl.lazer.g06.users.LocalUser.LoginException;
 public class MyActionListener implements ActionListener {
 	LazerChallenge game;
 	
-	public MyActionListener(LazerChallenge game) {
-		this.game = game;
+	public MyActionListener() {
+		this.game = LazerChallenge.getInstance();
 	}
 	
 	public void act(String action) {
@@ -67,11 +68,11 @@ public class MyActionListener implements ActionListener {
 			break;
 		// ACTIONs from MENU_MODES
 		case "ACTION_MODE_ARCADE":
-			game.setMode("ARCADE");
+			game.setMode(Level.Mode.ARCADE);
 			act("MENU_LEVELS");
 			break;
 		case "ACTION_MODE_TRAINING":
-			game.setMode("TRAINING");
+			game.setMode(Level.Mode.TRAINING);
 			act("MENU_LEVELS");
 			break;
 		
