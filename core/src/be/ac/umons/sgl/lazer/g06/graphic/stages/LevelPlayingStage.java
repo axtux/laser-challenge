@@ -1,6 +1,7 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -10,13 +11,15 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.graphic.MyMap;
+import be.ac.umons.sgl.lazer.g06.listeners.MyClickListener;
 
 public class LevelPlayingStage extends AbstractStage {
 	boolean displayScore;
 	
 	Table map;
-	
+
 	Level level;
+	MyMap mapActor;
 	
 	public LevelPlayingStage(LazerChallenge game) {
 		super(game, game.getLevel().getName());
@@ -37,7 +40,8 @@ public class LevelPlayingStage extends AbstractStage {
 		content.row();
 		content.add(map).expand().fill();
 		
-		map.add(new MyMap(level.getMap().getTiledMap())).expand().fill().pad(20);
+		mapActor = new MyMap(level.getMap().getTiledMap());
+		map.add(mapActor).pad(20);
 		
 		content.row();
 		addMenuButton("Lancer le lazer", "ACTION_GAME_LAZER");
