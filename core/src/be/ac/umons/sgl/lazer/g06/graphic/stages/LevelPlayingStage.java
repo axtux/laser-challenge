@@ -18,7 +18,7 @@ public class LevelPlayingStage extends AbstractLevelStage {
 		content.row();
 		content.add(map).grow();
 		
-		mapActor = new MapTable(level.getMap().getTiledMap());
+		mapActor = new MapTable(level.getMap());
 		map.add(mapActor).pad(20);
 		
 		content.row();
