@@ -21,11 +21,12 @@ public class LevelInfosStage extends AbstractStage {
 		displayScore = game.getMode().equals("ARCADE");
 		
 		addHeaderButton("Retour", "MENU_LEVELS");
-
+		
 		addDoubleLabel("Nom", level.getName());
 		int width = level.getMap().getIntProp("width");
 		int height = level.getMap().getIntProp("height");
 		addDoubleLabel("Taille", Integer.toString(width)+"x"+Integer.toString(height));
+		addDoubleLabel("Mode", game.getMode());
 		if(displayScore) {
 			// TODO load score
 			addDoubleLabel("Score", "");
