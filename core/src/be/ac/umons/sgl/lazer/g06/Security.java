@@ -5,8 +5,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Security {
-	/*
-	 * @return lowercase string representation of md5 hash from data string
+	/**
+	 * md5 Hash calculation of data string.
+	 * @param data Data to hash.
+	 * @return Lowercase string representing md5 hash from @data string
 	 */
 	public static String md5(String data) {
 		MessageDigest md5;
