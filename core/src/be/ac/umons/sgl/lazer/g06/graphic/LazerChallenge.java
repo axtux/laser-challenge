@@ -5,7 +5,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.AbstractStage;
@@ -25,7 +24,7 @@ public class LazerChallenge extends Game {
 	AbstractStage stage;
 	MySkin skin;
 	User user;
-	String mode = "";
+	Level.Mode mode;
 	Level level;
 	
 	public LazerChallenge() {
@@ -58,20 +57,15 @@ public class LazerChallenge extends Game {
 		return user;
 	}
 	
-	public String getMode() {
+	public Level.Mode getMode() {
 		return mode;
 	}
-	
-	public void setMode(String mode) {
-		mode = mode.toUpperCase();
-		switch(mode) {
-		case "TRAINING":
-		case "ARCADE":
-			this.mode = mode;
-			break;
-		default:
-			throw new GdxRuntimeException("Invalid mode "+mode+". Should be TRAINING or ARCADE.");
-		}
+	/**
+	 * Save mode here because mode is selected before level is created
+	 * @param mode The mode within which the player want to play.
+	 */
+	public void setMode(Level.Mode mode) {
+		this.mode = mode;
 	}
 	
 	public Level getLevel() {
