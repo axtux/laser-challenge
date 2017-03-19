@@ -109,6 +109,12 @@ public class Level {
 		return map;
 	}
 	/**
+	 * @return mode
+	 */
+	public Mode getMode() {
+		return mode;
+	}
+	/**
 	 * 
 	 * @return difficulty
 	 */
@@ -201,13 +207,16 @@ public class Level {
 	 * TRAINING mode has no time limit, no score and continuous laser.
 	 */
 	public enum Mode {
-		ARCADE, TRAINING
+		ARCADE, TRAINING;
+		public boolean score() {
+			return this.equals(ARCADE);
+		}
 	}
 	/**
 	 * Difficulty of the game, information for the user from XML file.
 	 */
 	public enum Difficulty {
-		EASY, MEDIUM, HARD
+		EASY, MEDIUM, HARD;
 	}
 	/**
 	 * Type of game :
@@ -215,6 +224,6 @@ public class Level {
 	 * ADVANCED has 8 directions, laser intensity and some more blocks.
 	 */
 	public enum Type {
-		STANDARD, ADVANCED
+		STANDARD, ADVANCED;
 	}
 }
