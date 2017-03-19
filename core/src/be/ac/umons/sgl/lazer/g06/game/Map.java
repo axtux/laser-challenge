@@ -29,9 +29,17 @@ public class Map {
 	public String getProp(String prop) {
 		return getProp(prop, "");
 	}
-	
+
 	public String getProp(String prop, String defaultValue) {
 		return map.getProperties().get(prop, defaultValue, String.class);
+	}
+	
+	public int getIntProp(String prop) {
+		return getIntProp(prop, -1);
+	}
+	
+	public int getIntProp(String prop, int defaultValue) {
+		return map.getProperties().get(prop, defaultValue, int.class);
 	}
 	
 	public String getCellProp(int x, int y, String prop) {
