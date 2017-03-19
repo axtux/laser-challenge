@@ -38,14 +38,14 @@ public class Orientation {
 	}
 	
 	/**
-	 * this method return the attribut orientationToIndice from object
+	 * @return the attribut orientationToIndice from object
 	 */
 	public Hashtable<String,Integer> getOrientationToIndice(){
 		return orientationToIndice;
 	}
 	
 	/**
-	 * this method return the attribut indiceToOrientation from object
+	 * @return the attribut indiceToOrientation from object
 	 */
 	public String[] getIndiceToOrientation(){
 		return indiceToOrientation;

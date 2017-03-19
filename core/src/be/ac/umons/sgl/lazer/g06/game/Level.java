@@ -11,7 +11,9 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
-
+/**
+ * 
+ */
 public class Level {
 	Mode mode;
 	String type;
