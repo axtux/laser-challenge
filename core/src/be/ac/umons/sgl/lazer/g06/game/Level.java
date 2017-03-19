@@ -1,11 +1,7 @@
 package be.ac.umons.sgl.lazer.g06.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
@@ -13,14 +9,13 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 import be.ac.umons.sgl.lazer.g06.Files;
 
 public class Level {
-	Mode mode;
-	String type;
-	int number;
+	static final String LEVEL_PATH = "levels";
 	
 	String name;
-	TiledMap map;
-	TiledMapTileLayer ground;
-
+	Map map;
+	String difficulty;
+	String type;
+	
 	public Level(String file) {
 		String content = Files.getContent(file);
 		if(content == null) {
@@ -30,67 +25,103 @@ public class Level {
 		Gdx.app.debug("Level.Level", "creating level from file "+file);
 		XmlReader reader = new XmlReader();
 		Element level = reader.parse(content);
-		name = level.getAttribute("name");
-		String map = level.getAttribute("map");
-		loadMap(map);
-		
-		
+		setName(level.getAttribute("name", ""));
+		setMap(level.getAttribute("map", ""));
+		setDifficulty(level.getAttribute("difficulty", "medium"));
+		setType(level.getAttribute("type", "standard"));
+		Array<Element> blocks = level.getChildByName("blocks").getChildrenByName("block");
+		for(Element block : blocks) {
+			// TODO implement Block
+			//map.addBlock(block);
+		}
 	}
 	
-	public Level(Mode mode, String type, int number) {
-		this.mode = mode;
-		this.type = type;
-		this.number = number;
-	}
-	
-	private boolean loadMap(String mapName) {
-		TmxMapLoader loader = new TmxMapLoader();
-		// uses internal
-		map = loader.load("maps/"+mapName+".tmx");
-		ground = (TiledMapTileLayer)map.getLayers().get("ground");
-		String keys = String.join("|", (Iterable<? extends CharSequence>) ground.getCell(2, 0).getTile().getProperties().getKeys());
-		Gdx.app.debug("keys", keys);
-		return true;
+	private void setName(String name) {
+		if(name == null || name.isEmpty()) {
+			throw new GdxRuntimeException("Name cannot be null or empty.");
+		}
+		this.name = name;
 	}
 
-	public String getMapProp(String prop) {
-		return getMapProp(prop, "");
+	private void setMap(String mapFilename) {
+		this.map = new Map(mapFilename);
+	}
+
+	private void setDifficulty(String difficulty) {
+		difficulty = difficulty.toUpperCase();
+		switch(difficulty) {
+		case "EASY":
+		case "MEDIUM":
+		case "HARD":
+			this.difficulty = difficulty;
+			break;
+		default:
+			throw new GdxRuntimeException("Invalid difficulty "+difficulty+". Should be EASY, MEDIUM or HARD.");
+		}
 	}
 	
-	public String getMapProp(String prop, String defaultValue) {
-		return map.getProperties().get(prop, defaultValue, String.class);
+	private void setType(String type) {
+		type = type.toUpperCase();
+		switch(type) {
+		case "STANDARD":
+		case "ADVANCED":
+			this.type = type;
+			break;
+		default:
+			throw new GdxRuntimeException("Invalid type "+type+". Should be STANDARD or ADVANCED.");
+		}
 	}
 	
-	public String getCellProp(int x, int y, String prop) {
-		return getCellProp(x, y, prop, "");
+	public String getName() {
+		return name;
 	}
 	
-	public String getCellProp(int x, int y, String prop, String defaultValue) {
-		Cell c = ground.getCell(x, y);
-		return c.getTile().getProperties().get(prop, defaultValue, String.class);
-	}
-	
-	public TiledMap getMap() {
+	public Map getMap() {
 		return map;
 	}
 	
+	public String getDifficulty() {
+		return difficulty;
+	}
+
+	public String getType() {
+		return type;
+	}
+
 	public enum Mode {
 		ARCADE, TRAINING
 	}
 	
-	public static Level[] listLevels(String type) {
-		String levelsDir = "levels/"+type.toLowerCase();
-		String levelFiles[] = Files.list(levelsDir);
-		
+	public static Array<Level> getLevels() {
+		return getLevels("STANDARD");
+	}
+	
+	public static Array<Level> getLevels(String type) {
+		Array<String> levelFiles = Files.listFiles(LEVEL_PATH);
 		if(levelFiles == null) {
-			Gdx.app.error("Level.listLevels", "Got null while listing directory "+levelsDir);
-			return null;
+			throw new GdxRuntimeException("Got null while listing directory "+LEVEL_PATH);
 		}
 		
-		Level levels[] = new Level[levelFiles.length];
-		for(int i = 0; i < levelFiles.length; ++i) {
-			levels[i] = new Level(levelFiles[i]);
+		Array<Level> levels = new Array<Level>(levelFiles.size);
+		Level tmp;
+		for(String file : levelFiles) {
+			if(!file.endsWith(".xml")) {
+				continue;
+			}
+			
+			try {
+				tmp = new Level(LEVEL_PATH+"/"+file);
+			} catch (GdxRuntimeException e) {
+				Gdx.app.error("Level.getLevels", "Unable to create level with file "+file+" :\n"+e.getMessage());
+				continue;
+			}
+			
+			if(tmp.getType().equals(type)) {
+				levels.add(tmp);
+			}
+			
 		}
-		return null;
+		
+		return levels;
 	}
 }
