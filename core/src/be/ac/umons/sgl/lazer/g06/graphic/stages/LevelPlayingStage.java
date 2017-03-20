@@ -7,6 +7,7 @@ import be.ac.umons.sgl.lazer.g06.graphic.MapTable;
 public class LevelPlayingStage extends AbstractLevelStage {
 	Table map;
 	MapTable mapActor;
+	Table sideTable;
 	
 	public LevelPlayingStage() {
 		super();
@@ -17,12 +18,16 @@ public class LevelPlayingStage extends AbstractLevelStage {
 		map = new Table();
 		content.row();
 		content.add(map).grow();
+		sideTable = new Table();
+		sideTable.pad(20);
+		content.add(sideTable);
 		
 		mapActor = new MapTable(level.getMap());
 		map.add(mapActor).pad(20);
-		
-		content.row();
-		addDoubleButton("Swap", "ACTION_LEVEL_SWAP", "Lancer le lazer", "ACTION_LEVEL_LASER");
+
+		this.addButton(sideTable, "Swap", "ACTION_LEVEL_SWAP", "small-menu").pad(20);
+		sideTable.row();
+		this.addButton(sideTable, "Lancer le lazer", "ACTION_LEVEL_LASER", "small-menu").pad(20);
 	}
 	
 }
