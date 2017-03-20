@@ -2,6 +2,10 @@ package be.ac.umons.sgl.lazer.g06.game;
 
 import java.util.HashMap;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader;
@@ -41,7 +45,7 @@ public class LevelType {
 		
 		BlockType block;
 		for(Element blockElement : blockElements) {
-			block = new BlockType(blockElement);
+			block = new BlockType(rawName, blockElement);
 			blocks.put(block.getName(), block);
 		}
 	}
@@ -88,13 +92,19 @@ public class LevelType {
 	}
 	
 	class BlockType {
-		private final String image;
+		private final TextureRegion tr;
 		private final String name;
 		private final HashMap<String, Array<String>> inputs;
 		
-		public BlockType(Element block) {
+		public BlockType(String levelType, Element block) {
 			this.name = block.get("name");
-			this.image = block.get("image");
+			
+			String filename = "level_types/"+levelType+"/sprites/"+name+".png";
+			FileHandle fh = Gdx.files.local(filename);
+			if(fh == null) {
+				throw new GdxRuntimeException("404 File not found "+filename);
+			}
+			tr = new TextureRegion(new Texture(fh));
 			
 			Element inputsElement = block.getChildByName("inputs");
 			Array<Element> inputElements = inputsElement.getChildrenByName("input");
@@ -109,12 +119,12 @@ public class LevelType {
 			}
 		}
 		
-		public String getName() {
-			return name;
+		public TextureRegion getTextureRegion() {
+			return tr;
 		}
 		
-		public String getImage() {
-			return image;
+		public String getName() {
+			return name;
 		}
 		
 		public Array<String> input(String orientation) {
