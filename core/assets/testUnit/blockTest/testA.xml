@@ -1,0 +1,25 @@
+<blocks>
+	<block>
+		<image>path_to_img</image>
+		<name>blocker</name>
+		<inputs>
+		</inputs>
+	</block>
+	
+	<block>
+		<image>path_to_img</image>
+		<name>gate</name>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="DOWN"/>
+			</input>
+			<input orientation="DOWN">
+				<output orientation="UP"/>
+			</input>
+		</inputs>
+	</block>
+	
+	<pasUnBlock> 
+		<name>inutile</name>
+	</pasUnBlock>
+</blocks>

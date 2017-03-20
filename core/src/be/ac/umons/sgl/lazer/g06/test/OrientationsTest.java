@@ -19,11 +19,6 @@ public class OrientationsTest {
 	Orientation testB;
 	Orientation testC;
 	
-	@Before
-	public void init() throws IOException{
-		
-	}
-	
 	@Test
 	public void test() throws IOException {
 		test = new Orientation(Gdx.files.classpath("/levels/standard/orientations.xml"));
@@ -34,7 +29,7 @@ public class OrientationsTest {
 	}
 	@Test
 	public void testA() throws IOException{
-		testA = new Orientation(Gdx.files.classpath("/testUnit/testA.xml"));
+		testA = new Orientation(Gdx.files.classpath("/testUnit/orientationTest/testA.xml"));
 		// test when the xml file has no orientation
 		assertEquals(testA.size(),0);
 		// test sizes of attributs are ok 
@@ -43,7 +38,7 @@ public class OrientationsTest {
 	
 	@Test
 	public void TestB() throws IOException{
-		testB = new Orientation(Gdx.files.classpath("/testUnit/testB.xml"));
+		testB = new Orientation(Gdx.files.classpath("/testUnit/orientationTest/testB.xml"));
 		// test when the xml file has others balises and it has correctly been parsed
 		assertEquals(testB.size(),2);
 		// test sizes of attributs are ok 
@@ -51,7 +46,7 @@ public class OrientationsTest {
 	}
 	@Test
 	public void TestC() throws IOException{
-		testC = new Orientation(Gdx.files.classpath("/testUnit/testC.xml"));
+		testC = new Orientation(Gdx.files.classpath("/orientationTest/testUnit/testC.xml"));
 		//test when a balise contains 2 same orientations
 		assertEquals(testC.size(),2);
 		assertEquals(testC.getOrientationToIndice().size(),testC.getIndiceToOrientation().length);

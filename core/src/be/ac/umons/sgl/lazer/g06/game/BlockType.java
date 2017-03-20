@@ -51,10 +51,4 @@ public class BlockType {
 		return this.blocks.size();
 	}
 	
-	/*public static void main(String argv[]) throws IOException{
-		BlockType a= new BlockType(new FileHandle("/home/mehdi/Bureau/projetGL/pgl1617-pgl6/levels/standard/blocks.xml"));
-		
-	
-	}*/
-
 }
