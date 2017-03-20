@@ -14,7 +14,7 @@ import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 public class Level {
 	static final String LEVEL_PATH = "levels";
 	static final Difficulty defaultDifficulty = Difficulty.MEDIUM;
-	static final Type defaultType = Type.STANDARD;
+	static final String defaultType = "standard";
 	
 	private static Array<Level> levels;
 	
@@ -22,7 +22,7 @@ public class Level {
 	String name;
 	Map map;
 	Difficulty difficulty;
-	Type type;
+	LevelType type;
 	
 	/**
 	 * Create level from file
@@ -46,8 +46,10 @@ public class Level {
 		setName(level.getAttribute("name", ""));
 		setMap(level.getAttribute("map", ""));
 		setDifficulty(level.getAttribute("difficulty", ""));
-		setType(level.getAttribute("type", ""));
+		setType(level.getAttribute("type", defaultType));
+		
 		Array<Element> blocks = level.getChildByName("blocks").getChildrenByName("block");
+		
 		for(Element block : blocks) {
 			// TODO implement Block
 			//map.addBlock(block);
@@ -82,15 +84,11 @@ public class Level {
 		}
 	}
 	/**
-	 * Set type. defaultType is used if argument is not valid
-	 * @param type String representation of type, case insensitive
+	 * Set type
+	 * @param type String representation of type, case sensitive
 	 */
 	private void setType(String type) {
-		try {
-			this.type = Type.valueOf(type.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			this.type = defaultType;
-		}
+		this.type = new LevelType(type);
 	}
 	/**
 	 * @return name
@@ -113,7 +111,7 @@ public class Level {
 	/**
 	 * @return type
 	 */
-	public Type getType() {
+	public LevelType getType() {
 		return type;
 	}
 	/**
@@ -168,7 +166,7 @@ public class Level {
 	 * @param type Only levels of this type will be returned
 	 * @return levels with type equals to @type
 	 */
-	public static Array<Level> getLevels(Type type) {
+	public static Array<Level> getLevels(String type) {
 		return getLevels(type, false);
 	}
 	/**
@@ -177,12 +175,12 @@ public class Level {
 	 * @param refresh Whether or not refresh levels from disk
 	 * @return Levels with type equals to @type
 	 */
-	public static Array<Level> getLevels(Type type, boolean refresh) {
+	public static Array<Level> getLevels(String type, boolean refresh) {
 		getLevels(refresh);
 		Array<Level> filtered = new Array<Level>(levels.size);
 		
 		for(Level level : levels) {
-			if(level.getType().equals(type)) {
+			if(level.getType().getRawName().equals(type)) {
 				filtered.add(level);
 			}
 		}
@@ -215,13 +213,5 @@ public class Level {
 	 */
 	public enum Difficulty {
 		EASY, MEDIUM, HARD;
-	}
-	/**
-	 * Type of game :
-	 * STANDARD has 4 directions and limited blocks while
-	 * ADVANCED has 8 directions, laser intensity and some more blocks.
-	 */
-	public enum Type {
-		STANDARD, ADVANCED;
 	}
 }

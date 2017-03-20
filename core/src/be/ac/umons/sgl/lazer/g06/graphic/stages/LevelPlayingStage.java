@@ -22,7 +22,7 @@ public class LevelPlayingStage extends AbstractLevelStage {
 		map.add(mapActor).pad(20);
 		
 		content.row();
-		addMenuButton("Lancer le lazer", "ACTION_GAME_LAZER");
+		addDoubleButton("Swap", "ACTION_LEVEL_SWAP", "Lancer le lazer", "ACTION_LEVEL_LASER");
 	}
 	
 }

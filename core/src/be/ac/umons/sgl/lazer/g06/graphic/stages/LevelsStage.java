@@ -1,12 +1,15 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Level;
+import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.listeners.LevelSelectorListener;
 
 public class LevelsStage extends AbstractStage {
@@ -28,8 +31,18 @@ public class LevelsStage extends AbstractStage {
 		
 		addHeaderButton("Retour", "MENU_MODES");
 		
-		addLevelsBlock("Niveaux standards", Level.Type.STANDARD);
-		addLevelsBlock("Niveaux avancés", Level.Type.ADVANCED);
+		Array<String> types = LevelType.getLevelTypes();
+		Gdx.app.debug("LevelsStage.LevelsStage", "Found types "+String.join("|", types));
+		LevelType lt;
+		for(String type : types) {
+			try {
+				lt = new LevelType(type);
+			} catch (GdxRuntimeException e) {
+				Gdx.app.error("LevelsStage.LevelsStage", "Not able to create LevelType from type "+type+" : "+e.getMessage());
+				continue;
+			}
+			addLevelsBlock(lt);
+		}
 		
 		content.row();
 		
@@ -38,17 +51,17 @@ public class LevelsStage extends AbstractStage {
 		}
 	}
 	
-	private void addLevelsBlock(String name, Level.Type type) {
+	private void addLevelsBlock(LevelType lt) {
 		Table block = new Table();
 		
-		Label title = new Label(name+" : ", skin, "label");
+		Label title = new Label(lt.getName()+" : ", skin, "label");
 		block.row();
 		block.add(title).pad(20).padLeft(100).left();
 		
 		Table levelsContainer = new Table();
 		
 		int i = 1;
-		for(Level level : Level.getLevels(type)) {
+		for(Level level : Level.getLevels(lt.getRawName())) {
 			addLevelButton(levelsContainer, level, i++, false);
 		}
 		
