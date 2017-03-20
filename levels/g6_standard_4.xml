@@ -45,10 +45,16 @@
 		<block type="blocker">
 			<position x="0" y="14"/>
 		</block>
+		<block type="blocker"/>
+		<block type="blocker"/>
+		<block type="blocker"/>
+		<block type="one-way_mirror"/>
 		<block type="one-way_mirror"/>
 		<block type="two-way_mirror"/>
 		<block type="two-way-straight_splitter"/>
 		<block type="two-way-angled-right_splitter"/>
+		<block type="two-way-angled-right_splitter"/>
+		<block type="two-way-angled-left_splitter"/>
 		<block type="two-way-angled-left_splitter"/>
 		<block type="three-way-angled-left_splitter"/>
 	</blocks>
