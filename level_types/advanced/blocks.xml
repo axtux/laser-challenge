@@ -1,14 +1,14 @@
 <blocks>
 	<block>
-		<image>path_to_img</image>
 		<name>blocker</name>
+		<label>Blocker</label>
 		<inputs>
 		</inputs>
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>gate</name>
+		<label>Gate</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN"/>
@@ -20,36 +20,26 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>one-laser_source</name>
+		<label>Source</label>
 		<inputs>
 			<input>
 				<output orientation ="UP"/>
 			</input>
 		</inputs>
 	</block>
-
-	<block>
-		<image>path_to_img</image>
-		<name>one-laser-oriented_source</name>
-		<inputs>
-			<input>
-				<output orientation ="UP-LEFT"/>
-			</input>
-		</inputs>
-	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>one-laser_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="UP"/>
 		</inputs>
 	</block>
 		
 	<block>
-		<image>path_to_img</image>
 		<name>two-laser_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="RIGHT"/>
 			<input orientation ="LEFT"/>
@@ -57,8 +47,8 @@
 	</block>
 			
 	<block>
-		<image>path_to_img</image>
 		<name>four-laser_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
@@ -68,16 +58,16 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>one-laser-oriented_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="DOWN-RIGHT"/>
 		</inputs>
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>two-laser-oriented_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="DOWN-RIGHT"/>
 			<input orientation ="DOWN-LEFT"/>
@@ -85,8 +75,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>four-laser-oriented_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="UP-LEFT"/>
 			<input orientation ="UP-RIGHT"/>
@@ -96,8 +86,8 @@
 	</block>
 			
 	<block>
-		<image>path_to_img</image>
 		<name>one-way_mirror</name>
+		<label>Mirror</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -109,8 +99,8 @@
 	</block>
 
 	<block>
-		<image>path_to_img</image>
 		<name>two-way_mirror</name>
+		<label>Mirror</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -129,8 +119,8 @@
 
 	
 	<block>
-		<image>path_to_img</image>
 		<name>two-way-little-angled_mirror</name>
+		<label>Mirror</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="UP-RIGHT"/>
@@ -149,8 +139,8 @@
 	
 	
 	<block>
-		<image>path_to_img</image>
-		<name>two-way-straight_splitter </name>
+		<name>two-way-straight_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT" intensite="1/2"/>
@@ -160,8 +150,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>two-way-angled-right_splitter </name>
+		<name>two-way-angled-right_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN" intensite="1/2"/>
@@ -171,8 +161,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>two-way-angled-left_splitter </name>
+		<name>two-way-angled-left_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT" intensite="1/2"/>
@@ -182,8 +172,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>two-way-little-angled_splitter </name>
+		<name>two-way-little-angled_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="UP-LEFT" intensite="1/2"/>
@@ -193,8 +183,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>two-way-big-angled_splitter </name>
+		<name>two-way-big-angled_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN-LEFT" intensite="1/2"/>
@@ -204,8 +194,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>three-way_splitter </name>
+		<name>three-way_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT" intensite="1/3"/>
@@ -216,8 +206,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>three-way-big-angled_splitter </name>
+		<name>three-way-big-angled_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN-RIGHT" intensite="1/3"/>
@@ -228,8 +218,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>three-way-little-angled_splitter </name>
+		<name>three-way-little-angled_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="UP-RIGHT" intensite="1/3"/>
@@ -240,8 +230,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>four-way-right_splitter </name>
+		<name>four-way-right_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="UP-RIGHT" intensite="1/4"/>
@@ -253,8 +243,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>four-way-left_splitter </name>
+		<name>four-way-left_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="UP-LEFT" intensite="1/4"/>
@@ -266,8 +256,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>five-way_splitter </name>
+		<name>five-way_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT" intensite="1/5"/>
@@ -281,8 +271,8 @@
 	
 	
 	<block>
-		<image>path_to_img</image>
-		<name>six-way-right_splitter </name>
+		<name>six-way-right_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT" intensite="1/6"/>
@@ -296,8 +286,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>six-way-left_splitter </name>
+		<name>six-way-left_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT" intensite="1/6"/>
@@ -312,8 +302,8 @@
 	
 	
 	<block>
-		<image>path_to_img</image>
-		<name>seven-way_splitter </name>
+		<name>seven-way_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT" intensite="1/7"/>
@@ -328,8 +318,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>amplifier </name>
+		<name>amplifier</name>
+		<label>Amplifier</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN" intensite="2"/>

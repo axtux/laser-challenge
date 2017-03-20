@@ -1,14 +1,14 @@
 <blocks>
 	<block>
-		<image>path_to_img</image>
 		<name>blocker</name>
+		<label>Blocker</label>
 		<inputs>
 		</inputs>
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>gate</name>
+		<label>Gate</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN"/>
@@ -20,8 +20,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>one-laser_source</name>
+		<label>Source</label>
 		<inputs>
 			<input>
 				<output orientation ="UP"/>
@@ -30,16 +30,16 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>one-laser_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="UP"/>
 		</inputs>
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>two-laser_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="RIGHT"/>
 			<input orientation ="LEFT"/>
@@ -47,8 +47,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>four-laser_target</name>
+		<label>Target</label>
 		<inputs>
 			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
@@ -58,8 +58,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
 		<name>one-way_mirror</name>
+		<label>Mirror</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -72,8 +72,8 @@
 
 	
 	<block>
-		<image>path_to_img</image>
 		<name>two-way_mirror</name>
+		<label>Mirror</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -91,8 +91,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>two-way-straight_splitter </name>
+		<name>two-way-straight_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT"/>
@@ -102,8 +102,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>two-way-angled-right_splitter </name>
+		<name>two-way-angled-right_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN"/>
@@ -113,8 +113,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>two-way-angled-left_splitter </name>
+		<name>two-way-angled-left_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT"/>
@@ -124,8 +124,8 @@
 	</block>
 	
 	<block>
-		<image>path_to_img</image>
-		<name>three-way_splitter </name>
+		<name>three-way_splitter</name>
+		<label>Splitter</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
