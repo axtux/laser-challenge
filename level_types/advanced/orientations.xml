@@ -1,11 +1,11 @@
 <orientations>
-	<orientation>UP</orientation>
-	<orientation>UP-RIGHT</orientation>
-	<orientation>RIGHT</orientation>
-	<orientation>DOWN-RIGHT</orientation>
-	<orientation>DOWN</orientation>
-	<orientation>DOWN-LEFT</orientation>
-	<orientation>LEFT</orientation>
-	<orientation>UP-LEFT</orientation>
+	<orientation y="1">UP</orientation>
+	<orientation x="1" y="1">UP-RIGHT</orientation>
+	<orientation x="1">RIGHT</orientation>
+	<orientation x="1" y="-1">DOWN-RIGHT</orientation>
+	<orientation y="-1">DOWN</orientation>
+	<orientation x="-1" y="-1">DOWN-LEFT</orientation>
+	<orientation x="-1">LEFT</orientation>
+	<orientation x="-1" y="1">UP-LEFT</orientation>
 </orientations>
 	

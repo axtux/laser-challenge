@@ -1,7 +1,7 @@
 <orientations>
-	<orientation>UP</orientation>
-	<orientation>RIGHT</orientation>
-	<orientation>DOWN</orientation>
-	<orientation>LEFT</orientation>
+	<orientation y="1">UP</orientation>
+	<orientation x="1">RIGHT</orientation>
+	<orientation y="-1">DOWN</orientation>
+	<orientation x="-1">LEFT</orientation>
 </orientations>
 	
