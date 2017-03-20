@@ -27,6 +27,9 @@ public class Map {
 		setSizes();
 		
 		ground = (TiledMapTileLayer)map.getLayers().get("ground");
+		if(ground == null) {
+			throw new GdxRuntimeException("no ground layer found in map");
+		}
 		blocks = new TiledMapTileLayer(ground.getWidth(), ground.getHeight(), (int) ground.getTileWidth(), (int) ground.getTileHeight());
 		
 	}
