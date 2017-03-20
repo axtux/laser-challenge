@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024">
+  <image source="../core/assets/maps/terrain.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy9lEuSAUEQhku5A+MM9h5bgyMwzY5hx0YEDoAj4ADGEcwssMIR3GCuIMLOn9GdIaOitPJcfFHd2VVfZlRnVTKiVNKgrW97ficD5B2C0ZPyz+D5AXNQAMUHvRus34IdaIAm+L9CLqrUJ8hH7c4j6DhCc6XPg78CqoKE9ufGQBx8gKXyOYAVWCu7z5YzG/hSIA0yEX+9ic3HeWVOL/CVQBl8kVuf55Z0uG9l5GQff6Oxi1gP9APvPfUdRD1jMAFTB59LfQvEfsGfxVeDpw6+r9TH/5NG2j/ew5Sxf7LXwuqT/cLfZeyS71J9sl/2XKeI0ZyEcR5t/WfrF8pFThnjXpU+Wivhs+J63jzH+8LMY4Nzv/L+bOnw91vXngDdnZ4x
+  </data>
+ </layer>
+</map>
