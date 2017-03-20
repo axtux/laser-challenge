@@ -3,6 +3,7 @@ package be.ac.umons.sgl.lazer.g06.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -70,7 +71,11 @@ public class Level {
 	 * @param mapFilename TMX filename (without extension) which has to be located into maps directory.
 	 */
 	private void setMap(String mapFilename) {
-		this.map = new Map(mapFilename);
+		try {
+			this.map = new Map(mapFilename);
+		} catch (SerializationException e) {
+			throw new GdxRuntimeException("Unable to load map "+mapFilename+" : "+e.getMessage());
+		}
 	}
 	/**
 	 * Set difficulty. defaultDifficulty is used if argument is not valid

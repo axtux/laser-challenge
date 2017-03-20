@@ -49,7 +49,7 @@ public class LevelType {
 	 * @return Directory path relative to application root.
 	 */
 	private String dirPath() {
-		return "levels/"+rawName+"/";
+		return "level_types/"+rawName+"/";
 	}
 	/**
 	 * @return Name.
@@ -80,7 +80,7 @@ public class LevelType {
 	 * @return Level types.
 	 */
 	public static Array<String> getLevelTypes() {
-		Array<String> types = Files.listDirs("levels");
+		Array<String> types = Files.listDirs("level_types");
 		if(types == null) {
 			throw new GdxRuntimeException("Unable to get levels types from filesystem.");
 		}
