@@ -3,7 +3,9 @@ package be.ac.umons.sgl.lazer.g06;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
+/**
+ * Easily get hash functions of string.
+ */
 public class Security {
 	/**
 	 * md5 Hash calculation of data string.

@@ -5,7 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 /**
- * To easily manage files using @Gdx.files.local interface
+ * To easily manage files using Gdx.files.local interface
  */
 public class Files {
 	/**
@@ -37,8 +37,10 @@ public class Files {
 		return content;
 	}
 	/**
-	 * default append value is false
-	 * @see putContent
+	 * Call {@link #putContent(String, String, boolean)} with append value set to false
+	 * @param path Relative path to application root.
+	 * @param content Whole file content as a string.
+	 * @return True on success, false on error.
 	 */
 	public static boolean putContent(String path, String content) {
 		return putContent(path, content, false);
@@ -109,7 +111,7 @@ public class Files {
 		return fh.exists();
 	}
 	/**
-	 * Check that @path is a directory.
+	 * Check that path is a directory.
 	 * @param path Relative path to application root.
 	 * @return True if path is a directory. False otherwise (path could be a file or not exist).
 	 */
@@ -156,7 +158,7 @@ public class Files {
 		return fileNames;
 	}
 	/**
-	 * Just as @list but make sure entries are real files (not directory).
+	 * Just as {@link #list(String)} but make sure entries are real files (not directory).
 	 * @param path Relative path to application root.
 	 * @return Array of string filenames (relative to their own directory).
 	 */
