@@ -5,11 +5,14 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 
 import be.ac.umons.sgl.lazer.g06.game.*;
+import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.files.FileHandle;
 
 public class OrientationsTest {
@@ -19,9 +22,21 @@ public class OrientationsTest {
 	Orientation testB;
 	Orientation testC;
 	
+	@Before
+	public void before() {
+		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "Lazer Challenge";
+		config.useGL30 = false;
+		config.width = 1;
+		config.height = 1;
+		new LwjglApplication(new LazerChallenge(), config);
+	}
+	
 	@Test
 	public void test() throws IOException {
-		test = new Orientation(Gdx.files.classpath("/levels/standard/orientations.xml"));
+		FileHandle file = Gdx.files.local("level_types/standard/orientations.xml");
+		assertNotNull("404 File not found", file);
+		test = new Orientation(file);
 		// test if the xml has correctly been parsed
 		assertEquals(test.size(),4);
 		// test sizes of attributs are ok 
