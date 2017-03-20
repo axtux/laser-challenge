@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024">
+  <image source="../core/assets/maps/terrain.png" width="1024" height="1024"/>
+  <tile id="188">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="213">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="245">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="277">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="278">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="279">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="341">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="342">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="343">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="565">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="597">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="620">
+   <properties>
+    <property name="source" value="1"/>
+   </properties>
+  </tile>
+  <tile id="621">
+   <properties>
+    <property name="target" value="1"/>
+   </properties>
+  </tile>
+  <tile id="629">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="630">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="631">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="693">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="694">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="695">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="834">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Calque de Tile 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy1lEEOgjAQRYceQr0De/Qk6CV0owInUU+iLlqP4VFY85swcZi0VQwsXlIy09/fT9s8I8oVBzNuPCfHiTiB84i+X3kT0WsGKuRbg8aE11hg7SVYZd9rFlygcwU3E16vQO8abIBL1FjvDp0HeEb0SvRuwS7gT9YsDfH1NuTPfHrKyJrszUXy4ZpV+VqlUWFODZr+/1qVAftohR+Zr9YL+YtlwP5kvqzH+y7MUM8qz1KPPfo5nGGh8tNZuF7Pz21EfjJTOXY0PDMyi1bsK3Xm9Pnjfp9D6qzJuyEzlWOppzP8586nmPq9mvo93Zv099i5HVLHxUM=
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,29 @@
+<level name="Level 3 advanced" map="g6_3a" difficulty="medium">
+	<blocks>
+		<block type="one-laser_source" fixedposition="true">
+			<position x="0" y="0"/>
+		</block>
+		<block type="two-laser_target" fixedposition="true" fixedorientation="true">
+			<position x="9" y="5"/>
+		</block>
+		<block type="blocker">
+			<position x="1" y="0"/>
+		</block>
+		<block type="blocker">
+			<position x="0" y="1"/>
+		</block>
+		<block type="blocker">
+			<position x="4" y="8"/>
+		</block>
+		<block type="blocker">
+			<position x="6" y="2"/>
+		</block>
+		<block type="one-way_mirror"/>
+		<block type="two-way_mirror"/>
+		<block type="two-way-little-angled_mirror"/>
+		<block type="two-way-big-angled_splitter"/>
+		<block type="amplifier" fixedposition="true">
+			<position x="5" y="5"/>
+		</block>
+	</blocks>
+</level>

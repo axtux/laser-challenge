@@ -1,0 +1,52 @@
+<level name="Level 5" map="g6_5" difficulty="hard">
+	<blocks>
+		<block type="one-laser_source" fixedposition="true">
+			<position x="0" y="0"/>
+		</block>
+		<block type="one-laser_source" fixedposition="true">
+			<position x="4" y="0"/>
+		</block>
+		<block type="one-laser_source" fixedposition="true">
+			<position x="15" y="0"/>
+		</block>
+		<block type="one-laser_source" fixedposition="true">
+			<position x="19" y="0"/>
+		</block>
+		<block type="one-laser_target" fixedposition="true">
+			<position x="5" y="19"/>
+		</block>
+		<block type="one-laser_target" fixedposition="true">
+			<position x="8" y="19"/>
+		</block>
+		<block type="one-laser_target" fixedposition="true">
+			<position x="11" y="19"/>
+		</block>
+		<block type="one-laser_target" fixedposition="true">
+			<position x="14" y="19"/>
+		</block>
+		<block type="blocker">
+			<position x="2" y="2"/>
+		</block>
+		<block type="blocker">
+			<position x="11" y="3"/>
+		</block>
+		<block type="blocker">
+			<position x="3" y="19"/>
+		</block>
+		<block type="blocker">
+			<position x="11" y="17"/>
+		</block>
+		<block type="blocker">
+			<position x="17" y="3"/>
+		</block>
+		<block type="blocker">
+			<position x="19" y="19"/>
+		</block>
+		<block type="one-way_mirror"/>
+		<block type="two-way_mirror"/>
+		<block type="two-way-straight_splitter"/>
+		<block type="two-way-angled-right_splitter"/>
+		<block type="two-way-angled-left_splitter"/>
+		<block type="three-way-angled-left_splitter"/>
+	</blocks>
+</level>
