@@ -41,10 +41,14 @@ public class BlockType {
 	
 	/**
 	 * 
-	 * @return
+	 * @return the attribut blocks
 	 */
 	public HashMap<String,String> getBlocks(){
 		return this.blocks;
+	}
+	
+	public int size(){
+		return this.blocks.size();
 	}
 	
 	/*public static void main(String argv[]) throws IOException{
