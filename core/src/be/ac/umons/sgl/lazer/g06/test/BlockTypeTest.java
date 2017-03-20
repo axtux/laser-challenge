@@ -20,24 +20,24 @@ public class BlockTypeTest {
 	
 	@Test
 	public void test() throws IOException{
-		test=new BlockType(new FileHandle("/home/mehdi/Bureau/projetGL/pgl1617-pgl6/levels/standard/blocks.xml"));
+		test=new BlockType(Gdx.files.classpath("/levels/standard/blocks.xml"));
 		assertEquals(test.size(),12);
 		assertEquals(test.getBlocks().size(),12);
 	}
 	@Test
 	public void testA() throws IOException{
-		testA=new BlockType(new FileHandle("/home/mehdi/Bureau/projetGL/pgl1617-pgl6/core/assets/testUnit/blockTest/testA.xml"));
+		testA=new BlockType(Gdx.files.classpath("/testUnit/blockTest/testA.xml"));
 		assertEquals(testA.size(),2);
 	}
 	@Test
 	public void testB() throws IOException{
-		testB=new BlockType(new FileHandle("/home/mehdi/Bureau/projetGL/pgl1617-pgl6/core/assets/testUnit/blockTest/testB.xml"));
+		testB=new BlockType(Gdx.files.classpath("/testUnit/blockTest/testB.xml"));
 		assertEquals(testB.size(),2);
 	}
 	
 	@Test
 	public void testC() throws IOException{
-		testC=new BlockType(new FileHandle("/home/mehdi/Bureau/projetGL/pgl1617-pgl6/core/assets/testUnit/blockTest/testC.xml"));
+		testC=new BlockType(Gdx.files.classpath("/testUnit/blockTest/testC.xml"));
 		assertEquals(testC.size(),0);
 	}
 
