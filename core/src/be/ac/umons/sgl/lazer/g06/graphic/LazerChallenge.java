@@ -62,8 +62,8 @@ public class LazerChallenge extends Game {
 		act("MENU_LOGINS");
 		//act("ACTION_LEVEL_PLAY");
 		// load files from disk
-		act("ACTION_LOAD_LEVELS");
 		act("ACTION_LOAD_LEVEL_TYPES");
+		act("ACTION_LOAD_LEVELS");
 		
 	}
 	/**
