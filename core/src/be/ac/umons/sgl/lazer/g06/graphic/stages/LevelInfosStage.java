@@ -1,5 +1,7 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
+import be.ac.umons.sgl.lazer.g06.Time;
+
 public class LevelInfosStage extends AbstractLevelStage {
 	public LevelInfosStage() {
 		super("Informations sur le niveau");
@@ -14,6 +16,7 @@ public class LevelInfosStage extends AbstractLevelStage {
 		
 		addDoubleLabel("Mode", game.getMode().toString());
 		if(game.getMode().hasScore()) {
+			addDoubleLabel("Temps", Time.prettyTime(level.getTime(), false, false));
 			// TODO load score
 			addDoubleLabel("Score", "");
 		}
