@@ -26,6 +26,7 @@ public class Level {
 	Inventory inventory;
 	Difficulty difficulty;
 	LevelType type;
+	int time;
 	
 	/**
 	 * Create level from file
@@ -49,6 +50,7 @@ public class Level {
 		setName(level.getAttribute("name", ""));
 		setDifficulty(level.getAttribute("difficulty", ""));
 		setType(level.getAttribute("type", ""));
+		setTime(level.getIntAttribute("time", 0));
 		
 		setMap(level.getAttribute("map", ""));
 		inventory = new Inventory();
@@ -97,7 +99,16 @@ public class Level {
 			throw new GdxRuntimeException("Type "+type+" not found");
 		}
 	}
-	
+	/**
+	 * Set maximum time a user has to finish this level in arcade mode.
+	 * @param time Time in seconds.
+	 */
+	private void setTime(int time) {
+		if(time < 2) {
+			throw new GdxRuntimeException("Time should be > 1");
+		}
+		this.time = time;
+	}
 	private void setBlocks(Element blocksElement) {
 		Array<Element> blockElements = blocksElement.getChildrenByName("block");
 		
@@ -154,6 +165,13 @@ public class Level {
 	 */
 	public LevelType getType() {
 		return type;
+	}
+	/**
+	 * 
+	 * @return time
+	 */
+	public int getTime() {
+		return time;
 	}
 	/**
 	 * Refresh levels from disk. Levels directory is scanned and all valid levels are loaded into static array.
