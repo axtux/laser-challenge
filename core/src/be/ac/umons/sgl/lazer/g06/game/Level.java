@@ -133,7 +133,7 @@ public class Level {
 			}
 			
 			int x = positionElement.getIntAttribute("x", -1);
-			int y = positionElement.getIntAttribute("x", -1);
+			int y = positionElement.getIntAttribute("y", -1);
 			if(!map.setBlock(block, x, y)) {
 				Gdx.app.error("Level.setBlocks", "level "+name+" : block "+blockType+" out of map");
 				inventory.addBlock(block);
