@@ -94,7 +94,10 @@ public class Level {
 	 * @param type String representation of type, case sensitive
 	 */
 	private void setType(String type) {
-		this.type = new LevelType(type);
+		this.type = LevelType.getLevelType(type);
+		if(this.type == null) {
+			throw new GdxRuntimeException("Type "+type+" not found");
+		}
 	}
 	/**
 	 * @return name
