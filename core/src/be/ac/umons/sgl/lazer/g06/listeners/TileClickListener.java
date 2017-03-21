@@ -3,11 +3,13 @@ package be.ac.umons.sgl.lazer.g06.listeners;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+
+import be.ac.umons.sgl.lazer.g06.game.Position;
 /**
  * Listener to keep track of tile clicks.
  */
 public class TileClickListener extends MyClickListener {
-	int tileX, tileY;
+	Position position;
 	/**
 	 * Create listener.
 	 * @param mouseButton Button from @Input.Buttons
@@ -15,15 +17,14 @@ public class TileClickListener extends MyClickListener {
 	 * @param tileY Y coordinate
 	 * @param action Action to send to game when mouseButton is clicked.
 	 */
-	public TileClickListener(int mouseButton, int tileX, int tileY, String action) {
+	public TileClickListener(int mouseButton, Position position, String action) {
 		super(mouseButton, action);
-		this.tileX = tileX;
-		this.tileY = tileY;
+		this.position = position;
 	}
 	
 	public void clicked(InputEvent event, float x, float y) {
-		String tile = Integer.toString(tileX)+"x"+Integer.toString(tileY);
-		Gdx.app.debug("TileClickListener from "+tile, "ACTION : "+action);
+		String pos = position.getLocation().toString()+" : "+Integer.toString(position.getX())+"x"+Integer.toString(position.getY());
+		Gdx.app.debug("TileClickListener from "+pos, "ACTION : "+action);
 		
 		Actor actor = event.getListenerActor();
 		

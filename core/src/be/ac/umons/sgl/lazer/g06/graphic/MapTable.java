@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 
 import be.ac.umons.sgl.lazer.g06.game.Map;
+import be.ac.umons.sgl.lazer.g06.game.Position;
 import be.ac.umons.sgl.lazer.g06.listeners.TileClickListener;
 
 public class MapTable extends Table implements Observer {
@@ -51,8 +52,9 @@ public class MapTable extends Table implements Observer {
 		style.checkedOver = d.tint(Color.DARK_GRAY);
 		
 		Button button = new Button(style);
-		button.addListener(new TileClickListener(Input.Buttons.LEFT, x, y, "ACTION_MOVE"));
-		button.addListener(new TileClickListener(Input.Buttons.RIGHT, x, y, "ACTION_ROTATE"));
+		Position pos = new Position(x, y, Position.Location.MAP);
+		button.addListener(new TileClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_TILE_SELECT"));
+		button.addListener(new TileClickListener(Input.Buttons.RIGHT, pos, "ACTION__LEVEL_TILE_ROTATE"));
 		//button.setTransform(true);
 		//button.setOrigin(button.getWidth()/2, button.getHeight()/2);
 		/* Use this to scale map to available space
