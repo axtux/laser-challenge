@@ -230,19 +230,6 @@
 	</block>
 	
 	<block>
-		<name>four-way-right_splitter</name>
-		<label>Splitter</label>
-		<inputs>
-			<input orientation="UP">
-				<output orientation ="UP-RIGHT" intensite="1/4"/>
-				<output orientation ="RIGHT" intensite="1/4"/>
-				<output orientation ="DOWN" intensite="1/4"/>
-				<output orientation ="LEFT" intensite="1/4"/>
-			</input>
-		</inputs>
-	</block>
-	
-	<block>
 		<name>four-way-left_splitter</name>
 		<label>Splitter</label>
 		<inputs>
@@ -300,22 +287,6 @@
 		</inputs>
 	</block>
 	
-	
-	<block>
-		<name>seven-way_splitter</name>
-		<label>Splitter</label>
-		<inputs>
-			<input orientation="UP">
-				<output orientation ="RIGHT" intensite="1/7"/>
-				<output orientation ="UP-RIGHT" intensite="1/7"/>
-				<output orientation ="DOWN-RIGHT" intensite="1/7"/>
-				<output orientation ="DOWN" intensite="1/7"/>
-				<output orientation ="DOWN-LEFT" intensite="1/7"/>
-				<output orientation ="LEFT" intensite="1/7"/>
-				<output orientation ="UP-LEFT" intensite="1/7"/>
-			</input>
-		</inputs>
-	</block>
 	
 	<block>
 		<name>amplifier</name>
