@@ -1,4 +1,4 @@
-<level name="Level 3" map="g6_3a" difficulty="medium" type="advanced" time="100" inventray="6">
+<level name="Level 3" map="g6_3a" difficulty="medium" type="advanced" time="100">
 	<blocks>
 		<block type="one-laser_source" fixedposition="true">
 			<position x="0" y="0"/>
