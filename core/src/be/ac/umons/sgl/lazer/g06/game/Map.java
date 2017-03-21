@@ -1,7 +1,10 @@
 package be.ac.umons.sgl.lazer.g06.game;
 
+import java.util.Observable;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.LocalFileHandleResolver;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -9,7 +12,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-public class Map {
+public class Map extends Observable {
 	static final String MAP_PATH = "maps";
 	private TiledMap map;
 	TiledMapTileLayer ground;
@@ -24,17 +27,19 @@ public class Map {
 		
 		map = loader.load(MAP_PATH+"/"+name+".tmx");
 		
-		setSizes();
-		
 		ground = (TiledMapTileLayer)map.getLayers().get("ground");
 		if(ground == null) {
 			throw new GdxRuntimeException("no ground layer found in map");
 		}
-		blocks = new TiledMapTileLayer(ground.getWidth(), ground.getHeight(), (int) ground.getTileWidth(), (int) ground.getTileHeight());
+		
+		setSizes();
+		
+		blocks = new TiledMapTileLayer(mapWidth, mapHeight, tileSize, tileSize);
 		
 	}
 	
 	private void setSizes() {
+		// extract size from map properties
 		MapProperties props = map.getProperties();
 		
 		mapWidth = props.get("width", -1, int.class);
@@ -54,18 +59,68 @@ public class Map {
 		}
 		
 		tileSize = tileWidth;
+		
+		// check ground size
+		if(mapWidth != ground.getWidth()) {
+			throw new GdxRuntimeException("mapWidth "+mapWidth+" does not equal ground width "+ground.getWidth());
+		}
+		if(mapHeight != ground.getHeight()) {
+			throw new GdxRuntimeException("mapHeight "+mapHeight+" does not equal ground height "+ground.getHeight());
+		}
+		if(tileSize != ground.getTileHeight() || tileSize != ground.getTileWidth()) {
+			throw new GdxRuntimeException("ground tile size must equal map tile size");
+		}
 	}
 	
-	public int getMapWidth() {
+	public int getWidth() {
 		return mapWidth;
 	}
-
-	public int getMapHeight() {
+	
+	public int getHeight() {
 		return mapHeight;
 	}
-
+	
 	public int getTileSize() {
 		return tileSize;
+	}
+	
+	public boolean setBlock(Block block, int x, int y) {
+		if(x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) {
+			return false;
+		}
+		
+		blocks.setCell(x, y, block);
+		this.notifyObservers();
+		return true;
+	}
+	
+	private Cell getVisibleCell(int x, int y) {
+		Cell c = blocks.getCell(x, y);
+		if(c != null) {
+			return c;
+		}
+		return ground.getCell(x, y);
+	}
+	
+	public TextureRegion getVisibleTextureRegion(int x, int y) {
+		return getVisibleCell(x, y).getTile().getTextureRegion();
+	}
+	
+	public int getVisibleRotation(int x, int y) {
+		Cell c = getVisibleCell(x, y);
+		switch(c.getRotation()) {
+		case Cell.ROTATE_0:
+			return 0;
+		case Cell.ROTATE_90:
+			return 90;
+		case Cell.ROTATE_180:
+			return 180;
+		case Cell.ROTATE_270:
+			return 270;
+		default:
+			Gdx.app.error("Map.getVisibleOrientation", "Orientation not within static defined");
+			return c.getRotation();
+		}
 	}
 	
 	public TiledMap getTiledMap() {
