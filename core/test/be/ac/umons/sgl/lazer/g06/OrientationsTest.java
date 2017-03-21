@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import be.ac.umons.sgl.lazer.g06.game.*;
+import be.ac.umons.sgl.lazer.g06.game.Orientation;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 import org.junit.Before;
@@ -27,7 +27,6 @@ public class OrientationsTest {
 	public void before() {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Lazer Challenge";
-		config.useGL30 = false;
 		config.width = 1;
 		config.height = 1;
 		new LwjglApplication(new LazerChallenge(), config);
