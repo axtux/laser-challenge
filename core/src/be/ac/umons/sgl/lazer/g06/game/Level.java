@@ -13,10 +13,11 @@ import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
  * Class that manages the game part of the LazerChallenge
  */
 public class Level {
-	static final String LEVEL_PATH = "levels";
+	static final String LEVELS_PATH = "levels";
 	static final Difficulty defaultDifficulty = Difficulty.MEDIUM;
-	static final String defaultType = "standard";
-	
+	/**
+	 * Keep all instances of Level to avoid too many disk access.
+	 */
 	private static Array<Level> levels;
 	
 	LazerChallenge game;
@@ -47,7 +48,7 @@ public class Level {
 		setName(level.getAttribute("name", ""));
 		setMap(level.getAttribute("map", ""));
 		setDifficulty(level.getAttribute("difficulty", ""));
-		setType(level.getAttribute("type", defaultType));
+		setType(level.getAttribute("type", ""));
 		
 		Array<Element> blocks = level.getChildByName("blocks").getChildrenByName("block");
 		
@@ -122,10 +123,10 @@ public class Level {
 	/**
 	 * Refresh levels from disk. Levels directory is scanned and all valid levels are loaded into static array.
 	 */
-	public static void refreshLevels() {
-		Array<String> levelFiles = Files.listFiles(LEVEL_PATH);
+	private static void refresh() {
+		Array<String> levelFiles = Files.listFiles(LEVELS_PATH);
 		if(levelFiles == null) {
-			throw new GdxRuntimeException("Got null while listing directory "+LEVEL_PATH);
+			throw new GdxRuntimeException("Got null while listing directory "+LEVELS_PATH);
 		}
 		levelFiles.sort();
 		Gdx.app.debug("Level.getLevels files", String.join("|", levelFiles));
@@ -138,7 +139,7 @@ public class Level {
 			}
 			
 			try {
-				tmp = new Level(LEVEL_PATH+"/"+file);
+				tmp = new Level(LEVELS_PATH+"/"+file);
 			} catch (GdxRuntimeException e) {
 				Gdx.app.error("Level.getLevels", "Unable to create level with file "+file+" :\n"+e.getMessage());
 				continue;
@@ -162,7 +163,7 @@ public class Level {
 	 */
 	public static Array<Level> getLevels(boolean refresh) {
 		if(refresh || levels == null) {
-			refreshLevels();
+			refresh();
 		}
 		return levels;
 	}
@@ -171,7 +172,7 @@ public class Level {
 	 * @param type Only levels of this type will be returned
 	 * @return levels with type equals to @type
 	 */
-	public static Array<Level> getLevels(String type) {
+	public static Array<Level> getLevels(LevelType type) {
 		return getLevels(type, false);
 	}
 	/**
@@ -180,12 +181,12 @@ public class Level {
 	 * @param refresh Whether or not refresh levels from disk
 	 * @return Levels with type equals to @type
 	 */
-	public static Array<Level> getLevels(String type, boolean refresh) {
+	public static Array<Level> getLevels(LevelType type, boolean refresh) {
 		getLevels(refresh);
 		Array<Level> filtered = new Array<Level>(levels.size);
 		
 		for(Level level : levels) {
-			if(level.getType().getRawName().equals(type)) {
+			if(level.getType().getName().equals(type.getName())) {
 				filtered.add(level);
 			}
 		}
