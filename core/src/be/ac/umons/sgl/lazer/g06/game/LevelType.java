@@ -150,10 +150,12 @@ public class LevelType {
 	static class BlockType {
 		private final TextureRegion tr;
 		private final String name;
+		private final String label;
 		private final ObjectMap<String, Array<String>> inputs;
 		
 		public BlockType(String levelType, Element block) {
 			this.name = block.get("name");
+			this.label = block.get("label");
 			
 			String filename = LEVEL_TYPES_PATH+"/"+levelType+"/sprites/"+name+".png";
 			FileHandle fh = Gdx.files.local(filename);
@@ -181,6 +183,9 @@ public class LevelType {
 		
 		public String getName() {
 			return name;
+		}
+		public String getLabel() {
+			return label;
 		}
 		
 		public Array<String> input(String orientation) {
