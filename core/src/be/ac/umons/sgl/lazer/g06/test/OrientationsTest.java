@@ -16,12 +16,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 public class OrientationsTest {
-/*		
 	Orientation test;
 	Orientation testA;
 	Orientation testB;
 	Orientation testC;
-	
+	/*
 	@Before
 	public void before() {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -31,7 +30,7 @@ public class OrientationsTest {
 		config.height = 1;
 		new LwjglApplication(new LazerChallenge(), config);
 	}
-	
+	//*/
 	@Test
 	public void test() throws IOException {
 		FileHandle file = Gdx.files.local("level_types/standard/orientations.xml");
@@ -67,5 +66,4 @@ public class OrientationsTest {
 		assertEquals(testC.getOrientationToIndice().size(),testC.getIndiceToOrientation().length);
 		assertTrue(testC.getIndiceToOrientation()[0].equals("UP"));
 	}
-	*/
 }
