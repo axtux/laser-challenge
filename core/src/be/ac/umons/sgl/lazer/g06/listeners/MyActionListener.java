@@ -3,6 +3,7 @@ package be.ac.umons.sgl.lazer.g06.listeners;
 import com.badlogic.gdx.Gdx;
 
 import be.ac.umons.sgl.lazer.g06.game.Level;
+import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelFinishedStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelInfosStage;
@@ -31,6 +32,14 @@ public class MyActionListener implements ActionListener {
 		Gdx.app.debug("ACTION", action);
 		
 		switch(action) {
+		
+		// ACTIONs to LOAD resources
+		case "ACTION_LOAD_LEVELS":
+			Level.getLevels(true);
+			break;
+		case "ACTION_LOAD_LEVEL_TYPES":
+			LevelType.getLevelTypes(true);
+			break;
 		
 		// ACTIONs from headers
 		case "ACTION_EXIT":
