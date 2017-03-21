@@ -1,11 +1,12 @@
 package be.ac.umons.sgl.lazer.g06.graphic;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -15,24 +16,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.listeners.TileClickListener;
 
-public class MapTable extends Table {
+public class MapTable extends Table implements Observer {
 	Map map;
-	TiledMap tiledMap;
 	OrthogonalTiledMapRenderer renderer;
 	
-	TiledMapTileLayer ground;
 	Button[][] buttons;
 	
 	public MapTable(Map map) {
 		this.map = map;
-		this.tiledMap = map.getTiledMap();
+		map.addObserver(this);
 		
-		ground = (TiledMapTileLayer) tiledMap.getLayers().get("ground");
-		buttons = new Button[ground.getHeight()][ground.getWidth()];
+		int h = map.getHeight();
+		int w = map.getWidth();
+		buttons = new Button[h][w];
 		// indicies start from bottom left
-		for(int y = ground.getHeight()-1; y >=0; --y) {
-			for(int x = 0; x < ground.getWidth(); ++x) {
-				buttons[y][x] = addButton(this, ground.getCell(x, y), x, y);
+		for(int y = h-1; y >=0; --y) {
+			for(int x = 0; x < w; ++x) {
+				buttons[y][x] = addTileButton(x, y);
 			}
 			this.row();
 		}
@@ -42,8 +42,8 @@ public class MapTable extends Table {
 		//this.rotateBy(90);
 	}
 	
-	public Button addButton(Table container, Cell cell, int x, int y) {
-		TextureRegionDrawable d = new TextureRegionDrawable(cell.getTile().getTextureRegion());
+	public Button addTileButton(int x, int y) {
+		TextureRegionDrawable d = new TextureRegionDrawable(map.getVisibleTextureRegion(x, y));
 		
 		ButtonStyle style = new ButtonStyle(d, d, d);
 		style.over = d.tint(Color.LIGHT_GRAY);
@@ -53,11 +53,42 @@ public class MapTable extends Table {
 		Button button = new Button(style);
 		button.addListener(new TileClickListener(Input.Buttons.LEFT, x, y, "ACTION_MOVE"));
 		button.addListener(new TileClickListener(Input.Buttons.RIGHT, x, y, "ACTION_ROTATE"));
-		button.setTransform(true);
-		button.setOrigin(button.getWidth()/2, button.getHeight()/2);
-		container.add(button);
+		//button.setTransform(true);
+		//button.setOrigin(button.getWidth()/2, button.getHeight()/2);
+		/* Use this to scale map to available space
+		this.add(button).grow();
+		//*/this.add(button);
 		
 		return button;
+	}
+	
+	public void refreshAll() {
+		Gdx.app.debug("MapTable.refreshAll", "ALL");
+		int h = map.getHeight();
+		int w = map.getWidth();
+		// start at top left corner, walking through lines then columns
+		for(int y = h-1; y >=0; --y) {
+			for(int x = 0; x < w; ++x) {
+				refresh(x, y);
+			}
+			this.row();
+		}
+	}
+	
+	public void refresh(int x, int y) {
+		TextureRegionDrawable d = new TextureRegionDrawable(map.getVisibleTextureRegion(x, y));
+		
+		ButtonStyle style = new ButtonStyle(d, d, d);
+		style.over = d.tint(Color.LIGHT_GRAY);
+		style.checked = d.tint(Color.GRAY);
+		style.checkedOver = d.tint(Color.DARK_GRAY);
+		
+		buttons[y][x].setStyle(style);
+		setButtonRotation(buttons[y][x], map.getVisibleRotation(x, y));
+	}
+	
+	private void setButtonRotation(Button button, int rotation) {
+		button.setRotation(rotation);
 	}
 	
 	public void draw(Batch batch, float parentAlpha) {
@@ -69,5 +100,9 @@ public class MapTable extends Table {
 	public void rotationChanged() {
 		super.rotationChanged();
 		
+	}
+	// Observer method
+	public void update(Observable o, Object arg) {
+		this.refreshAll();
 	}
 }
