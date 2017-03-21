@@ -154,7 +154,7 @@ public class LevelType {
 		return levelTypes.get(name);
 	}
 	
-	static class BlockType {
+	public class BlockType {
 		private final TextureRegion tr;
 		private final String name;
 		private final String label;
