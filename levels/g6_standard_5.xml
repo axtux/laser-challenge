@@ -1,4 +1,4 @@
-<level name="Level 5" map="g6_5" difficulty="hard" time="60">
+<level name="Level 5" map="g6_5" difficulty="hard" time="60" inventary="8">
 	<blocks>
 		<block type="one-laser_source" fixedposition="true">
 			<position x="0" y="0"/>
@@ -42,6 +42,8 @@
 		<block type="blocker">
 			<position x="19" y="19"/>
 		</block>
+		<block type="blocker"/>
+		<block type="blocker"/>
 		<block type="one-way_mirror"/>
 		<block type="two-way_mirror"/>
 		<block type="two-way-straight_splitter"/>
