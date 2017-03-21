@@ -23,7 +23,7 @@ public class LevelType {
 	 */
 	private static OrderedMap<String, LevelType> levelTypes;
 	
-	private ObjectMap<String, BlockType> blocks;
+	private OrderedMap<String, BlockType> blocks;
 	String name;
 	String label;
 	/**
@@ -48,7 +48,7 @@ public class LevelType {
 		XmlReader reader = new XmlReader();
 		Element blocksElement = reader.parse(xml);
 		Array<Element> blockElements = blocksElement.getChildrenByName("block");
-		blocks = new ObjectMap<String, BlockType>(blockElements.size);
+		blocks = new OrderedMap<String, BlockType>(blockElements.size);
 		
 		BlockType block;
 		for(Element blockElement : blockElements) {
@@ -73,6 +73,13 @@ public class LevelType {
 	 */
 	public String getName() {
 		return name;
+	}
+	/**
+	 * Get block types.
+	 * @return Valid types of block for this LevelType.
+	 */
+	public Array<String> getBlockTypes() {
+		return blocks.orderedKeys();
 	}
 	/**
 	 * Get {@link BlockType} from BlockType name.
