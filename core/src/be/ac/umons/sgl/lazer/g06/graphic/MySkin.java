@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -41,6 +42,19 @@ public class MySkin extends Skin {
 	
 	public Drawable getColor(Color c) {
 		return this.newDrawable("white", c);
+	}
+	
+	public Drawable getColor(Color c, int size) {
+		String name = Integer.toString(size)+"x"+Integer.toString(size);
+		
+		Pixmap pixmap = new Pixmap(size, size, Format.RGBA8888);
+		pixmap.setColor(Color.WHITE);
+		pixmap.fill();
+		
+		this.add(name, new Texture(pixmap));
+		pixmap.dispose();
+		
+		return this.newDrawable(name, c);
 	}
 	
 	public BitmapFont getFont(int size, Color internal) {
@@ -116,5 +130,14 @@ public class MySkin extends Skin {
 		tbs.down = getColor(Color.LIGHT_GRAY);
 		tbs.font = getFont(smallFont, Color.WHITE, defaultBorder, Color.BLACK);
 		add("small-menu", tbs);
+		
+		ScrollPaneStyle sps = new ScrollPaneStyle();
+		sps.background = getColor(Color.LIGHT_GRAY);
+		sps.corner = sps.background;
+		sps.hScroll = getColor(Color.GRAY, 10);
+		sps.hScrollKnob = getColor(Color.DARK_GRAY, 10);
+		sps.vScroll = getColor(Color.GRAY, 10);
+		sps.vScrollKnob = getColor(Color.DARK_GRAY, 10);
+		add("default", sps);
 	}
 }
