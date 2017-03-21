@@ -1,4 +1,4 @@
-package be.ac.umons.sgl.lazer.g06.test;
+package be.ac.umons.sgl.lazer.g06;
 
 import static org.junit.Assert.*;
 

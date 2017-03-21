@@ -1,4 +1,4 @@
-package be.ac.umons.sgl.lazer.g06.test;
+package be.ac.umons.sgl.lazer.g06;
 
 import static org.junit.Assert.*;
 
@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.badlogic.gdx.Gdx;
-//import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-//import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.files.FileHandle;
 
 public class OrientationsTest {
@@ -20,7 +20,9 @@ public class OrientationsTest {
 	Orientation testA;
 	Orientation testB;
 	Orientation testC;
-	/*
+	/**
+	 * Initialize Gdx application before using any feature.
+	 */
 	@Before
 	public void before() {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -30,7 +32,6 @@ public class OrientationsTest {
 		config.height = 1;
 		new LwjglApplication(new LazerChallenge(), config);
 	}
-	//*/
 	@Test
 	public void test() throws IOException {
 		FileHandle file = Gdx.files.local("level_types/standard/orientations.xml");
