@@ -23,6 +23,7 @@ public class Level {
 	LazerChallenge game;
 	String name;
 	Map map;
+	Inventory inventory;
 	Difficulty difficulty;
 	LevelType type;
 	
@@ -46,16 +47,13 @@ public class Level {
 		XmlReader reader = new XmlReader();
 		Element level = reader.parse(content);
 		setName(level.getAttribute("name", ""));
-		setMap(level.getAttribute("map", ""));
 		setDifficulty(level.getAttribute("difficulty", ""));
 		setType(level.getAttribute("type", ""));
 		
-		Array<Element> blocks = level.getChildByName("blocks").getChildrenByName("block");
+		setMap(level.getAttribute("map", ""));
+		inventory = new Inventory();
 		
-		for(Element block : blocks) {
-			// TODO implement Block
-			//map.addBlock(block);
-		}
+		setBlocks(level.getChildByName("blocks"));
 	}
 	/**
 	 * Set level name
@@ -97,6 +95,40 @@ public class Level {
 		this.type = LevelType.getLevelType(type);
 		if(this.type == null) {
 			throw new GdxRuntimeException("Type "+type+" not found");
+		}
+	}
+	
+	private void setBlocks(Element blocksElement) {
+		Array<Element> blockElements = blocksElement.getChildrenByName("block");
+		
+		String blockType;
+		Block block;
+		Element positionElement;
+		for(Element blockElement : blockElements) {
+			blockType = blockElement.getAttribute("type", "");
+			block = new Block(type.getBlockType(blockType));
+			
+			if(blockElement.getAttribute("fixedposition", "false").toLowerCase().equals("true")) {
+				block.getTile().getProperties().put("fixedposition", true);
+			}
+			if(blockElement.getAttribute("fixedorientation", "false").toLowerCase().equals("true")) {
+				block.getTile().getProperties().put("fixedorientation", true);
+			}
+			
+			positionElement = blockElement.getChildByName("position");
+			if(positionElement == null) {
+				inventory.addBlock(block);
+				return;
+			}
+			
+			int x = positionElement.getIntAttribute("x", -1);
+			int y = positionElement.getIntAttribute("x", -1);
+			if(!map.setBlock(block, x, y)) {
+				Gdx.app.error("Level.setBlocks", "level "+name+" : block "+blockType+" out of map");
+				inventory.addBlock(block);
+				return;
+			}
+			
 		}
 	}
 	/**
@@ -223,4 +255,5 @@ public class Level {
 	public enum Difficulty {
 		EASY, MEDIUM, HARD;
 	}
+	
 }
