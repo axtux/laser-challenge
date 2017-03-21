@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 
@@ -54,9 +55,11 @@ public class MapTable extends Table implements Observer {
 		Button button = new Button(style);
 		Position pos = new Position(x, y, Position.Location.MAP);
 		button.addListener(new TileClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_TILE_SELECT"));
-		button.addListener(new TileClickListener(Input.Buttons.RIGHT, pos, "ACTION__LEVEL_TILE_ROTATE"));
-		//button.setTransform(true);
-		//button.setOrigin(button.getWidth()/2, button.getHeight()/2);
+		button.addListener(new TileClickListener(Input.Buttons.RIGHT, pos, "ACTION_LEVEL_TILE_ROTATE"));
+		// required for rotation to be visible
+		button.setTransform(true);
+		// rotation is done from origin
+		button.setOrigin(Align.center);
 		/* Use this to scale map to available space
 		this.add(button).grow();
 		//*/this.add(button);

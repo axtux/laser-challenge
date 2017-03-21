@@ -3,7 +3,6 @@ package be.ac.umons.sgl.lazer.g06.listeners;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-
 import be.ac.umons.sgl.lazer.g06.game.Position;
 /**
  * Listener to keep track of tile clicks.
@@ -13,8 +12,7 @@ public class TileClickListener extends MyClickListener {
 	/**
 	 * Create listener.
 	 * @param mouseButton Button from @Input.Buttons
-	 * @param tileX X coordinate
-	 * @param tileY Y coordinate
+	 * @param position Position of tile.
 	 * @param action Action to send to game when mouseButton is clicked.
 	 */
 	public TileClickListener(int mouseButton, Position position, String action) {
@@ -29,7 +27,8 @@ public class TileClickListener extends MyClickListener {
 		Actor actor = event.getListenerActor();
 		
 		switch(action) {
-		case "ACTION_ROTATE":
+		case "ACTION_LEVEL_TILE_ROTATE":
+			Gdx.app.debug("TileClickListener.clicked", "Rotating tile");
 			actor.rotateBy(90);
 			break;
 		}
