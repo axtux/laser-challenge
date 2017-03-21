@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TimerTest {
+public class TimeTest {
 	
 	@Test
 	public void secondsShortTest() {
