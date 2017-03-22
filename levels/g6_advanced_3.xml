@@ -18,14 +18,14 @@
 		<block type="blocker">
 			<position x="6" y="2"/>
 		</block>
+		<block type="amplifier" fixedposition="true">
+			<position x="5" y="5"/>
+		</block>
 		<block type="one-way_mirror"/>
 		<block type="two-way_mirror"/>
 		<block type="blocker"/>
 		<block type="blocker"/>
 		<block type="two-way-little-angled_mirror"/>
 		<block type="two-way-big-angled_splitter"/>
-		<block type="amplifier" fixedposition="true">
-			<position x="5" y="5"/>
-		</block>
 	</blocks>
 </level>

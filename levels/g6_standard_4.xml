@@ -1,8 +1,5 @@
 <level name="Level 4" map="g6_4" difficulty="medium" time="120">
 	<blocks>
-		<block type="one-laser_source"/>
-		<block type="one-laser_source"/>
-		<block type="one-laser_source"/>
 		<block type="one-laser_target" fixedposition="true">
 			<position x="0" y="15"/>
 		</block>
@@ -45,6 +42,9 @@
 		<block type="blocker">
 			<position x="0" y="14"/>
 		</block>
+		<block type="one-laser_source"/>
+		<block type="one-laser_source"/>
+		<block type="one-laser_source"/>
 		<block type="blocker"/>
 		<block type="blocker"/>
 		<block type="blocker"/>
@@ -56,6 +56,5 @@
 		<block type="two-way-angled-right_splitter"/>
 		<block type="two-way-angled-left_splitter"/>
 		<block type="two-way-angled-left_splitter"/>
-		<block type="three-way-angled-left_splitter"/>
 	</blocks>
 </level>

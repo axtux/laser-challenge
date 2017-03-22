@@ -10,7 +10,7 @@
 			<position x="9" y="9"/>
 		</block>
 		<block type="one-laser_target" fixedposition="true" fixedorientation="true">
-			<position x="9" y="0"/>
+			<position x="0" y="9"/>
 		</block>
 		<block type="blocker">
 			<position x="2" y="0"/>

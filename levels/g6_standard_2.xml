@@ -1,6 +1,5 @@
 <level name="Level 2" map="g6_2" difficulty="easy" time="120">
 	<blocks>
-		<block type="one-laser_source" fixedorientation="true"/>
 		<block type="four-laser_target" fixedposition="true" fixedorientation="true">
 			<position x="2" y="4"/>
 		</block>
@@ -8,6 +7,7 @@
 			<position x="2" y="2"/>
 		</block>
 		<block type="one-way_mirror"/>
+		<block type="one-laser_source" fixedorientation="true"/>
 		<block type="two-way-straight_splitter"/>
 	</blocks>
 </level>
