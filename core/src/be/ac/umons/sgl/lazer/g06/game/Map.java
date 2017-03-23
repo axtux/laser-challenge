@@ -4,12 +4,12 @@ import java.util.Observable;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.LocalFileHandleResolver;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class Map extends Observable {
@@ -35,6 +35,7 @@ public class Map extends Observable {
 		setSizes();
 		
 		blocks = new TiledMapTileLayer(mapWidth, mapHeight, tileSize, tileSize);
+		map.getLayers().add(blocks);
 		
 	}
 	
@@ -94,61 +95,47 @@ public class Map extends Observable {
 		return true;
 	}
 	
-	private Cell getVisibleCell(int x, int y) {
-		Cell c = blocks.getCell(x, y);
-		if(c != null) {
-			return c;
+	public Block getBlock(Position pos) {
+		int x = pos.getX();
+		int y = pos.getY();
+		
+		if(x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) {
+			return null;
 		}
-		return ground.getCell(x, y);
+		
+		return (Block) blocks.getCell(x, y);
 	}
 	
-	public TextureRegion getVisibleTextureRegion(int x, int y) {
-		return getVisibleCell(x, y).getTile().getTextureRegion();
+	public boolean rotate(Position pos) {
+		Cell c = getBlock(pos);
+		if(c == null) {
+			return false;
+		}
+		
+		c.setRotation(c.getRotation()+90);
+		return true;
 	}
 	
-	public int getVisibleRotation(int x, int y) {
-		Cell c = getVisibleCell(x, y);
-		switch(c.getRotation()) {
-		case Cell.ROTATE_0:
-			return 0;
-		case Cell.ROTATE_90:
-			return 90;
-		case Cell.ROTATE_180:
-			return 180;
-		case Cell.ROTATE_270:
-			return 270;
-		default:
-			Gdx.app.error("Map.getVisibleOrientation", "Orientation not within static defined");
-			return c.getRotation();
+	public Array<Cell> getCells(int x, int y) {
+		int size = map.getLayers().getCount();
+		
+		Array<Cell> cells = new Array<Cell>(size);
+		Cell tmp;
+		TiledMapTileLayer tmtl;
+		
+		for(int i = 0; i < size; ++i) {
+			tmtl = (TiledMapTileLayer) map.getLayers().get(i);
+			tmp = tmtl.getCell(x, y);
+			if(tmp != null) {
+				cells.add(tmp);
+			}
 		}
+		
+		return cells;
 	}
 	
 	public TiledMap getTiledMap() {
 		return map;
 	}
 	
-	public String getProp(String prop) {
-		return getProp(prop, "");
-	}
-
-	public String getProp(String prop, String defaultValue) {
-		return map.getProperties().get(prop, defaultValue, String.class);
-	}
-	
-	public int getIntProp(String prop) {
-		return getIntProp(prop, -1);
-	}
-	
-	public int getIntProp(String prop, int defaultValue) {
-		return map.getProperties().get(prop, defaultValue, int.class);
-	}
-	
-	public String getCellProp(int x, int y, String prop) {
-		return getCellProp(x, y, prop, "");
-	}
-	
-	public String getCellProp(int x, int y, String prop, String defaultValue) {
-		Cell c = ground.getCell(x, y);
-		return c.getTile().getProperties().get(prop, defaultValue, String.class);
-	}
 }
