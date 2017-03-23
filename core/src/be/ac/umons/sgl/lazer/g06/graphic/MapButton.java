@@ -24,8 +24,8 @@ public class MapButton extends Button {
 		this.map = map;
 		this.pos = pos;
 		
-		this.addListener(new MapClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_TILE_SELECT"));
-		this.addListener(new MapClickListener(Input.Buttons.RIGHT, pos, "ACTION_LEVEL_TILE_ROTATE"));
+		this.addListener(new MapClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_SELECT"));
+		this.addListener(new MapClickListener(Input.Buttons.RIGHT, pos, "ACTION_LEVEL_ROTATE"));
 		
 		update();
 		setBackground();
