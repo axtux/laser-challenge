@@ -7,7 +7,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+/* Auto renderer but not movable
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+//*/
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -20,7 +23,9 @@ import be.ac.umons.sgl.lazer.g06.listeners.TileClickListener;
 
 public class MapTable extends Table implements Observer {
 	Map map;
+	/* Auto renderer but not movable
 	OrthogonalTiledMapRenderer renderer;
+	//*/
 	
 	Button[][] buttons;
 	
@@ -95,9 +100,31 @@ public class MapTable extends Table implements Observer {
 	private void setButtonRotation(Button button, int rotation) {
 		button.setRotation(rotation);
 	}
-	
+	/* Auto renderer but not movable
+	public void initRenderer(Batch batch) {
+		//renderer = new OrthogonalTiledMapRenderer(map, 1/(float)tx);
+		//renderer = new OrthogonalTiledMapRenderer(map);
+		renderer = new OrthogonalTiledMapRenderer(map.getTiledMap(), batch);
+		OrthographicCamera camera = new OrthographicCamera();
+		// always display all map for this game
+		//camera.setToOrtho(false, x, y);
+		camera.setToOrtho(false, map.getWidth()*map.getTileSize(), map.getHeight()*map.getTileSize());
+		//camera.translate(0*tx, 5);
+		//camera.rotate(45);
+			camera.update();
+			renderer.setView(camera);
+	}
+	//*/
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
+		/* Auto renderer but not movable
+		if(renderer == null) {
+			initRenderer(batch);
+		}
+		batch.end();
+		renderer.render();
+		batch.begin();
+		//*/
 		// for rotation on center
 		this.setOrigin(this.getWidth()/2, this.getHeight()/2);
 	}
