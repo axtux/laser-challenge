@@ -4,22 +4,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
 /* Auto renderer but not movable
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 //*/
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.game.Position;
-import be.ac.umons.sgl.lazer.g06.listeners.TileClickListener;
 
 public class MapTable extends Table implements Observer {
 	Map map;
@@ -27,7 +19,7 @@ public class MapTable extends Table implements Observer {
 	OrthogonalTiledMapRenderer renderer;
 	//*/
 	
-	Button[][] buttons;
+	MapButton[][] buttons;
 	
 	public MapTable(Map map) {
 		this.map = map;
@@ -35,11 +27,11 @@ public class MapTable extends Table implements Observer {
 		
 		int h = map.getHeight();
 		int w = map.getWidth();
-		buttons = new Button[h][w];
+		buttons = new MapButton[h][w];
 		// indicies start from bottom left
 		for(int y = h-1; y >=0; --y) {
 			for(int x = 0; x < w; ++x) {
-				buttons[y][x] = addTileButton(x, y);
+				buttons[y][x] = addMapButton(x, y);
 			}
 			this.row();
 		}
@@ -49,22 +41,10 @@ public class MapTable extends Table implements Observer {
 		//this.rotateBy(90);
 	}
 	
-	public Button addTileButton(int x, int y) {
-		TextureRegionDrawable d = new TextureRegionDrawable(map.getVisibleTextureRegion(x, y));
-		
-		ButtonStyle style = new ButtonStyle(d, d, d);
-		style.over = d.tint(Color.LIGHT_GRAY);
-		style.checked = d.tint(Color.GRAY);
-		style.checkedOver = d.tint(Color.DARK_GRAY);
-		
-		Button button = new Button(style);
+	public MapButton addMapButton(int x, int y) {
 		Position pos = new Position(x, y, Position.Location.MAP);
-		button.addListener(new TileClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_TILE_SELECT"));
-		button.addListener(new TileClickListener(Input.Buttons.RIGHT, pos, "ACTION_LEVEL_TILE_ROTATE"));
-		// required for rotation to be visible
-		button.setTransform(true);
-		// rotation is done from origin
-		button.setOrigin(Align.center);
+		MapButton button = new MapButton(map, pos);
+		
 		/* Use this to scale map to available space
 		this.add(button).grow();
 		//*/this.add(button);
@@ -86,20 +66,9 @@ public class MapTable extends Table implements Observer {
 	}
 	
 	public void refresh(int x, int y) {
-		TextureRegionDrawable d = new TextureRegionDrawable(map.getVisibleTextureRegion(x, y));
-		
-		ButtonStyle style = new ButtonStyle(d, d, d);
-		style.over = d.tint(Color.LIGHT_GRAY);
-		style.checked = d.tint(Color.GRAY);
-		style.checkedOver = d.tint(Color.DARK_GRAY);
-		
-		buttons[y][x].setStyle(style);
-		setButtonRotation(buttons[y][x], map.getVisibleRotation(x, y));
+		buttons[y][x].update();
 	}
 	
-	private void setButtonRotation(Button button, int rotation) {
-		button.setRotation(rotation);
-	}
 	/* Auto renderer but not movable
 	public void initRenderer(Batch batch) {
 		//renderer = new OrthogonalTiledMapRenderer(map, 1/(float)tx);
@@ -115,19 +84,6 @@ public class MapTable extends Table implements Observer {
 			renderer.setView(camera);
 	}
 	//*/
-	public void draw(Batch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
-		/* Auto renderer but not movable
-		if(renderer == null) {
-			initRenderer(batch);
-		}
-		batch.end();
-		renderer.render();
-		batch.begin();
-		//*/
-		// for rotation on center
-		this.setOrigin(this.getWidth()/2, this.getHeight()/2);
-	}
 	
 	public void rotationChanged() {
 		super.rotationChanged();
