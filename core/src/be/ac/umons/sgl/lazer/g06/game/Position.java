@@ -2,7 +2,7 @@ package be.ac.umons.sgl.lazer.g06.game;
 
 public class Position {
 	public enum Location {
-		MAP, INVENTARY;
+		MAP, INVENTORY;
 	}
 	
 	private int x, y;
@@ -28,6 +28,15 @@ public class Position {
 	
 	public Location getLocation() {
 		return loc;
+	}
+	
+	public String toString() {
+		String s = "Position("+Integer.toString(x)+", "+Integer.toString(y);
+		if(loc != null) {
+			s += ", "+loc.toString();
+		}
+		s += ")";
+		return s;
 	}
 	
 }
