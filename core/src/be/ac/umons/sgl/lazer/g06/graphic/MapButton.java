@@ -32,7 +32,7 @@ public class MapButton extends Button {
 	}
 	
 	public void update() {
-		cells = map.getCells(pos.getX(), pos.getY());
+		cells = map.getCells(pos);
 		Gdx.app.debug("TileButton.update", "called for position "+pos.toString());
 	}
 	
