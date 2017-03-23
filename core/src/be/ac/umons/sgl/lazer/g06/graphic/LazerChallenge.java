@@ -31,7 +31,7 @@ public class LazerChallenge extends Game {
 	Level.Mode mode;
 	Level level;
 	/**
-	 * Check single instance and sage it statically.
+	 * Check single instance and save it statically.
 	 * Initialize action listener.
 	 */
 	public LazerChallenge() {
