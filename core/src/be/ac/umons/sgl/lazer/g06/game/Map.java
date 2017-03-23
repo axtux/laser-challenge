@@ -14,10 +14,10 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 public class Map extends Observable {
 	static final String MAP_PATH = "maps";
-	private TiledMap map;
-	TiledMapTileLayer ground;
-	TiledMapTileLayer blocks;
+	public static final int GROUND_LAYER = 0;
+	public static final int BLOCKS_LAYER = 1;
 	
+	private TiledMap map;
 	int mapWidth, mapHeight, tileSize;
 	
 	public Map(String name) {
@@ -27,15 +27,19 @@ public class Map extends Observable {
 		
 		map = loader.load(MAP_PATH+"/"+name+".tmx");
 		
-		ground = (TiledMapTileLayer)map.getLayers().get("ground");
-		if(ground == null) {
+		if(map.getLayers().getCount() != 1) {
+			throw new GdxRuntimeException("map must contain exactly one layer");
+		}
+		
+		if(!getLayer(0).getName().equals("ground")) {
 			throw new GdxRuntimeException("no ground layer found in map");
 		}
 		
 		setSizes();
 		
-		blocks = new TiledMapTileLayer(mapWidth, mapHeight, tileSize, tileSize);
-		map.getLayers().add(blocks);
+		TiledMapTileLayer layer = new TiledMapTileLayer(mapWidth, mapHeight, tileSize, tileSize);
+		layer.setName("blocks");
+		map.getLayers().add(layer);
 		
 	}
 	
@@ -62,6 +66,8 @@ public class Map extends Observable {
 		tileSize = tileWidth;
 		
 		// check ground size
+		TiledMapTileLayer ground = getLayer(GROUND_LAYER);
+		
 		if(mapWidth != ground.getWidth()) {
 			throw new GdxRuntimeException("mapWidth "+mapWidth+" does not equal ground width "+ground.getWidth());
 		}
@@ -90,20 +96,56 @@ public class Map extends Observable {
 			return false;
 		}
 		
-		blocks.setCell(x, y, block);
+		getLayer(BLOCKS_LAYER).setCell(x, y, block);
 		this.notifyObservers();
 		return true;
 	}
 	
-	public Block getBlock(Position pos) {
-		int x = pos.getX();
-		int y = pos.getY();
+	public TiledMapTileLayer getLayer(int i) {
+		if(i < 0 || i >= map.getLayers().getCount()) {
+			return null;
+		}
+		
+		return (TiledMapTileLayer) map.getLayers().get(i);
+	}
+	
+	public Cell getCell(int layer, Position p) {
+		TiledMapTileLayer tmtl = getLayer(layer);
+		if(tmtl == null) {
+			return null;
+		}
+		
+		int x = p.getX();
+		int y = p.getY();
 		
 		if(x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) {
 			return null;
 		}
 		
-		return (Block) blocks.getCell(x, y);
+		return tmtl.getCell(x, y);
+	}
+	
+	public Array<Cell> getCells(Position pos) {
+		int size = map.getLayers().getCount();
+		Array<Cell> cells = new Array<Cell>(size);
+		
+		Cell tmp;
+		for(int i = 0; i < size; ++i) {
+			tmp = getCell(i, pos);
+			if(tmp != null) {
+				cells.add(tmp);
+			}
+		}
+		
+		return cells;
+	}
+	
+	public Cell getGround(Position pos) {
+		return getCell(GROUND_LAYER, pos);
+	}
+	
+	public Block getBlock(Position pos) {
+		return (Block) getCell(BLOCKS_LAYER, pos);
 	}
 	
 	public boolean rotate(Position pos) {
@@ -114,24 +156,6 @@ public class Map extends Observable {
 		// TODO change this to real rotation
 		c.setRotation(c.getRotation()+90);
 		return true;
-	}
-	
-	public Array<Cell> getCells(int x, int y) {
-		int size = map.getLayers().getCount();
-		
-		Array<Cell> cells = new Array<Cell>(size);
-		Cell tmp;
-		TiledMapTileLayer tmtl;
-		
-		for(int i = 0; i < size; ++i) {
-			tmtl = (TiledMapTileLayer) map.getLayers().get(i);
-			tmp = tmtl.getCell(x, y);
-			if(tmp != null) {
-				cells.add(tmp);
-			}
-		}
-		
-		return cells;
 	}
 	
 	public TiledMap getTiledMap() {
