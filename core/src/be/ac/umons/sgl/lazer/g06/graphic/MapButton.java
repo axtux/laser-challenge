@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Array;
 
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.game.Position;
-import be.ac.umons.sgl.lazer.g06.listeners.TileClickListener;
+import be.ac.umons.sgl.lazer.g06.listeners.MapClickListener;
 
 public class MapButton extends Button {
 	Map map;
@@ -24,8 +24,8 @@ public class MapButton extends Button {
 		this.map = map;
 		this.pos = pos;
 		
-		this.addListener(new TileClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_TILE_SELECT"));
-		this.addListener(new TileClickListener(Input.Buttons.RIGHT, pos, "ACTION_LEVEL_TILE_ROTATE"));
+		this.addListener(new MapClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_TILE_SELECT"));
+		this.addListener(new MapClickListener(Input.Buttons.RIGHT, pos, "ACTION_LEVEL_TILE_ROTATE"));
 		
 		update();
 		setBackground();
