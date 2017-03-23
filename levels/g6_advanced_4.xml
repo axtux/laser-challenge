@@ -19,7 +19,7 @@
 			<position x="3" y="0"/>
 		</block>
 		<block type="blocker">
-			<position x="12" y="0"/>
+			<position x="12" y="1"/>
 		</block>
 		<block type="blocker">
 			<position x="6" y="9"/>
@@ -34,7 +34,7 @@
 			<position x="2" y="1"/>
 		</block>
 		<block type="two-way-big-angled_splitter" fixedposition="true" fiedorientation="true">
-			<position x="12" y="1"/>
+			<position x="13" y="1"/>
 		</block>
 		<block type="amplifier" fixedposition="true">
 			<position x="1" y="5"/>

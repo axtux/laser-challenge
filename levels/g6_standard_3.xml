@@ -4,7 +4,7 @@
 			<position x="1" y="0"/>
 		</block>
 		<block type="one-laser_source" fixedposition="true">
-			<position x="6" y="0"/>
+			<position x="7" y="0"/>
 		</block>
 		<block type="one-laser_target" fixedposition="true" fixedorientation="true">
 			<position x="9" y="9"/>
