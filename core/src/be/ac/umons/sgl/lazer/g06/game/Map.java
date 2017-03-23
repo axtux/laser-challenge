@@ -4,13 +4,21 @@ import java.util.Observable;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.LocalFileHandleResolver;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import be.ac.umons.sgl.lazer.g06.game.Position.Location;
+import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 public class Map extends Observable {
 	static final String MAP_PATH = "maps";
@@ -19,13 +27,39 @@ public class Map extends Observable {
 	
 	private TiledMap map;
 	int mapWidth, mapHeight, tileSize;
+	Location loc;
+	/**
+	 * Create Map with references from an other Map instance
+	 * Usually used for inventory
+	 * @param reference
+	 */
+	public Map(int width, int minSize, int tileSize, Location loc) {
+		this.loc = loc;
+		
+		this.mapWidth = width;
+		int height = minSize/width;
+		this.mapHeight = (minSize == width*height ? height : height+1);
+		this.tileSize = tileSize;
+		
+		map = new TiledMap();
+		map.getProperties().put("width", mapWidth);
+		map.getProperties().put("height", mapHeight);
+		map.getProperties().put("tilewidth", tileSize);
+		map.getProperties().put("tileheight", tileSize);
+		
+		addLayer("ground");
+		fillLayer(GROUND_LAYER, Color.GRAY);
+		addLayer("blocks");
+	}
 	
-	public Map(String name) {
-		Gdx.app.debug("Map.Map", "creating map from file "+name+".tmx");
+	public Map(String tmx_map_name, Location loc) {
+		this.loc = loc;
+		
+		Gdx.app.debug("Map.Map", "creating map from file "+tmx_map_name+".tmx");
 		// load map from local files
 		TmxMapLoader loader = new TmxMapLoader(new LocalFileHandleResolver());
 		
-		map = loader.load(MAP_PATH+"/"+name+".tmx");
+		map = loader.load(MAP_PATH+"/"+tmx_map_name+".tmx");
 		
 		if(map.getLayers().getCount() != 1) {
 			throw new GdxRuntimeException("map must contain exactly one layer");
@@ -36,11 +70,27 @@ public class Map extends Observable {
 		}
 		
 		setSizes();
-		
+		addLayer("blocks");
+	}
+	
+	private void addLayer(String name) {
 		TiledMapTileLayer layer = new TiledMapTileLayer(mapWidth, mapHeight, tileSize, tileSize);
-		layer.setName("blocks");
+		layer.setName(name);
 		map.getLayers().add(layer);
+	}
+	
+	private void fillLayer(int layer, Color c) {
+		Texture tex = LazerChallenge.getInstance().getSkin().getTexture(c, tileSize);
+		TiledMapTile tile = new StaticTiledMapTile(new TextureRegion(tex));
+		Cell cell = new Cell();
+		cell.setTile(tile);
 		
+		TiledMapTileLayer tmtl = getLayer(layer);
+		for(int x = 0; x < mapWidth; ++x) {
+			for(int y = 0; y < mapHeight; ++y) {
+				tmtl.setCell(x, y, cell);
+			}
+		}
 	}
 	
 	private void setSizes() {
@@ -89,6 +139,10 @@ public class Map extends Observable {
 	
 	public int getTileSize() {
 		return tileSize;
+	}
+	
+	public Location getLocation() {
+		return loc;
 	}
 	
 	private boolean setCell(Cell cell, int layer, Position p) {
