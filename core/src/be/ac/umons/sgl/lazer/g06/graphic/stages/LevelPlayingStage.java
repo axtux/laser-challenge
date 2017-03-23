@@ -8,11 +8,11 @@ import com.badlogic.gdx.utils.Array;
 
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.game.LevelType.BlockType;
+import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.graphic.MapTable;
 
 public class LevelPlayingStage extends AbstractLevelStage {
-	Table map;
-	MapTable mapActor;
+	Table mapTable;
 	Table leftTable;
 	Table rightTable;
 	
@@ -28,18 +28,14 @@ public class LevelPlayingStage extends AbstractLevelStage {
 		content.add(new ScrollPane(leftTable, skin)).pad(10).fill().uniform();
 		addLegend(leftTable);
 		
-		map = new Table();
-		content.add(map).grow();
+		mapTable = new Table();
+		content.add(mapTable).grow();
+		addMapTable(mapTable, level.getMap());
 		
 		rightTable = new Table();
 		content.add(new ScrollPane(rightTable, skin)).pad(10).fill().uniform();
-		
-		mapActor = new MapTable(level.getMap());
-		map.add(mapActor).grow().pad(20);
-
-		this.addButton(rightTable, "Swap", "ACTION_LEVEL_SWAP", "small-menu").pad(20);
-		rightTable.row();
-		this.addButton(rightTable, "Lancer le lazer", "ACTION_LEVEL_LASER", "small-menu").pad(20);
+		addInventory(rightTable, level.getInventory());
+		addInfos(rightTable);
 	}
 	
 	private void addLegend(Table container) {
@@ -64,6 +60,24 @@ public class LevelPlayingStage extends AbstractLevelStage {
 		
 		Label label = new Label(bt.getLabel(), skin, "small-label");
 		container.add(label).pad(10).left();
+	}
+	
+	private void addMapTable(Table container, Map map) {
+		Table mapTable = new MapTable(map);
+		container.add(mapTable).grow().pad(20);
+	}
+	
+	private void addInventory(Table container, Map inv) {
+		container.row();
+		Table mapTable = new MapTable(inv);
+		container.add(mapTable).grow().pad(10);
+	}
+	
+	private void addInfos(Table container) {
+		container.row();
+		addButton(container, "Swap", "ACTION_LEVEL_SWAP", "small-menu").pad(20);
+		container.row();
+		addButton(container, "Lancer le lazer", "ACTION_LEVEL_LASER", "small-menu").pad(20);
 	}
 	
 }
