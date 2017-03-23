@@ -128,16 +128,18 @@ public class Level {
 			
 			positionElement = blockElement.getChildByName("position");
 			if(positionElement == null) {
+				//Gdx.app.debug("Level.setBLocks", "Block "+blockType+" goes to inventory");
 				inventory.addBlock(block);
-				return;
+				continue;
 			}
 			
 			int x = positionElement.getIntAttribute("x", -1);
 			int y = positionElement.getIntAttribute("y", -1);
+			//Gdx.app.debug("Level.setBLocks", "Block "+blockType+" goes to "+Integer.toString(x)+"x"+Integer.toString(y));
+			// if x or y out of map, block goes to inventory
 			if(!map.setBlock(block, x, y)) {
 				Gdx.app.error("Level.setBlocks", "level "+name+" : block "+blockType+" out of map");
 				inventory.addBlock(block);
-				return;
 			}
 			
 		}
