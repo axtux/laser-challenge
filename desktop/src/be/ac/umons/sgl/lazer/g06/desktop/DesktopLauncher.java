@@ -2,6 +2,7 @@ package be.ac.umons.sgl.lazer.g06.desktop;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.utils.Timer;
 
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
@@ -16,7 +17,6 @@ public class DesktopLauncher {
 		//*
 		config.fullscreen = false;
 		//*/config.fullscreen = true;
-		
 		new LwjglApplication(new LazerChallenge(), config);
 		
 		if(!config.fullscreen) {
