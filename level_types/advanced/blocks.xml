@@ -116,27 +116,6 @@
 			</input>
 		</inputs>
 	</block>
-
-	
-	<block>
-		<name>two-way-little-angled_mirror</name>
-		<label>Mirror</label>
-		<inputs>
-			<input orientation="UP">
-				<output orientation ="UP-RIGHT"/>
-			</input>
-			<input orientation="UP-RIGHT">
-				<output orientation="UP"/>
-			</input>
-			<input orientation="DOWN-LEFT">
-				<output orientation="LEFT"/>
-			</input>
-			<input orientation="LEFT">
-				<output orientation="DOWN-LEFT"/>
-			</input>
-		</inputs>
-	</block>
-	
 	
 	<block>
 		<name>two-way-straight_splitter</name>
@@ -206,18 +185,6 @@
 	</block>
 	
 	<block>
-		<name>three-way-big-angled_splitter</name>
-		<label>Splitter</label>
-		<inputs>
-			<input orientation="UP">
-				<output orientation ="DOWN-RIGHT" intensite="1/3"/>
-				<output orientation ="DOWN-LEFT" intensite="1/3"/>
-				<output orientation ="DOWN" intensite="1/3"/>
-			</input>
-		</inputs>
-	</block>
-	
-	<block>
 		<name>three-way-little-angled_splitter</name>
 		<label>Splitter</label>
 		<inputs>
@@ -252,37 +219,6 @@
 				<output orientation ="DOWN" intensite="1/5"/>
 				<output orientation ="DOWN-LEFT" intensite="1/5"/>
 				<output orientation ="LEFT" intensite="1/5"/>
-			</input>
-		</inputs>
-	</block>
-	
-	
-	<block>
-		<name>six-way-right_splitter</name>
-		<label>Splitter</label>
-		<inputs>
-			<input orientation="UP">
-				<output orientation ="RIGHT" intensite="1/6"/>
-				<output orientation ="UP-RIGHT" intensite="1/6"/>
-				<output orientation ="DOWN-RIGHT" intensite="1/6"/>
-				<output orientation ="DOWN" intensite="1/6"/>
-				<output orientation ="DOWN-LEFT" intensite="1/6"/>
-				<output orientation ="LEFT" intensite="1/6"/>
-			</input>
-		</inputs>
-	</block>
-	
-	<block>
-		<name>six-way-left_splitter</name>
-		<label>Splitter</label>
-		<inputs>
-			<input orientation="UP">
-				<output orientation ="RIGHT" intensite="1/6"/>
-				<output orientation ="UP-LEFT" intensite="1/6"/>
-				<output orientation ="DOWN-RIGHT" intensite="1/6"/>
-				<output orientation ="DOWN" intensite="1/6"/>
-				<output orientation ="DOWN-LEFT" intensite="1/6"/>
-				<output orientation ="LEFT" intensite="1/6"/>
 			</input>
 		</inputs>
 	</block>

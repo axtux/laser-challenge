@@ -51,7 +51,6 @@
 		<block type="one-way_mirror"/>
 		<block type="two-way_mirror"/>
 		<block type="two-way_mirror"/>
-		<block type="two-way-little-angled_mirror"/>
 		<block type="two-way-big-angled_splitter"/>
 	</blocks>
 </level>

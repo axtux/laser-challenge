@@ -49,6 +49,6 @@
 		<block type="two-way-straight_splitter"/>
 		<block type="two-way-angled-right_splitter"/>
 		<block type="two-way-angled-left_splitter"/>
-		<block type="three-way-angled-left_splitter"/>
+		<block type="three-way_splitter"/>
 	</blocks>
 </level>
