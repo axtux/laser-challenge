@@ -42,7 +42,7 @@ public class MapTable extends Table implements Observer {
 	}
 	
 	public MapButton addMapButton(int x, int y) {
-		Position pos = new Position(x, y, Position.Location.MAP);
+		Position pos = new Position(x, y, map.getLocation());
 		MapButton button = new MapButton(map, pos);
 		
 		/* Use this to scale map to available space
