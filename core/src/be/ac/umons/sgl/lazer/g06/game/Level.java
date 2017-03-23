@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
+import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 /**
  * Class that manages the game part of the LazerChallenge
@@ -23,7 +24,7 @@ public class Level {
 	LazerChallenge game;
 	String name;
 	Map map;
-	Inventory inventory;
+	Map inventory;
 	Difficulty difficulty;
 	LevelType type;
 	int time;
@@ -54,7 +55,7 @@ public class Level {
 		setTime(level.getIntAttribute("time", 0));
 		
 		setMap(level.getAttribute("map", ""));
-		inventory = new Inventory();
+		inventory = new Map(5, 20, map.getTileSize(), Location.INVENTORY);
 		
 		setBlocks(level.getChildByName("blocks"));
 	}
@@ -74,7 +75,7 @@ public class Level {
 	 */
 	private void setMap(String mapFilename) {
 		try {
-			this.map = new Map(mapFilename);
+			this.map = new Map(mapFilename, Location.MAP);
 		} catch (SerializationException e) {
 			throw new GdxRuntimeException("Unable to load map "+mapFilename+" : "+e.getMessage());
 		}
@@ -117,6 +118,7 @@ public class Level {
 		Block block;
 		Element positionElement;
 		Position pos;
+		Array<Block> invBlocks = new Array<Block>(blockElements.size);
 		for(Element blockElement : blockElements) {
 			blockType = blockElement.getAttribute("type", "");
 			block = new Block(type.getBlockType(blockType));
@@ -131,7 +133,7 @@ public class Level {
 			positionElement = blockElement.getChildByName("position");
 			if(positionElement == null) {
 				//Gdx.app.debug("Level.setBLocks", "Block "+blockType+" goes to inventory");
-				inventory.addBlock(block);
+				invBlocks.add(block);
 				continue;
 			}
 			
@@ -142,13 +144,39 @@ public class Level {
 			pos = new Position(x, y);
 			if(!map.setBlock(block, pos)) {
 				Gdx.app.error("Level.setBlocks", "level "+name+" : block "+blockType+" out of map");
-				inventory.addBlock(block);
+				invBlocks.add(block);
 			}
-			
+		}
+		
+		addInventoryBlocks(invBlocks);
+	}
+	
+	private void addInventoryBlocks(Array<Block> blocks) {
+		Position pos;
+		int w = inventory.getWidth();
+		
+		for(int i = 0; i < blocks.size; ++i) {
+			pos = new Position(i%w, i/w);
+			inventory.setBlock(blocks.get(i), pos);
 		}
 	}
 	
-	public void setSelected(Position pos) {
+	public void select(Position pos) {
+		this.selected = pos;
+	}
+	
+	public void rotate(Position pos) {
+		if(pos.getLocation() == null) {
+			Gdx.app.error("Level.rotate", "no location");
+		}
+		switch(pos.getLocation()) {
+		case MAP:
+			map.rotate(pos);
+			break;
+		case INVENTORY:
+			inventory.rotate(pos);
+			break;
+		}
 		this.selected = pos;
 	}
 	
@@ -166,6 +194,12 @@ public class Level {
 	 */
 	public Map getMap() {
 		return map;
+	}
+	/**
+	 * @return inventory
+	 */
+	public Map getInventory() {
+		return inventory;
 	}
 	/**
 	 * @return difficulty
