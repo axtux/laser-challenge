@@ -91,14 +91,26 @@ public class Map extends Observable {
 		return tileSize;
 	}
 	
-	public boolean setBlock(Block block, int x, int y) {
+	private boolean setCell(Cell cell, int layer, Position p) {
+		TiledMapTileLayer tmtl = getLayer(layer);
+		if(tmtl == null) {
+			return false;
+		}
+		
+		int x = p.getX();
+		int y = p.getY();
+		
 		if(x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) {
 			return false;
 		}
 		
-		getLayer(BLOCKS_LAYER).setCell(x, y, block);
+		tmtl.setCell(x, y, cell);
 		this.notifyObservers();
 		return true;
+	}
+	
+	public boolean setBlock(Block block, Position pos) {
+		return setCell(block, BLOCKS_LAYER, pos);
 	}
 	
 	public TiledMapTileLayer getLayer(int i) {
