@@ -27,6 +27,7 @@ public class Level {
 	Difficulty difficulty;
 	LevelType type;
 	int time;
+	Position selected;
 	
 	/**
 	 * Create level from file
@@ -115,6 +116,7 @@ public class Level {
 		String blockType;
 		Block block;
 		Element positionElement;
+		Position pos;
 		for(Element blockElement : blockElements) {
 			blockType = blockElement.getAttribute("type", "");
 			block = new Block(type.getBlockType(blockType));
@@ -137,12 +139,21 @@ public class Level {
 			int y = positionElement.getIntAttribute("y", -1);
 			//Gdx.app.debug("Level.setBLocks", "Block "+blockType+" goes to "+Integer.toString(x)+"x"+Integer.toString(y));
 			// if x or y out of map, block goes to inventory
-			if(!map.setBlock(block, x, y)) {
+			pos = new Position(x, y);
+			if(!map.setBlock(block, pos)) {
 				Gdx.app.error("Level.setBlocks", "level "+name+" : block "+blockType+" out of map");
 				inventory.addBlock(block);
 			}
 			
 		}
+	}
+	
+	public void setSelected(Position pos) {
+		this.selected = pos;
+	}
+	
+	public Position getSelected() {
+		return this.selected;
 	}
 	/**
 	 * @return name
