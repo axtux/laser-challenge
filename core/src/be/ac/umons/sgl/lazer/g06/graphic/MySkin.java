@@ -40,6 +40,15 @@ public class MySkin extends Skin {
 		createStyles();
 	}
 	
+	public Texture getTexture(Color c, int size) {
+		Pixmap pixmap = new Pixmap(size, size, Format.RGBA8888);
+		pixmap.setColor(c);
+		pixmap.fill();
+		Texture texture = new Texture(pixmap);
+		pixmap.dispose();
+		return texture;
+	}
+	
 	public Drawable getColor(Color c) {
 		return this.newDrawable("white", c);
 	}
