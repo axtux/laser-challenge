@@ -111,7 +111,7 @@ public class Map extends Observable {
 		if(c == null) {
 			return false;
 		}
-		
+		// TODO change this to real rotation
 		c.setRotation(c.getRotation()+90);
 		return true;
 	}
