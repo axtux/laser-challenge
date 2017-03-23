@@ -22,10 +22,7 @@
 			<position x="12" y="1"/>
 		</block>
 		<block type="blocker">
-			<position x="6" y="9"/>
-		</block>
-		<block type="blocker">
-			<position x="9" y="9"/>
+			<position x="6" y="8"/>
 		</block>
 		<block type="blocker">
 			<position x="3" y="8"/>
