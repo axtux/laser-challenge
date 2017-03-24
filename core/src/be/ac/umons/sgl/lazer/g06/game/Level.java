@@ -55,8 +55,6 @@ public class Level {
 		setTime(level.getIntAttribute("time", 0));
 		
 		setMap(level.getAttribute("map", ""));
-		inventory = new Map(5, 20, map.getTileSize(), Location.INVENTORY);
-		
 		setBlocks(level.getChildByName("blocks"));
 	}
 	/**
@@ -152,6 +150,8 @@ public class Level {
 	}
 	
 	private void addInventoryBlocks(Array<Block> blocks) {
+		inventory = new Map(5, blocks.size, map.getTileSize(), Location.INVENTORY);
+		
 		Position pos;
 		int w = inventory.getWidth();
 		
