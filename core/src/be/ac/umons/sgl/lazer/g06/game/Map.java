@@ -159,6 +159,8 @@ public class Map extends Observable {
 		}
 		
 		tmtl.setCell(x, y, cell);
+		// notify observers
+		this.setChanged();
 		this.notifyObservers();
 		return true;
 	}
