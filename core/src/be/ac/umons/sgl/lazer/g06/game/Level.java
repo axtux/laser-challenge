@@ -1,5 +1,7 @@
 package be.ac.umons.sgl.lazer.g06.game;
 
+import java.util.Observable;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -12,8 +14,9 @@ import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 /**
  * Class that manages the game part of the LazerChallenge
+ * Notify observers about selected level, time and score updates
  */
-public class Level {
+public class Level extends Observable {
 	static final String LEVELS_PATH = "levels";
 	static final Difficulty defaultDifficulty = Difficulty.MEDIUM;
 	/**
@@ -28,7 +31,10 @@ public class Level {
 	Difficulty difficulty;
 	LevelType type;
 	int time;
+	int elapsedTime;
+	// state for interaction, maybe they should go elsewhere
 	Position selected;
+	boolean moving;
 	
 	/**
 	 * Create level from file
@@ -161,7 +167,12 @@ public class Level {
 		}
 	}
 	
-	private Block getBlock(Position pos) {
+	public Block getBlock(Position pos) {
+		if(pos == null) {
+			Gdx.app.error("Level.getBlock", "pos cannot be null");
+			return null;
+		}
+		
 		if(pos.getLocation() == null) {
 			Gdx.app.error("Level.getBlock", "location cannot be null");
 			return null;
@@ -193,8 +204,34 @@ public class Level {
 		}
 	}
 	
+	public void start() {
+		this.elapsedTime = 0;
+		// TODO activate timer
+		// notify observers
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	public void stop() {
+		// TODO deactivate timer
+		// notify observers
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
 	public void select(Position pos) {
 		this.selected = pos;
+		// notify observers
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	public void moving(boolean moving) {
+		this.moving = moving;
+	}
+	
+	public boolean moving() {
+		return moving;
 	}
 	
 	public boolean moveSelectedTo(Position newPos) {
@@ -279,6 +316,22 @@ public class Level {
 	 */
 	public int getTime() {
 		return time;
+	}
+	/**
+	 * Can be negative
+	 * @return
+	 */
+	public int getRemainingTime() {
+		return time-elapsedTime;
+	}
+	
+	public int getScore() {
+		int r = getRemainingTime();
+		if(r < 1) {
+			return 0;
+		}
+		
+		return time*time-r*r;
 	}
 	/**
 	 * Refresh levels from disk. Levels directory is scanned and all valid levels are loaded into static array.
