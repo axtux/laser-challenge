@@ -104,6 +104,7 @@ public class MyActionListener implements ActionListener {
 			break;
 		case "ACTION_LEVEL_LAUNCH":
 			game.setStage(new LevelPlayingStage());
+			game.getLevel().start();
 			break;
 		
 		case "MENU_LEVEL_PAUSE": // TODO remove parameters
@@ -115,7 +116,7 @@ public class MyActionListener implements ActionListener {
 			break;
 		
 		case "ACTION_LEVEL_MOVE":
-			//game.getLevel().moveSelectedTo(null);
+			game.getLevel().moving(true);
 			break;
 		case "ACTION_LEVEL_ROTATE":
 			game.getLevel().rotateSelected();
