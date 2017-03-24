@@ -147,6 +147,15 @@ public class MySkin extends Skin {
 		sps.hScrollKnob = getColor(Color.DARK_GRAY, 10);
 		sps.vScroll = getColor(Color.GRAY, 10);
 		sps.vScrollKnob = getColor(Color.DARK_GRAY, 10);
+		add("gray", sps);
+		
+		sps = new ScrollPaneStyle();
+		sps.background = getColor(Color.WHITE);
+		sps.corner = sps.background;
+		sps.hScroll = getColor(Color.GRAY, 10);
+		sps.hScrollKnob = getColor(Color.DARK_GRAY, 10);
+		sps.vScroll = getColor(Color.GRAY, 10);
+		sps.vScrollKnob = getColor(Color.DARK_GRAY, 10);
 		add("default", sps);
 	}
 }
