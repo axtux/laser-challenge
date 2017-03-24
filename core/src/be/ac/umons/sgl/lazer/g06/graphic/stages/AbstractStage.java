@@ -160,11 +160,11 @@ public abstract class AbstractStage extends Stage {
 		return tf;
 	}
 
-	protected void addDoubleLabel(String label1, String label2) {
-		addDoubleLabel(content, label1, label2, "label");
+	protected Label addDoubleLabel(String label1, String label2) {
+		return addDoubleLabel(content, label1, label2, "label");
 	}
 	
-	protected void addDoubleLabel(Table container, String label1, String label2, String skinName) {
+	protected Label addDoubleLabel(Table container, String label1, String label2, String skinName) {
 		container.row().fillX();
 		
 		Label l1 = new Label(label1+" :", skin, skinName);
@@ -176,6 +176,8 @@ public abstract class AbstractStage extends Stage {
 		Table l2Container = new Table();
 		l2Container.add(l2).pad(10).padLeft(0).expandX().left();
 		container.add(l2Container).uniform();
+		
+		return l2;
 	}
 	
 	protected void addDoubleButton(String label1, String action1, String label2, String action2) {
