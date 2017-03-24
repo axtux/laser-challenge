@@ -41,8 +41,9 @@ public class MapButton extends Button {
 		TextureRegionDrawable d = new TextureRegionDrawable(bg.getTile().getTextureRegion());
 		
 		ButtonStyle style = new ButtonStyle(d, d, d);
-		style.checked = style.over = d.tint(Color.GRAY);
-		style.checkedOver = style.over = d.tint(Color.DARK_GRAY);
+		style.over = d.tint(Color.LIGHT_GRAY);
+		style.checked = d.tint(Color.GRAY);
+		style.checkedOver = d.tint(Color.DARK_GRAY);
 		
 		this.setStyle(style);
 	}

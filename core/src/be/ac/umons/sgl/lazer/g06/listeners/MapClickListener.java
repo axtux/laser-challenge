@@ -23,6 +23,7 @@ public class MapClickListener extends MyClickListener {
 	}
 	
 	public void clicked(InputEvent event, float x, float y) {
+		// uncheck previous checked button
 		if(previous != null) {
 			previous.setChecked(false);
 		}
