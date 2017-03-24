@@ -1,13 +1,16 @@
 package be.ac.umons.sgl.lazer.g06.listeners;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import be.ac.umons.sgl.lazer.g06.game.Position;
+import be.ac.umons.sgl.lazer.g06.graphic.MapButton;
 /**
  * Listener to keep track of tile clicks.
  */
 public class MapClickListener extends MyClickListener {
 	Position position;
+	static MapButton previous;
 	/**
 	 * Create listener.
 	 * @param mouseButton Button from @Input.Buttons
@@ -20,6 +23,11 @@ public class MapClickListener extends MyClickListener {
 	}
 	
 	public void clicked(InputEvent event, float x, float y) {
+		if(previous != null) {
+			previous.setChecked(false);
+		}
+		previous = (MapButton) event.getTarget();
+		
 		Gdx.app.debug("MapClickListener from "+position.toString(), "ACTION : "+action);
 		
 		switch(action) {
@@ -27,7 +35,7 @@ public class MapClickListener extends MyClickListener {
 			if(game.getLevel().moving()) {
 				Gdx.app.debug("MapClickListener.clicked", "Moving to position");
 				game.getLevel().moveSelectedTo(position);
-				game.getLevel().select(null);
+				game.getLevel().select(position);
 				game.getLevel().moving(false);
 			} else {
 				Gdx.app.debug("MapClickListener.clicked", "Selecting position");
