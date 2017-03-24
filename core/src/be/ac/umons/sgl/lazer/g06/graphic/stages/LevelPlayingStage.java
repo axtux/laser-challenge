@@ -5,12 +5,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.utils.Array;
 
+import be.ac.umons.sgl.lazer.g06.Time;
+import be.ac.umons.sgl.lazer.g06.game.Block;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.game.LevelType.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.Map;
@@ -23,6 +26,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	
 	Label scoreLabel;
 	Label timeLabel;
+	Label blockLabel;
 	Table selectionContent;
 	
 	public LevelPlayingStage() {
@@ -41,12 +45,16 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		content.add(mapTable).grow();
 		//addInventory(mapTable, level.getInventory());
 		addMapTable(mapTable, level.getMap());
+		addLaserButton(rightTable, false);
 		
 		rightTable = new Table();
 		content.add(new ScrollPane(rightTable, skin)).pad(10).fill().uniform();
 		addInfos(rightTable);
 		addInventory(rightTable, level.getInventory());
 		addSelection(rightTable);
+		
+		// get updated
+		level.addObserver(this);
 	}
 	
 	private void addLegend(Table container) {
@@ -85,22 +93,30 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		container.row();
 		container.add(box).growX().padBottom(10);
 		
-		Label label = new Label(title, skin, "label");
-		box.row();
-		box.add(label).pad(20);
+		if(title != null) {
+			Label label = new Label(title, skin, "label");
+			box.row();
+			box.add(label).pad(20);
+		}
 		
 		Table content = new Table();
 		content.background(skin.getColor(Color.WHITE));
 		box.row();
-		box.add(content).pad(20).padTop(0);
+		if(title != null) {
+			box.add(content).pad(20).padTop(0);
+		} else {
+			box.add(content).pad(20);
+		}
 		
 		return content;
 	}
 	
 	private void addInfos(Table container) {
+		if(!game.getMode().hasScore()) return;
+		
 		Table content = addBox(container, "Informations");
-		addDoubleLabel(content, "Temps", "XX:XX", "small-label");
-		addDoubleLabel(content, "Score", "XXX", "small-label");
+		timeLabel = addDoubleLabel(content, "Temps", "", "small-label");
+		scoreLabel = addDoubleLabel(content, "Score", "", "small-label");
 	}
 	
 	private void addInventory(Table container, Map inv) {
@@ -112,22 +128,38 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	
 	private void addSelection(Table container) {
 		Table content = addBox(container, "Sélection");
-		addDoubleLabel(content, "Block", "source", "small-label");
 		
-		addDoubleLabel(content, "Déplacer", "autorisé", "small-label");
-		addDoubleLabel(content, "Orienter", "autorisé", "small-label");
-		
+		selectionContent = new Table();
 		content.row();
-		addButton(content, "Move", "ACTION_LEVEL_MOVE", "small-menu").pad(5);
-		addButton(content, "Rotate", "ACTION_LEVEL_ROTATE", "small-menu").pad(5);
+		content.add(selectionContent);
+		blockLabel = addDoubleLabel(selectionContent, "Block", "", "small-label");
+		//addDoubleLabel(selectionContent, "Déplacer", "autorisé", "small-label");
+		//addDoubleLabel(selectionContent, "Orienter", "autorisé", "small-label");
 		
+		Table buttons = new Table();
+		content.row();
+		content.add(buttons);
+		addButton(buttons, "Move", "ACTION_LEVEL_MOVE", "small-menu").pad(5);
+		addButton(buttons, "Rotate", "ACTION_LEVEL_ROTATE", "small-menu").pad(5);
+	}
+	
+	private void addLaserButton(Table container, boolean box) {
+		// TODO continuous laser in training mode
+		//if(!game.getMode().hasScore()) return;
+		
+		if(box) {
+			container = addBox(container, null);
+		}
 		container.row();
-		addButton(container, "Lancer le lazer", "ACTION_LEVEL_LASER", "small-menu").pad(20);
+		addButton(container, "Lancer le lazer", "ACTION_LEVEL_LASER", "small-menu").pad(box ? 5 : 10);
 	}
 	
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		timeLabel.setText(Time.prettyTime(level.getRemainingTime(), false, false));
+		scoreLabel.setText(Integer.toString(level.getScore()));
 		
+		Block block = level.getBlock(level.getSelected());
+		blockLabel.setText(block == null ? "none" : block.getType().getLabel());
 	}
 	
 }
