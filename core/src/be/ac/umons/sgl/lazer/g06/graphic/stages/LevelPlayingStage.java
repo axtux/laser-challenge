@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -133,6 +132,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		content.row();
 		content.add(selectionContent);
 		blockLabel = addDoubleLabel(selectionContent, "Block", "", "small-label");
+		// TODO add information about empty case
 		//addDoubleLabel(selectionContent, "Déplacer", "autorisé", "small-label");
 		//addDoubleLabel(selectionContent, "Orienter", "autorisé", "small-label");
 		
