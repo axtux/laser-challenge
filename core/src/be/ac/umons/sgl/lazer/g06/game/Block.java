@@ -10,6 +10,11 @@ public class Block extends TiledMapTileLayer.Cell {
 	
 	public Block(BlockType type) {
 		super();
+		this.type = type;
 		setTile(new StaticTiledMapTile(type.getTextureRegion()));
+	}
+	
+	public BlockType getType() {
+		return type;
 	}
 }
