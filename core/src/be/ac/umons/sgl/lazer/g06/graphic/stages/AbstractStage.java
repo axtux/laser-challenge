@@ -161,17 +161,21 @@ public abstract class AbstractStage extends Stage {
 	}
 
 	protected void addDoubleLabel(String label1, String label2) {
-		content.row().fillX();
+		addDoubleLabel(content, label1, label2, "label");
+	}
+	
+	protected void addDoubleLabel(Table container, String label1, String label2, String skinName) {
+		container.row().fillX();
 		
-		Label l1 = new Label(label1+" : ", skin, "label");
+		Label l1 = new Label(label1+" :", skin, skinName);
 		Table l1Container = new Table();
-		l1Container.add(l1).pad(10).expandX().right();
-		content.add(l1Container).uniform();
+		l1Container.add(l1).pad(10).padRight(0).expandX().right();
+		container.add(l1Container).uniform();
 		
-		Label l2 = new Label(label2, skin, "label");
+		Label l2 = new Label(" "+label2, skin, skinName);
 		Table l2Container = new Table();
-		l2Container.add(l2).pad(10).expandX().left();
-		content.add(l2Container).uniform();
+		l2Container.add(l2).pad(10).padLeft(0).expandX().left();
+		container.add(l2Container).uniform();
 	}
 	
 	protected void addDoubleButton(String label1, String action1, String label2, String action2) {
