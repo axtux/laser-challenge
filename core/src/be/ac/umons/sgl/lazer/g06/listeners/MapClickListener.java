@@ -24,11 +24,18 @@ public class MapClickListener extends MyClickListener {
 		
 		switch(action) {
 		case "ACTION_LEVEL_SELECT":
-			Gdx.app.debug("MapClickListener.clicked", "Selecting tile");
-			game.getLevel().select(position);
+			if(game.getLevel().moving()) {
+				Gdx.app.debug("MapClickListener.clicked", "Moving to position");
+				game.getLevel().moveSelectedTo(position);
+				game.getLevel().select(null);
+				game.getLevel().moving(false);
+			} else {
+				Gdx.app.debug("MapClickListener.clicked", "Selecting position");
+				game.getLevel().select(position);
+			}
 			break;
 		case "ACTION_LEVEL_ROTATE":
-			Gdx.app.debug("MapClickListener.clicked", "Rotating tile");
+			Gdx.app.debug("MapClickListener.clicked", "Rotating position");
 			game.getLevel().rotate(position);
 			break;
 		}
