@@ -161,11 +161,71 @@ public class Level {
 		}
 	}
 	
+	private Block getBlock(Position pos) {
+		if(pos.getLocation() == null) {
+			Gdx.app.error("Level.getBlock", "location cannot be null");
+			return null;
+		}
+		
+		switch(pos.getLocation()) {
+		case MAP:
+			return map.getBlock(pos);
+		case INVENTORY:
+			return inventory.getBlock(pos);
+		default:
+			return null;
+		}
+	}
+	
+	private boolean setBlock(Block block, Position pos) {
+		if(pos.getLocation() == null) {
+			Gdx.app.error("Level.setBlock", "location cannot be null");
+			return false;
+		}
+		
+		switch(pos.getLocation()) {
+		case MAP:
+			return map.setBlock(block, pos);
+		case INVENTORY:
+			return inventory.setBlock(block, pos);
+		default:
+			return false;
+		}
+	}
+	
 	public void select(Position pos) {
 		this.selected = pos;
 	}
 	
+	public boolean moveSelectedTo(Position newPos) {
+		return moveTo(selected, newPos);
+	}
+	
+	public boolean moveTo(Position oldPos, Position newPos) {
+		if(oldPos == null) {
+			Gdx.app.error("Level.moveTo", "oldPos is null");
+			return false;
+		}
+		if(newPos == null) {
+			Gdx.app.error("Level.moveTo", "newPos is null");
+			return false;
+		}
+		
+		Block oldBlock = getBlock(oldPos);
+		Block newBlock = getBlock(newPos);
+		return setBlock(oldBlock, newPos) && setBlock(newBlock, oldPos);
+	}
+	
+	public void rotateSelected() {
+		rotate(selected);
+	}
+	
 	public void rotate(Position pos) {
+		if(pos == null) {
+			Gdx.app.error("Level.rotate", "pos is null");
+			return;
+		}
+		
 		if(pos.getLocation() == null) {
 			Gdx.app.error("Level.rotate", "no location");
 		}
