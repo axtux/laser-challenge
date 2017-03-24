@@ -105,13 +105,20 @@ public class MyActionListener implements ActionListener {
 		case "ACTION_LEVEL_LAUNCH":
 			game.setStage(new LevelPlayingStage());
 			break;
-
+		
 		case "MENU_LEVEL_PAUSE": // TODO remove parameters
 			game.setStage(new LevelPausedStage());
 			break;
-
+		
 		case "MENU_LEVEL_FINISHED":
 			game.setStage(new LevelFinishedStage());
+			break;
+		
+		case "ACTION_LEVEL_MOVE":
+			//game.getLevel().moveSelectedTo(null);
+			break;
+		case "ACTION_LEVEL_ROTATE":
+			game.getLevel().rotateSelected();
 			break;
 		
 		default:
