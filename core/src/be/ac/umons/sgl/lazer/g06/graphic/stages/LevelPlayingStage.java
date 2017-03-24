@@ -1,6 +1,10 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+
+import java.util.Observable;
+import java.util.Observer;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -12,10 +16,14 @@ import be.ac.umons.sgl.lazer.g06.game.LevelType.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.graphic.MapTable;
 
-public class LevelPlayingStage extends AbstractLevelStage {
+public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	Table mapTable;
 	Table leftTable;
 	Table rightTable;
+	
+	Label scoreLabel;
+	Label timeLabel;
+	Table selectionContent;
 	
 	public LevelPlayingStage() {
 		super();
@@ -110,10 +118,16 @@ public class LevelPlayingStage extends AbstractLevelStage {
 		addDoubleLabel(content, "Orienter", "autorisé", "small-label");
 		
 		content.row();
-		addButton(content, "Swap", "ACTION_LEVEL_SWAP", "small-menu").pad(20).colspan(2);
+		addButton(content, "Move", "ACTION_LEVEL_MOVE", "small-menu").pad(5);
+		addButton(content, "Rotate", "ACTION_LEVEL_ROTATE", "small-menu").pad(5);
 		
 		container.row();
 		addButton(container, "Lancer le lazer", "ACTION_LEVEL_LASER", "small-menu").pad(20);
+	}
+	
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
