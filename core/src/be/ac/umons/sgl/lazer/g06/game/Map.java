@@ -48,7 +48,7 @@ public class Map extends Observable {
 		map.getProperties().put("tileheight", tileSize);
 		
 		addLayer("ground");
-		fillLayer(GROUND_LAYER, Color.GRAY);
+		fillLayer(GROUND_LAYER, Color.WHITE);
 		addLayer("blocks");
 	}
 	
