@@ -36,6 +36,7 @@ public class Level extends Observable {
 	// state for interaction, maybe they should go elsewhere
 	Position selected;
 	boolean moving;
+	Array<Switch> history;
 	
 	/**
 	 * Create level from file
@@ -268,6 +269,7 @@ public class Level extends Observable {
 		if (oldBlock != null && oldBlock.getTile().getProperties().containsKey("fixedposition")){
 			return false;
 		}
+		history.add(new Switch(oldPos,newPos));
 		return setBlock(oldBlock, newPos) && setBlock(newBlock, oldPos);
 	}
 	
