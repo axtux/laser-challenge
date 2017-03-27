@@ -9,14 +9,30 @@ import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
 
 public class Block extends TiledMapTileLayer.Cell {
 	BlockType type;
+	Orientation orientation;
 	// for laser
 	Orientation input;
 	boolean processed;
 	
-	public Block(BlockType type) {
+	public Block(BlockType type, Orientation orientation) {
 		super();
 		this.type = type;
 		setTile(new StaticTiledMapTile(type.getTextureRegion()));
+		setOrientation(orientation);
+	}
+	
+	public boolean rotate() {
+		if(getTile().getProperties().containsKey("fixedorientation")) {
+			return false;
+		}
+		
+		setOrientation(orientation.next());
+		return true;
+	}
+	
+	private void setOrientation(Orientation orientation) {
+		this.orientation = orientation;
+		this.setRotation(orientation.getAngle());
 	}
 	
 	public boolean processed() {
@@ -38,9 +54,6 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	
 	public Array<Orientation> getOutputs() {
-		if(!processed) {
-			return new Array<Orientation>(0);
-		}
 		return type.input(input);
 	}
 	

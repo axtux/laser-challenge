@@ -130,14 +130,14 @@ public class Level extends Observable {
 		Array<Block> invBlocks = new Array<Block>(blockElements.size);
 		for(Element blockElement : blockElements) {
 			blockType = blockElement.getAttribute("type", "");
-			block = new Block(type.getBlockType(blockType));
 			
 			orientationStr = blockElement.getAttribute("orientation", defaultOrientation);
 			orientation = Orientation.valueOf(orientationStr);
 			if(orientation == null) {
 				throw new GdxRuntimeException("No orientation "+orientationStr);
 			}
-			block.setRotation(orientation.getAngle());
+			
+			block = new Block(type.getBlockType(blockType), orientation);
 			
 			if(blockElement.getAttribute("fixedposition", "false").toLowerCase().equals("true")) {
 				block.getTile().getProperties().put("fixedposition", true);
