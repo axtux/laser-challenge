@@ -64,6 +64,7 @@ public class Level extends Observable {
 		
 		setMap(level.getAttribute("map", ""));
 		setBlocks(level.getChildByName("blocks"));
+		history= new Array<Switch>();
 	}
 	/**
 	 * Set level name
