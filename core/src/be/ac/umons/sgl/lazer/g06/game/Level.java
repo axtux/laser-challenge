@@ -223,6 +223,31 @@ public class Level extends Observable {
 		}
 	}
 	
+	public void start_laser() {
+		Position pos;
+		
+		for(int x = 0; x < map.getWidth(); ++x) {
+			for(int y = 0; y < map.getHeight(); ++y) {
+				pos = new Position(x, y, Position.Location.MAP);
+				laser_input(pos, null);
+			}
+		}
+	}
+	
+	public Array<Orientation> laser_input(Position position, Orientation orientation) {
+		Block block = map.getBlock(position);
+		if(block == null) {
+			return null;
+		}
+		
+		if(block.processed()) {
+			return null;
+		}
+		
+		block.input(orientation);
+		return block.getOutputs();
+	}
+	
 	public void start() {
 		this.elapsedTime = 0;
 		Timer.schedule(new Timer.Task() {
