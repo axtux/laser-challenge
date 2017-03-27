@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 
 import be.ac.umons.sgl.lazer.g06.game.Block;
-import be.ac.umons.sgl.lazer.g06.game.LevelType.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.game.Position;
@@ -65,8 +64,13 @@ public class MapButton extends Button {
 			return;
 		}
 		
-		// display block
-		draw(batch, block.getTile().getTextureRegion(), block.getRotation());
+		// display block and other upper layers
+		// don't draw background as already displayed by button
+		//for(Cell cell : cells) {
+		for(int i = 1; i < cells.size; ++i) { Cell cell = cells.get(i);
+			draw(batch, cell.getTile().getTextureRegion(), cell.getRotation());
+		}
+		//*/draw(batch, block.getTile().getTextureRegion(), block.getRotation());
 		
 		// stop if laser not on block
 		if(!block.processed()) {
@@ -85,17 +89,6 @@ public class MapButton extends Button {
 			}
 		}
 		
-		
-		
-		/*
-		// don't draw background as already displayed by button
-		//for(Cell cell : cells) {
-		for(int i = 1; i < cells.size; ++i) { Cell cell = cells.get(i);
-			tr = cell.getTile().getTextureRegion();
-			angle = cell.getRotation();
-			batch.draw(tr, getX(), getY(), getWidth()/2, getHeight()/2, getWidth(), getHeight(), 1, 1, -angle);
-		}
-		//*/
 	}
 	
 	private void draw(Batch batch, TextureRegion tr, int rotation) {
