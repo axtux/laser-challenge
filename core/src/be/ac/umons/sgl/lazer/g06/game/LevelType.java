@@ -243,49 +243,35 @@ public class LevelType {
 	}
 	
 	public enum Orientation {
-		UP(0),
-		RIGHT(1),
-		DOWN(2),
-		LEFT(3);
-		
-		int indice;
-		
-		private Orientation(int indice) {
-			this.indice = indice;
-		}
+		UP,
+		RIGHT,
+		DOWN,
+		LEFT;
 		
 		public Orientation next() {
-			switch(this) {
-			case UP:
-				return Orientation.RIGHT;
-			case RIGHT:
-				return Orientation.DOWN;
-			case DOWN:
-				return Orientation.LEFT;
-			case LEFT:
-				return Orientation.UP;
-			default:
-				return null;
-			}
+			return fromInt(ordinal()+1);
 		}
 		
 		public Orientation prev() {
-			return this.next().next().next();
+			return fromInt(ordinal()-1);
 		}
 		
 		public int getAngle() {
-			switch(this) {
-			case UP:
-				return 0;
-			case RIGHT:
-				return 90;
-			case DOWN:
-				return 180;
-			case LEFT:
-				return 270;
-			default:
-				return 0;
-			}
+			return ordinal()*(360/Orientation.values().length);
+		}
+		
+		public Orientation rotateBy(Orientation other) {
+			return fromInt(this.ordinal()+other.ordinal());
+		}
+		
+		public Orientation unRotateBy(Orientation other) {
+			return fromInt(this.ordinal()-other.ordinal());
+		}
+		
+		private static Orientation fromInt(int i) {
+			Orientation[] orientations = Orientation.values();
+			while(i < 0) i+= orientations.length;
+			return orientations[i%orientations.length];
 		}
 		/**
 		 * Get orientation from string
