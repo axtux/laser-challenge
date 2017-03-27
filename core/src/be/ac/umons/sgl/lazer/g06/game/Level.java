@@ -225,9 +225,30 @@ public class Level extends Observable {
 		}
 	}
 	
-	public void start_laser() {
+	private void clear_laser() {
 		Position pos;
 		
+		for(int x = 0; x < map.getWidth(); ++x) {
+			for(int y = 0; y < map.getHeight(); ++y) {
+				pos = new Position(x, y, Position.Location.MAP);
+				clear_laser(pos);
+			}
+		}
+	}
+	
+	private void clear_laser(Position position) {
+		Block block = map.getBlock(position);
+		if(block == null) {
+			return;
+		}
+		
+		block.clearInput();
+	}
+	
+	public void start_laser() {
+		clear_laser();
+		
+		Position pos;
 		for(int x = 0; x < map.getWidth(); ++x) {
 			for(int y = 0; y < map.getHeight(); ++y) {
 				pos = new Position(x, y, Position.Location.MAP);
