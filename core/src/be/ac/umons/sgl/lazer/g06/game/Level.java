@@ -313,7 +313,7 @@ public class Level extends Observable {
 	
 	public Block getSelectedBlock() {
 		if(selected == null) {
-			Gdx.app.log("Level.getSelectedBlock", "selected is null");
+			//Gdx.app.log("Level.getSelectedBlock", "selected is null");
 			return null;
 		}
 		
