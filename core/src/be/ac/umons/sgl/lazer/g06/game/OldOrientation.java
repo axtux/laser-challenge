@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 
-public class Orientation {
+public class OldOrientation {
 	
 	private Hashtable<String,Integer> orientationToIndice = new Hashtable<String ,Integer>();
 	private String[] indiceToOrientation;
@@ -23,7 +23,7 @@ public class Orientation {
 	 * @param xml it is a document on xml format
 	 * @throws IOException
 	 */
-	public Orientation(FileHandle xml ) throws IOException{
+	public OldOrientation(FileHandle xml ) throws IOException{
 		XmlReader reader= new XmlReader();
 		Element root = reader.parse(xml);
 		Array<Element> orientations = root.getChildrenByName("orientation");
