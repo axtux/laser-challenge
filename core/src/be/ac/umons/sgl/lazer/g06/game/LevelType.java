@@ -1,12 +1,13 @@
 package be.ac.umons.sgl.lazer.g06.game;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
@@ -158,7 +159,7 @@ public class LevelType {
 		private final TextureRegion tr;
 		private final String name;
 		private final String label;
-		private final ObjectMap<String, Array<String>> inputs;
+		private final HashMap<Orientation, Array<Orientation>> inputs;
 		
 		public BlockType(String levelType, Element block) {
 			this.name = block.get("name");
@@ -171,16 +172,33 @@ public class LevelType {
 			}
 			tr = new TextureRegion(new Texture(fh));
 			
+			
 			Element inputsElement = block.getChildByName("inputs");
 			Array<Element> inputElements = inputsElement.getChildrenByName("input");
-			inputs = new ObjectMap<String, Array<String>>(inputElements.size);
+			inputs = new HashMap<Orientation, Array<Orientation>>(inputElements.size);
+			// for each intputElement
+			Array<Element> outputElements;
+			Array<Orientation> outputs;
+			// for each intputElement and outputElement
+			String orientationStr;
+			Orientation orientation;
+			
 			for(Element inputElement : inputElements) {
-				Array<Element> outputElements = inputElement.getChildrenByName("output");
-				Array<String> outputs = new Array<String>(outputElements.size);
+				outputElements = inputElement.getChildrenByName("output");
+				outputs = new Array<Orientation>(outputElements.size);
 				for(Element outputElement : outputElements) {
-					outputs.add(outputElement.getAttribute("orientation"));
+					orientationStr = outputElement.getAttribute("orientation");
+					orientation = Orientation.fromString(orientationStr);
+					if(orientation == null) {
+						throw new GdxRuntimeException("No orientation "+orientationStr);
+					}
+					
+					outputs.add(orientation);
 				}
-				inputs.put(inputElement.getAttribute("orientation", "NONE"), outputs);
+				
+				orientationStr = inputElement.getAttribute("orientation", "");
+				orientation = Orientation.fromString(orientationStr);
+				inputs.put(orientation, outputs);
 			}
 		}
 		
@@ -195,15 +213,8 @@ public class LevelType {
 			return label;
 		}
 		
-		public Array<String> input(String orientation) {
-			if(orientation == null) {
-				orientation = "NONE";
-			}
-			Array<String> array = inputs.get(orientation);
-			if(array == null) {
-				array = new Array<String>(0);
-			}
-			return array;
+		public Array<Orientation> input(Orientation orientation) {
+			return inputs.get(orientation);
 		}
 	}
 	
@@ -250,6 +261,18 @@ public class LevelType {
 				return 270;
 			default:
 				return 0;
+			}
+		}
+		/**
+		 * Get orientation from string
+		 * @param str String representation of orientation
+		 * @return null if orientation does not exists instead of throwing an exception
+		 */
+		public static Orientation fromString(String str) {
+			try {
+				return Orientation.valueOf(str);
+			} catch (IllegalArgumentException e) {
+				return null;
 			}
 		}
 	}
