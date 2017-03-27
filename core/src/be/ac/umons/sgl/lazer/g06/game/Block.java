@@ -60,7 +60,7 @@ public class Block extends TiledMapTileLayer.Cell {
 	public Array<Orientation> getOutputs() {
 		Array<Orientation> typeOutputs = type.input(input);
 		if(typeOutputs == null) {
-			return null;
+			return new Array<Orientation>(0);
 		}
 		
 		Array<Orientation> outputs = new Array<Orientation>(typeOutputs.size);
