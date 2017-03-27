@@ -7,6 +7,11 @@
     <property name="unavailable" value="1"/>
    </properties>
   </tile>
+  <tile id="189">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
   <tile id="213">
    <properties>
     <property name="unavailable" value="1"/>
@@ -43,6 +48,21 @@
    </properties>
   </tile>
   <tile id="343">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="373">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="374">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="375">
    <properties>
     <property name="unavailable" value="1"/>
    </properties>
