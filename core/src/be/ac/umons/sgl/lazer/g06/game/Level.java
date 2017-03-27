@@ -236,18 +236,23 @@ public class Level extends Observable {
 		}
 	}
 	
-	public Array<Orientation> laser_input(Position position, Orientation orientation) {
+	public boolean laser_input(Position position, Orientation orientation) {
+		Gdx.app.debug("Level.laser_input", position.toString());
 		Block block = map.getBlock(position);
 		if(block == null) {
-			return null;
+			return false;
 		}
 		
 		if(block.processed()) {
-			return null;
+			return false;
 		}
 		
 		block.input(orientation);
-		return block.getOutputs();
+		for(Orientation output : block.getOutputs()) {
+			laser_input(output.nextPosition(position), output);
+		}
+		
+		return true;
 	}
 	
 	public void start() {
