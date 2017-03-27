@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import be.ac.umons.sgl.lazer.g06.game.Orientation;
+import be.ac.umons.sgl.lazer.g06.game.OldOrientation;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 import org.junit.Before;
@@ -16,10 +16,10 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.files.FileHandle;
 
 public class OrientationsTest {
-	Orientation test;
-	Orientation testA;
-	Orientation testB;
-	Orientation testC;
+	OldOrientation test;
+	OldOrientation testA;
+	OldOrientation testB;
+	OldOrientation testC;
 	/**
 	 * Initialize Gdx application before using any feature.
 	 */
@@ -35,7 +35,7 @@ public class OrientationsTest {
 	public void test() throws IOException {
 		FileHandle file = Gdx.files.local("level_types/standard/orientations.xml");
 		assertNotNull("404 File not found", file);
-		test = new Orientation(file);
+		test = new OldOrientation(file);
 		// test if the xml has correctly been parsed
 		assertEquals(test.size(),4);
 		// test sizes of attributs are ok 
@@ -43,7 +43,7 @@ public class OrientationsTest {
 	}
 	@Test
 	public void testA() throws IOException{
-		testA = new Orientation(Gdx.files.classpath("/testUnit/orientationTest/testA.xml"));
+		testA = new OldOrientation(Gdx.files.classpath("/testUnit/orientationTest/testA.xml"));
 		// test when the xml file has no orientation
 		assertEquals(testA.size(),0);
 		// test sizes of attributs are ok 
@@ -52,7 +52,7 @@ public class OrientationsTest {
 	
 	@Test
 	public void TestB() throws IOException{
-		testB = new Orientation(Gdx.files.classpath("/testUnit/orientationTest/testB.xml"));
+		testB = new OldOrientation(Gdx.files.classpath("/testUnit/orientationTest/testB.xml"));
 		// test when the xml file has others balises and it has correctly been parsed
 		assertEquals(testB.size(),2);
 		// test sizes of attributs are ok 
@@ -60,7 +60,7 @@ public class OrientationsTest {
 	}
 	@Test
 	public void TestC() throws IOException{
-		testC = new Orientation(Gdx.files.classpath("/orientationTest/testUnit/testC.xml"));
+		testC = new OldOrientation(Gdx.files.classpath("/orientationTest/testUnit/testC.xml"));
 		//test when a balise contains 2 same orientations
 		assertEquals(testC.size(),2);
 		assertEquals(testC.getOrientationToIndice().size(),testC.getIndiceToOrientation().length);

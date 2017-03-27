@@ -206,5 +206,52 @@ public class LevelType {
 			return array;
 		}
 	}
+	
+	public enum Orientation {
+		UP(0),
+		RIGHT(1),
+		DOWN(2),
+		LEFT(3);
+		
+		int indice;
+		
+		private Orientation(int indice) {
+			this.indice = indice;
+		}
+		
+		public Orientation next() {
+			switch(this) {
+			case UP:
+				return Orientation.RIGHT;
+			case RIGHT:
+				return Orientation.DOWN;
+			case DOWN:
+				return Orientation.LEFT;
+			case LEFT:
+				return Orientation.UP;
+			default:
+				return null;
+			}
+		}
+		
+		public Orientation prev() {
+			return this.next().next().next();
+		}
+		
+		public int getAngle() {
+			switch(this) {
+			case UP:
+				return 0;
+			case RIGHT:
+				return 90;
+			case DOWN:
+				return 180;
+			case LEFT:
+				return 270;
+			default:
+				return 0;
+			}
+		}
+	}
 
 }
