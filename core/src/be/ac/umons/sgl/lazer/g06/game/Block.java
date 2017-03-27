@@ -45,7 +45,11 @@ public class Block extends TiledMapTileLayer.Cell {
 		}
 		
 		processed = true;
-		input = orientation;
+		// input null to start source
+		if(input != null) {
+			input = orientation.rotateBy(this.orientation);
+		}
+		
 		return true;
 	}
 	
@@ -54,7 +58,17 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	
 	public Array<Orientation> getOutputs() {
-		return type.input(input);
+		Array<Orientation> typeOutputs = type.input(input);
+		if(typeOutputs == null) {
+			return null;
+		}
+		
+		Array<Orientation> outputs = new Array<Orientation>(typeOutputs.size);
+		for(Orientation o : typeOutputs) {
+			outputs.add(o.unRotateBy(this.orientation));
+		}
+		
+		return outputs;
 	}
 	
 	public BlockType getType() {
