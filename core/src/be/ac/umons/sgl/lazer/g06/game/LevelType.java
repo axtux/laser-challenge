@@ -243,10 +243,16 @@ public class LevelType {
 	}
 	
 	public enum Orientation {
-		UP,
-		RIGHT,
-		DOWN,
-		LEFT;
+		UP(0, 1),
+		RIGHT(1, 0),
+		DOWN(0, -1),
+		LEFT(-1, 0);
+		
+		int x, y;
+		private Orientation(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
 		
 		public Orientation next() {
 			return fromInt(ordinal()+1);
@@ -266,6 +272,10 @@ public class LevelType {
 		
 		public Orientation unRotateBy(Orientation other) {
 			return fromInt(this.ordinal()-other.ordinal());
+		}
+		
+		public Position nextPosition(Position position) {
+			return new Position(position.getX()+x, position.getY()+y, position.getLocation());
 		}
 		
 		private static Orientation fromInt(int i) {
