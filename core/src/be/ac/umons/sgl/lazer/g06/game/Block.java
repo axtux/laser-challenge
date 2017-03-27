@@ -19,6 +19,10 @@ public class Block extends TiledMapTileLayer.Cell {
 		setTile(new StaticTiledMapTile(type.getTextureRegion()));
 	}
 	
+	public boolean processed() {
+		return processed;
+	}
+	
 	public boolean input(Orientation orientation) {
 		if(processed) {
 			return false;
