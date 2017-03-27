@@ -154,6 +154,14 @@ public class Level extends Observable {
 		
 		addInventoryBlocks(invBlocks);
 	}
+	/**
+	 * Set state to changed and notify observers
+	 */
+	private void changed() {
+		// notify observers
+		this.setChanged();
+		this.notifyObservers();
+	}
 	
 	private void addInventoryBlocks(Array<Block> blocks) {
 		inventory = new Map(5, blocks.size, map.getTileSize(), Location.INVENTORY);
@@ -207,23 +215,21 @@ public class Level extends Observable {
 	public void start() {
 		this.elapsedTime = 0;
 		// TODO activate timer
-		// notify observers
-		this.setChanged();
-		this.notifyObservers();
+		changed();
 	}
 	
 	public void stop() {
 		// TODO deactivate timer
-		// notify observers
-		this.setChanged();
-		this.notifyObservers();
+		changed();
+	}
+	
+	public void timer_tick() {
+		this.elapsedTime += 1;
 	}
 	
 	public void select(Position pos) {
 		this.selected = pos;
-		// notify observers
-		this.setChanged();
-		this.notifyObservers();
+		changed();
 	}
 	
 	public void moving(boolean moving) {
