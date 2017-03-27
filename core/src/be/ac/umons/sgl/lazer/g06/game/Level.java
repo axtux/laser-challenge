@@ -202,7 +202,6 @@ public class Level extends Observable {
 			Gdx.app.error("Level.setBlock", "location cannot be null");
 			return false;
 		}
-		
 		switch(pos.getLocation()) {
 		case MAP:
 			return map.setBlock(block, pos);
@@ -263,6 +262,12 @@ public class Level extends Observable {
 		
 		Block oldBlock = getBlock(oldPos);
 		Block newBlock = getBlock(newPos);
+		if (newBlock != null && newBlock.getTile().getProperties().containsKey("fixedposition")){
+				return false;
+		}
+		if (oldBlock != null && oldBlock.getTile().getProperties().containsKey("fixedposition")){
+			return false;
+		}
 		return setBlock(oldBlock, newPos) && setBlock(newBlock, oldPos);
 	}
 	
