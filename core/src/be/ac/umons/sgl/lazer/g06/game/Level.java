@@ -155,6 +155,14 @@ public class Level extends Observable {
 		
 		addInventoryBlocks(invBlocks);
 	}
+	/**
+	 * Set state to changed and notify observers
+	 */
+	private void changed() {
+		// notify observers
+		this.setChanged();
+		this.notifyObservers();
+	}
 	
 	private void addInventoryBlocks(Array<Block> blocks) {
 		inventory = new Map(5, blocks.size, map.getTileSize(), Location.INVENTORY);
@@ -207,46 +215,28 @@ public class Level extends Observable {
 	
 	public void start() {
 		this.elapsedTime = 0;
-		Timer clock = new Timer();
-		Timer.Task i = new Timer.Task() {
-			
-			@Override
+		Timer.schedule(new Timer.Task() {
 			public void run() {
-				clock.delay(5000);
-				Gdx.app.exit();
-				
+				LazerChallenge.getInstance().getLevel().timer_tick();
 			}
-		};
-		clock.scheduleTask(new Timer.Task() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				
-			}
-		}, time);
-		//clock.delay(111111000);
-		//clock.start();
-		// TODO activate timer
-		// notify observers
-		this.setChanged();
-		this.notifyObservers();
-		//Gdx.app.exit();
+		}, 1, 1, this.time);
+		changed();
 	}
 	
 	public void stop() {
-		// TODO deactivate timer
-		//clock.stop();X
-		// notify observers
-		this.setChanged();
-		this.notifyObservers();
+		Timer.instance().clear();
+		changed();
+	}
+	
+	public void timer_tick() {
+		//Gdx.app.debug("Level.timer_tick", "elapsedTime="+Integer.toString(elapsedTime));
+		this.elapsedTime += 1;
+		changed();
 	}
 	
 	public void select(Position pos) {
 		this.selected = pos;
-		// notify observers
-		this.setChanged();
-		this.notifyObservers();
+		changed();
 	}
 	
 	public void moving(boolean moving) {
@@ -278,6 +268,15 @@ public class Level extends Observable {
 	
 	public void rotateSelected() {
 		rotate(selected);
+	}
+	
+	public Block getSelectedBlock() {
+		if(selected == null) {
+			Gdx.app.log("Level.getSelectedBlock", "selected is null");
+			return null;
+		}
+		
+		return getBlock(selected);
 	}
 	
 	public void rotate(Position pos) {
