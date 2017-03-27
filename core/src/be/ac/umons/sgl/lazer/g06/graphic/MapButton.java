@@ -78,8 +78,11 @@ public class MapButton extends Button {
 			draw(batch, inputTR, input.getAngle());
 		}
 		
-		for(Orientation output : block.getOutputs()) {
-			draw(batch, outputTR, output.getAngle());
+		Array<Orientation> outputs = block.getOutputs();
+		if(outputs != null) {
+			for(Orientation output : outputs) {
+				draw(batch, outputTR, output.getAngle());
+			}
 		}
 		
 		
