@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
+import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 /**
@@ -20,6 +21,7 @@ import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 public class Level extends Observable {
 	static final String LEVELS_PATH = "levels";
 	static final Difficulty defaultDifficulty = Difficulty.MEDIUM;
+	static final String defaultOrientation = "UP";
 	/**
 	 * Keep all instances of Level to avoid too many disk access.
 	 */
@@ -122,11 +124,21 @@ public class Level extends Observable {
 		String blockType;
 		Block block;
 		Element positionElement;
+		String orientationStr;
+		Orientation orientation;
 		Position pos;
 		Array<Block> invBlocks = new Array<Block>(blockElements.size);
 		for(Element blockElement : blockElements) {
 			blockType = blockElement.getAttribute("type", "");
 			block = new Block(type.getBlockType(blockType));
+			
+			orientationStr = blockElement.getAttribute("orientation", defaultOrientation);
+			try {
+				orientation = Orientation.valueOf(orientationStr);
+			} catch (IllegalArgumentException e) {
+				throw new GdxRuntimeException("No orientation "+orientationStr);
+			}
+			block.setRotation(orientation.getAngle());
 			
 			if(blockElement.getAttribute("fixedposition", "false").toLowerCase().equals("true")) {
 				block.getTile().getProperties().put("fixedposition", true);
