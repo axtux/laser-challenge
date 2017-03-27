@@ -12,10 +12,10 @@
 		<block type="blocker" fixedposition="true">
 			<position x="14" y="15"/>
 		</block>
-		<block type="two-way-angled-left_splitter" fixedposition="true" fiedorientation="true">
+		<block type="two-way-angled-left_splitter" fixedposition="true" fixedorientation="true">
 			<position x="12" y="4"/>
 		</block>
-		<block type="two-way-little-angled_splitter" fixedposition="true" fiedorientation="true">
+		<block type="two-way-little-angled_splitter" fixedposition="true" fixedorientation="true">
 			<position x="3" y="4"/>
 		</block>
 		<block type="amplifier" fixedposition="true">
