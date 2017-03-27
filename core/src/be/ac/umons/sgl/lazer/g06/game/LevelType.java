@@ -60,14 +60,14 @@ public class LevelType {
 			blocks.put(block.getName(), block);
 		}
 		
-		String filename = dirPath()+"/laserInput.png";
+		String filename = dirPath()+"/sprites/laserInput.png";
 		FileHandle fh = Gdx.files.local(filename);
 		if(fh == null) {
 			throw new GdxRuntimeException("404 File not found "+filename);
 		}
 		input = new TextureRegion(new Texture(fh));
 		
-		filename = dirPath()+"/laserOutput.png";
+		filename = dirPath()+"/sprites/laserOutput.png";
 		fh = Gdx.files.local(filename);
 		if(fh == null) {
 			throw new GdxRuntimeException("404 File not found "+filename);
