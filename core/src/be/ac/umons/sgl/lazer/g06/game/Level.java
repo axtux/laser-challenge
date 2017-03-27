@@ -348,12 +348,7 @@ public class Level extends Observable {
 	}
 	
 	public int getScore() {
-		int r = getRemainingTime();
-		if(r < 1) {
-			return 0;
-		}
-		
-		return time*time-r*r;
+		return time*time-elapsedTime*elapsedTime;
 	}
 	/**
 	 * Refresh levels from disk. Levels directory is scanned and all valid levels are loaded into static array.
