@@ -217,14 +217,12 @@ public class Map extends Observable {
 	}
 	
 	public boolean rotate(Position pos) {
-		Cell c = getBlock(pos);
-		if(c == null) {
+		Block block = getBlock(pos);
+		if(block == null) {
 			return false;
 		}
-		// TODO change this to real rotation
-		if (!(c.getTile().getProperties().containsKey("fixedorientation")))
-			c.setRotation(c.getRotation()+90);
-		return true;
+		
+		return block.rotate();
 	}
 	
 	public TiledMap getTiledMap() {

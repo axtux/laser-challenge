@@ -121,6 +121,9 @@ public class MyActionListener implements ActionListener {
 		case "ACTION_LEVEL_ROTATE":
 			game.getLevel().rotateSelected();
 			break;
+		case "ACTION_LEVEL_LASER":
+			game.getLevel().start_laser();
+			break;
 		
 		default:
 			Gdx.app.error("ACTION_NOT_IMPLEMENTED", action);
