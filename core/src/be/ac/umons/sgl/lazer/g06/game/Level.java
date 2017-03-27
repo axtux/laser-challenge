@@ -236,7 +236,7 @@ public class Level extends Observable {
 	
 	public void stop() {
 		// TODO deactivate timer
-		//clock.stop();
+		//clock.stop();X
 		// notify observers
 		this.setChanged();
 		this.notifyObservers();
