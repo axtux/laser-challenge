@@ -158,7 +158,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		timeLabel.setText(Time.prettyTime(level.getRemainingTime(), false, false));
 		scoreLabel.setText(Integer.toString(level.getScore()));
 		
-		Block block = level.getBlock(level.getSelected());
+		Block block = level.getSelectedBlock();
 		blockLabel.setText(block == null ? "none" : block.getType().getLabel());
 	}
 	

@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.SerializationException;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -214,17 +215,23 @@ public class Level extends Observable {
 	
 	public void start() {
 		this.elapsedTime = 0;
-		// TODO activate timer
+		Timer.schedule(new Timer.Task() {
+			public void run() {
+				LazerChallenge.getInstance().getLevel().timer_tick();
+			}
+		}, 1, 1, this.time);
 		changed();
 	}
 	
 	public void stop() {
-		// TODO deactivate timer
+		Timer.instance().clear();
 		changed();
 	}
 	
 	public void timer_tick() {
+		//Gdx.app.debug("Level.timer_tick", "elapsedTime="+Integer.toString(elapsedTime));
 		this.elapsedTime += 1;
+		changed();
 	}
 	
 	public void select(Position pos) {
@@ -261,6 +268,15 @@ public class Level extends Observable {
 	
 	public void rotateSelected() {
 		rotate(selected);
+	}
+	
+	public Block getSelectedBlock() {
+		if(selected == null) {
+			Gdx.app.log("Level.getSelectedBlock", "selected is null");
+			return null;
+		}
+		
+		return getBlock(selected);
 	}
 	
 	public void rotate(Position pos) {
