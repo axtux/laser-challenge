@@ -222,7 +222,8 @@ public class Map extends Observable {
 			return false;
 		}
 		// TODO change this to real rotation
-		c.setRotation(c.getRotation()+90);
+		if (!(c.getTile().getProperties().containsKey("fixedorientation")))
+			c.setRotation(c.getRotation()+90);
 		return true;
 	}
 	

@@ -1,6 +1,6 @@
 <level name="Level 1" map="g6_1" difficulty="easy" time="120">	
 	<blocks>
-		<block type="one-laser_source" fixedposition="true" fixedorientation="true" orientation="LEFT">
+		<block type="one-laser_source" fixedposition="true" orientation="LEFT">
 			<position x="2" y="0"/>
 		</block>
 		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="DOWN">
