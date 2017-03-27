@@ -27,6 +27,9 @@ public class LevelType {
 	private OrderedMap<String, BlockType> blocks;
 	String name;
 	String label;
+	
+	TextureRegion input;
+	TextureRegion output;
 	/**
 	 * Parse XML blocks file of levelType and create associated BlockType objects.
 	 * @param levelType LevelType name.
@@ -56,6 +59,20 @@ public class LevelType {
 			block = new BlockType(name, blockElement);
 			blocks.put(block.getName(), block);
 		}
+		
+		String filename = dirPath()+"/laserInput.png";
+		FileHandle fh = Gdx.files.local(filename);
+		if(fh == null) {
+			throw new GdxRuntimeException("404 File not found "+filename);
+		}
+		input = new TextureRegion(new Texture(fh));
+		
+		filename = dirPath()+"/laserOutput.png";
+		fh = Gdx.files.local(filename);
+		if(fh == null) {
+			throw new GdxRuntimeException("404 File not found "+filename);
+		}
+		output = new TextureRegion(new Texture(fh));
 	}
 	/**
 	 * @return Directory path relative to application root.
@@ -74,6 +91,13 @@ public class LevelType {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	public TextureRegion getInput() {
+		return input;
+	}
+	public TextureRegion getOutput() {
+		return output;
 	}
 	/**
 	 * Get block types.
