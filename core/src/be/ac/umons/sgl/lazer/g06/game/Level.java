@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.SerializationException;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
@@ -206,14 +207,36 @@ public class Level extends Observable {
 	
 	public void start() {
 		this.elapsedTime = 0;
+		Timer clock = new Timer();
+		Timer.Task i = new Timer.Task() {
+			
+			@Override
+			public void run() {
+				clock.delay(5000);
+				Gdx.app.exit();
+				
+			}
+		};
+		clock.scheduleTask(new Timer.Task() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
+			}
+		}, time);
+		//clock.delay(111111000);
+		//clock.start();
 		// TODO activate timer
 		// notify observers
 		this.setChanged();
 		this.notifyObservers();
+		//Gdx.app.exit();
 	}
 	
 	public void stop() {
 		// TODO deactivate timer
+		//clock.stop();
 		// notify observers
 		this.setChanged();
 		this.notifyObservers();
