@@ -9,7 +9,7 @@
 		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="DOWN">
 			<position x="9" y="9"/>
 		</block>
-		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="LEFT">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="RIGHT">
 			<position x="0" y="9"/>
 		</block>
 		<block type="blocker">
