@@ -55,13 +55,13 @@
 		<block type="two-way_mirror">
 			<position x="7" y="12"/>
 		</block>
-		<block type="two-way-straight_splitter" orientation="DOWN">
+		<block type="two-way-straight_splitter" fixedposition="true" fixedorientation="true" orientation="DOWN">
 			<position x="11" y="1"/>
 		</block>
-		<block type="two-way-angled-right_splitter" orientation="DOWN">
+		<block type="two-way-angled-right_splitter" fixedposition="true" fixedorientation="true" orientation="DOWN">
 			<position x="13" y="10"/>
 		</block>
-		<block type="two-way-angled-left_splitter" orientation="DOWN">
+		<block type="two-way-angled-left_splitter" fixedposition="true" fixedorientation="true" orientation="DOWN">
 			<position x="3" y="7"/>
 		</block>
 		<block type="blocker"/>
