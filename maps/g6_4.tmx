@@ -7,6 +7,16 @@
     <property name="unavailable" value="1"/>
    </properties>
   </tile>
+  <tile id="188">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="189">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
   <tile id="277">
    <properties>
     <property name="unavailable" value="1"/>
@@ -27,16 +37,6 @@
     <property name="mirror" value="1"/>
    </properties>
   </tile>
-  <tile id="309">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="311">
-   <properties>
-    <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
   <tile id="341">
    <properties>
     <property name="unavailable" value="1"/>
@@ -50,6 +50,21 @@
   <tile id="343">
    <properties>
     <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="370">
+   <properties>
+    <property name="blocker" value="1"/>
+   </properties>
+  </tile>
+  <tile id="371">
+   <properties>
+    <property name="blocker" value="1"/>
+   </properties>
+  </tile>
+  <tile id="372">
+   <properties>
+    <property name="blocker" value="1"/>
    </properties>
   </tile>
   <tile id="373">
@@ -85,7 +100,7 @@
  </tileset>
  <layer name="ground" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJzLY2Jg0GYkD+fh0evMTBymVH8xIyYmxb17GFAxPv3YMCH92NwHwiVAXEqkfjEgFgdiCRzq8fkfxDcDYnMgtsCin5D/QPrDgDgciCPI1F8GxOVAXIFFvxOBtEAo/AjpJ4QHk/5cJggmRX8SUF8yFv3YzIHJI6sDAA3NTZw=
+   eJzLY2Jg0GYkD+fh0evMTBymVH8xUG0JEJciYVLcu4eBgWEvEO+DYnz6sWFC+kFuK8aCYW4mRr8YEIsDsQQjQh0ME/I/SM4MiM2B2AKLfkL+A+kPA+JwII4gU38ZEJcDcQUW/YTSAqHwIyYt4cODSX8uEwRTQz82c2DyyOoAq5FNqw==
   </data>
  </layer>
 </map>

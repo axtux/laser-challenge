@@ -355,6 +355,7 @@ public class Level extends Observable {
 		Block newBlock = getBlock(newPos);
 		/*
 		if(!isAvailable(oldBlock.getType().getLabel(),oldPos,newPos)){
+			Gdx.app.debug("Level.moveTo", "not available");
 			return false;
 		}
 		//*/
@@ -388,8 +389,12 @@ public class Level extends Observable {
 	}
 	
 	public boolean isAvailable (String labelOldBlock, Position oldPos, Position newPos){
-		if (map.getGround(oldPos).getTile().getProperties().containsKey("unavailable") || 
-		map.getGround(newPos).getTile().getProperties().containsKey("unavailable")){
+		if (map.getGround(oldPos).getTile().getProperties().containsKey("unavailable") && 
+			        	map.getGround(oldPos).getTile().getProperties().get("unavailable").equals("1")){
+			Gdx.app.debug("Level.isAvailable", "oldBlock contient unavailable");
+			return false;}
+		else if	(map.getGround(newPos).getTile().getProperties().containsKey("unavailable") &&
+					map.getGround(newPos).getTile().getProperties().get("unavailable").equals("1")){
 			return false;
 		}
 		if(!(labelOldBlock.equals("Source")) && (map.getGround(newPos).getTile().getProperties().containsKey("source"))){
@@ -397,51 +402,38 @@ public class Level extends Observable {
 				return false;
 			}
 		}
-		else if ( labelOldBlock.equals("Source") && (map.getGround(newPos).getTile().getProperties().containsKey("source"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("source").equals("0")){
-				return false;
-			}
-		}
 		else if ( !(labelOldBlock.equals("Cible")) && (map.getGround(newPos).getTile().getProperties().containsKey("target"))){
 			if ( map.getGround(newPos).getTile().getProperties().get("target").equals("1")){
-				return false;
-			}
-		}
-		else if ( labelOldBlock.equals("Cible") && (map.getGround(newPos).getTile().getProperties().containsKey("target"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("target").equals("0")){
+				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
 				return false;
 			}
 		}
 		else if ( !(labelOldBlock.equals("Miroir")) && (map.getGround(newPos).getTile().getProperties().containsKey("mirror"))){
 			if ( map.getGround(newPos).getTile().getProperties().get("mirror").equals("1")){
-				return false;
-			}
-		}
-		else if ( labelOldBlock.equals("Miroir") && (map.getGround(newPos).getTile().getProperties().containsKey("mirror"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("mirror").equals("0")){
+				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
 				return false;
 			}
 		}
 		else if ( !(labelOldBlock.equals("Diviseur")) && (map.getGround(newPos).getTile().getProperties().containsKey("splitter"))){
 			if ( map.getGround(newPos).getTile().getProperties().get("splitter").equals("1")){
-				return false;
-			}
-		}
-		else if ( labelOldBlock.equals("Diviseur") && (map.getGround(newPos).getTile().getProperties().containsKey("splitter"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("splitter").equals("0")){
-				return false;
-			}
-		}
-		else if ( labelOldBlock.equals("Porte") && (map.getGround(newPos).getTile().getProperties().containsKey("gate"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("gate").equals("0")){
+				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
 				return false;
 			}
 		}
 		else if ( !(labelOldBlock.equals("Porte")) && (map.getGround(newPos).getTile().getProperties().containsKey("gate"))){
 			if ( map.getGround(newPos).getTile().getProperties().get("gate").equals("1")){
+				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
 				return false;
 			}
 		}
+
+		if ( !(labelOldBlock.equals("Bloqueur")) && (map.getGround(newPos).getTile().getProperties().containsKey("blocker"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("block").equals("1")){
+				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
+				return false;
+			}
+		}
+		Gdx.app.debug("isAvailable", "FIN");
 		return true;
 					
 	}
