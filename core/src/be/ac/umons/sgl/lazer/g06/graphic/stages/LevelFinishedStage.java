@@ -7,7 +7,7 @@ public class LevelFinishedStage extends AbstractLevelStage {
 		addDoubleLabel("Niveau", level.getName());
 		if(game.getMode().hasScore()) {
 			// TODO load score
-			addDoubleLabel("Score", "");
+			addDoubleLabel("Score", Integer.toString(level.getScore()));
 		}
 		
 		content.row();
