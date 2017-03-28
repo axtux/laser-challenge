@@ -22,11 +22,6 @@
     <property name="restriction" value="mirror"/>
    </properties>
   </tile>
-  <tile id="310">
-   <properties>
-    <property name="restriction" value="splitter"/>
-   </properties>
-  </tile>
   <tile id="370">
    <properties>
     <property name="splitter" value="1"/>
