@@ -115,6 +115,9 @@ public class MyActionListener implements ActionListener {
 			game.setStage(new LevelFinishedStage());
 			break;
 		
+		case "ACTION_LEVEL_UNDO":
+			game.getLevel().undo();
+			break;
 		case "ACTION_LEVEL_MOVE":
 			game.getLevel().moving(true);
 			break;
