@@ -32,6 +32,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	Label blockLabel;
 	Table selectionContent;
 	
+	TextButton undoButton;
 	TextButton moveButton;
 	TextButton rotateButton;
 	
@@ -145,8 +146,10 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		Table buttons = new Table();
 		content.row();
 		content.add(buttons);
+		undoButton = getButton("Annuler", "ACTION_LEVEL_UNDO", "small-menu");
 		moveButton = getButton("Déplacer", "ACTION_LEVEL_MOVE", "small-menu");
 		rotateButton = getButton("Pivoter", "ACTION_LEVEL_ROTATE", "small-menu");
+		buttons.add(undoButton).pad(5);
 		buttons.add(moveButton).pad(5);
 		buttons.add(rotateButton).pad(5);
 	}
@@ -173,6 +176,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		
 		boolean move = block != null && block.canMove();
 		boolean rotate = block != null && block.canRotate();
+		undoButton.setStyle(skin.get(level.canUndo() ? "small-menu" : "disabled-small-menu", TextButtonStyle.class));
 		moveButton.setStyle(skin.get(move ? "small-menu" : "disabled-small-menu", TextButtonStyle.class));
 		rotateButton.setStyle(skin.get(rotate ? "small-menu" : "disabled-small-menu", TextButtonStyle.class));
 	}
