@@ -26,6 +26,7 @@ public class Map extends Observable {
 	public static final int BLOCKS_LAYER = 1;
 	public static final int INPUTS_LAYER = 2;
 	public static final int START_OUTPUTS_LAYER = 3;
+	public final int END_OUTPUTS_LAYER;
 	
 	private TiledMap map;
 	int mapWidth, mapHeight, tileSize;
@@ -52,9 +53,10 @@ public class Map extends Observable {
 		map.getProperties().put("tileheight", tileSize);
 		
 		addLayer("ground");
-		fillLayer(GROUND_LAYER, Color.WHITE);
+		fillLayer(GROUND_LAYER, getColorCell(Color.WHITE));
 		addLayer("blocks");
-		
+		// not outputs layer
+		END_OUTPUTS_LAYER = -1;
 	}
 	
 	public Map(String tmx_map_name, Location loc) {
@@ -78,7 +80,8 @@ public class Map extends Observable {
 		addLayer("blocks");
 		// laser layers
 		addLayer("input");
-		for(int i = 0; i < Orientation.values().length; ++i) {
+		END_OUTPUTS_LAYER = START_OUTPUTS_LAYER+Orientation.values().length-1;
+		for(int i = 0; i <= END_OUTPUTS_LAYER; ++i) {
 			addLayer("output_"+Integer.toString(i));
 		}
 		// get link to texture regions
@@ -92,12 +95,14 @@ public class Map extends Observable {
 		map.getLayers().add(layer);
 	}
 	
-	private void fillLayer(int layer, Color c) {
+	private Cell getColorCell(Color c) {
 		Texture tex = LazerChallenge.getInstance().getSkin().getTexture(c, tileSize);
 		TiledMapTile tile = new StaticTiledMapTile(new TextureRegion(tex));
 		Cell cell = new Cell();
 		cell.setTile(tile);
-		
+		return cell;
+	}
+	private void fillLayer(int layer, Cell cell) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		for(int x = 0; x < mapWidth; ++x) {
 			for(int y = 0; y < mapHeight; ++y) {
@@ -214,6 +219,11 @@ public class Map extends Observable {
 		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getOutput()));
 		cell.setRotation(orientation.getAngle());
 		return this.setCell(cell, START_OUTPUTS_LAYER, position);
+	}
+	public void clearLasers() {
+		for(int layer = INPUTS_LAYER; layer <= END_OUTPUTS_LAYER; ++layer) {
+			fillLayer(layer, null);
+		}
 	}
 	
 	public TiledMapTileLayer getLayer(int i) {

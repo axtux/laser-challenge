@@ -248,6 +248,7 @@ public class Level extends Observable {
 	
 	public void start_laser() {
 		clear_laser();
+		map.clearLasers();
 		
 		Position pos;
 		for(int x = 0; x < map.getWidth(); ++x) {
