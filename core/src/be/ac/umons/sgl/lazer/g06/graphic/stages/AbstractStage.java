@@ -133,10 +133,14 @@ public abstract class AbstractStage extends Stage {
 	}
 	
 	protected Cell<TextButton> addButton(Table container, String text, String action, String styleName) {
+		return container.add(getButton(text, action, styleName));
+	}
+	
+	protected TextButton getButton(String text, String action, String styleName) {
 		TextButton btn = new TextButton(text, skin, styleName);
 		btn.getLabelCell().pad(10);
 		btn.addListener(new MyClickListener(Input.Buttons.LEFT, action));
-		return container.add(btn);
+		return btn;
 	}
 	
 	protected TextField addTextField(String label, String fieldname) {

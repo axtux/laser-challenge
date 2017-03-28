@@ -1,6 +1,8 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -27,6 +29,9 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	Label timeLabel;
 	Label blockLabel;
 	Table selectionContent;
+	
+	TextButton moveButton;
+	TextButton rotateButton;
 	
 	public LevelPlayingStage() {
 		super();
@@ -139,8 +144,10 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		Table buttons = new Table();
 		content.row();
 		content.add(buttons);
-		addButton(buttons, "Move", "ACTION_LEVEL_MOVE", "small-menu").pad(5);
-		addButton(buttons, "Rotate", "ACTION_LEVEL_ROTATE", "small-menu").pad(5);
+		moveButton = getButton("Move", "ACTION_LEVEL_MOVE", "small-menu");
+		rotateButton = getButton("Rotate", "ACTION_LEVEL_ROTATE", "small-menu");
+		buttons.add(moveButton).pad(5);
+		buttons.add(rotateButton).pad(5);
 	}
 	
 	private void addLaserButton(Table container, boolean box) {
@@ -160,6 +167,20 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		
 		Block block = level.getSelectedBlock();
 		blockLabel.setText(block == null ? "none" : block.getType().getLabel());
+		
+		boolean move = block != null && block.canMove();
+		boolean rotate = block != null && block.canRotate();
+		
+		if(move) {
+			moveButton.setStyle(skin.get("small-menu", TextButtonStyle.class));
+		} else {
+			moveButton.setStyle(skin.get("disabled-small-menu", TextButtonStyle.class));
+		}
+		if(rotate) {
+			rotateButton.setStyle(skin.get("small-menu", TextButtonStyle.class));
+		} else {
+			rotateButton.setStyle(skin.get("disabled-small-menu", TextButtonStyle.class));
+		}
 	}
 	
 }

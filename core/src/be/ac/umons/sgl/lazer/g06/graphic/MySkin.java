@@ -139,6 +139,13 @@ public class MySkin extends Skin {
 		tbs.down = getColor(Color.LIGHT_GRAY);
 		tbs.font = getFont(smallFont, Color.WHITE, defaultBorder, Color.BLACK);
 		add("small-menu", tbs);
+		// Small disabled
+		tbs = new TextButtonStyle();
+		tbs.up = getColor(Color.DARK_GRAY);
+		tbs.over = getColor(Color.DARK_GRAY);
+		tbs.down = getColor(Color.DARK_GRAY);
+		tbs.font = getFont(smallFont, Color.DARK_GRAY, defaultBorder, Color.BLACK);
+		add("disabled-small-menu", tbs);
 		
 		ScrollPaneStyle sps = new ScrollPaneStyle();
 		sps.background = getColor(Color.LIGHT_GRAY);
