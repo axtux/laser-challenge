@@ -35,6 +35,7 @@
   <tile id="298">
    <properties>
     <property name="mirror" value="1"/>
+    <property name="source" value="0"/>
    </properties>
   </tile>
   <tile id="341">
@@ -50,21 +51,6 @@
   <tile id="343">
    <properties>
     <property name="unavailable" value="1"/>
-   </properties>
-  </tile>
-  <tile id="370">
-   <properties>
-    <property name="blocker" value="1"/>
-   </properties>
-  </tile>
-  <tile id="371">
-   <properties>
-    <property name="blocker" value="1"/>
-   </properties>
-  </tile>
-  <tile id="372">
-   <properties>
-    <property name="blocker" value="1"/>
    </properties>
   </tile>
   <tile id="373">
