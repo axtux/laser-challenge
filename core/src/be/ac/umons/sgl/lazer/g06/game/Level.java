@@ -353,12 +353,12 @@ public class Level extends Observable {
 		}
 		Block oldBlock = getBlock(oldPos);
 		Block newBlock = getBlock(newPos);
-	
+		/*
 		if(!isAvailable(oldBlock.getType().getLabel(),oldPos,newPos)){
 			Gdx.app.debug("Level.moveTo", "not available");
 			return false;
 		}
-		
+		//*/
 		if (oldBlock != null && !oldBlock.canMove()){
 			return false;
 		}
@@ -383,6 +383,8 @@ public class Level extends Observable {
 		
 		Switch last = history.pop();
 		moveTo(last.getOldPos(), last.getNewPos());
+		// this move has been saved, remove it
+		history.pop();
 		return true;
 	}
 	
