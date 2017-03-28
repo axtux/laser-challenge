@@ -26,9 +26,9 @@ public class Level extends Observable {
 	 */
 	private static Array<Level> levels;
 	
+	String xml;
 	LazerChallenge game;
 	String name;
-	String mapName;
 	Map map;
 	Map inventory;
 	Difficulty difficulty;
@@ -49,16 +49,21 @@ public class Level extends Observable {
 	 * if any asset referenced into TMX file cannot be loaded.
 	 */
 	public Level(String file) {
-		String content = Files.getContent(file);
-		if(content == null) {
+		xml = Files.getContent(file);
+		if(xml == null) {
 			throw new GdxRuntimeException("File "+file+" does not exists.");
 		}
 		
 		game = LazerChallenge.getInstance();
-		
 		Gdx.app.debug("Level.Level", "creating level from file "+file);
+		reset();
+	}
+	
+	public void reset() {
+		stop();
+		
 		XmlReader reader = new XmlReader();
-		Element level = reader.parse(content);
+		Element level = reader.parse(xml);
 		setName(level.getAttribute("name", ""));
 		setDifficulty(level.getAttribute("difficulty", ""));
 		setType(level.getAttribute("type", ""));
@@ -67,7 +72,9 @@ public class Level extends Observable {
 		setMap(level.getAttribute("map", ""));
 		setBlocks(level.getChildByName("blocks"));
 		history= new Array<Switch>();
+		// changed during game
 		moving  = false;
+		selected = null;
 	}
 	/**
 	 * Set level name
@@ -84,7 +91,6 @@ public class Level extends Observable {
 	 * @param mapFilename TMX filename (without extension) which has to be located into maps directory.
 	 */
 	private void setMap(String mapFilename) {
-		this.mapName = mapFilename;
 		try {
 			this.map = new Map(mapFilename, Location.MAP);
 		} catch (SerializationException e) {
@@ -258,6 +264,10 @@ public class Level extends Observable {
 				laserInput(pos, null);
 			}
 		}
+		
+		if(game.getMode().hasScore()) {
+			end();
+		}
 	}
 	
 	public boolean laserInput(Position position, Orientation orientation) {
@@ -313,9 +323,17 @@ public class Level extends Observable {
 		changed();
 	}
 	
+	private void end() {
+		stop();
+		game.act("MENU_LEVEL_FINISHED");
+	}
+	
 	public void timerTick() {
 		//Gdx.app.debug("Level.timer_tick", "elapsedTime="+Integer.toString(elapsedTime));
 		this.elapsedTime += 1;
+		if(getRemainingTime() == 0) {
+			end();
+		}
 		changed();
 	}
 	
