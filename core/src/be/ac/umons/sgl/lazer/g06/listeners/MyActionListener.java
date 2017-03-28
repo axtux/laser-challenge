@@ -70,10 +70,10 @@ public class MyActionListener implements ActionListener {
 			break;
 		// ACTIONs from LOGIN_LOCAL
 		case "ACTION_LOCAL_LOGIN":
-			local_user(false);
+			localUser(false);
 			break;
 		case "ACTION_LOCAL_SIGNUP":
-			local_user(true);
+			localUser(true);
 			break;
 			
 		case "MENU_MODES":
@@ -122,7 +122,7 @@ public class MyActionListener implements ActionListener {
 			game.getLevel().rotateSelected();
 			break;
 		case "ACTION_LEVEL_LASER":
-			game.getLevel().start_laser();
+			game.getLevel().startLaser();
 			break;
 		
 		default:
@@ -134,7 +134,7 @@ public class MyActionListener implements ActionListener {
 	 * Manage local user connection.
 	 * @param create If true, user will be created. If false, user will be logged in.
 	 */
-	private void local_user(boolean create) {
+	private void localUser(boolean create) {
 		String username = game.getStage().getFieldValue("USERNAME");
 		String password = game.getStage().getFieldValue("PASSWORD");
 		
