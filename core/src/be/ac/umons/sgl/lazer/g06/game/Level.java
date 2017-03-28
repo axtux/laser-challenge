@@ -347,13 +347,17 @@ public class Level extends Observable {
 		if(!cellProperties(oldBlock,newBlock,oldPos,newPos)){
 			return false;
 		}
-		if (newBlock != null && newBlock.getTile().getProperties().containsKey("fixedposition")){
-				return false;
-		}
-		if (oldBlock != null && oldBlock.getTile().getProperties().containsKey("fixedposition")){
+		
+		if (oldBlock != null && !oldBlock.canMove()){
 			return false;
 		}
+		
+		if (newBlock != null && !newBlock.canMove()){
+				return false;
+		}
+		
 		history.add(new Switch(oldPos,newPos));
+		
 		return setBlock(oldBlock, newPos) && setBlock(newBlock, oldPos);
 	}
 	
