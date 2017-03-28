@@ -39,4 +39,18 @@ public class Position {
 		return s;
 	}
 	
+	public boolean equals(Object o) {
+		if(o == null) {
+			return false;
+		}
+		
+		Position other;
+		try {
+			other = (Position) o;
+		} catch (ClassCastException e) {
+			return false;
+		}
+		return this.x == other.x && this.y == other.y && this.loc == other.loc;
+	}
+	
 }
