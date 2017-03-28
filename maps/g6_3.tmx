@@ -32,11 +32,6 @@
     <property name="unavailable" value="1"/>
    </properties>
   </tile>
-  <tile id="310">
-   <properties>
-    <property name="splitter" value="1"/>
-   </properties>
-  </tile>
   <tile id="311">
    <properties>
     <property name="unavailable" value="1"/>
@@ -55,6 +50,21 @@
   <tile id="343">
    <properties>
     <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="370">
+   <properties>
+    <property name="blocker" value="1"/>
+   </properties>
+  </tile>
+  <tile id="371">
+   <properties>
+    <property name="blocker" value="1"/>
+   </properties>
+  </tile>
+  <tile id="372">
+   <properties>
+    <property name="blocker" value="1"/>
    </properties>
   </tile>
   <tile id="373">
@@ -85,7 +95,7 @@
  </tileset>
  <layer name="ground" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJzLY2Jg0GbEj/OIUIMPF2PBYkAsDsQSaOr2MKBiM6CYORBbQOVxqQsDioUDcQSaOnRcBsTlQFxBgrsp8TsyzsURjsjiAA3pHI8=
+   eJzLY2Jg0GbEj/OIUAPDxWgYmxgIiwGxOBBLoKnbw4CKzYBi5kBsQUBdGFAsHIgjCNhbBsTlQFyBpI5Yf1CKc3GEI7I4ACRnHs8=
   </data>
  </layer>
 </map>
