@@ -1,5 +1,9 @@
 package be.ac.umons.sgl.lazer.g06.users;
 
+import com.badlogic.gdx.utils.Array;
+
+import be.ac.umons.sgl.lazer.g06.game.Switch;
+
 public class User {
 	private String username;
 	private String image;
@@ -33,4 +37,18 @@ public class User {
 		return image;
 	}
 	
+	public void saveScore (String levelname, float score ){
+		
+	}
+	
+	public void saveHistory ( String levelname , Array<Switch> history){
+		
+	}
+	
+	/*public float loadScore(String levelname){
+		
+	}
+	public Array<Switch> loadHistory(String levelname){
+		
+	} */
 }
