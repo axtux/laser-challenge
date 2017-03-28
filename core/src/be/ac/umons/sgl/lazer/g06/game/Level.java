@@ -345,6 +345,7 @@ public class Level extends Observable {
 		Block newBlock = getBlock(newPos);
 	
 		if(!isAvailable(oldBlock.getType().getLabel(),oldPos,newPos)){
+			Gdx.app.debug("Level.moveTo", "not available");
 			return false;
 		}
 		
@@ -413,6 +414,16 @@ public class Level extends Observable {
 		}
 		else if ( !(labelOldBlock.equals("Porte")) && (map.getGround(newPos).getTile().getProperties().containsKey("gate"))){
 			if ( map.getGround(newPos).getTile().getProperties().get("gate").equals("1")){
+				return false;
+			}
+		}
+		else if ( labelOldBlock.equals("Bloqueur") && (map.getGround(newPos).getTile().getProperties().containsKey("block"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("block").equals("0")){
+				return false;
+			}
+		}
+		else if ( !(labelOldBlock.equals("Bloqueur")) && (map.getGround(newPos).getTile().getProperties().containsKey("block"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("block").equals("1")){
 				return false;
 			}
 		}
