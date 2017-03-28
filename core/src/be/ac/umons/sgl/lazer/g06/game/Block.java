@@ -1,5 +1,6 @@
 package be.ac.umons.sgl.lazer.g06.game;
 
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.utils.Array;
@@ -21,8 +22,26 @@ public class Block extends TiledMapTileLayer.Cell {
 		setOrientation(orientation);
 	}
 	
+	public boolean canMove() {
+		MapProperties props = getTile().getProperties();
+		if(props.containsKey("fixedposition") && props.get("fixedposition").toString().toLowerCase() == "true") {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean canRotate() {
+		MapProperties props = getTile().getProperties();
+		if(props.containsKey("fixedorientation") && props.get("fixedorientation").toString().toLowerCase() == "true") {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public boolean rotate() {
-		if(getTile().getProperties().containsKey("fixedorientation")) {
+		if(!canRotate()) {
 			return false;
 		}
 		
