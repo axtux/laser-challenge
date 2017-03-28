@@ -29,7 +29,7 @@ public class Block extends TiledMapTileLayer.Cell {
 		}
 		
 		String value = props.get(name).toString().toLowerCase();
-		if(value == "true" || value == "1") {
+		if(value.equals("true") || value.equals("1")) {
 			return true;
 		}
 		
