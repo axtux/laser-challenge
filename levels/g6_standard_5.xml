@@ -1,4 +1,4 @@
-<level name="Level 5" map="g6_5" difficulty="hard" time="80">
+<level name="Niveau 5" map="g6_5" difficulty="hard" time="80">
 	<blocks>
 		<block type="one-laser_source" fixedposition="true">
 			<position x="0" y="0"/>
@@ -24,6 +24,12 @@
 		<block type="one-laser_target" fixedposition="true" orientation="DOWN">
 			<position x="14" y="19"/>
 		</block>
+		<block type="gate" fixedposition="true">
+			<position x="3" y="16"/>
+		</block>
+		<block type="gate" fixedposition="true">
+			<position x="18" y="16"/>
+		</block>		
 		<block type="blocker" fixedposition="true">
 			<position x="2" y="2"/>
 		</block>
