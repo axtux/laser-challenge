@@ -12,22 +12,22 @@
 		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="RIGHT">
 			<position x="0" y="9"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="2" y="0"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker"  fixedposition="true">
 			<position x="0" y="0"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker"  fixedposition="true">
 			<position x="5" y="2"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker"  fixedposition="true">
 			<position x="1" y="8"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker"  fixedposition="true">
 			<position x="3" y="8"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker"  fixedposition="true">
 			<position x="8" y="8"/>
 		</block>
 		<block type="two-way-angled-left_splitter" orientation="DOWN">
