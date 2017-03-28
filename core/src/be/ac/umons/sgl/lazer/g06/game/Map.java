@@ -287,7 +287,7 @@ public class Map extends Observable {
 		}
 		
 		value = value.toLowerCase();
-		if(value == "true" || value == "1") {
+		if(value.equals("true") || value.equals("1")) {
 			return true;
 		}
 		
