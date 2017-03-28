@@ -179,7 +179,11 @@ public class Level extends Observable {
 	/**
 	 * Set state to changed and notify observers
 	 */
-	private void changed() {
+	public void changed() {
+		// continuous laser
+		if(game.getMode() != null && !game.getMode().hasScore()) {
+			startLaser();
+		}
 		// notify observers
 		this.setChanged();
 		this.notifyObservers();
@@ -309,12 +313,14 @@ public class Level extends Observable {
 	}
 	
 	public void start() {
-		this.elapsedTime = 0;
-		Timer.schedule(new Timer.Task() {
-			public void run() {
-				LazerChallenge.getInstance().getLevel().timerTick();
-			}
-		}, 1, 1, this.time-1);
+		if(game.getMode().hasScore()) {
+			this.elapsedTime = 0;
+			Timer.schedule(new Timer.Task() {
+				public void run() {
+					LazerChallenge.getInstance().getLevel().timerTick();
+				}
+			}, 1, 1, this.time-1);
+		}
 		changed();
 	}
 	
