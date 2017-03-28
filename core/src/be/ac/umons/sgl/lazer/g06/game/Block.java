@@ -22,7 +22,7 @@ public class Block extends TiledMapTileLayer.Cell {
 		setOrientation(orientation);
 	}
 	
-	private boolean getBoolProp(String name) {
+	public boolean getBoolProp(String name) {
 		MapProperties props = getTile().getProperties();
 		if(!props.containsKey(name)) {
 			return false;
