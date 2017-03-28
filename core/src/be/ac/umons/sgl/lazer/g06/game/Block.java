@@ -22,22 +22,26 @@ public class Block extends TiledMapTileLayer.Cell {
 		setOrientation(orientation);
 	}
 	
-	public boolean canMove() {
+	private boolean getBoolProp(String name) {
 		MapProperties props = getTile().getProperties();
-		if(props.containsKey("fixedposition") && props.get("fixedposition").toString().toLowerCase() == "true") {
+		if(!props.containsKey(name)) {
 			return false;
 		}
 		
-		return true;
+		String value = props.get(name).toString().toLowerCase();
+		if(value == "true" || value == "1") {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean canMove() {
+		return !getBoolProp("fixedposition");
 	}
 	
 	public boolean canRotate() {
-		MapProperties props = getTile().getProperties();
-		if(props.containsKey("fixedorientation") && props.get("fixedorientation").toString().toLowerCase() == "true") {
-			return false;
-		}
-		
-		return true;
+		return !getBoolProp("fixedorientation");
 	}
 	
 	public boolean rotate() {

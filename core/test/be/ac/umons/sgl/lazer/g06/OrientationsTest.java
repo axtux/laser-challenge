@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.OldOrientation;
-import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 import org.junit.Before;
 import org.junit.Test;

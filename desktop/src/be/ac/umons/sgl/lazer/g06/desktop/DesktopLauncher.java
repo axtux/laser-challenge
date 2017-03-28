@@ -4,7 +4,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.utils.Timer;
 
-import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
+import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 
 public class DesktopLauncher {
 	public static void main (String[] args) {
