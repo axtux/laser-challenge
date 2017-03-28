@@ -19,7 +19,12 @@
   </tile>
   <tile id="298">
    <properties>
-    <property name="source" value="0"/>
+    <property name="restriction" value="mirror"/>
+   </properties>
+  </tile>
+  <tile id="310">
+   <properties>
+    <property name="restriction" value="splitter"/>
    </properties>
   </tile>
   <tile id="370">
@@ -29,12 +34,12 @@
   </tile>
   <tile id="620">
    <properties>
-    <property name="source" value="1"/>
+    <property name="restriction" value="source"/>
    </properties>
   </tile>
   <tile id="621">
    <properties>
-    <property name="target" value="1"/>
+    <property name="restriction" value="target"/>
    </properties>
   </tile>
  </tileset>
