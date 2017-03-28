@@ -226,19 +226,19 @@ public class Level extends Observable {
 		}
 	}
 	
-	private void clear_laser() {
+	private void clearLaser() {
 		map.clearLasers();
 		Position pos;
 		
 		for(int x = 0; x < map.getWidth(); ++x) {
 			for(int y = 0; y < map.getHeight(); ++y) {
 				pos = new Position(x, y, Position.Location.MAP);
-				clear_laser(pos);
+				clearLaser(pos);
 			}
 		}
 	}
 	
-	private void clear_laser(Position position) {
+	private void clearLaser(Position position) {
 		Block block = map.getBlock(position);
 		if(block == null) {
 			return;
@@ -247,19 +247,19 @@ public class Level extends Observable {
 		block.clearInput();
 	}
 	
-	public void start_laser() {
-		clear_laser();
+	public void startLaser() {
+		clearLaser();
 		
 		Position pos;
 		for(int x = 0; x < map.getWidth(); ++x) {
 			for(int y = 0; y < map.getHeight(); ++y) {
 				pos = new Position(x, y, Position.Location.MAP);
-				laser_input(pos, null);
+				laserInput(pos, null);
 			}
 		}
 	}
 	
-	public boolean laser_input(Position position, Orientation orientation) {
+	public boolean laserInput(Position position, Orientation orientation) {
 		Gdx.app.debug("Level.laser_input", position.toString()+" from "+(orientation == null ? "null" : orientation.toString()));
 		
 		if(!map.inMap(position)) {
@@ -279,7 +279,7 @@ public class Level extends Observable {
 			result = result && map.setLaserInput(position, orientation.reverse());
 			result = result && map.setLaserOutput(position, orientation.reverse());
 			Gdx.app.debug("Level.laser_input", "setting laser on "+pos_str+" to "+ori_str+" result: "+Boolean.toString(result));
-			return result && laser_input(orientation.reverse().nextPosition(position), orientation);
+			return result && laserInput(orientation.reverse().nextPosition(position), orientation);
 		}
 		
 		if(block.processed()) {
@@ -291,7 +291,7 @@ public class Level extends Observable {
 			Position nextPosition = output.nextPosition(position);
 			Orientation nextOrientation = output.reverse();
 			Gdx.app.debug("Level.laser_input", "sending laser to "+nextPosition.toString()+" from "+nextOrientation.toString());
-			laser_input(nextPosition, nextOrientation);
+			laserInput(nextPosition, nextOrientation);
 		}
 		
 		return true;
@@ -301,7 +301,7 @@ public class Level extends Observable {
 		this.elapsedTime = 0;
 		Timer.schedule(new Timer.Task() {
 			public void run() {
-				LazerChallenge.getInstance().getLevel().timer_tick();
+				LazerChallenge.getInstance().getLevel().timerTick();
 			}
 		}, 1, 1, this.time-1);
 		changed();
@@ -312,7 +312,7 @@ public class Level extends Observable {
 		changed();
 	}
 	
-	public void timer_tick() {
+	public void timerTick() {
 		//Gdx.app.debug("Level.timer_tick", "elapsedTime="+Integer.toString(elapsedTime));
 		this.elapsedTime += 1;
 		changed();
