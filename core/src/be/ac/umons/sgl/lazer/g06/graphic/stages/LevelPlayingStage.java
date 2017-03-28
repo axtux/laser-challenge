@@ -138,14 +138,12 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		content.add(selectionContent);
 		blockLabel = addDoubleLabel(selectionContent, "Block", "", "small-label");
 		// TODO add information about empty case
-		//addDoubleLabel(selectionContent, "Déplacer", "autorisé", "small-label");
-		//addDoubleLabel(selectionContent, "Orienter", "autorisé", "small-label");
 		
 		Table buttons = new Table();
 		content.row();
 		content.add(buttons);
-		moveButton = getButton("Move", "ACTION_LEVEL_MOVE", "small-menu");
-		rotateButton = getButton("Rotate", "ACTION_LEVEL_ROTATE", "small-menu");
+		moveButton = getButton("Déplacer", "ACTION_LEVEL_MOVE", "small-menu");
+		rotateButton = getButton("Pivoter", "ACTION_LEVEL_ROTATE", "small-menu");
 		buttons.add(moveButton).pad(5);
 		buttons.add(rotateButton).pad(5);
 	}
@@ -170,17 +168,8 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		
 		boolean move = block != null && block.canMove();
 		boolean rotate = block != null && block.canRotate();
-		
-		if(move) {
-			moveButton.setStyle(skin.get("small-menu", TextButtonStyle.class));
-		} else {
-			moveButton.setStyle(skin.get("disabled-small-menu", TextButtonStyle.class));
-		}
-		if(rotate) {
-			rotateButton.setStyle(skin.get("small-menu", TextButtonStyle.class));
-		} else {
-			rotateButton.setStyle(skin.get("disabled-small-menu", TextButtonStyle.class));
-		}
+		moveButton.setStyle(skin.get(move ? "small-menu" : "disabled-small-menu", TextButtonStyle.class));
+		rotateButton.setStyle(skin.get(rotate ? "small-menu" : "disabled-small-menu", TextButtonStyle.class));
 	}
 	
 }
