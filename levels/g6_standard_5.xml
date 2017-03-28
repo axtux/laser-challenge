@@ -12,16 +12,16 @@
 		<block type="one-laser_source" fixedposition="true">
 			<position x="19" y="0"/>
 		</block>
-		<block type="one-laser_target" fixedposition="true" orientation="DOWN">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="DOWN">
 			<position x="5" y="19"/>
 		</block>
-		<block type="one-laser_target" fixedposition="true" orientation="LEFT">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="LEFT">
 			<position x="8" y="19"/>
 		</block>
-		<block type="one-laser_target" fixedposition="true" orientation="RIGHT">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="RIGHT">
 			<position x="11" y="19"/>
 		</block>
-		<block type="one-laser_target" fixedposition="true" orientation="DOWN">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="DOWN">
 			<position x="14" y="19"/>
 		</block>
 		<block type="gate" fixedposition="true">

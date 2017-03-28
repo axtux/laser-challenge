@@ -30,7 +30,7 @@
 		<block type="blocker"  fixedposition="true">
 			<position x="8" y="8"/>
 		</block>
-		<block type="two-way-angled-left_splitter" orientation="DOWN">
+		<block type="two-way-angled-left_splitter" fixedposition="true" fixedorientation="true" orientation="DOWN">
 			<position x="1" y="1"/>
 		</block>
 		<block type="blocker"/>

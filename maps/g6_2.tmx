@@ -17,16 +17,6 @@
     <property name="splitter" value="1"/>
    </properties>
   </tile>
-  <tile id="298">
-   <properties>
-    <property name="restriction" value="mirror"/>
-   </properties>
-  </tile>
-  <tile id="310">
-   <properties>
-    <property name="restriction" value="splitter"/>
-   </properties>
-  </tile>
   <tile id="370">
    <properties>
     <property name="splitter" value="1"/>
@@ -45,7 +35,7 @@
  </tileset>
  <layer name="ground" width="6" height="6">
   <data encoding="base64" compression="zlib">
-   eJzTZmRg0MaBzbHgPCYIvZeBgWEPA4LGpR6X2blM2MUA0BcJwQ==
+   eJzTZmRg0MaBzbHgPCYIvZeBgWEPA4LGpR6X2blM2MUBzwwJfg==
   </data>
  </layer>
 </map>
