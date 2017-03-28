@@ -351,20 +351,25 @@ public class Level extends Observable {
 			Gdx.app.error("Level.moveTo", "newPos is null");
 			return false;
 		}
-		Block oldBlock = getBlock(oldPos);
-		Block newBlock = getBlock(newPos);
-		/*
-		if(!isAvailable(oldBlock.getType().getLabel(),oldPos,newPos)){
-			Gdx.app.debug("Level.moveTo", "not available");
-			return false;
-		}
-		//*/
-		if (oldBlock != null && !oldBlock.canMove()){
+		// unavailable
+		if(!isAvailable(oldPos) || !isAvailable(newPos)) {
 			return false;
 		}
 		
+		Block oldBlock = getBlock(oldPos);
+		Block newBlock = getBlock(newPos);
+		// fixed position
+		if (oldBlock != null && !oldBlock.canMove()){
+			return false;
+		}
+		// fixed position
 		if (newBlock != null && !newBlock.canMove()){
 				return false;
+		}
+		
+		// restriction
+		if(!isAllowed(oldPos, newBlock) || !isAllowed(newPos, oldBlock)) {
+			return false;
 		}
 		
 		history.add(new Switch(oldPos,newPos));
@@ -388,55 +393,26 @@ public class Level extends Observable {
 		return true;
 	}
 	
-	public boolean isAvailable (String labelOldBlock, Position oldPos, Position newPos){
-		if (map.getGround(oldPos).getTile().getProperties().containsKey("unavailable") && 
-			        	map.getGround(oldPos).getTile().getProperties().get("unavailable").equals("1")){
-			Gdx.app.debug("Level.isAvailable", "oldBlock contient unavailable");
-			return false;}
-		else if	(map.getGround(newPos).getTile().getProperties().containsKey("unavailable") &&
-					map.getGround(newPos).getTile().getProperties().get("unavailable").equals("1")){
-			return false;
-		}
-		if(!(labelOldBlock.equals("Source")) && (map.getGround(newPos).getTile().getProperties().containsKey("source"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("source").equals("1")){
-				return false;
-			}
-		}
-		else if ( !(labelOldBlock.equals("Cible")) && (map.getGround(newPos).getTile().getProperties().containsKey("target"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("target").equals("1")){
-				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
-				return false;
-			}
-		}
-		else if ( !(labelOldBlock.equals("Miroir")) && (map.getGround(newPos).getTile().getProperties().containsKey("mirror"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("mirror").equals("1")){
-				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
-				return false;
-			}
-		}
-		else if ( !(labelOldBlock.equals("Diviseur")) && (map.getGround(newPos).getTile().getProperties().containsKey("splitter"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("splitter").equals("1")){
-				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
-				return false;
-			}
-		}
-		else if ( !(labelOldBlock.equals("Porte")) && (map.getGround(newPos).getTile().getProperties().containsKey("gate"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("gate").equals("1")){
-				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
-				return false;
-			}
-		}
-
-		if ( !(labelOldBlock.equals("Bloqueur")) && (map.getGround(newPos).getTile().getProperties().containsKey("blocker"))){
-			if ( map.getGround(newPos).getTile().getProperties().get("block").equals("1")){
-				Gdx.app.debug("Level.isAvailable", "not Block but map contain property");
-				return false;
-			}
-		}
-		Gdx.app.debug("isAvailable", "FIN");
-		return true;
-					
+	public boolean isAvailable(Position pos) {
+		return !map.getGroundBoolProp(pos, "unavailable");
 	}
+	
+	public boolean isAllowed(Position pos, Block block) {
+		// null block is allowed everywhere
+		if(block == null) {
+			return true;
+		}
+		
+		String restriction = map.getGroundProp(pos, "restriction");
+		// no restriction
+		if(restriction == null || restriction.isEmpty()) {
+			return true;
+		}
+		String name = block.getType().getName();
+		// name must contain restriction to be allowed
+		return name.contains(restriction);
+	}
+	
 	public void rotateSelected() {
 		rotate(selected);
 	}
