@@ -17,6 +17,11 @@
     <property name="splitter" value="1"/>
    </properties>
   </tile>
+  <tile id="298">
+   <properties>
+    <property name="source" value="0"/>
+   </properties>
+  </tile>
   <tile id="370">
    <properties>
     <property name="splitter" value="1"/>

@@ -1,4 +1,4 @@
-<level name="Level 2" map="g6_2" difficulty="easy" time="120">
+<level name="Niveau 2" map="g6_2" difficulty="easy" time="120">
 	<blocks>
 		<block type="one-way_mirror"/>
 		<block type="one-way_mirror"/>

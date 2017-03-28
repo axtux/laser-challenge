@@ -1,14 +1,14 @@
 <blocks>
 	<block>
 		<name>blocker</name>
-		<label>Blocker</label>
+		<label>Bloqueur</label>
 		<inputs>
 		</inputs>
 	</block>
 	
 	<block>
 		<name>gate</name>
-		<label>Gate</label>
+		<label>Porte</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN"/>
@@ -31,7 +31,7 @@
 	
 	<block>
 		<name>one-laser_target</name>
-		<label>Target</label>
+		<label>Cible</label>
 		<inputs>
 			<input orientation ="UP"/>
 		</inputs>
@@ -39,7 +39,7 @@
 	
 	<block>
 		<name>two-laser_target</name>
-		<label>Target</label>
+		<label>Cible</label>
 		<inputs>
 			<input orientation ="RIGHT"/>
 			<input orientation ="LEFT"/>
@@ -48,7 +48,7 @@
 	
 	<block>
 		<name>four-laser_target</name>
-		<label>Target</label>
+		<label>Cible</label>
 		<inputs>
 			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
@@ -59,7 +59,7 @@
 	
 	<block>
 		<name>one-way_mirror</name>
-		<label>Mirror</label>
+		<label>Miroir</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -73,7 +73,7 @@
 	
 	<block>
 		<name>two-way_mirror</name>
-		<label>Mirror</label>
+		<label>Miroir</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>
@@ -92,7 +92,7 @@
 	
 	<block>
 		<name>two-way-straight_splitter</name>
-		<label>Splitter</label>
+		<label>Diviseur</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT"/>
@@ -103,7 +103,7 @@
 	
 	<block>
 		<name>two-way-angled-right_splitter</name>
-		<label>Splitter</label>
+		<label>Diviseur</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="DOWN"/>
@@ -114,7 +114,7 @@
 	
 	<block>
 		<name>two-way-angled-left_splitter</name>
-		<label>Splitter</label>
+		<label>Diviseur</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="LEFT"/>
@@ -125,7 +125,7 @@
 	
 	<block>
 		<name>three-way_splitter</name>
-		<label>Splitter</label>
+		<label>Diviseur</label>
 		<inputs>
 			<input orientation="UP">
 				<output orientation ="RIGHT"/>

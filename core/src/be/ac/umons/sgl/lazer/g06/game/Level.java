@@ -343,10 +343,18 @@ public class Level extends Observable {
 		map.getGround(newPos).getTile().getProperties().containsKey("unavailable")){
 			return false;
 		}
-		if(oldBlock !=null && oldBlock.getType().getLabel().equals("Source") && !(map.getGround(newPos).getTile().getProperties().containsKey("source"))){
-			return false;
+		if(oldBlock !=null && !(oldBlock.getType().getLabel().equals("Source")) && (map.getGround(newPos).getTile().getProperties().containsKey("source"))){
+				if ( map.getGround(newPos).getTile().getProperties().get("source").equals("1")){
+					return false;
+				}
 		}
-		else if(newBlock !=null && newBlock.getType().getLabel().equals("Source") && !(map.getGround(oldPos).getTile().getProperties().containsKey("source"))){
+		else if(newBlock !=null && !(newBlock.getType().getLabel().equals("Source")) && (map.getGround(oldPos).getTile().getProperties().containsKey("source"))){
+			if ( map.getGround(oldPos).getTile().getProperties().get("source").equals("1")){
+				return false;
+			}
+		}
+		
+		else if (newBlock !=null && map.getGround(oldPos).getTile().getProperties().get("source").equals("0")){
 			return false;
 		}
 		return true;
