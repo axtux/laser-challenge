@@ -9,6 +9,11 @@
 		<block type="blocker" fixedposition="true" fixedorientation="true">
 			<position x="0" y="2"/>
 		</block>
-		<block type="one-laser_source"/>
+		<block type="blocker" fixedposition="true" fixedorientation="true">
+			<position x="1" y="2"/>
+		</block>
+		<block type="one-laser_source" fixedposition="true">
+			<position x="0" y="0"/>
+		</block>
 	</blocks>
 </level>
