@@ -67,6 +67,7 @@ public class Level extends Observable {
 		setMap(level.getAttribute("map", ""));
 		setBlocks(level.getChildByName("blocks"));
 		history= new Array<Switch>();
+		moving  = false;
 	}
 	/**
 	 * Set level name
@@ -324,6 +325,12 @@ public class Level extends Observable {
 	}
 	
 	public void moving(boolean moving) {
+		if(moving) {
+			Block block = getSelectedBlock();
+			if(block == null || !block.canMove()) {
+				return;
+			}
+		}
 		this.moving = moving;
 	}
 	
@@ -362,6 +369,20 @@ public class Level extends Observable {
 		history.add(new Switch(oldPos,newPos));
 		
 		return setBlock(oldBlock, newPos) && setBlock(newBlock, oldPos);
+	}
+	
+	public boolean canUndo() {
+		return history.size > 0;
+	}
+	
+	public boolean undo() {
+		if(!canUndo()) {
+			return false;
+		}
+		
+		Switch last = history.pop();
+		moveTo(last.getOldPos(), last.getNewPos());
+		return true;
 	}
 	
 	public boolean isAvailable (String labelOldBlock, Position oldPos, Position newPos){
