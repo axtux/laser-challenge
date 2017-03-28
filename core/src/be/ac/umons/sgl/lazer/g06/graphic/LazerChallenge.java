@@ -119,6 +119,10 @@ public class LazerChallenge extends Game {
 	 * @param level New level
 	 */
 	public void setLevel(Level level) {
+		if(this.level != null) {
+			this.level.stop();
+		}
+		
 		this.level = level;
 	}
 	/**
