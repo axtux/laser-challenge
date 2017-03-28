@@ -19,7 +19,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
-import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
 public class Map extends Observable {
 	static final String MAP_PATH = "maps";

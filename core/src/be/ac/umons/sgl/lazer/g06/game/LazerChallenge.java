@@ -1,4 +1,4 @@
-package be.ac.umons.sgl.lazer.g06.graphic;
+package be.ac.umons.sgl.lazer.g06.game;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-import be.ac.umons.sgl.lazer.g06.game.Level;
+import be.ac.umons.sgl.lazer.g06.graphic.MySkin;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.AbstractStage;
 import be.ac.umons.sgl.lazer.g06.listeners.ActionListener;
 import be.ac.umons.sgl.lazer.g06.listeners.MyActionListener;

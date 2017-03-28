@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
+import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.graphic.MySkin;
 import be.ac.umons.sgl.lazer.g06.listeners.MyClickListener;
 

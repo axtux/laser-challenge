@@ -3,7 +3,7 @@ package be.ac.umons.sgl.lazer.g06.listeners;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
+import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 /**
  * Add this listener to scene2d object to make it do actions
  */

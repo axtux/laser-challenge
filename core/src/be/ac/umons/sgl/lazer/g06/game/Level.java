@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 import be.ac.umons.sgl.lazer.g06.Files;
 import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
-import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 /**
  * Class that manages the game part of the LazerChallenge
  * Notify observers about selected level, time and score updates
