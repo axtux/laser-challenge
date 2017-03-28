@@ -406,6 +406,16 @@ public class Level extends Observable {
 				return false;
 			}
 		}
+		else if ( labelOldBlock.equals("Porte") && (map.getGround(newPos).getTile().getProperties().containsKey("gate"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("gate").equals("0")){
+				return false;
+			}
+		}
+		else if ( !(labelOldBlock.equals("Porte")) && (map.getGround(newPos).getTile().getProperties().containsKey("gate"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("gate").equals("1")){
+				return false;
+			}
+		}
 		return true;
 					
 	}
