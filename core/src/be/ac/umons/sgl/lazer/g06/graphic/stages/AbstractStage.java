@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -50,10 +51,11 @@ public abstract class AbstractStage extends Stage {
 	}
 	
 	protected void initContainer() {
+		Table rootContainer = new Table();
+		this.addActor(rootContainer);
+		rootContainer.setFillParent(true);
 		container = new Table();
-		this.addActor(container);
-		container.setFillParent(true);
-		container.setBackground(skin.getColor(Color.WHITE));
+		rootContainer.add(new ScrollPane(container, skin)).grow();
 	}
 	
 	protected void initContent() {
