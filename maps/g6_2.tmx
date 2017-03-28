@@ -22,11 +22,6 @@
     <property name="source" value="0"/>
    </properties>
   </tile>
-  <tile id="310">
-   <properties>
-    <property name="mirror" value="1"/>
-   </properties>
-  </tile>
   <tile id="370">
    <properties>
     <property name="splitter" value="1"/>
