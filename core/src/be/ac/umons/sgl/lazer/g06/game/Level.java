@@ -28,6 +28,7 @@ public class Level extends Observable {
 	
 	LazerChallenge game;
 	String name;
+	String mapName;
 	Map map;
 	Map inventory;
 	Difficulty difficulty;
@@ -82,6 +83,7 @@ public class Level extends Observable {
 	 * @param mapFilename TMX filename (without extension) which has to be located into maps directory.
 	 */
 	private void setMap(String mapFilename) {
+		this.mapName = mapFilename;
 		try {
 			this.map = new Map(mapFilename, Location.MAP);
 		} catch (SerializationException e) {
@@ -300,7 +302,7 @@ public class Level extends Observable {
 			public void run() {
 				LazerChallenge.getInstance().getLevel().timer_tick();
 			}
-		}, 1, 1, this.time);
+		}, 1, 1, this.time-1);
 		changed();
 	}
 	
