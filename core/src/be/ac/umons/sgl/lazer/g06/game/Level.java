@@ -342,9 +342,11 @@ public class Level extends Observable {
 			Gdx.app.error("Level.moveTo", "newPos is null");
 			return false;
 		}
-		
 		Block oldBlock = getBlock(oldPos);
 		Block newBlock = getBlock(newPos);
+		if(!cellProperties(oldBlock,newBlock,oldPos,newPos)){
+			return false;
+		}
 		if (newBlock != null && newBlock.getTile().getProperties().containsKey("fixedposition")){
 				return false;
 		}
@@ -355,6 +357,20 @@ public class Level extends Observable {
 		return setBlock(oldBlock, newPos) && setBlock(newBlock, oldPos);
 	}
 	
+	public boolean cellProperties (Block oldBlock ,Block newBlock, Position oldPos, Position newPos){
+		if (map.getGround(oldPos).getTile().getProperties().containsKey("unavailable") || 
+		map.getGround(newPos).getTile().getProperties().containsKey("unavailable")){
+			return false;
+		}
+		if(oldBlock !=null && oldBlock.getType().getLabel().equals("Source") && !(map.getGround(newPos).getTile().getProperties().containsKey("source"))){
+			return false;
+		}
+		else if(newBlock !=null && newBlock.getType().getLabel().equals("Source") && !(map.getGround(oldPos).getTile().getProperties().containsKey("source"))){
+			return false;
+		}
+		return true;
+					
+	}
 	public void rotateSelected() {
 		rotate(selected);
 	}

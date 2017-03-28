@@ -6,14 +6,17 @@
 		<block type="one-laser_source" fixedposition="true">
 			<position x="7" y="0"/>
 		</block>
-		<block type="one-laser_target" fixedposition="true" fixedorientation="true">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="DOWN">
 			<position x="9" y="9"/>
 		</block>
-		<block type="one-laser_target" fixedposition="true" fixedorientation="true">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="LEFT">
 			<position x="0" y="9"/>
 		</block>
 		<block type="blocker">
 			<position x="2" y="0"/>
+		</block>
+		<block type="blocker">
+			<position x="0" y="0"/>
 		</block>
 		<block type="blocker">
 			<position x="5" y="2"/>
@@ -27,11 +30,16 @@
 		<block type="blocker">
 			<position x="8" y="8"/>
 		</block>
+		<block type="two-way-angled-left_splitter" orientation="DOWN">
+			<position x="1" y="1"/>
+		</block>
+		<block type="blocker"/>
+		<block type="blocker"/>
+		<block type="blocker"/>
+		<block type="one-way_mirror"/>
+		<block type="one-way_mirror"/>
 		<block type="one-way_mirror"/>
 		<block type="two-way_mirror"/>
-		<block type="two-way-straight_splitter"/>
-		<block type="two-way-angled-left_splitter"/>
-		<block type="two-way-angled-right_splitter"/>
 	</blocks>
 </level>
 		

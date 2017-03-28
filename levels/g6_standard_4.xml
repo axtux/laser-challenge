@@ -1,46 +1,55 @@
 <level name="Level 4" map="g6_4" difficulty="medium" time="120">
 	<blocks>
-		<block type="one-laser_target" fixedposition="true">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="RIGHT">
 			<position x="0" y="15"/>
 		</block>
-		<block type="one-laser_target" fixedposition="true">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="LEFT">
 			<position x="15" y="15"/>
 		</block>
 		<block type="two-laser_target" fixedposition="true">
 			<position x="11" y="12"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="14" y="1"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="4" y="2"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="12" y="3"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="14" y="3"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="6" y="4"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="11" y="4"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="1" y="7"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="6" y="7"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="8" y="11"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="12" y="11"/>
 		</block>
-		<block type="blocker">
+		<block type="blocker" fixedposition="true">
 			<position x="0" y="14"/>
+		</block>
+		<block type="two-way_mirror">
+			<position x="7" y="12"/>
+		</block>
+		<block type="two-way-straight_splitter" orientation="DOWN">
+			<position x="11" y="1"/>
+		</block>
+		<block type="two-way-angled-right_splitter" orientation="DOWN">
+			<position x="13" y="10"/>
 		</block>
 		<block type="one-laser_source"/>
 		<block type="one-laser_source"/>
@@ -48,13 +57,11 @@
 		<block type="blocker"/>
 		<block type="blocker"/>
 		<block type="blocker"/>
+		<block type="blocker"/>
+		<block type="blocker"/>
 		<block type="one-way_mirror"/>
 		<block type="one-way_mirror"/>
-		<block type="two-way_mirror"/>
-		<block type="two-way-straight_splitter"/>
-		<block type="two-way-angled-right_splitter"/>
-		<block type="two-way-angled-right_splitter"/>
-		<block type="two-way-angled-left_splitter"/>
-		<block type="two-way-angled-left_splitter"/>
+		<block type="one-way_mirror"/>
+		<block type="one-way_mirror"/>
 	</blocks>
 </level>

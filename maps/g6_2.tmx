@@ -2,6 +2,11 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="6" height="6" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32" tilecount="1024">
   <image source="terrain.png" width="1024" height="1024"/>
+  <tile id="187">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
   <tile id="188">
    <properties>
     <property name="unavailable" value="1"/>
@@ -30,7 +35,7 @@
  </tileset>
  <layer name="ground" width="6" height="6">
   <data encoding="base64" compression="zlib">
-   eJzTZmRg0MaD85iwi+9lQMXo8sVQjM9sZJzLBMEAw3cJzw==
+   eJzTZmRg0MaBzbHgPCYIvZeBgWEPA4LGpR6X2blM2MUA0BcJwQ==
   </data>
  </layer>
 </map>

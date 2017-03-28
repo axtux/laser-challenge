@@ -42,9 +42,19 @@
     <property name="unavailable" value="1"/>
    </properties>
   </tile>
-  <tile id="370">
+  <tile id="341">
    <properties>
-    <property name="splitter" value="1"/>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="342">
+   <properties>
+    <property name="unavailable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="343">
+   <properties>
+    <property name="unavailable" value="1"/>
    </properties>
   </tile>
   <tile id="373">
@@ -75,7 +85,7 @@
  </tileset>
  <layer name="ground" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJzLY2Jg0GbEj/OIUEMIF6NhMSAWB2IJNHV7GFCxGVDMHIgtoPpwqQsDioUDcQSaOnR7y4C4HIgrSHAzpX6H4Vwc4YgsDgD/yxtv
+   eJzLY2Jg0GbEj/OIUIMPF2PBYkAsDsQSaOr2MKBiM6CYORBbQOVxqQsDioUDcQSaOnRcBsTlQFxBgrsp8TsyzsURjsjiAA3pHI8=
   </data>
  </layer>
 </map>
