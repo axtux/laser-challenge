@@ -344,7 +344,7 @@ public class Level extends Observable {
 		}
 		Block oldBlock = getBlock(oldPos);
 		Block newBlock = getBlock(newPos);
-		if(!cellProperties(oldBlock,newBlock,oldPos,newPos)){
+		if(!isAvailable(oldBlock.getType().getLabel(),oldPos,newPos)){
 			return false;
 		}
 		
@@ -361,24 +361,50 @@ public class Level extends Observable {
 		return setBlock(oldBlock, newPos) && setBlock(newBlock, oldPos);
 	}
 	
-	public boolean cellProperties (Block oldBlock ,Block newBlock, Position oldPos, Position newPos){
+	public boolean isAvailable (String labelOldBlock, Position oldPos, Position newPos){
 		if (map.getGround(oldPos).getTile().getProperties().containsKey("unavailable") || 
 		map.getGround(newPos).getTile().getProperties().containsKey("unavailable")){
 			return false;
 		}
-		if(oldBlock !=null && !(oldBlock.getType().getLabel().equals("Source")) && (map.getGround(newPos).getTile().getProperties().containsKey("source"))){
-				if ( map.getGround(newPos).getTile().getProperties().get("source").equals("1")){
-					return false;
-				}
-		}
-		else if(newBlock !=null && !(newBlock.getType().getLabel().equals("Source")) && (map.getGround(oldPos).getTile().getProperties().containsKey("source"))){
-			if ( map.getGround(oldPos).getTile().getProperties().get("source").equals("1")){
+		if(!(labelOldBlock.equals("Source")) && (map.getGround(newPos).getTile().getProperties().containsKey("source"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("source").equals("1")){
 				return false;
 			}
 		}
-		
-		else if (newBlock !=null && map.getGround(oldPos).getTile().getProperties().get("source").equals("0")){
-			return false;
+		else if ( labelOldBlock.equals("Source") && (map.getGround(newPos).getTile().getProperties().containsKey("source"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("source").equals("0")){
+				return false;
+			}
+		}
+		else if ( !(labelOldBlock.equals("Cible")) && (map.getGround(newPos).getTile().getProperties().containsKey("target"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("target").equals("1")){
+				return false;
+			}
+		}
+		else if ( labelOldBlock.equals("Cible") && (map.getGround(newPos).getTile().getProperties().containsKey("target"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("target").equals("0")){
+				return false;
+			}
+		}
+		else if ( !(labelOldBlock.equals("Miroir")) && (map.getGround(newPos).getTile().getProperties().containsKey("mirror"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("mirror").equals("1")){
+				return false;
+			}
+		}
+		else if ( labelOldBlock.equals("Miroir") && (map.getGround(newPos).getTile().getProperties().containsKey("mirror"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("mirror").equals("0")){
+				return false;
+			}
+		}
+		else if ( !(labelOldBlock.equals("Diviseur")) && (map.getGround(newPos).getTile().getProperties().containsKey("splitter"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("splitter").equals("1")){
+				return false;
+			}
+		}
+		else if ( labelOldBlock.equals("Diviseur") && (map.getGround(newPos).getTile().getProperties().containsKey("splitter"))){
+			if ( map.getGround(newPos).getTile().getProperties().get("splitter").equals("0")){
+				return false;
+			}
 		}
 		return true;
 					
