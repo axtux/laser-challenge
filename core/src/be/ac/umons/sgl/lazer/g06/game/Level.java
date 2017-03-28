@@ -413,6 +413,10 @@ public class Level extends Observable {
 		return name.contains(restriction);
 	}
 	
+	public String getRestriction(Position pos) {
+		return map.getGroundProp(pos, "restriction");
+	}
+	
 	public void rotateSelected() {
 		rotate(selected);
 	}

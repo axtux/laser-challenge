@@ -30,6 +30,8 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	Label scoreLabel;
 	Label timeLabel;
 	Label blockLabel;
+	Label availableLabel;
+	Label restrictionLabel;
 	Table selectionContent;
 	
 	TextButton undoButton;
@@ -140,7 +142,9 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		selectionContent = new Table();
 		content.row();
 		content.add(selectionContent);
-		blockLabel = addDoubleLabel(selectionContent, "Block", "", "small-label");
+		blockLabel = addDoubleLabel(selectionContent, "Bloc", "", "small-label");
+		availableLabel = addDoubleLabel(selectionContent, "Disponible", "", "small-label");
+		restrictionLabel = addDoubleLabel(selectionContent, "Contrainte", "", "small-label");
 		// TODO add information about empty case
 		
 		Table buttons = new Table();
@@ -173,6 +177,8 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		
 		Block block = level.getSelectedBlock();
 		blockLabel.setText(block == null ? "none" : block.getType().getLabel());
+		availableLabel.setText(level.isAvailable(level.getSelected()) ? "oui" : "non");
+		restrictionLabel.setText(level.getRestriction(level.getSelected()));
 		
 		boolean move = block != null && block.canMove();
 		boolean rotate = block != null && block.canRotate();
