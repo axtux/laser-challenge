@@ -159,8 +159,8 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	}
 	
 	private void addLaserButton(Table container, boolean box) {
-		// TODO continuous laser in training mode
-		//if(!game.getMode().hasScore()) return;
+		// no button in training mode
+		if(!score) return;
 		
 		if(box) {
 			container = addBox(container, null);
