@@ -230,14 +230,11 @@ public class Map extends Observable {
 			return null;
 		}
 		
-		int x = p.getX();
-		int y = p.getY();
-		
-		if(x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) {
+		if(!inMap(p)) {
 			return null;
 		}
 		
-		return tmtl.getCell(x, y);
+		return tmtl.getCell(p.getX(), p.getY());
 	}
 	
 	public Array<Cell> getCells(Position pos) {
@@ -257,6 +254,34 @@ public class Map extends Observable {
 	
 	public Cell getGround(Position pos) {
 		return getCell(GROUND_LAYER, pos);
+	}
+	
+	public String getGroundProp(Position pos, String name) {
+		Cell cell = getCell(GROUND_LAYER, pos);
+		if(cell == null) {
+			return null;
+		}
+		
+		MapProperties props = cell.getTile().getProperties();
+		if(!props.containsKey(name)) {
+			return null;
+		}
+		
+		return props.get(name).toString();
+	}
+	
+	public boolean getGroundBoolProp(Position pos, String name) {
+		String value = getGroundProp(pos, name);
+		if(value == null) {
+			return false;
+		}
+		
+		value = value.toLowerCase();
+		if(value == "true" || value == "1") {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public Block getBlock(Position pos) {
