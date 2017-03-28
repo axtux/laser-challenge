@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
+import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 import be.ac.umons.sgl.lazer.g06.graphic.LazerChallenge;
 
@@ -24,10 +25,14 @@ public class Map extends Observable {
 	static final String MAP_PATH = "maps";
 	public static final int GROUND_LAYER = 0;
 	public static final int BLOCKS_LAYER = 1;
+	public static final int INPUTS_LAYER = 2;
+	public static final int START_OUTPUTS_LAYER = 3;
 	
 	private TiledMap map;
 	int mapWidth, mapHeight, tileSize;
 	Location loc;
+	
+	TiledMapTile inputTile, outputTile;
 	/**
 	 * Create Map with references from an other Map instance
 	 * Usually used for inventory
@@ -50,6 +55,7 @@ public class Map extends Observable {
 		addLayer("ground");
 		fillLayer(GROUND_LAYER, Color.WHITE);
 		addLayer("blocks");
+		
 	}
 	
 	public Map(String tmx_map_name, Location loc) {
@@ -71,6 +77,14 @@ public class Map extends Observable {
 		
 		setSizes();
 		addLayer("blocks");
+		// laser layers
+		addLayer("input");
+		for(int i = 0; i < Orientation.values().length; ++i) {
+			addLayer("output_"+Integer.toString(i));
+		}
+		// get link to texture regions
+		//inputTile = new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getInput());
+		//outputTile = new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getOutput());
 	}
 	
 	private void addLayer(String name) {
@@ -145,20 +159,32 @@ public class Map extends Observable {
 		return loc;
 	}
 	
+	public boolean inMap(Position position) {
+		if(position == null) {
+			return false;
+		}
+		
+		if(position.getX() < 0 || position.getX() >= mapWidth) {
+			return false;
+		}
+		if(position.getY() < 0 || position.getY() >= mapHeight) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	private boolean setCell(Cell cell, int layer, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		if(tmtl == null) {
 			return false;
 		}
 		
-		int x = p.getX();
-		int y = p.getY();
-		
-		if(x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) {
+		if(!inMap(p)) {
 			return false;
 		}
 		
-		tmtl.setCell(x, y, cell);
+		tmtl.setCell(p.getX(), p.getY(), cell);
 		// notify observers
 		this.setChanged();
 		this.notifyObservers();
@@ -167,6 +193,28 @@ public class Map extends Observable {
 	
 	public boolean setBlock(Block block, Position pos) {
 		return setCell(block, BLOCKS_LAYER, pos);
+	}
+	
+	public boolean setLaserInput(Position position, Orientation orientation) {
+		if(!inMap(position) || orientation == null) {
+			return false;
+		}
+		
+		Cell cell = new Cell();
+		//Texture
+		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getInput()));
+		cell.setRotation(orientation.getAngle());
+		return this.setCell(cell, INPUTS_LAYER, position);
+	}
+	public boolean setLaserOutput(Position position, Orientation orientation) {
+		if(!inMap(position) || orientation == null) {
+			return false;
+		}
+		
+		Cell cell = new Cell();
+		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getOutput()));
+		cell.setRotation(orientation.getAngle());
+		return this.setCell(cell, START_OUTPUTS_LAYER, position);
 	}
 	
 	public TiledMapTileLayer getLayer(int i) {
