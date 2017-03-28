@@ -344,6 +344,7 @@ public class Level extends Observable {
 		}
 		Block oldBlock = getBlock(oldPos);
 		Block newBlock = getBlock(newPos);
+	
 		if(!isAvailable(oldBlock.getType().getLabel(),oldPos,newPos)){
 			return false;
 		}
