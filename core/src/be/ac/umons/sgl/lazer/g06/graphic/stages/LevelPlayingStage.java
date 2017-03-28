@@ -21,6 +21,8 @@ import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.graphic.MapTable;
 
 public class LevelPlayingStage extends AbstractLevelStage implements Observer {
+	boolean score;
+	
 	Table mapTable;
 	Table leftTable;
 	Table rightTable;
@@ -36,6 +38,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	public LevelPlayingStage() {
 		super();
 		setTitle(game.getMode().toString()+" : "+level.getName());
+		this.score = game.getMode().hasScore();
 		
 		addHeaderButton("Retour", "MENU_LEVEL_INFOS");
 		
@@ -116,7 +119,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	}
 	
 	private void addInfos(Table container) {
-		if(!game.getMode().hasScore()) return;
+		if(!score) return;
 		
 		Table content = addBox(container, "Informations");
 		timeLabel = addDoubleLabel(content, "Temps", "", "small-label");
@@ -160,8 +163,10 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	}
 	
 	public void update(Observable o, Object arg) {
-		timeLabel.setText(Time.prettyTime(level.getRemainingTime(), false, false));
-		scoreLabel.setText(Integer.toString(level.getScore()));
+		if(score) {
+			timeLabel.setText(Time.prettyTime(level.getRemainingTime(), false, false));
+			scoreLabel.setText(Integer.toString(level.getScore()));
+		}
 		
 		Block block = level.getSelectedBlock();
 		blockLabel.setText(block == null ? "none" : block.getType().getLabel());
