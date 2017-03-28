@@ -254,6 +254,10 @@ public class LevelType {
 			this.y = y;
 		}
 		
+		public Orientation reverse() {
+			return fromInt(ordinal()+Orientation.values().length/2);
+		}
+		
 		public Orientation next() {
 			return fromInt(ordinal()+1);
 		}
