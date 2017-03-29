@@ -102,6 +102,7 @@ public class MyActionListener implements ActionListener {
 		// ACTIONs from MENU_LEVEL_INFOS
 		case "MENU_LEVEL_LOAD":
 			// TODO load level
+			act("ACTION_LEVEL_LAUNCH");
 			break;
 		case "ACTION_LEVEL_LAUNCH":
 			game.setStage(new LevelPlayingStage());
