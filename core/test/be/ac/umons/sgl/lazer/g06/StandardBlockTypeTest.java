@@ -37,26 +37,72 @@ public class StandardBlockTypeTest {
 	}
 	
 	@Test
-	public void GateTest() {
+	public void BlockerTest() {
 		// initialization
-		BlockType gate = standard.getBlockType("gate");
+		BlockType block = standard.getBlockType("blocker");
 		Array<Orientation> outputs;
 		// from null
-		outputs = gate.input(null);
+		outputs = block.input(null);
 		assertEquals("From null size", 0, outputs.size);
 		// from UP
-		outputs = gate.input(Orientation.UP);
+		outputs = block.input(Orientation.UP);
+		assertEquals("From UP size", 0, outputs.size);
+		// from DOWN
+		outputs = block.input(Orientation.DOWN);
+		assertEquals("From DOWN size", 0, outputs.size);
+		// FROM RIGHT
+		outputs = block.input(Orientation.RIGHT);
+		assertEquals("From RIGHT size", 0, outputs.size);
+		// FROM LEFT
+		outputs = block.input(Orientation.LEFT);
+		assertEquals("From LEFT size", 0, outputs.size);
+	}
+	
+	@Test
+	public void GateTest() {
+		// initialization
+		BlockType block = standard.getBlockType("gate");
+		Array<Orientation> outputs;
+		// from null
+		outputs = block.input(null);
+		assertEquals("From null size", 0, outputs.size);
+		// from UP
+		outputs = block.input(Orientation.UP);
 		assertEquals("From UP size", 1, outputs.size);
 		assertEquals("From UP Orientation", Orientation.DOWN, outputs.get(0));
 		// from DOWN
-		outputs = gate.input(Orientation.DOWN);
+		outputs = block.input(Orientation.DOWN);
 		assertEquals("From DOWN size", 1, outputs.size);
 		assertEquals("From DOWN Orientation", Orientation.UP, outputs.get(0));
 		// FROM RIGHT
-		outputs = gate.input(Orientation.RIGHT);
+		outputs = block.input(Orientation.RIGHT);
 		assertEquals("From RIGHT size", 0, outputs.size);
 		// FROM LEFT
-		outputs = gate.input(Orientation.LEFT);
+		outputs = block.input(Orientation.LEFT);
+		assertEquals("From LEFT size", 0, outputs.size);
+	}
+	
+	@Test
+	public void OneWayMirrorTest() {
+		// initialization
+		BlockType block = standard.getBlockType("one-way_mirror");
+		Array<Orientation> outputs;
+		// from null
+		outputs = block.input(null);
+		assertEquals("From null size", 0, outputs.size);
+		// from UP
+		outputs = block.input(Orientation.UP);
+		assertEquals("From UP size", 1, outputs.size);
+		assertEquals("From UP Orientation", Orientation.RIGHT, outputs.get(0));
+		// FROM RIGHT
+		outputs = block.input(Orientation.RIGHT);
+		assertEquals("From RIGHT size", 1, outputs.size);
+		assertEquals("From RIGHT Orientation", Orientation.UP, outputs.get(0));
+		// from DOWN
+		outputs = block.input(Orientation.DOWN);
+		assertEquals("From DOWN size", 0, outputs.size);
+		// FROM LEFT
+		outputs = block.input(Orientation.LEFT);
 		assertEquals("From LEFT size", 0, outputs.size);
 	}
 }
