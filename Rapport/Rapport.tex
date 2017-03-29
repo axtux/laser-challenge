@@ -18,7 +18,7 @@
 \tableofcontents
 \newpage
 \section{Introduction}
-Nous débutons notre rapport d'implémentation par un léger rappel du projet qui nous a été demandé initialement. 
+  Nous débutons notre rapport d'implémentation par un léger rappel du projet qui nous a été demandé initialement. 
 L'énoncé mis à notre disposition en début d'année parlait de la réalisation du jeu nommé ``Lazer Challenge'' en Java
 en nous aidant de la bibliothèque LibGDX. De plus , une extension était demandée individuellement à chaque étudiant .
 
@@ -33,45 +33,51 @@ Pour pouvoir réaliser ce projet, plusieurs étapes ont dû être nécessaires. 
  Nous voici désormais à l'étape de l'implémentation où nous allont maintenant vous expliquer notre travail dans son ensemble,
  les difficultés et problèmes survenus ,nos choix d'implémentations ,quelques concessions faites également ... TODO suite.
 \section{Préparatifs}
-\subsection{Changement de groupe}
+\subsection{Changement de groupe} 
 Dès le début de la phase d'implémentation , suite a plusieurs abandons dans les autres groupes, un membre de notre goupe a été annexé dans un autre groupe.
-En conséquence , nous avons dû immédiatement revoir notre diagramme de Classe et la maquette graphique afin de pouvoir nous baser directement sur quelque chose
-de concret. Le diagramme de classe se trouve dans le .jar et est donc à votre disposition (core/assets/images/ClassDiagram.png).
+En conséquence , nous avons dû immédiatement revoir notre diagramme de classe et la maquette graphique afin de pouvoir nous baser directement sur quelque chose
+de concret. Le nouveau diagramme de classe se trouve dans l'archive .jar et est donc à votre disposition (core/assets/images/ClassDiagram.png).
 \section{Conception}
 \subsection{Choix d'implémentation}
-Nous allons ici , essayer d'argumenter de la meilleure manières nos choix que nous avons pris lors de la phase d'implémentation.
-Un des choix les plus importants concerne les propriétés disponibles sur les tuiles. Au départ, nous avions respectés les consignes qui nous
+Nous allons ici , essayer d'argumenter de la meilleure manières nos choix d'implémentations que nous avons pris lors de cette phase.
+Un des choix les plus importants concerne les propriétés disponibles sur les tuiles. Au départ, nous avions respecté les consignes qui nous
 avaient été données , mais après quelques soucis d'implémentation ( pas adapté à notre Design, quelques bugs également difficiles à régler ), nous
-avont opté pour un mécanisme de restriction , autrement dit, chaque tuile possédera, ou non, une propriété appelé restriction. Cette dernière aura
-comme valeur le nom d'un bloqueur, exemple , si une tuile possède restriction ayant comme valeur source, seul une source pourra être déposée sur cette tuile.
+avons opté pour un mécanisme de restriction , autrement dit, chaque tuile possédera, ou non, une propriété appelé restriction. Cette dernière aura
+comme valeur le nom d'un bloqueur, exemple , si une tuile possède une restriction ayant comme valeur source, seul une source pourra être déposée sur cette tuile.
 Si elle ne possède aucune restriction, tout type de bloqueurs pourront y être déposés. 
 \\
-Concernant la bibliothèque LibGDX, n'ayant que peu de connaissance au début, nous étions partis sur une interface graphique composée de sprites qui faisaient
+Concernant la bibliothèque LibGDX, n'ayant que peu de connaissance au début du projet, nous étions partis sur une interface graphique composée de sprites qui faisaient
 office de boutons. C'était une solution facile à mettre en oeuvre , qui nous avait permis de pouvoir passer à d'autres étapes de notre projet.\\
 Ceppendant, le fait de créer des images de boutons devenaient redondants et après réflexion, nous nous sommes dit que si nous voulions, dans un futur
 hypothétique, traduire notre jeu. Il nous aurait fallu refaire tous les sprites. La décision de revenir en arrière et de recréer entièrement nos menus 
 du jeu a été prise en exploitant au mieux les propriétés de LibGDX. 
+\\
+Par rapport à notre maquette graphique remis durant la phase de modélisation, nous avons essayé de la respecter au mieux, seul quelques changement
+esthétiques ont pu faire leur apparition,
 \subsection{Difficultés}
-Une des difficultés principale concernant le projet est l'appropriation de la bibliothèque LibGDX, ce qui est normal étant donné , qu'aucun des membres
-n'avaient utilisés cette bibliothèque aupparavent , cependant nous regrettons un manque de documentation ...
+Une des difficultés principale concernant le projet est la capacité à nous adapter à la bibliothèque LibGDX, ce qui est normal étant donné , qu'aucun des membres
+n'avaient utilisés cette bibliothèque aupparavent , cependant nous regrettons un manque de documentation accessible sur internet, que ce soit sur 
+le site contenant la documentation LibGDX officielle ou bien sur des sites tierces ....
 \\
 Une autre difficulté vient du fait qu'une méthode renderer venant de Tiled et qui permet d'afficher correctement les maps n'est pas compatible avec
-l'API scendeUI.2D utilisée pour l'interface graphique. Une solution a été de créer une table contenant des boutons qui ont permis d'afficher plusieurs
+l'API sceneUI.2D utilisée pour l'interface graphique. Une solution a été de créer une table contenant des boutons qui ont permis d'afficher plusieurs
 textures. 
 \subsection{Concessions}
-Suite à un manque de temps , nous avons dû revoir nos objectifs et avons priviliégié ce qui nous semble être le plus important. 
-Ces objectifs ont été de pouvoir rendre un projet jouable, bien documenté , composés de quelques tests unitaires sur le côté , mais 
-également un rapport fourni et une vidéo expliquant la manière de jouer au jeu et ainsi, d'en profiter pleinement. 
-Vous l'avez donc sans doute remarqué, les extentions ne sont donc pas présente dans notre jeu final ... ou du moins , elles ne seront pas finalisées.
-En effet , pour l'extension ``diagonal directions'' de Maazouz Mehdi, les maps avaient été créées, certains sprites spécifiques à ce mode de jeu également
-et vous pourrze noter la présence de fichier xml spécifiques eux aussi, à cette extension . Bien entendu, cela n'a pas été suffisant pour la qualifer de finie.
+Suite à un manque de temps , nous avons dû revoir nos objectifs à la baisse et avons priviliégié ce qui nous semble être le plus important. 
+Ces objectifs ont été de pouvoir rendre un projet jouable, bien documenté, composés de quelques tests unitaires sur le côté , mais 
+également un rapport fourni et une vidéo expliquant les fonctionnalités de notre jeu. 
+Les extentions ne sont donc pas présente dans notre jeu final ... ou du moins , elles ne sont pas finalisées.
+En effet , pour l'extension ``Diagonal directions'' de Maazouz Mehdi, les maps avaient été créées, certains sprites spécifiques à ce mode de jeu également
+et vous pourrez noter la présence de fichiers Xml spécifiques eux aussi, à cette extension. Bien entendu, cela n'a pas été suffisant qualifer
+cette dernière de finie.
 Alexis Lecocq devait initialement, s'occuper de l'extension ``Saving + Multiple users + Social network''. Après réflexion, son choix
-s'est tourné vers le réseau social Twitter ( a noter qu'initialement, comme mis dans le diagramme de classe, le réseau social Facebook avait été préféré )
-.Suite à quelques problèmes, il est venu trouver les assistants et professeurs afin d'obtenir un hébergement,
+s'est tourné vers le réseau social Twitter ( à noter que ce choix est différent de clui qui avait été préconisé dans le diagramme de classe)
+. Suite à quelques problèmes, il est venu trouver les assistants et professeurs afin d'obtenir un hébergement,
 malheureusement , il semblerait que ca n'est pas été le cas .\\
 
 Même si cela n'était pas obligatoire, nous pouvons également noter l'absence de fichiers XSD pour vérifier la structure de nos fichiers XML, cependant,
- nous aimerions préciser que suivant le cours de Base de Données 2 en Bac3, nous avions créé quelques DTD qui nous avaient permis vérifier nos XML.
+ nous aimerions préciser que nous suivions/suivons le cours de Base de Données 2 en Bac3, nous avions donc créé quelques DTD qui 
+ nous avaient permis vérifier nos XML.
  Mais en utilisant la classe XmlReader de LibGDX , des soucis sont apparus dû à la présence de ces DTD ( souci de compatibilité ? ) qui nous ont obligé
  à les retirer.
 
@@ -81,5 +87,11 @@ Vous pouvez visualiser un aperçu commenté de notre jeu en cliquant sur cette U
 \section{Notes Annexes}
 Nous parlions d'une première version de l'interface graphique dans la section \textbf{Nos Choix}, Maazouz Mehdi s'était occupé majoritairement
 de cette version en ayant fait une vingtaine de commits, cependant, aucun de ses commits n'apparait sur GitHub ( dans des sections de statistiques, 
-de graphiques ) . Il faut donc intégralement remonter tous les commits pour les retrouver .
+de graphiques, ... ) . Il faut donc intégralement remonter la liste contenant tous les commits pour les retrouver .
+\section{Conclusion}
+En conclusion, ce projet fût long , laborieux mais il nous a permis de nous apprivoiser avec certains outils, certaines notions
+pas forcément déjà vus tels que le format XML, la création et la gestion des maps avec l'outil Tiled, la bibliothèque LibGDX, Gradle, 
+Git qui, une fois ``maitrisé'' a pu grandement nous aider à gérer ce projet, et dans une moindre
+mesure , l'outil Gimp pour les sprites ainsi que TODOOBS pour l'enregistrement de notre vidéo explicative. 
+Nous avons également pu nous refamiliariser avec la JavaDoc, JUnit vus, quand à eux, en Bac1. 
 \end{document}
