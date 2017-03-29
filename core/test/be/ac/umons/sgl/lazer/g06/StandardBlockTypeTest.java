@@ -4,10 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
@@ -16,11 +14,8 @@ import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.game.Orientation;
 
+@RunWith(GdxTestRunner.class)
 public class StandardBlockTypeTest {
-	/**
-	 * Create application before any test
-	 */
-	LwjglApplication app;
 	/**
 	 * save level type for all tests to use it
 	 */
@@ -30,18 +25,10 @@ public class StandardBlockTypeTest {
 	 */
 	@Before
 	public void before() {
-		// init app only once
-		if(app != null) {
-			return;
-		}
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Lazer Challenge";
-		config.width = 1;
-		config.height = 1;
-		app = new LwjglApplication(LazerChallenge.getInstance(), config);
+		// initialize LazerChallenge
+		LazerChallenge.getInstance();
 		// initialize level type
 		standard = LevelType.getLevelType("standard");
-		Gdx.app.debug("StandardBlockTypeTest.before", String.join("|", standard.getBlockTypes()));
 	}
 	
 	@Test(expected=GdxRuntimeException.class)
@@ -54,6 +41,9 @@ public class StandardBlockTypeTest {
 		// initialization
 		BlockType gate = standard.getBlockType("gate");
 		Array<Orientation> outputs;
+		// from null
+		outputs = gate.input(null);
+		assertEquals("From null size", 0, outputs.size);
 		// from UP
 		outputs = gate.input(Orientation.UP);
 		assertEquals("From UP size", 1, outputs.size);
