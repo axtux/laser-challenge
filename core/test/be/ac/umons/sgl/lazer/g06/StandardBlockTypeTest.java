@@ -41,6 +41,9 @@ public class StandardBlockTypeTest {
 		// initialization
 		BlockType gate = standard.getBlockType("gate");
 		Array<Orientation> outputs;
+		// from null
+		outputs = gate.input(null);
+		assertEquals("From null size", 0, outputs.size);
 		// from UP
 		outputs = gate.input(Orientation.UP);
 		assertEquals("From UP size", 1, outputs.size);
@@ -51,9 +54,9 @@ public class StandardBlockTypeTest {
 		assertEquals("From DOWN Orientation", Orientation.UP, outputs.get(0));
 		// FROM RIGHT
 		outputs = gate.input(Orientation.RIGHT);
-		assertNull("From RIGHT null", outputs);
+		assertEquals("From RIGHT size", 0, outputs.size);
 		// FROM LEFT
 		outputs = gate.input(Orientation.LEFT);
-		assertNull("From LEFT null", outputs);
+		assertEquals("From LEFT size", 0, outputs.size);
 	}
 }
