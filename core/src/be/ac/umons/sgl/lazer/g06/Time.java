@@ -1,6 +1,15 @@
 package be.ac.umons.sgl.lazer.g06;
-
+/**
+ * Some static time functions
+ */
 public class Time {
+	/**
+	 * Return a pretty representation of the time. E.g. 2jours 3heures 2minutes 35secondes.
+	 * @param seconds Time to represent in seconds.
+	 * @param displayall If false, units that equals 0 won't be represented e.g. 0jours.
+	 * @param longunits If true, long units will be used e.g. Xjours. If false, short units will be used e.g. Xj.
+	 * @return
+	 */
 	public static String prettyTime(int seconds, boolean displayall, boolean longunits) {
 		String pretty = "";
 		if(seconds < 0) {
