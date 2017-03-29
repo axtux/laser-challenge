@@ -384,7 +384,7 @@ public class Level extends Observable {
 		}
 		// unavailable
 		if(!isAvailable(oldPos) || !isAvailable(newPos)) {
-			Gdx.app.debug("Level.moveTo", "pos not available");
+			Gdx.app.debug("Level.moveTo", "one pos not available");
 			return false;
 		}
 		
@@ -431,16 +431,31 @@ public class Level extends Observable {
 		}
 		// this move has been saved, remove it
 		history.pop();
+		
 		return true;
 	}
 	
 	public boolean isAvailable(Position pos) {
+		if(pos == null) {
+			return false;
+		}
+		if(pos.getLocation().equals(Position.Location.INVENTORY)) {
+			return true;
+		}
 		return !map.getGroundBoolProp(pos, "unavailable");
 	}
 	
 	public boolean isAllowed(Position pos, Block block) {
 		// null block is allowed everywhere
 		if(block == null) {
+			return true;
+		}
+		
+		if(pos == null) {
+			return false;
+		}
+		
+		if(pos.getLocation().equals(Position.Location.INVENTORY)) {
 			return true;
 		}
 		
@@ -456,6 +471,9 @@ public class Level extends Observable {
 	}
 	
 	public String getRestriction(Position pos) {
+		if(pos == null || pos.getLocation().equals(Position.Location.INVENTORY)) {
+			return null;
+		}
 		return map.getGroundProp(pos, "restriction");
 	}
 	
