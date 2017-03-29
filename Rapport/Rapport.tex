@@ -54,8 +54,10 @@ du jeu a été prise en exploitant au mieux les propriétés de LibGDX.
 \subsection{Difficultés}
 Une des difficultés principale concernant le projet est l'appropriation de la bibliothèque LibGDX, ce qui est normal étant donné , qu'aucun des membres
 n'avaient utilisés cette bibliothèque aupparavent , cependant nous regrettons un manque de documentation ...
-
-DIfficulté car API pas compatible avec Tiled 
+\\
+Une autre difficulté vient du fait qu'une méthode renderer venant de Tiled et qui permet d'afficher correctement les maps n'est pas compatible avec
+l'API scendeUI.2D utilisée pour l'interface graphique. Une solution a été de créer une table contenant des boutons qui ont permis d'afficher plusieurs
+textures. 
 \subsection{Concessions}
 Suite à un manque de temps , nous avons dû revoir nos objectifs et avons priviliégié ce qui nous semble être le plus important. 
 Ces objectifs ont été de pouvoir rendre un projet jouable, bien documenté , composés de quelques tests unitaires sur le côté , mais 
@@ -64,8 +66,14 @@ Vous l'avez donc sans doute remarqué, les extentions ne sont donc pas présente
 En effet , pour l'extension ``diagonal directions'' de Maazouz Mehdi, les maps avaient été créées, certains sprites spécifiques à ce mode de jeu également
 et vous pourrze noter la présence de fichier xml spécifiques eux aussi, à cette extension . Bien entendu, cela n'a pas été suffisant pour la qualifer de finie.
 Alexis Lecocq devait initialement, s'occuper de l'extension ``Saving + Multiple users + Social network''. Après réflexion, son choix
-s'est tourné vers le réseau social Twitter .Suite à quelques problèmes, il est venu trouver les assistants et professeurs afin d'obtenir un hébergement,
-malheureusement , il semblerait que ca n'est pas été le cas .
+s'est tourné vers le réseau social Twitter ( a noter qu'initialement, comme mis dans le diagramme de classe, le réseau social Facebook avait été préféré )
+.Suite à quelques problèmes, il est venu trouver les assistants et professeurs afin d'obtenir un hébergement,
+malheureusement , il semblerait que ca n'est pas été le cas .\\
+
+Même si cela n'était pas obligatoire, nous pouvons également noter l'absence de fichiers XSD pour vérifier la structure de nos fichiers XML, cependant,
+ nous aimerions préciser que suivant le cours de Base de Données 2 en Bac3, nous avions créé quelques DTD qui nous avaient permis vérifier nos XML.
+ Mais en utilisant la classe XmlReader de LibGDX , des soucis sont apparus dû à la présence de ces DTD ( souci de compatibilité ? ) qui nous ont obligé
+ à les retirer.
 
 \section{Notre jeu}
 Vous pouvez visualiser un aperçu commenté de notre jeu en cliquant sur cette URL
