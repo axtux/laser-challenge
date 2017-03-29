@@ -7,7 +7,6 @@ import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelFinishedStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelInfosStage;
-import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelPausedStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelPlayingStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelsStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LocalLoginStage;
@@ -107,10 +106,6 @@ public class MyActionListener implements ActionListener {
 		case "ACTION_LEVEL_LAUNCH":
 			game.setStage(new LevelPlayingStage());
 			game.getLevel().start();
-			break;
-		
-		case "MENU_LEVEL_PAUSE": // TODO remove parameters
-			game.setStage(new LevelPausedStage());
 			break;
 		
 		case "MENU_LEVEL_FINISHED":
