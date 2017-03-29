@@ -9,12 +9,15 @@ public class Block extends TiledMapTileLayer.Cell {
 	BlockType type;
 	Orientation orientation;
 	// for laser
-	Orientation input;
 	boolean processed;
+	Orientation input;
+	Array<Orientation> outputs;
 	
 	public Block(BlockType type, Orientation orientation) {
 		super();
 		this.type = type;
+		this.outputs = new Array<Orientation>(0);
+		
 		setTile(new StaticTiledMapTile(type.getTextureRegion()));
 		setOrientation(orientation);
 	}
@@ -56,22 +59,40 @@ public class Block extends TiledMapTileLayer.Cell {
 		this.setRotation(orientation.getAngle());
 	}
 	
-	public boolean processed() {
-		return processed;
-	}
-	
-	public boolean input(Orientation orientation) {
+	public Array<Orientation> input(Orientation orientation) {
 		if(processed) {
-			return false;
+			return null;
 		}
 		
 		processed = true;
+		setInput(orientation);
+		
+		return getOutputs();
+	}
+	
+	private void setInput(Orientation input) {
+		this.input = input;
+		getOutputsFromType();
+	}
+	
+	private void getOutputsFromType() {
+		Orientation originInput = input;
 		// input null to start source
-		if(input != null) {
-			input = orientation.unRotateBy(this.orientation);
+		if(originInput != null) {
+			// get unrotated input
+			originInput = originInput.unRotateBy(this.orientation);
 		}
 		
-		return true;
+		Array<Orientation> originOutputs = type.input(originInput);
+		outputs = new Array<Orientation>(originOutputs.size);
+		for(Orientation o : originOutputs) {
+			// rotate output to this orientation
+			outputs.add(o.rotateBy(this.orientation));
+		}
+	}
+	
+	public boolean processed() {
+		return processed;
 	}
 	
 	public Orientation getInput() {
@@ -79,16 +100,6 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	
 	public Array<Orientation> getOutputs() {
-		Array<Orientation> typeOutputs = type.input(input);
-		if(typeOutputs == null) {
-			return new Array<Orientation>(0);
-		}
-		
-		Array<Orientation> outputs = new Array<Orientation>(typeOutputs.size);
-		for(Orientation o : typeOutputs) {
-			outputs.add(o.rotateBy(this.orientation));
-		}
-		
 		return outputs;
 	}
 	
