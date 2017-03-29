@@ -10,8 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
-import be.ac.umons.sgl.lazer.g06.game.Block;
-import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.game.Position;
 import be.ac.umons.sgl.lazer.g06.listeners.MapClickListener;
@@ -20,9 +18,6 @@ public class MapButton extends Button {
 	Map map;
 	Position pos;
 	Array<Cell> cells;
-	Block block;
-	
-	TextureRegion inputTR, outputTR;
 	
 	public MapButton(Map map, Position pos) {
 		super();
@@ -32,16 +27,12 @@ public class MapButton extends Button {
 		this.addListener(new MapClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_SELECT"));
 		this.addListener(new MapClickListener(Input.Buttons.RIGHT, pos, "ACTION_LEVEL_ROTATE"));
 		
-		inputTR = LazerChallenge.getInstance().getLevel().getType().getInput();
-		outputTR = LazerChallenge.getInstance().getLevel().getType().getOutput();
-		
 		update();
 		setBackground();
 	}
 	
 	public void update() {
 		cells = map.getCells(pos);
-		block = map.getBlock(pos);
 	}
 	
 	public void setBackground() {
