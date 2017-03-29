@@ -49,8 +49,8 @@ public class Files {
 	 * Write string to file.
 	 * @param path Relative path to application root.
 	 * @param content Whole file content as a string.
-	 * @param append Whether the content has to be added at the end of the file.
-	 * If not, any existing file will be overwritten.
+	 * @param append If true, the content is added at the end of the file.
+	 * If false, any existing file will be overwritten.
 	 * @return True on success, false on error.
 	 */
 	public static boolean putContent(String path, String content, boolean append) {

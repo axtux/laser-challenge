@@ -10,7 +10,7 @@ public class Security {
 	/**
 	 * md5 Hash calculation of data string.
 	 * @param data Data to hash.
-	 * @return Lowercase string representing md5 hash from @data string
+	 * @return MD5 hash lower cased string representing of the data string
 	 */
 	public static String md5(String data) {
 		MessageDigest md5;
