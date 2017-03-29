@@ -1,4 +1,4 @@
-<level name="Niveau 5" map="g6_5" difficulty="hard" time="80">
+<level name="Niveau 5" map="g6_5" difficulty="hard" time="120">
 	<blocks>
 		<block type="one-laser_source" fixedposition="true">
 			<position x="0" y="0"/>
@@ -48,6 +48,25 @@
 		<block type="blocker" fixedposition="true">
 			<position x="19" y="19"/>
 		</block>
+		<block type="one-way_mirror" fixedposition="true">
+			<position x="0" y="18"/>
+		</block>
+		<block type="two-way-angled-left_splitter" fixedposition="true" fixedorientation="true" orientation="DOWN">
+			<position x="0" y="8"/>
+		</block>
+		<block type="two-way-angled-right_splitter" fixedposition="true" fixedorientation="true" orientation="DOWN">
+			<position x="19" y="8"/>
+		</block>
+		<block type="two-way-angled-right_splitter" fixedposition="true" fixedorientation="true" orientation="DOWN">
+			<position x="18" y="11"/>
+		</block>
+		<block type="blocker"/>
+		<block type="blocker"/>
+		<block type="blocker"/>
+		<block type="one-way_mirror"/>
+		<block type="one-way_mirror"/>
+		<block type="one-way_mirror"/>
+		<block type="one-way_mirror"/>
 		<block type="one-way_mirror"/>
 		<block type="one-way_mirror"/>
 		<block type="one-way_mirror"/>
