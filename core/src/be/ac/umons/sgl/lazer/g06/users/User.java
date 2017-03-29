@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 
+import be.ac.umons.sgl.lazer.g06.Files;
 import be.ac.umons.sgl.lazer.g06.game.Switch;
 
 public class User {
@@ -44,9 +45,15 @@ public class User {
 		return image;
 	}
 	
-	//public void saveScore (String levelname, float score ){
-		//if (Gdx.files.classpath())
-	//}
+	public boolean saveScore (String levelname, int score ){
+		String newScore = String.valueOf(score);
+		return Files.putContent("users/local/"+this.username+"/"+levelname+"Score", newScore);
+	}
+	
+	public int loadScore(String levelname){
+		String newScore = Files.getContent("users/local/"+this.username+"/"+levelname+"Score"); 
+		return Integer.parseInt(newScore);
+	}
 	
 	public void saveHistory ( String levelname , Array<Switch> history){
 		try {
@@ -62,11 +69,7 @@ public class User {
 			}
 		}
 	}
-	
-	/*public float loadScore(String levelname){
-		
-	}
-	public Array<Switch> loadHistory(String levelname){
+	/*public Array<Switch> loadHistory(String levelname){
 		
 	} */
 }
