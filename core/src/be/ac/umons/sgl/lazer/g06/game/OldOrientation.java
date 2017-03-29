@@ -5,13 +5,12 @@ import java.io.IOException;
 //import java.util.Enumeration;
 import java.util.Hashtable;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
-
+// TODO remove or use this class
 public class OldOrientation {
 	
 	private Hashtable<String,Integer> orientationToIndice = new Hashtable<String ,Integer>();
