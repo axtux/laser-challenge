@@ -9,11 +9,14 @@
 		<block type="four-laser_target">
 			<position x="7" y="7"/>
 		</block>
+		<block type="two-laser_target">
+			<position x="8" y="2"/>
+		</block>
 		<block type="blocker">
 			<position x="2" y="0"/>
 		</block>
 		<block type="gate">
-			<position x="5" y="0"/>
+			<position x="3" y="9"/>
 		</block>
 		<block type="blocker">
 			<position x="5" y="0"/>
