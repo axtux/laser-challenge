@@ -142,7 +142,6 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		content.add(selectionContent);
 		blockLabel = addDoubleLabel(selectionContent, "Bloc", "", "small-label");
 		restrictionLabel = addDoubleLabel(selectionContent, "Contrainte", "", "small-label");
-		// TODO add information about empty case
 		
 		Table buttons = new Table();
 		content.row();
