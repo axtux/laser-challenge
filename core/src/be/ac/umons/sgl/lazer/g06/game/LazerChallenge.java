@@ -45,6 +45,9 @@ public class LazerChallenge extends Game {
 	 * @return Singleton pattern instance.
 	 */
 	public static LazerChallenge getInstance() {
+		if(instance == null) {
+			instance = new LazerChallenge();
+		}
 		return instance;
 	}
 	/**
