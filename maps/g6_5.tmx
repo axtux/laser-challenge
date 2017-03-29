@@ -42,9 +42,19 @@
     <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
+  <tile id="298">
+   <properties>
+    <property name="restriction" value="one-time"/>
+   </properties>
+  </tile>
   <tile id="309">
    <properties>
     <property name="restriction" value="unavailable"/>
+   </properties>
+  </tile>
+  <tile id="310">
+   <properties>
+    <property name="restriction" value="one-time"/>
    </properties>
   </tile>
   <tile id="311">
@@ -65,6 +75,21 @@
   <tile id="343">
    <properties>
     <property name="restriction" value="unavailable"/>
+   </properties>
+  </tile>
+  <tile id="370">
+   <properties>
+    <property name="restriction" value="one-time"/>
+   </properties>
+  </tile>
+  <tile id="371">
+   <properties>
+    <property name="restriction" value="one-time"/>
+   </properties>
+  </tile>
+  <tile id="372">
+   <properties>
+    <property name="restriction" value="one-time"/>
    </properties>
   </tile>
   <tile id="373">
@@ -122,6 +147,11 @@
     <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
+  <tile id="662">
+   <properties>
+    <property name="restriction" value="one-time"/>
+   </properties>
+  </tile>
   <tile id="663">
    <properties>
     <property name="restriction" value="unavailable"/>
@@ -150,7 +180,7 @@
  </tileset>
  <layer name="ground" width="20" height="20">
   <data encoding="base64" compression="zlib">
-   eJy1lEEOgjAQRYceQr0De/Qk6CV0owInUU+iLlqP4VFY85swcZi0VQwsXlIy09/fT9s8I8oVBzNuPCfHiTiB84i+X3kT0WsGKuRbg8aE11hg7SVYZd9rFlygcwU3E16vQO8abIBL1FjvDp0HeEb0SvRuwS7gT9YsDfH1NuTPfHrKyJrszUXy4ZpV+VqlUWFODZr+/1qVAftohR+Zr9YL+YtlwP5kvqzH+y7MUM8qz1KPPfo5nGGh8tNZuF7Pz21EfjJTOXY0PDMyi1bsK3Xm9Pnjfp9D6qzJuyEzlWOppzP8586nmPq9mvo93Zv099i5HVLHxUM=
+   eJy1lMERgjAUREOKUHvwjlaCNqEXFahErUQ9JJZhKZxdZvjj8ieJ4sDhzYT5P5vNkmSZGbNU7O2w8ZQcRuIITgP6fuVljHlOQIl8K1Db8BozrD0Hi+x7zYEzdC7gasPr5ehdgTXwiZro3aBzB4+IXoHeDdgG/HHNmT5tvQn5s5+eIrKmePORfKTmVL5OaZSYU4G6+79OZSA+GvLD+Wq9kL9YBuKP8xU92Xdu+3pOeWY98djOkQxzlZ/Ownd67dya8uNMeexN/8xwFg3tK3Xm9Pnj/tRZ47vBmfKY9XSG/9z5FGO/V2O/pzub/h469w1cicVJ
   </data>
  </layer>
 </map>
