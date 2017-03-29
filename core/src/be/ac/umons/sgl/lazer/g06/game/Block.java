@@ -8,16 +8,12 @@ import com.badlogic.gdx.utils.Array;
 public class Block extends TiledMapTileLayer.Cell {
 	BlockType type;
 	Orientation orientation;
-	// for laser
-	Orientation input;
-	Array<Orientation> outputs;
 	
 	public Block(BlockType type, Orientation orientation) {
 		super();
 		this.type = type;
 		setTile(new StaticTiledMapTile(type.getTextureRegion()));
 		setOrientation(orientation);
-		clearInput();
 	}
 	
 	public boolean getBoolProp(String name) {
@@ -57,18 +53,7 @@ public class Block extends TiledMapTileLayer.Cell {
 		this.setRotation(orientation.getAngle());
 	}
 	
-	public Array<Orientation> input(Orientation orientation) {
-		setInput(orientation);
-		return getOutputs();
-	}
-	
-	private void setInput(Orientation input) {
-		this.input = input;
-		getOutputsFromType();
-	}
-	
-	private void getOutputsFromType() {
-		Orientation originInput = input;
+	public Array<Orientation> input(Orientation originInput) {
 		// input null to start source
 		if(originInput != null) {
 			// get unrotated input
@@ -76,18 +61,12 @@ public class Block extends TiledMapTileLayer.Cell {
 		}
 		
 		Array<Orientation> originOutputs = type.input(originInput);
-		outputs = new Array<Orientation>(originOutputs.size);
+		Array<Orientation> outputs = new Array<Orientation>(originOutputs.size);
 		for(Orientation o : originOutputs) {
 			// rotate output to this orientation
 			outputs.add(o.rotateBy(this.orientation));
 		}
-	}
-	
-	public Orientation getInput() {
-		return input;
-	}
-	
-	public Array<Orientation> getOutputs() {
+		
 		return outputs;
 	}
 	
@@ -95,8 +74,4 @@ public class Block extends TiledMapTileLayer.Cell {
 		return type;
 	}
 	
-	public void clearInput() {
-		input = null;
-		this.outputs = new Array<Orientation>(0);
-	}
 }
