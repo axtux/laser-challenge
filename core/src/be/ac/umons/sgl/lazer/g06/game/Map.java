@@ -198,25 +198,27 @@ public class Map extends Observable {
 		return setCell(block, BLOCKS_LAYER, pos);
 	}
 	
-	public boolean setLaserInput(Position position, Orientation orientation) {
-		if(!inMap(position) || orientation == null) {
+	public boolean setLaserInput(Position position, Orientation fromOrientation) {
+		if(!inMap(position) || fromOrientation == null) {
 			return false;
 		}
+		// laser input sprite comes from DOWN, fromOrientation from UP
+		fromOrientation = fromOrientation.reverse();
 		
 		Cell cell = new Cell();
 		//Texture
 		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getInput()));
-		cell.setRotation(orientation.getAngle());
+		cell.setRotation(fromOrientation.getAngle());
 		return this.setCell(cell, INPUTS_LAYER, position);
 	}
-	public boolean setLaserOutput(Position position, Orientation orientation) {
-		if(!inMap(position) || orientation == null) {
+	public boolean setLaserOutput(Position position, Orientation toOrientation) {
+		if(!inMap(position) || toOrientation == null) {
 			return false;
 		}
 		
 		Cell cell = new Cell();
 		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getOutput()));
-		cell.setRotation(orientation.getAngle());
+		cell.setRotation(toOrientation.getAngle());
 		return this.setCell(cell, START_OUTPUTS_LAYER, position);
 	}
 	public void clearLasers() {
