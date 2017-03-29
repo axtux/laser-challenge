@@ -1,0 +1,62 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{
+    \begin{minipage}\linewidth
+        \centering\bfseries\sffamily
+        Projet Génie Logiciel : LazerChallenge
+        \vskip3pt
+        \large Rapport d'implémentation
+    \end{minipage}
+    }
+\author{Maazouz Mehdi, Lecocq Alexis}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Nous débutons notre rapport d'implémentation par un léger rappel du projet qui nous a été demandé initialement. 
+L'énoncé mis à notre disposition en début d'année parlait de la réalisation du jeu nommé ``Lazer Challenge'' en Java
+et en nous aidant de la bibliothèque LibGDX. De plus , une extension était demandée individuellement à chaque étudiant .
+
+Pour pouvoir réaliser ce projet, plusieurs étapes ont dû être nécessaires. La première consisait en la plannification de notre projet,
+ cette étape comprenait la création d'un graphe Gantt , PERT, ainsi qu'une gestion des risques, une répartition du travail,
+  et de pouvoir déterminer les ressources qui allaient noue être nécessaires dans l'optique de nous préparer au mieux à d'éventuel
+ obstacles, empêchement qui pourrait subvenir et nous ralentir dans la conception de notre jeu. Ensuite est venue l'étape de la modélisation, où nous
+ avons dû créer une maquette permettant aux professeurs et assistants d'avoir une vision de la forme que prendrai notre jeu , c'est à dire la partie graphique.
+ Mais également la conception de plusieurs diagrammes UML , notamment un diagramme de classe qui a permis de montrer le fond de notre jeu , autrement dit les classes
+ que comprendrai notre projet.
+ 
+ Nous voici désormais à l'étape de l'implémentation où nous allont maintenant vous expliquer notre travail dans son ensemble,
+ les difficultés et problèmes survenus , nos choix d'implémentations, ... TODO suite.
+ 
+\section{Conception}
+\subsection{Changement de groupe}
+Dès le début de la phase d'implémentation , suite a plusieurs abandons dans les autres groupes, un membre de notre goupe a été annexé dans un autre groupe.
+En conséquence , nous avons dû immédiatement revoir notre diagramme de Classe et la maquette graphique afin de pouvoir nous baser directement sur quelque chose
+de concret. Le diagramme de classe se trouve dans le .jar et est donc à votre disposition (core/assets/images/ClassDiagram.png).
+\subsection{Choix d'implémentation}
+Nous allons ici , essayer d'argumenter de la meilleure manières nos choix que nous avons pris lors de la phase d'implémentation.
+Un des choix les plus importants concerne les propriétés disponibles sur les tuiles. Au départ, nous avions respectés les consignes qui nous
+avaient été données , mais après quelques soucis d'implémentation ( pas adapté à notre Design, quelques bugs également difficiles à régler ), nous
+avont opté pour un mécanisme de restriction , autrement dit, chaque tuile possédera, ou non, une propriété appelé restriction. Cette dernière aura
+comme valeur le nom d'un bloqueur, exemple , si une tuile possède restriction ayant comme valeur source, seul une source pourra être déposée sur cette tuile.
+Si elle ne possède aucune restriction, tout type de bloqueurs pourront y être déposés.
+\subsection{Difficultés}
+Une des difficultés principale concernant le projet est l'appropriation de la bibliothèque LibGDX, ce qui est normal étant donné , qu'aucun des membres
+n'avaient utilisés cette bibliothèque aupparavent , cependant nous regrettons un manque de documentation ...
+\subsection{Concessions}
+Suite à un manque de temps , nous avons dû revoir nos objectifs et avons priviliégié ce qui nous semble être le plus important. 
+Ces objectifs ont été de pouvoir rendre un projet jouable, bien documenté , composés de quelques tests unitaires sur le côté , mais 
+également un rapport fourni et une vidéo expliquant la manière de jouer au jeu et ainsi, d'en profiter pleinement. 
+Vous l'avez donc sans doute remarqué, les extentions ne sont donc pas présente dans notre jeu final ... ou du moins , elles ne seront pas finalisées.
+En effet , pour l'extension ``diagonal directions'' de Maazouz Mehdi, les maps avaient été créées, certains sprites spécifiques à ce mode de jeu également
+et vous pourrze noter la présence de fichier xml spécifiques eux aussi, à cette extension . Bien entendu, cela n'a pas été suffisant pour la qualifer de finie.
+Alexis Lecocq devait initialement, s'occuper de l'extension ``Saving + Multiple users + Social network''. Après réflexion, son choix
+s'est tourné vers le réseau social Twitter .Suite à quelques problèmes, il est venu trouver les assistants et professeurs afin d'obtenir un hébergement,
+malheureusement , il semblerait que ca n'est pas été le cas .
+
+
+\end{document}
