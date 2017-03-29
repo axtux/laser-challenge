@@ -14,7 +14,7 @@ public class DesktopLauncher {
 		//*
 		config.fullscreen = false;
 		//*/config.fullscreen = true;
-		new LwjglApplication(new LazerChallenge(), config);
+		new LwjglApplication(LazerChallenge.getInstance(), config);
 		
 		if(!config.fullscreen) {
 			// maximize window
