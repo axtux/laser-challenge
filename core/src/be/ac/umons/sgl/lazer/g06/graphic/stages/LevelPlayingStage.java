@@ -30,7 +30,6 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	Label scoreLabel;
 	Label timeLabel;
 	Label blockLabel;
-	Label availableLabel;
 	Label restrictionLabel;
 	Table selectionContent;
 	
@@ -53,7 +52,6 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		
 		mapTable = new Table();
 		content.add(mapTable).grow();
-		//addInventory(mapTable, level.getInventory());
 		addMapTable(mapTable, level.getMap());
 		addLaserButton(mapTable, false);
 		
@@ -143,19 +141,19 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		content.row();
 		content.add(selectionContent);
 		blockLabel = addDoubleLabel(selectionContent, "Bloc", "", "small-label");
-		availableLabel = addDoubleLabel(selectionContent, "Disponible", "", "small-label");
 		restrictionLabel = addDoubleLabel(selectionContent, "Contrainte", "", "small-label");
 		// TODO add information about empty case
 		
 		Table buttons = new Table();
 		content.row();
 		content.add(buttons);
-		undoButton = getButton("Annuler", "ACTION_LEVEL_UNDO", "small-menu");
 		moveButton = getButton("Déplacer", "ACTION_LEVEL_MOVE", "small-menu");
 		rotateButton = getButton("Pivoter", "ACTION_LEVEL_ROTATE", "small-menu");
-		buttons.add(undoButton).pad(5);
+		undoButton = getButton("Annuler", "ACTION_LEVEL_UNDO", "small-menu");
 		buttons.add(moveButton).pad(5);
 		buttons.add(rotateButton).pad(5);
+		buttons.row();
+		buttons.add(undoButton).pad(5);
 	}
 	
 	private void addLaserButton(Table container, boolean box) {
@@ -176,9 +174,12 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		}
 		
 		Block block = level.getSelectedBlock();
-		blockLabel.setText(block == null ? "none" : block.getType().getLabel());
-		availableLabel.setText(level.isAvailable(level.getSelected()) ? "oui" : "non");
-		restrictionLabel.setText(level.getRestriction(level.getSelected()));
+		blockLabel.setText(block == null ? "aucun" : block.getType().getLabel());
+		String restriction = level.getRestriction(level.getSelected());
+		if(restriction == null || restriction.isEmpty()) {
+			restriction = "aucune";
+		}
+		restrictionLabel.setText(restriction);
 		
 		boolean move = block != null && block.canMove();
 		boolean rotate = block != null && block.canRotate();
