@@ -9,7 +9,6 @@ public class Block extends TiledMapTileLayer.Cell {
 	BlockType type;
 	Orientation orientation;
 	// for laser
-	boolean processed;
 	Orientation input;
 	Array<Orientation> outputs;
 	
@@ -59,13 +58,7 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	
 	public Array<Orientation> input(Orientation orientation) {
-		if(processed) {
-			return null;
-		}
-		
-		processed = true;
 		setInput(orientation);
-		
 		return getOutputs();
 	}
 	
@@ -90,10 +83,6 @@ public class Block extends TiledMapTileLayer.Cell {
 		}
 	}
 	
-	public boolean processed() {
-		return processed;
-	}
-	
 	public Orientation getInput() {
 		return input;
 	}
@@ -107,7 +96,6 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	
 	public void clearInput() {
-		processed = false;
 		input = null;
 		this.outputs = new Array<Orientation>(0);
 	}
