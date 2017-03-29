@@ -17,8 +17,7 @@ public class LevelInfosStage extends AbstractLevelStage {
 		addDoubleLabel("Mode", game.getMode().toString());
 		if(game.getMode().hasScore()) {
 			addDoubleLabel("Temps", Time.prettyTime(level.getTime(), false, false));
-			// TODO load score
-			addDoubleLabel("Score", "");
+			addDoubleLabel("Score", Integer.toString(level.getScore()));
 		}
 		
 		addDoubleButton("Charger", "ACTION_LEVEL_LOAD", "Lancer", "ACTION_LEVEL_LAUNCH");
