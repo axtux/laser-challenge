@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.utils.Array;
@@ -17,6 +18,10 @@ import be.ac.umons.sgl.lazer.g06.game.Orientation;
 
 public class StandardBlockTypeTest {
 	/**
+	 * Create application before any test
+	 */
+	LwjglApplication app;
+	/**
 	 * save level type for all tests to use it
 	 */
 	LevelType standard;
@@ -25,13 +30,18 @@ public class StandardBlockTypeTest {
 	 */
 	@Before
 	public void before() {
+		// init app only once
+		if(app != null) {
+			return;
+		}
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Lazer Challenge";
 		config.width = 1;
 		config.height = 1;
-		new LwjglApplication(new LazerChallenge(), config);
+		app = new LwjglApplication(LazerChallenge.getInstance(), config);
 		// initialize level type
 		standard = LevelType.getLevelType("standard");
+		Gdx.app.debug("StandardBlockTypeTest.before", String.join("|", standard.getBlockTypes()));
 	}
 	
 	@Test(expected=GdxRuntimeException.class)
