@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.Array;
 import be.ac.umons.sgl.lazer.g06.game.Block;
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.Map;
-import be.ac.umons.sgl.lazer.g06.game.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position;
 import be.ac.umons.sgl.lazer.g06.listeners.MapClickListener;
 
@@ -67,25 +66,6 @@ public class MapButton extends Button {
 			draw(batch, cell.getTile().getTextureRegion(), cell.getRotation());
 			
 		}
-		//*/draw(batch, block.getTile().getTextureRegion(), block.getRotation());
-		
-		// stop if laser not on block
-		if(block == null  || !block.processed()) {
-			return;
-		}
-		
-		Orientation input = block.getInput();
-		if(input != null) {
-			draw(batch, inputTR, input.getAngle());
-		}
-		
-		Array<Orientation> outputs = block.getOutputs();
-		if(outputs != null) {
-			for(Orientation output : outputs) {
-				draw(batch, outputTR, output.getAngle());
-			}
-		}
-		
 	}
 	
 	private void draw(Batch batch, TextureRegion tr, int rotation) {
