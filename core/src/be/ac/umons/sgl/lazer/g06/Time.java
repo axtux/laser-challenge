@@ -8,7 +8,7 @@ public class Time {
 	 * @param seconds Time to represent in seconds.
 	 * @param displayall If false, units that equals 0 won't be represented e.g. 0jours.
 	 * @param longunits If true, long units will be used e.g. Xjours. If false, short units will be used e.g. Xj.
-	 * @return
+	 * @return String representation of time.
 	 */
 	public static String prettyTime(int seconds, boolean displayall, boolean longunits) {
 		String pretty = "";
