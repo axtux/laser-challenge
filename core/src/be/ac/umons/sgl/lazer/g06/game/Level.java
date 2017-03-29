@@ -334,6 +334,14 @@ public class Level extends Observable {
 		game.act("MENU_LEVEL_FINISHED");
 	}
 	
+	public boolean isWon() {
+		if(getRemainingTime() <= 0) {
+			return false;
+		}
+		// TODO check targets
+		return false;
+	}
+	
 	public void timerTick() {
 		//Gdx.app.debug("Level.timer_tick", "elapsedTime="+Integer.toString(elapsedTime));
 		this.elapsedTime += 1;
