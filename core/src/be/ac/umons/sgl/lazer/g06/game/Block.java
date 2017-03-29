@@ -16,10 +16,9 @@ public class Block extends TiledMapTileLayer.Cell {
 	public Block(BlockType type, Orientation orientation) {
 		super();
 		this.type = type;
-		this.outputs = new Array<Orientation>(0);
-		
 		setTile(new StaticTiledMapTile(type.getTextureRegion()));
 		setOrientation(orientation);
+		clearInput();
 	}
 	
 	public boolean getBoolProp(String name) {
@@ -108,7 +107,8 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	
 	public void clearInput() {
-		input = null;
 		processed = false;
+		input = null;
+		this.outputs = new Array<Orientation>(0);
 	}
 }
