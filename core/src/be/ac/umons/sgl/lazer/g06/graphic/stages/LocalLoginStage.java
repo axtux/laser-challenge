@@ -1,6 +1,7 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class LocalLoginStage extends AbstractStage {
 
@@ -13,8 +14,10 @@ public class LocalLoginStage extends AbstractStage {
 		addHeaderButton("Retour", "MENU_LOGINS");
 		
 		addTextField("Nom d'utilisateur", "USERNAME", usernameFieldValue);
-		// TODO find why password mode does not make characters displayed as *
-		addTextField("Mot de passe", "PASSWORD", passwordFieldValue).setPasswordMode(true);
+		TextField password = addTextField("Mot de passe", "PASSWORD", passwordFieldValue);
+		// replace characters by *
+		password.setPasswordCharacter('*');
+		password.setPasswordMode(true);
 		
 		content.row();
 		addButton(content, "Créer ce compte", "ACTION_LOCAL_SIGNUP", "small-menu").space(50);
