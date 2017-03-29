@@ -384,6 +384,7 @@ public class Level extends Observable {
 		}
 		// unavailable
 		if(!isAvailable(oldPos) || !isAvailable(newPos)) {
+			Gdx.app.debug("Level.moveTo", "one pos not available");
 			return false;
 		}
 		
@@ -391,15 +392,22 @@ public class Level extends Observable {
 		Block newBlock = getBlock(newPos);
 		// fixed position
 		if (oldBlock != null && !oldBlock.canMove()){
+			Gdx.app.debug("Level.moveTo", "old can't move");
 			return false;
 		}
 		// fixed position
 		if (newBlock != null && !newBlock.canMove()){
-				return false;
+			Gdx.app.debug("Level.moveTo", "new can't move");
+			return false;
 		}
 		
 		// restriction
-		if(!isAllowed(oldPos, newBlock) || !isAllowed(newPos, oldBlock)) {
+		if(!isAllowed(oldPos, newBlock)) {
+			Gdx.app.debug("Level.moveTo", "new to old movement not allowed");
+			return false;
+		}
+		if(!isAllowed(newPos, oldBlock)) {
+			Gdx.app.debug("Level.moveTo", "old to  new movement not allowed");
 			return false;
 		}
 		
@@ -418,13 +426,22 @@ public class Level extends Observable {
 		}
 		
 		Switch last = history.pop();
-		moveTo(last.getOldPos(), last.getNewPos());
+		if(!moveTo(last.getOldPos(), last.getNewPos())) {
+			Gdx.app.error("Level.undo", "unable to undo "+last.getOldPos().toString()+"/"+last.getNewPos().toString());
+		}
 		// this move has been saved, remove it
 		history.pop();
+		
 		return true;
 	}
 	
 	public boolean isAvailable(Position pos) {
+		if(pos == null) {
+			return false;
+		}
+		if(pos.getLocation().equals(Position.Location.INVENTORY)) {
+			return true;
+		}
 		return !map.getGroundBoolProp(pos, "unavailable");
 	}
 	
@@ -434,17 +451,29 @@ public class Level extends Observable {
 			return true;
 		}
 		
+		if(pos == null) {
+			return false;
+		}
+		
+		if(pos.getLocation().equals(Position.Location.INVENTORY)) {
+			return true;
+		}
+		
 		String restriction = map.getGroundProp(pos, "restriction");
 		// no restriction
 		if(restriction == null || restriction.isEmpty()) {
 			return true;
 		}
+		
 		String name = block.getType().getName();
 		// name must contain restriction to be allowed
 		return name.contains(restriction);
 	}
 	
 	public String getRestriction(Position pos) {
+		if(pos == null || pos.getLocation().equals(Position.Location.INVENTORY)) {
+			return null;
+		}
 		return map.getGroundProp(pos, "restriction");
 	}
 	
