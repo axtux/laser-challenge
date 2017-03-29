@@ -47,7 +47,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		content.row();
 		
 		leftTable = new Table();
-		content.add(new ScrollPane(leftTable, skin, "gray")).pad(10).fill().uniform();
+		content.add(new ScrollPane(leftTable, skin, "gray")).pad(10).fillX().uniform();
 		addLegend(leftTable);
 		
 		mapTable = new Table();
@@ -56,7 +56,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		addLaserButton(mapTable, false);
 		
 		rightTable = new Table();
-		content.add(new ScrollPane(rightTable, skin)).pad(10).fill().uniform();
+		content.add(new ScrollPane(rightTable, skin)).pad(10).fillX().uniform();
 		addInfos(rightTable);
 		addInventory(rightTable, level.getInventory());
 		addSelection(rightTable);
