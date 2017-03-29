@@ -384,6 +384,8 @@ public class Level extends Observable {
 			Gdx.app.debug("Level.moveTo", "old to  new movement not allowed");
 			return false;
 		}
+		if (!(oldPos.getLocation().equals(Position.Location.INVENTORY)) && getRestriction(newPos).equals("one-time"))
+			return false;
 		
 		history.add(new Switch(oldPos,newPos));
 		
@@ -438,7 +440,9 @@ public class Level extends Observable {
 		if(restriction == null || restriction.isEmpty()) {
 			return true;
 		}
-		
+		if (restriction.equals("one-time")){
+			return true;
+		}
 		String name = block.getType().getName();
 		// name must contain restriction to be allowed
 		return name.contains(restriction);
