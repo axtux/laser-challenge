@@ -69,6 +69,10 @@ public class BlockType {
 	}
 	
 	public Array<Orientation> input(Orientation orientation) {
-		return inputs.get(orientation);
+		Array<Orientation> orientations = inputs.get(orientation);
+		if(orientations == null) {
+			orientations = new Array<Orientation>(0);
+		}
+		return orientations;
 	}
 }
