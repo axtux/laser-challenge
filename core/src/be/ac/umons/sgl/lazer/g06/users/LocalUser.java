@@ -40,7 +40,7 @@ public class LocalUser extends User {
 				throw new LoginException("Le nom d'utilisateur existe déjà.");
 			}
 			if(!saveToFile(password)) {
-				throw new LoginException("Error lors de la création de l'itilisateur.");
+				throw new LoginException("Erreur lors de la création de l'utilisateur.");
 			}
 		// user login
 		} else if(!exists()){
