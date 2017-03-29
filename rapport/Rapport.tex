@@ -15,6 +15,7 @@
 \begin{document}
 
 \maketitle
+\textbf{Groupe 6}
 \tableofcontents
 \newpage
 \section{Introduction}
@@ -29,7 +30,7 @@ Pour pouvoir réaliser ce projet, plusieurs étapes ont dû être nécessaires. 
  avons dû créer une maquette permettant aux professeurs et assistants d'avoir une vision de la forme que prendrai notre jeu , c'est à dire la partie graphique.
  Mais également la conception de plusieurs diagrammes UML , notamment un diagramme de classe qui a permis de montrer le fond de notre jeu , autrement dit les classes
  qui formerai notre projet.
- 
+ TODO
  Nous voici désormais à l'étape de l'implémentation où nous allont maintenant vous expliquer notre travail dans son ensemble,
  les difficultés et problèmes survenus ,nos choix d'implémentations ,quelques concessions faites également ... TODO suite.
 \section{Préparatifs}
@@ -43,8 +44,8 @@ Nous allons ici , essayer d'argumenter de la meilleure manières nos choix d'imp
 Un des choix les plus importants concerne les propriétés disponibles sur les tuiles. Au départ, nous avions respecté les consignes qui nous
 avaient été données , mais après quelques soucis d'implémentation ( pas adapté à notre Design, quelques bugs également difficiles à régler ), nous
 avons opté pour un mécanisme de restriction , autrement dit, chaque tuile possédera, ou non, une propriété appelé restriction. Cette dernière aura
-comme valeur le nom d'un bloqueur, exemple , si une tuile possède une restriction ayant comme valeur source, seul une source pourra être déposée sur cette tuile.
-Si elle ne possède aucune restriction, tout type de bloqueurs pourront y être déposés. 
+comme valeur le nom d'un bloc, exemple , si une tuile possède une restriction ayant comme valeur source, seul une source pourra être déposée sur cette tuile.
+Si elle ne possède aucune restriction, tout type de blocs pourront y être déposés. 
 \\
 Concernant la bibliothèque LibGDX, n'ayant que peu de connaissance au début du projet, nous étions partis sur une interface graphique composée de sprites qui faisaient
 office de boutons. C'était une solution facile à mettre en oeuvre , qui nous avait permis de pouvoir passer à d'autres étapes de notre projet.\\
@@ -53,7 +54,20 @@ hypothétique, traduire notre jeu. Il nous aurait fallu refaire tous les sprites
 du jeu a été prise en exploitant au mieux les propriétés de LibGDX. 
 \\
 Par rapport à notre maquette graphique remis durant la phase de modélisation, nous avons essayé de la respecter au mieux, seul quelques changement
-esthétiques ont pu faire leur apparition,
+esthétiques ont pu faire leur apparition.
+\\
+D'un autre côté, nous avons fait le choix de définir nos blocs dans des fichiers XML, nous pensons que cela rend notre projet plus modulable. En effet, nous 
+n'avons pas besoin de recompiler notre projet si nous voulons ajouter un nouveau type de bloc. Nous avons procédé de la même manière pour les orientations
+en les défénissant également dans des fichiers XML.
+\\
+Par ailleurs, l'énoncé parlait d'un mode ``arcade/practice'' ainsi que d'un mode 'continuous laser beam/one-time-only laser beam``. Concernant les
+deux premiers modes , nous n'avons à noter aucun changement par rapport a l'énoncé initial. Cependant, nous n'avons autorisé que le mode ''one-time-only laser beam``
+en mode arcade et que le mode ''continuous laser beam`` en mode ''practice``( mode ''entrainement`` dans notre interface graphique).
+Nous en parlions déjà dans notre rapport de modélisation.
+\\
+De plus , un mode Pause nous était demandé. Nous n'avons pas souhaité l'implémenter car étant donné qu'en mode ''entrainement``, aucune limite de
+temps n'est fixée , nous ne voyons donc pas l'intérêt d'un tel mode. En mode ''arcade``, une limite de temps est fixée, de ce fait, un mode pause entrainerait
+également la pause du timer ... Ce que nous considérons comme étant de la triche.
 \subsection{Difficultés}
 Une des difficultés principale concernant le projet est la capacité à nous adapter à la bibliothèque LibGDX, ce qui est normal étant donné , qu'aucun des membres
 n'avaient utilisés cette bibliothèque aupparavent , cependant nous regrettons un manque de documentation accessible sur internet, que ce soit sur 
@@ -61,7 +75,11 @@ le site contenant la documentation LibGDX officielle ou bien sur des sites tierc
 \\
 Une autre difficulté vient du fait qu'une méthode renderer venant de Tiled et qui permet d'afficher correctement les maps n'est pas compatible avec
 l'API sceneUI.2D utilisée pour l'interface graphique. Une solution a été de créer une table contenant des boutons qui ont permis d'afficher plusieurs
-textures. 
+textures.
+\\
+Concernant l'extension ``Diagonal Directions'', une difficulté nous est apparue en fin de projet. En effet, nous avions utilisé des énumérations pour
+les orientations. De ce fait , afin de pouvoir implémenter les orientations diagonales pour notre extension, il nous aurait fallu hériter notre énumération,
+ ce qu'il n'est pas permis par Java .
 \subsection{Concessions}
 Suite à un manque de temps , nous avons dû revoir nos objectifs à la baisse et avons priviliégié ce qui nous semble être le plus important. 
 Ces objectifs ont été de pouvoir rendre un projet jouable, bien documenté, composés de quelques tests unitaires sur le côté , mais 
@@ -97,5 +115,7 @@ Nous avons également pu nous refamiliariser avec la JavaDoc, JUnit vus, quand �
 la rédaction de ce rapport.
 \\
 \\
-Mais ce projet a surtout été enrichissant au niveau des discussions, des échanges des idées entre les membres du groupe. 
+Mais ce projet a surtout été enrichissant au niveau des discussions, des échanges des idées entre les membres du groupe.
+
+\section{Remerciements}
 \end{document}
