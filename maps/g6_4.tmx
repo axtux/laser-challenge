@@ -32,6 +32,11 @@
     <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
+  <tile id="298">
+   <properties>
+    <property name="restriction" value="one-time"/>
+   </properties>
+  </tile>
   <tile id="341">
    <properties>
     <property name="restriction" value="unavailable"/>
@@ -45,6 +50,21 @@
   <tile id="343">
    <properties>
     <property name="restriction" value="unavailable"/>
+   </properties>
+  </tile>
+  <tile id="370">
+   <properties>
+    <property name="restriction" value="one-time"/>
+   </properties>
+  </tile>
+  <tile id="371">
+   <properties>
+    <property name="restriction" value="one-time"/>
+   </properties>
+  </tile>
+  <tile id="372">
+   <properties>
+    <property name="restriction" value="one-time"/>
    </properties>
   </tile>
   <tile id="373">
