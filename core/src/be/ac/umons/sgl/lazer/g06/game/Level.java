@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
-import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 /**
  * Class that manages the game part of the LazerChallenge

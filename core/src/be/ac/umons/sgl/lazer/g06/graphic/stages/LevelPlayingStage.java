@@ -15,8 +15,8 @@ import com.badlogic.gdx.utils.Array;
 
 import be.ac.umons.sgl.lazer.g06.Time;
 import be.ac.umons.sgl.lazer.g06.game.Block;
+import be.ac.umons.sgl.lazer.g06.game.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
-import be.ac.umons.sgl.lazer.g06.game.LevelType.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.graphic.MapTable;
 

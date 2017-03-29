@@ -1,7 +1,5 @@
 package be.ac.umons.sgl.lazer.g06.game;
 
-import java.util.HashMap;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -52,22 +50,23 @@ public class LevelType {
 		XmlReader reader = new XmlReader();
 		Element blocksElement = reader.parse(xml);
 		Array<Element> blockElements = blocksElement.getChildrenByName("block");
+		String spritesPath = dirPath()+"/sprites";
 		blocks = new OrderedMap<String, BlockType>(blockElements.size);
 		
 		BlockType block;
 		for(Element blockElement : blockElements) {
-			block = new BlockType(name, blockElement);
+			block = new BlockType(spritesPath, blockElement);
 			blocks.put(block.getName(), block);
 		}
 		
-		String filename = dirPath()+"/sprites/laserInput.png";
+		String filename = spritesPath+"/laserInput.png";
 		FileHandle fh = Gdx.files.local(filename);
 		if(fh == null) {
 			throw new GdxRuntimeException("404 File not found "+filename);
 		}
 		input = new TextureRegion(new Texture(fh));
 		
-		filename = dirPath()+"/sprites/laserOutput.png";
+		filename = spritesPath+"/laserOutput.png";
 		fh = Gdx.files.local(filename);
 		if(fh == null) {
 			throw new GdxRuntimeException("404 File not found "+filename);
@@ -178,127 +177,4 @@ public class LevelType {
 		}
 		return levelTypes.get(name);
 	}
-	
-	public class BlockType {
-		private final TextureRegion tr;
-		private final String name;
-		private final String label;
-		private final HashMap<Orientation, Array<Orientation>> inputs;
-		
-		public BlockType(String levelType, Element block) {
-			this.name = block.get("name");
-			this.label = block.get("label");
-			
-			String filename = LEVEL_TYPES_PATH+"/"+levelType+"/sprites/"+name+".png";
-			FileHandle fh = Gdx.files.local(filename);
-			if(fh == null) {
-				throw new GdxRuntimeException("404 File not found "+filename);
-			}
-			tr = new TextureRegion(new Texture(fh));
-			
-			
-			Element inputsElement = block.getChildByName("inputs");
-			Array<Element> inputElements = inputsElement.getChildrenByName("input");
-			inputs = new HashMap<Orientation, Array<Orientation>>(inputElements.size);
-			// for each intputElement
-			Array<Element> outputElements;
-			Array<Orientation> outputs;
-			// for each intputElement and outputElement
-			String orientationStr;
-			Orientation orientation;
-			
-			for(Element inputElement : inputElements) {
-				outputElements = inputElement.getChildrenByName("output");
-				outputs = new Array<Orientation>(outputElements.size);
-				for(Element outputElement : outputElements) {
-					orientationStr = outputElement.getAttribute("orientation");
-					orientation = Orientation.fromString(orientationStr);
-					if(orientation == null) {
-						throw new GdxRuntimeException("No orientation "+orientationStr);
-					}
-					
-					outputs.add(orientation);
-				}
-				
-				orientationStr = inputElement.getAttribute("orientation", "");
-				orientation = Orientation.fromString(orientationStr);
-				inputs.put(orientation, outputs);
-			}
-		}
-		
-		public TextureRegion getTextureRegion() {
-			return tr;
-		}
-		
-		public String getName() {
-			return name;
-		}
-		public String getLabel() {
-			return label;
-		}
-		
-		public Array<Orientation> input(Orientation orientation) {
-			return inputs.get(orientation);
-		}
-	}
-	
-	public enum Orientation {
-		UP(0, 1),
-		RIGHT(1, 0),
-		DOWN(0, -1),
-		LEFT(-1, 0);
-		
-		int x, y;
-		private Orientation(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-		
-		public Orientation reverse() {
-			return fromInt(ordinal()+Orientation.values().length/2);
-		}
-		
-		public Orientation next() {
-			return fromInt(ordinal()+1);
-		}
-		
-		public Orientation prev() {
-			return fromInt(ordinal()-1);
-		}
-		
-		public int getAngle() {
-			return ordinal()*(360/Orientation.values().length);
-		}
-		
-		public Orientation rotateBy(Orientation other) {
-			return fromInt(this.ordinal()+other.ordinal());
-		}
-		
-		public Orientation unRotateBy(Orientation other) {
-			return fromInt(this.ordinal()-other.ordinal());
-		}
-		
-		public Position nextPosition(Position position) {
-			return new Position(position.getX()+x, position.getY()+y, position.getLocation());
-		}
-		
-		private static Orientation fromInt(int i) {
-			Orientation[] orientations = Orientation.values();
-			while(i < 0) i+= orientations.length;
-			return orientations[i%orientations.length];
-		}
-		/**
-		 * Get orientation from string
-		 * @param str String representation of orientation
-		 * @return null if orientation does not exists instead of throwing an exception
-		 */
-		public static Orientation fromString(String str) {
-			try {
-				return Orientation.valueOf(str);
-			} catch (IllegalArgumentException e) {
-				return null;
-			}
-		}
-	}
-
 }

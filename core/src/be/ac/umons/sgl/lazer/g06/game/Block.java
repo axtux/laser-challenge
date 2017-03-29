@@ -5,9 +5,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.utils.Array;
 
-import be.ac.umons.sgl.lazer.g06.game.LevelType.BlockType;
-import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
-
 public class Block extends TiledMapTileLayer.Cell {
 	BlockType type;
 	Orientation orientation;

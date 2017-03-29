@@ -1,6 +1,5 @@
 package be.ac.umons.sgl.lazer.g06.graphic;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -13,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 
 import be.ac.umons.sgl.lazer.g06.game.Block;
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
-import be.ac.umons.sgl.lazer.g06.game.LevelType.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Map;
+import be.ac.umons.sgl.lazer.g06.game.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position;
 import be.ac.umons.sgl.lazer.g06.listeners.MapClickListener;
 
