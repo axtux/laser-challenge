@@ -7,15 +7,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 
+import be.ac.umons.sgl.lazer.g06.game.Block;
 import be.ac.umons.sgl.lazer.g06.game.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.game.Orientation;
 
 @RunWith(GdxTestRunner.class)
-public class StandardBlockTypeTest {
+public class StandardBlockTest {
 	/**
 	 * save level type for all tests to use it
 	 */
@@ -31,16 +31,14 @@ public class StandardBlockTypeTest {
 		standard = LevelType.getLevelType("standard");
 	}
 	
-	@Test(expected=GdxRuntimeException.class)
-	public void InvalidNameTest() {
-		standard.getBlockType("invalid");
-	}
-	
 	@Test
 	public void BlockerTest() {
 		// initialization
-		BlockType block = standard.getBlockType("blocker");
+		BlockType blockType = standard.getBlockType("blocker");
+		Block block = new Block(blockType, Orientation.UP);
 		Array<Orientation> outputs;
+		// check type
+		assertEquals(blockType, block.getType());
 		// from null
 		outputs = block.input(null);
 		assertEquals("From null size", 0, outputs.size);
@@ -61,8 +59,11 @@ public class StandardBlockTypeTest {
 	@Test
 	public void GateTest() {
 		// initialization
-		BlockType block = standard.getBlockType("gate");
+		BlockType blockType = standard.getBlockType("gate");
+		Block block = new Block(blockType, Orientation.UP);
 		Array<Orientation> outputs;
+		// check type
+		assertEquals(blockType, block.getType());
 		// from null
 		outputs = block.input(null);
 		assertEquals("From null size", 0, outputs.size);
@@ -85,8 +86,11 @@ public class StandardBlockTypeTest {
 	@Test
 	public void OneWayMirrorTest() {
 		// initialization
-		BlockType block = standard.getBlockType("one-way_mirror");
+		BlockType blockType = standard.getBlockType("one-way_mirror");
+		Block block = new Block(blockType, Orientation.UP);
 		Array<Orientation> outputs;
+		// check type
+		assertEquals(blockType, block.getType());
 		// from null
 		outputs = block.input(null);
 		assertEquals("From null size", 0, outputs.size);

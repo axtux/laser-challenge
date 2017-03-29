@@ -273,42 +273,37 @@ public class Level extends Observable {
 		}
 	}
 	
-	public boolean laserInput(Position position, Orientation orientation) {
-		Gdx.app.debug("Level.laser_input", position.toString()+" from "+(orientation == null ? "null" : orientation.toString()));
+	private void laserInput(Position position, Orientation inputFrom) {
+		Orientation inputTo = null;
+		if(inputFrom != null) {
+			Gdx.app.debug("Level.laser_input", position.toString()+" from "+inputFrom.toString());
+			// display input on map
+			map.setLaserInput(position, inputFrom);
+			inputTo = inputFrom.reverse();
+		}
 		
 		if(!map.inMap(position)) {
-			return false;
+			return;
 		}
 		
 		Block block = map.getBlock(position);
 		if(block == null) {
-			// not block to start
-			if(orientation == null) {
-				return false;
+			// empty case
+			if(inputFrom == null) {
+				return;
 			}
-			// position on ground without block
-			String pos_str = position.toString();
-			String ori_str = orientation == null ? "null" : orientation.toString();
-			boolean result = true;
-			result = result && map.setLaserInput(position, orientation.reverse());
-			result = result && map.setLaserOutput(position, orientation.reverse());
-			Gdx.app.debug("Level.laser_input", "setting laser on "+pos_str+" to "+ori_str+" result: "+Boolean.toString(result));
-			return result && laserInput(orientation.reverse().nextPosition(position), orientation);
+			
+			// position on ground without block, continue with same inputFrom
+			map.setLaserOutput(position, inputTo);
+			laserInput(inputTo.nextPosition(position), inputFrom);
+			return;
 		}
 		
-		if(block.processed()) {
-			return false;
+		Array<Orientation> outputs = block.input(inputFrom);
+		for(Orientation output : outputs) {
+			map.setLaserOutput(position, output);
+			laserInput(output.nextPosition(position), output.reverse());
 		}
-		
-		block.input(orientation);
-		for(Orientation output : block.getOutputs()) {
-			Position nextPosition = output.nextPosition(position);
-			Orientation nextOrientation = output.reverse();
-			Gdx.app.debug("Level.laser_input", "sending laser to "+nextPosition.toString()+" from "+nextOrientation.toString());
-			laserInput(nextPosition, nextOrientation);
-		}
-		
-		return true;
 	}
 	
 	public void start() {
