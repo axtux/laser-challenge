@@ -260,7 +260,7 @@ public class Level extends Observable {
 		if(inputFrom != null) {
 			//Gdx.app.debug("Level.laser_input", position.toString()+" from "+inputFrom.toString());
 			// display input on map
-			map.setLaserInput(position, inputFrom);
+			map.addInputLaser(position, inputFrom);
 			inputTo = inputFrom.reverse();
 		}
 		
@@ -276,14 +276,14 @@ public class Level extends Observable {
 			}
 			
 			// position on ground without block, continue with same inputFrom
-			map.setLaserOutput(position, inputTo);
+			map.addOutputLaser(position, inputTo);
 			laserInput(inputTo.nextPosition(position), inputFrom);
 			return;
 		}
 		
 		Array<Orientation> outputs = block.input(inputFrom);
 		for(Orientation output : outputs) {
-			map.setLaserOutput(position, output);
+			map.addOutputLaser(position, output);
 			laserInput(output.nextPosition(position), output.reverse());
 		}
 	}
