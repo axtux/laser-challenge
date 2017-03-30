@@ -32,29 +32,29 @@
 	<block>
 		<name>one-laser_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="UP"/>
-		</inputs>
+		</required-inputs>
 	</block>
 	
 	<block>
 		<name>two-laser_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="RIGHT"/>
 			<input orientation ="LEFT"/>
-		</inputs>
+		</required-inputs>
 	</block>
 	
 	<block>
 		<name>four-laser_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
 			<input orientation ="DOWN"/>
 			<input orientation ="LEFT"/>
-		</inputs>
+		</required-inputs>
 	</block>
 	
 	<block>
