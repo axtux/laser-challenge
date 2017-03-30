@@ -7,6 +7,11 @@ public class Position {
 	
 	private int x, y;
 	private Location loc;
+	/**
+	 * Required for JSON class to create this object
+	 */
+	@SuppressWarnings(value = { "unused" })
+	private Position() {}
 	
 	public Position(int x, int y) {
 		this.x = x;
