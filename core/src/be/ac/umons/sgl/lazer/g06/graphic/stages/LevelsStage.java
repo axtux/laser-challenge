@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
+import be.ac.umons.sgl.lazer.g06.game.Levels;
 import be.ac.umons.sgl.lazer.g06.listeners.LevelSelectorListener;
 
 public class LevelsStage extends AbstractStage {
@@ -52,7 +53,7 @@ public class LevelsStage extends AbstractStage {
 		Table levelsContainer = new Table();
 		
 		int i = 1;
-		for(Level level : Level.getLevels(lt)) {
+		for(Level level : Levels.getLevels(lt)) {
 			addLevelButton(levelsContainer, level, i++, false);
 		}
 		

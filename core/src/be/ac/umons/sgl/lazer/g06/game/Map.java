@@ -301,6 +301,23 @@ public class Map extends Observable {
 		return (Block) getCell(BLOCKS_LAYER, pos);
 	}
 	
+	public boolean hasRequiredInputs() {
+		Block block;
+		Position pos;
+		
+		for(int x = 0; x < mapWidth; ++x) {
+			for(int y = 0; y < mapHeight; ++y) {
+				pos = new Position(x, y);
+				block = this.getBlock(pos);
+				if(block != null && !block.hasRequiredInputs()) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	public boolean rotate(Position pos) {
 		Block block = getBlock(pos);
 		if(block == null) {
