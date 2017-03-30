@@ -318,12 +318,17 @@ public class Map extends Observable {
 		
 		Block block = getBlock(position);
 		if(block == null) {
-			// empty case
+			// empty case, no block here
 			if(inputFrom == null) {
 				return;
 			}
 			
-			// position on ground without block, continue with same inputFrom
+			// don't accept crossing lasers
+			if(getLasers(position).getInputs().size > 1) {
+				return;
+			}
+			
+			// continue with same inputFrom
 			addOutputLaser(position, inputTo);
 			laserInput(inputTo.nextPosition(position), inputFrom);
 			return;
