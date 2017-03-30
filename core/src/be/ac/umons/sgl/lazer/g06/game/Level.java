@@ -364,7 +364,7 @@ public class Level extends Observable {
 	}
 	
 	public boolean canUndo() {
-		return history.size > 0;
+		return history.size > 0 && !isOneTime(history.get(history.size-1).getNewPos());
 	}
 	
 	public boolean undo() {
