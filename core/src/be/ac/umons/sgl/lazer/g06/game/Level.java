@@ -248,7 +248,11 @@ public class Level extends Observable {
 		}
 		
 		if(game.getMode().hasScore()) {
+			// one-time laser
 			end();
+		} else {
+			// notify map observers about new lasers
+			map.changed();
 		}
 	}
 	
@@ -287,12 +291,16 @@ public class Level extends Observable {
 	
 	public void start() {
 		if(game.getMode().hasScore()) {
+			// arcade mode with timer
 			this.elapsedTime = 0;
 			Timer.schedule(new Timer.Task() {
 				public void run() {
 					LazerChallenge.getInstance().getLevel().timerTick();
 				}
 			}, 1, 1, this.time-1);
+		} else {
+			// training mode, continuous laser
+			startLaser();
 		}
 		changed();
 	}
@@ -347,7 +355,7 @@ public class Level extends Observable {
 		return moveTo(selected, newPos);
 	}
 	
-	public boolean moveTo(Position oldPos, Position newPos) {
+	private boolean moveTo(Position oldPos, Position newPos) {
 		if(oldPos == null) {
 			Gdx.app.error("Level.moveTo", "oldPos is null");
 			return false;
@@ -375,7 +383,13 @@ public class Level extends Observable {
 			return false;
 		}
 		
-		// restriction
+		// one-time
+		if(isOneTime(oldPos)) {
+			Gdx.app.debug("Level.moveTo", "old pos is one-time");
+			return false;
+		}
+		
+		// other restrictions
 		if(!isAllowed(oldPos, newBlock)) {
 			Gdx.app.debug("Level.moveTo", "new to old movement not allowed");
 			return false;
@@ -384,8 +398,6 @@ public class Level extends Observable {
 			Gdx.app.debug("Level.moveTo", "old to  new movement not allowed");
 			return false;
 		}
-		if (!(oldPos.getLocation().equals(Position.Location.INVENTORY)) && getRestriction(newPos).equals("one-time"))
-			return false;
 		
 		history.add(new Switch(oldPos,newPos));
 		
@@ -421,28 +433,23 @@ public class Level extends Observable {
 		return !map.getGroundBoolProp(pos, "unavailable");
 	}
 	
+	public boolean isOneTime(Position pos) {
+		String restriction = getRestriction(pos);
+		return restriction != null && restriction.equals("one-time");
+	}
+	
 	public boolean isAllowed(Position pos, Block block) {
-		// null block is allowed everywhere
-		if(block == null) {
+		// null block is allowed everywhere, don't test for one-time here
+		if(block == null || isOneTime(pos)) {
 			return true;
 		}
 		
-		if(pos == null) {
-			return false;
-		}
-		
-		if(pos.getLocation().equals(Position.Location.INVENTORY)) {
-			return true;
-		}
-		
-		String restriction = map.getGroundProp(pos, "restriction");
+		String restriction = getRestriction(pos);
 		// no restriction
 		if(restriction == null || restriction.isEmpty()) {
 			return true;
 		}
-		if (restriction.equals("one-time")){
-			return true;
-		}
+		
 		String name = block.getType().getName();
 		// name must contain restriction to be allowed
 		return name.contains(restriction);
@@ -637,7 +644,17 @@ public class Level extends Observable {
 	 * Difficulty of the game, information for the user from XML file.
 	 */
 	public enum Difficulty {
-		EASY, MEDIUM, HARD;
+		EASY("facile"),
+		MEDIUM("moyenne"),
+		HARD("difficile");
+		
+		String s;
+		private Difficulty(String s) {
+			this.s = s;
+		}
+		public String toString() {
+			return s;
+		}
 	}
 	
 }

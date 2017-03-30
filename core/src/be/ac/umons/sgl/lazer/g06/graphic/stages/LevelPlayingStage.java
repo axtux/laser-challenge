@@ -180,7 +180,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		}
 		restrictionLabel.setText(restriction);
 		
-		boolean move = block != null && block.canMove();
+		boolean move = block != null && block.canMove() && !level.isOneTime(level.getSelected());
 		boolean rotate = block != null && block.canRotate();
 		undoButton.setStyle(skin.get(level.canUndo() ? "small-menu" : "disabled-small-menu", TextButtonStyle.class));
 		moveButton.setStyle(skin.get(move ? "small-menu" : "disabled-small-menu", TextButtonStyle.class));

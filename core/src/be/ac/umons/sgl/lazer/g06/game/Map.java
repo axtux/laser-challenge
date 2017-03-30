@@ -177,7 +177,7 @@ public class Map extends Observable {
 		return true;
 	}
 	
-	private boolean setCell(Cell cell, int layer, Position p) {
+	private boolean setCell(Cell cell, int layer, Position p, boolean notify) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		if(tmtl == null) {
 			return false;
@@ -188,14 +188,16 @@ public class Map extends Observable {
 		}
 		
 		tmtl.setCell(p.getX(), p.getY(), cell);
+		
 		// notify observers
-		this.setChanged();
-		this.notifyObservers();
+		if(notify) {
+			this.changed();
+		}
 		return true;
 	}
 	
 	public boolean setBlock(Block block, Position pos) {
-		return setCell(block, BLOCKS_LAYER, pos);
+		return setCell(block, BLOCKS_LAYER, pos, true);
 	}
 	
 	public boolean setLaserInput(Position position, Orientation fromOrientation) {
@@ -209,7 +211,7 @@ public class Map extends Observable {
 		//Texture
 		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getInput()));
 		cell.setRotation(fromOrientation.getAngle());
-		return this.setCell(cell, INPUTS_LAYER, position);
+		return this.setCell(cell, INPUTS_LAYER, position, false);
 	}
 	public boolean setLaserOutput(Position position, Orientation toOrientation) {
 		if(!inMap(position) || toOrientation == null) {
@@ -219,7 +221,7 @@ public class Map extends Observable {
 		Cell cell = new Cell();
 		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getOutput()));
 		cell.setRotation(toOrientation.getAngle());
-		return this.setCell(cell, START_OUTPUTS_LAYER, position);
+		return this.setCell(cell, START_OUTPUTS_LAYER, position, false);
 	}
 	public void clearLasers() {
 		for(int layer = INPUTS_LAYER; layer <= END_OUTPUTS_LAYER; ++layer) {
@@ -311,5 +313,11 @@ public class Map extends Observable {
 	public TiledMap getTiledMap() {
 		return map;
 	}
+	
+	public void changed() {
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
 	
 }
