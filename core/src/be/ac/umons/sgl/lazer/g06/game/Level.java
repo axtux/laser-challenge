@@ -248,7 +248,11 @@ public class Level extends Observable {
 		}
 		
 		if(game.getMode().hasScore()) {
+			// one-time laser
 			end();
+		} else {
+			// notify map observers about new lasers
+			map.changed();
 		}
 	}
 	
@@ -347,7 +351,7 @@ public class Level extends Observable {
 		return moveTo(selected, newPos);
 	}
 	
-	public boolean moveTo(Position oldPos, Position newPos) {
+	private boolean moveTo(Position oldPos, Position newPos) {
 		if(oldPos == null) {
 			Gdx.app.error("Level.moveTo", "oldPos is null");
 			return false;
@@ -384,8 +388,10 @@ public class Level extends Observable {
 			Gdx.app.debug("Level.moveTo", "old to  new movement not allowed");
 			return false;
 		}
-		if (!(oldPos.getLocation().equals(Position.Location.INVENTORY)) && getRestriction(newPos).equals("one-time"))
+		if (!(oldPos.getLocation().equals(Position.Location.INVENTORY)) && getRestriction(newPos).equals("one-time")) {
+			Gdx.app.debug("Level.moveTo", "old not into inventary and new one-time");
 			return false;
+		}
 		
 		history.add(new Switch(oldPos,newPos));
 		
