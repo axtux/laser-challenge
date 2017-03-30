@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE blocks [
+	<!ELEMENT blocks (block*) >
+	<!ELEMENT block (image,name,(inputs || required-inputs))>
+	<!ELEMENT image (#PCDATA)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT inputs (input*) >
+	<!ELEMENT required-inputs (input*) >
+	<!ELEMENT input (output*) >
+	<!ATTLIST input orientation CDATA #IMPLIED >
+	<!ELEMENT output EMPTY >
+	<!ATTLIST output orientation CDATA #IMPLIED >
+ 	]>
+
+
+
+
