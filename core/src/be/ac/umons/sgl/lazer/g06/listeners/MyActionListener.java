@@ -103,7 +103,7 @@ public class MyActionListener implements ActionListener {
 			break;
 		
 		// ACTIONs from MENU_LEVEL_INFOS
-		case "MENU_LEVEL_LOAD":
+		case "ACTION_LEVEL_LOAD":
 			act("MENU_LEVEL_PLAY");
 			game.getLevel().start(true);
 			break;
