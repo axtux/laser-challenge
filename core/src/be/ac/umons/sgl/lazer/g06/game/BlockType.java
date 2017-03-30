@@ -28,6 +28,8 @@ public class BlockType {
 		tr = new TextureRegion(new Texture(fh));
 		
 		
+		//Element requiredInputsElement = block.getChildByName("required_inputs");
+		//Array<Element> requiredInputsElements = requiredInputsElement.getChildrenByName("input");
 		Element inputsElement = block.getChildByName("inputs");
 		Array<Element> inputElements = inputsElement.getChildrenByName("input");
 		inputs = new HashMap<Orientation, Array<Orientation>>(inputElements.size);
