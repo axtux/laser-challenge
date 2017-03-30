@@ -644,7 +644,17 @@ public class Level extends Observable {
 	 * Difficulty of the game, information for the user from XML file.
 	 */
 	public enum Difficulty {
-		EASY, MEDIUM, HARD;
+		EASY("facile"),
+		MEDIUM("moyenne"),
+		HARD("difficile");
+		
+		String s;
+		private Difficulty(String s) {
+			this.s = s;
+		}
+		public String toString() {
+			return s;
+		}
 	}
 	
 }
