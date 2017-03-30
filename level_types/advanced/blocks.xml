@@ -78,6 +78,15 @@
 	</block>
 	
 	<block>
+		<name>two-laser-middle-oriented_target</name>
+		<label>Cible</label>
+		<required-inputs>
+			<input orientation ="UP"/>
+			<input orientation ="DOWN_RIGHT"/>
+		</required-inputs>
+	</block>
+	
+	<block>
 		<name>four-laser-oriented_target</name>
 		<label>Cible</label>
 		<required-inputs>

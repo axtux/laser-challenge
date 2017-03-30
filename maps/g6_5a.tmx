@@ -4,113 +4,123 @@
   <image source="terrain.png" width="1024" height="1024"/>
   <tile id="187">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="188">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="189">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="213">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="245">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="277">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="278">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="279">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
+   </properties>
+  </tile>
+  <tile id="309">
+   <properties>
+    <property name="restriction" value="unavailable"/>
+   </properties>
+  </tile>
+  <tile id="311">
+   <properties>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="341">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="342">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="343">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="565">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="597">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="620">
    <properties>
-    <property name="source" value="1"/>
+    <property name="restriction" value="source"/>
    </properties>
   </tile>
   <tile id="621">
    <properties>
-    <property name="target" value="1"/>
+    <property name="restriction" value="target"/>
    </properties>
   </tile>
   <tile id="629">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="630">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="631">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="693">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="694">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="695">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
  </tileset>
  <layer name="ground" width="18" height="18">
   <data encoding="base64" compression="zlib">
-   eJyNk0ESgjAMRUMPAZwEPUn1ErpUT6KeRF1QjtGjsDYdyBh+046LP4U0fSQ/tGuIetZERGe3rEkjK9LvXTRw7g60V6ucbfm5U2yU5/gBdDQ4A8RENX6gnOPVN8Y1Fip82Zcz6IX2B/nB4Ei9Wn2T7/dw/l//rX6Eg/ya/8Kx+rH8ao1edN/yrN+RPwHX8iTF5kIvmq25g8trLs0+0FZWL6V/CL3CulMdF9aVdXNbT0SYg/X5NXbn9cF6OttnKwfrTjkv3nuzPoozA0fnpPpq8031WXcyUu5taa61O4kMyTu57VxLc0FOVPXrvC+yJKgu
+   eJx9VMERgkAMDFcEWglaCdKEPtVK1ErUB6EMSvFtHC/DsuR47BC4zZJsAoOIDBmnNMW9YYQzR1OJ7Ah7wyZjW/1zEb+8ms5LOhhHOg2dt3Y9EDqKUaOjPL8/W+8XwzVN/Sv0zV6gP6h/s/y74UE6NXjEXmngz9PyX4Z3mueUfHMd9EehPs4r+eY66I/raKDDdeM7NfBnIH0HzzXy5JOf87x6eI51N2npSS9zPs5LZULUC+8M6uC8Frue4v1CIMd5WHeb6yvtF8bOcR7XrVSv535IxznOW5tvS33jd6OEtbnyvFyHNZx3TPG/gufFOiPUj7wvQX+o7g==
   </data>
  </layer>
 </map>

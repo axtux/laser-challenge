@@ -4,67 +4,67 @@
   <image source="terrain.png" width="1024" height="1024"/>
   <tile id="277">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="278">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="279">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="309">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="311">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="341">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="342">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="343">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="373">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="374">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="375">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="620">
    <properties>
-    <property name="source" value="1"/>
+    <property name="restriction" value="source"/>
    </properties>
   </tile>
   <tile id="621">
    <properties>
-    <property name="target" value="1"/>
+    <property name="restriction" value="target"/>
    </properties>
   </tile>
  </tileset>
