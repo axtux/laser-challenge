@@ -152,14 +152,12 @@ public class Level extends Observable {
 			
 			positionElement = blockElement.getChildByName("position");
 			if(positionElement == null) {
-				//Gdx.app.debug("Level.setBLocks", "Block "+blockType+" goes to inventory");
 				invBlocks.add(block);
 				continue;
 			}
 			
 			int x = positionElement.getIntAttribute("x", -1);
 			int y = positionElement.getIntAttribute("y", -1);
-			//Gdx.app.debug("Level.setBLocks", "Block "+blockType+" goes to "+Integer.toString(x)+"x"+Integer.toString(y));
 			// if x or y out of map, block goes to inventory
 			pos = new Position(x, y);
 			if(map.getBlock(pos) != null) {
@@ -201,12 +199,12 @@ public class Level extends Observable {
 	
 	public Block getBlock(Position pos) {
 		if(pos == null) {
-			Gdx.app.error("Level.getBlock", "pos cannot be null");
+			Gdx.app.debug("Level.getBlock", "pos is null");
 			return null;
 		}
 		
 		if(pos.getLocation() == null) {
-			Gdx.app.error("Level.getBlock", "location cannot be null");
+			Gdx.app.debug("Level.getBlock", "location is null");
 			return null;
 		}
 		
@@ -244,7 +242,11 @@ public class Level extends Observable {
 		}
 	}
 	
-	public void start() {
+	public void start(boolean load) {
+		if(load) {
+			load();
+		}
+		
 		if(game.getMode().hasScore()) {
 			// arcade mode with timer
 			this.elapsedTime = 0;
@@ -260,13 +262,41 @@ public class Level extends Observable {
 		changed();
 	}
 	
+	public boolean canLoad() {
+		Array<Switch> userHistory = game.getUser().loadHistory(name);
+		return userHistory != null && userHistory.size > 0;
+	}
+	public boolean load() {
+		Gdx.app.debug("Level.load", "trying to load");
+		if(!canLoad()) {
+			return false;
+		}
+		
+		Array<Switch> userHistory = game.getUser().loadHistory(name);
+		for(Switch s : userHistory) {
+			if(!moveTo(s.getOldPos(), s.getNewPos())) {
+				Gdx.app.error("Level.load", "Unable to load user history for level "+name);
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	public void stop() {
-		Timer.instance().clear();
-		changed();
+		if(game.getMode() != null && game.getMode().hasScore()) {
+			Timer.instance().clear();
+			changed();
+		} else if(game.getUser() != null){
+			game.getUser().saveHistory(name, history);
+		}
 	}
 	
 	private void end() {
 		stop();
+		if(game.getMode().hasScore() && isWon()) {
+			game.getUser().saveScore(name, getScore());
+		}
 		game.act("MENU_LEVEL_FINISHED");
 	}
 	
@@ -283,7 +313,6 @@ public class Level extends Observable {
 	}
 	
 	public void timerTick() {
-		//Gdx.app.debug("Level.timer_tick", "elapsedTime="+Integer.toString(elapsedTime));
 		this.elapsedTime += 1;
 		if(getRemainingTime() == 0) {
 			end();
@@ -375,7 +404,9 @@ public class Level extends Observable {
 		Switch last = history.pop();
 		if(!moveTo(last.getOldPos(), last.getNewPos())) {
 			Gdx.app.error("Level.undo", "unable to undo "+last.getOldPos().toString()+"/"+last.getNewPos().toString());
+			return false;
 		}
+		
 		// this move has been saved, remove it
 		history.pop();
 		
