@@ -287,7 +287,7 @@ public class Level extends Observable {
 		if(game.getMode() != null && game.getMode().hasScore()) {
 			Timer.instance().clear();
 			changed();
-		} else if(game.getUser() != null){
+		} else if(game.getUser() != null && history.size != 0){
 			game.getUser().saveHistory(name, history);
 		}
 	}
