@@ -45,15 +45,36 @@ public class User {
 		return image;
 	}
 	
-	public boolean saveScore (String levelname, int score ){
-		String newScore = String.valueOf(score);
-		return Files.putContent("users/local/"+this.username+"/"+levelname+"Score", newScore);
+	protected String userPath() {
+		return "users/"+getUsername();
 	}
 	
-	public int loadScore(String levelname){
-		String newScore = Files.getContent("users/local/"+this.username+"/"+levelname+"Score"); 
-		return Integer.parseInt(newScore);
+	private String levelPath(String levelName) {
+		return userPath()+"/"+levelName;
 	}
+	
+	private String scorePath(String levelName) {
+		return levelPath(levelName)+"/score.txt";
+	}
+	
+	private String historyPath(String levelName) {
+		return levelPath(levelName)+"/history.xml";
+	}
+	
+	public boolean saveScore(String levelName, int score){
+		String str_score = String.valueOf(score);
+		return Files.putContent(scorePath(levelName), str_score);
+	}
+	
+	public int loadScore(String levelName){
+		String str_score = Files.getContent(scorePath(levelName));
+		try {
+			return Integer.parseInt(str_score);
+		} catch(NumberFormatException e) {
+			return 0;
+		}
+	}
+	
 	
 	public void saveHistory ( String levelname , Array<Switch> history){
 		try {

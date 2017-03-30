@@ -291,10 +291,10 @@ public class Level extends Observable {
 			game.getUser().saveHistory(name, history);
 		}
 	}
-	
+	// only called in arcade mode
 	private void end() {
 		stop();
-		if(game.getMode().hasScore() && isWon()) {
+		if(isWon()) {
 			game.getUser().saveScore(name, getScore());
 		}
 		game.act("MENU_LEVEL_FINISHED");

@@ -17,8 +17,9 @@ public class LevelInfosStage extends AbstractLevelStage {
 		
 		addDoubleLabel("Mode", game.getMode().toString());
 		if(game.getMode().hasScore()) {
+			int score = game.getUser().loadScore(level.getName());
 			addDoubleLabel("Temps", Time.prettyTime(level.getTime(), false, false));
-			addDoubleLabel("Score", Integer.toString(level.getScore()));
+			addDoubleLabel("Score", Integer.toString(score));
 		}
 		
 		String style = level.canLoad() ? "menu" : "disabled-menu";

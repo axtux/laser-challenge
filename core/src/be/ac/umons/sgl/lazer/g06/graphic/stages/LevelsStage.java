@@ -86,8 +86,9 @@ public class LevelsStage extends AbstractStage {
 		levelContainer.row();
 		
 		if(game.getMode().hasScore()) {
-			Label score = new Label("Score : 0", skin, "small-label");
-			levelContainer.add(score);
+			int score = game.getUser().loadScore(level.getName());
+			Label label = new Label("Score : "+Integer.toString(score), skin, "small-label");
+			levelContainer.add(label);
 		}
 		
 		container.add(levelContainer).pad(20).left();
