@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 
 import be.ac.umons.sgl.lazer.g06.Files;
 import be.ac.umons.sgl.lazer.g06.game.Switch;
@@ -14,8 +15,8 @@ import be.ac.umons.sgl.lazer.g06.game.Switch;
 public class User {
 	private String username;
 	private String image;
-	private XMLEncoder encoder; 
-
+	private Json json;
+	
 	public User() {
 		this("Anonyme", "anonymous.png");
 	}
@@ -23,6 +24,7 @@ public class User {
 	public User(String username, String image) {
 		setUsername(username);
 		setImage(image);
+		json = new Json();
 	}
 	
 	public void setUsername(String username) {
@@ -75,22 +77,26 @@ public class User {
 		}
 	}
 	
-	
-	public void saveHistory ( String levelname , Array<Switch> history){
-		try {
-			encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("score"+levelname+".xml")));
-			encoder.writeObject(history);
-			encoder.flush();
-		} catch (final java.io.IOException e) {
-			e.printStackTrace();
-			} 
-		finally {
-			if (encoder != null) {
-				encoder.close();
-			}
-		}
+	public boolean saveHistory ( String levelName , Array<Switch> history){
+		String json_history = json.toJson(history);
+		Gdx.app.debug("User.saveHistory", json_history);
+		return Files.putContent(historyPath(levelName), json_history);
 	}
-	public Array<Switch> loadHistory(String levelname){
-		return null;
+	
+	public Array<Switch> loadHistory(String levelName){
+		String json_history = Files.getContent(historyPath(levelName));
+		if(json_history == null) {
+			Gdx.app.debug("User.loadHistory", "no file "+historyPath(levelName));
+			return null;
+		}
+		
+		Array<Switch> history = json.fromJson(Array.class, Switch.class, json_history);
+		
+		Gdx.app.debug("User.saveHistory", "size : "+Integer.toString(history.size));
+		for(Switch s : history) {
+			Gdx.app.debug("User.saveHistory", s.toString());
+		}
+		
+		return history;
 	}
 }
