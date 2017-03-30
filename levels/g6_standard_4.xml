@@ -2,7 +2,7 @@
 <level name="Niveau 4" map="g6_4" difficulty="medium" time="120">
 	<blocks>
 		<block type="one-laser_source" fixedposition="true">
-			<position x="6" y="0"/>
+			<position x="7" y="0"/>
 		</block>
 		<block type="one-laser_source" fixedposition="true">
 			<position x="3" y="1"/>

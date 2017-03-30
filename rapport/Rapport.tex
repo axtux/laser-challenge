@@ -23,19 +23,19 @@
 L'énoncé mis à notre disposition en début d'année parlait de la réalisation du jeu nommé ``Lazer Challenge'' en Java
 en nous aidant de la bibliothèque LibGDX. De plus , une extension était demandée individuellement à chaque étudiant .
 
-Pour pouvoir réaliser ce projet, plusieurs étapes ont dû être nécessaires. La première consisait en la plannification de notre projet,
- cette étape comprenait la création d'un graphe Gantt , PERT, ainsi qu'une gestion des risques, une répartition du travail,
+Pour pouvoir réaliser ce projet, plusieurs étapes ont dûes être nécessaires. La première consisait en la plannification de notre projet,
+ cette étape comprenait la création d'un graphe Gantt ,PERT, ainsi qu'une gestion des risques, une répartition du travail,
  et de pouvoir déterminer les ressources qui allaient nous être nécessaires dans l'optique de nous préparer au mieux à d'éventuels
- obstacles, empêchement qui pourrait survenir et nous ralentir dans la conception de notre jeu. Ensuite est venue l'étape de la modélisation, où nous
- avons dû créer une maquette permettant aux professeurs et assistants d'avoir une vision de la forme que prendrai notre jeu , c'est à dire la partie graphique.
- Mais également la conception de plusieurs diagrammes UML , notamment un diagramme de classe qui a permis de montrer le fond de notre jeu , autrement dit les classes
- qui formerai notre projet.
- TODO
- Nous voici désormais à l'étape de l'implémentation où nous allont maintenant vous expliquer notre travail dans son ensemble,
- les difficultés et problèmes survenus ,nos choix d'implémentations ,quelques concessions faites également ... TODO suite.
+ obstacles, empêchements qui pourrait survenir. Ce qui nous aurait ralenti dans la conception de notre jeu.\\ La deuxième, quand à elle, nous a amenée
+ à créer une maquette permettant aux professeurs et assistants d'avoir un aperçu de la forme que prendrai notre jeu , c'est à dire de la partie graphique.
+ Mais nous avons dû également travailler sur plusieurs diagrammes UML , notamment un diagramme de classe qui a permis de montrer le fond de notre jeu , autrement dit les classes
+ qui formeraient notre projet.\\
+ Nous voici désormais à l'étape de l'implémentation où nous allons maintenant vous expliquer notre travail dans son ensemble,
+ les difficultés et problèmes survenus, nos choix d'implémentations, quelques concessions faites également mais aussi quelques améliorations que nous
+ pourrions apporter dans le futur.
 \section{Préparatifs}
 \subsection{Changement de groupe} 
-Dès le début de la phase d'implémentation , suite a plusieurs abandons dans les autres groupes, un membre de notre goupe a été annexé dans un autre groupe.
+Dès le début de la phase d'implémentation , suite a plusieurs abandons dans les groupes, un membre de notre goupe a été annexé dans un autre groupe.
 En conséquence , nous avons dû immédiatement revoir notre diagramme de classe et la maquette graphique afin de pouvoir nous baser directement sur quelque chose
 de concret. Le nouveau diagramme de classe se trouve dans l'archive .jar et est donc à votre disposition (core/assets/images/ClassDiagram.png).
 \section{Conception}
@@ -48,7 +48,7 @@ comme valeur le nom d'un bloc, exemple , si une tuile possède une restriction a
 Si elle ne possède aucune restriction, tout type de blocs pourront y être déposés. 
 \\
 Concernant la bibliothèque LibGDX, n'ayant que peu de connaissance au début du projet, nous étions partis sur une interface graphique composée de sprites qui faisaient
-office de boutons. C'était une solution facile à mettre en oeuvre , qui nous avait permis de pouvoir passer à d'autres étapes de notre projet.\\
+office de boutons. C'était une solution facile à mettre en oeuvre , qui nous avait permis de pouvoir passer à d'autres étapes dans notre projet.\\
 Ceppendant, le fait de créer des images de boutons devenaient redondants et après réflexion, nous nous sommes dit que si nous voulions, dans un futur
 hypothétique, traduire notre jeu. Il nous aurait fallu refaire tous les sprites. La décision de revenir en arrière et de recréer entièrement nos menus 
 du jeu a été prise en exploitant au mieux les propriétés de LibGDX. 
@@ -60,14 +60,17 @@ D'un autre côté, nous avons fait le choix de définir nos blocs dans des fichi
 n'avons pas besoin de recompiler notre projet si nous voulons ajouter un nouveau type de bloc. Nous avons procédé de la même manière pour les orientations
 en les défénissant également dans des fichiers XML.
 \\
+De plus, nous avons pris la peine de fournir des fichier .dtd afin de vérifier si nos fichiers XML étaient corrects.
+\\
 Par ailleurs, l'énoncé parlait d'un mode ``arcade/practice'' ainsi que d'un mode 'continuous laser beam/one-time-only laser beam``. Concernant les
 deux premiers modes , nous n'avons à noter aucun changement par rapport a l'énoncé initial. Cependant, nous n'avons autorisé que le mode ''one-time-only laser beam``
 en mode arcade et que le mode ''continuous laser beam`` en mode ''practice``( mode ''entrainement`` dans notre interface graphique).
 Nous en parlions déjà dans notre rapport de modélisation.
 \\
-De plus , un mode Pause nous était demandé. Nous n'avons pas souhaité l'implémenter car étant donné qu'en mode ''entrainement``, aucune limite de
+Un mode Pause nous était aussi demandé. Nous n'avons pas souhaité l'implémenter car étant donné qu'en mode ''entrainement``, aucune limite de
 temps n'est fixée , nous ne voyons donc pas l'intérêt d'un tel mode. En mode ''arcade``, une limite de temps est fixée, de ce fait, un mode pause entrainerait
 également la pause du timer ... Ce que nous considérons comme étant de la triche.
+
 \subsection{Difficultés}
 Une des difficultés principale concernant le projet est la capacité à nous adapter à la bibliothèque LibGDX, ce qui est normal étant donné , qu'aucun des membres
 n'avaient utilisés cette bibliothèque aupparavent , cependant nous regrettons un manque de documentation accessible sur internet, que ce soit sur 
@@ -93,11 +96,6 @@ s'est tourné vers le réseau social Twitter ( à noter que ce choix est différ
 . Suite à quelques problèmes, il est venu trouver les assistants et professeurs afin d'obtenir un hébergement,
 malheureusement , il semblerait que ca n'est pas été le cas .\\
 
-Même si cela n'était pas obligatoire, nous pouvons également noter l'absence de fichiers XSD pour vérifier la structure de nos fichiers XML, cependant,
- nous aimerions préciser que nous suivions/suivons le cours de Base de Données 2 en Bac3, nous avions donc créé quelques DTD qui 
- nous avaient permis vérifier nos XML.
- Mais en utilisant la classe XmlReader de LibGDX , des soucis sont apparus dû à la présence de ces DTD ( souci de compatibilité ? ) qui nous ont obligé
- à les retirer.
 
 \section{Eventuelles Améliorations}
 Malgré le fait que l'on avait un énoncé contenant les consignes pour la réalisation de ce projet, nous avons quand même décidé de penser à d'éventuelles
@@ -113,12 +111,12 @@ de l'inventaire à la zone de jeu. Ainsi, plus nous mettrions de bloc en jeu, pl
 
 \section{Outils Utilisés}
 Pour la réalisation de ce projet, nous avons utilisé plusieurs outils mis à notre disposition, certains étaient demandés par les professeurs et assistants,
-tl que Git qui nous a grandement aidé dans la gestion de notre projet, Gradle qui nous a permis de compiler le programme facilement et d'effectuer les tests unitaires
+tel que Git qui nous a grandement aidé dans la gestion de notre projet, Gradle qui nous a permis de compiler le programme facilement et d'effectuer les tests unitaires
 avec JUnit.\\
 La création des maps s'est faites avec l'outil Tiled, comme, également demandé par les professeurs et assistants. \\
 
 Par ailleurs, nous avons utilisé certains outils qui n'étaient pas demandés explicitement, tel que Gimp pour la création des sprites de tous les blocs et lasers,
-la capture de la vidéo explicative s'est faites avec le logiciel de capture Kazam et le son avec le logiciel Audacity.\\
+la capture de la vidéo explicative s'est faite avec le logiciel de capture Kazam et le son avec le logiciel Audacity.\\
 Qui plus est, ce rapport a été rédigé avec le langage LaTex ( avec comme complément, l'IDE Kile).
 \section{Visuel Du Jeu}
 Vous pouvez visualiser un aperçu commenté de notre jeu en cliquant sur cette URL
@@ -136,4 +134,6 @@ notre projet et sans doute, d'autres projets futurs.
 Mais ce projet a surtout été enrichissant au niveau des discussions, des échanges des idées entre les membres du groupe.
 
 \section{Remerciements}
+Nous tenions à remercier le professeur Tom Mens ainsi que les assistants , Gauvain Devillez et Jeremy Dubrulle qui ont pu nous aider à concevoir les idées qui ont menées 
+à la réalisation de ce projet.
 \end{document}
