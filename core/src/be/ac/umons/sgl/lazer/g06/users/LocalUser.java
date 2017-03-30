@@ -57,7 +57,7 @@ public class LocalUser extends User {
 	}
 	
 	private String xmlPath() {
-		return userPath()+"user.xml";
+		return userPath()+"/user.xml";
 	}
 	
 	private boolean exists() {
