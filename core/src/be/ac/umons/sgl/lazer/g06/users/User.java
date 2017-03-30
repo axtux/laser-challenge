@@ -1,10 +1,5 @@
 package be.ac.umons.sgl.lazer.g06.users;
 
-import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -36,7 +31,7 @@ public class User {
 	}
 	
 	public void logout() {
-		
+		Gdx.app.debug("User.logout", "remove path "+userPath());
 	}
 	
 	public String getUsername() {
@@ -90,11 +85,12 @@ public class User {
 			return null;
 		}
 		
+		@SuppressWarnings("unchecked")
 		Array<Switch> history = json.fromJson(Array.class, Switch.class, json_history);
 		
-		Gdx.app.debug("User.saveHistory", "size : "+Integer.toString(history.size));
+		Gdx.app.debug("User.loadHistory", "size : "+Integer.toString(history.size));
 		for(Switch s : history) {
-			Gdx.app.debug("User.saveHistory", s.toString());
+			Gdx.app.debug("User.loadHistory", s.toString());
 		}
 		
 		return history;
