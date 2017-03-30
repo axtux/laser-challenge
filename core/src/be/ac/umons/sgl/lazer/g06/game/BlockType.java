@@ -15,6 +15,7 @@ public class BlockType {
 	private final String name;
 	private final String label;
 	private final HashMap<Orientation, Array<Orientation>> inputs;
+	private final Array<Orientation> requiredInputs;
 	
 	public BlockType(String spritesPath, Element block) {
 		this.name = block.get("name");
@@ -27,12 +28,17 @@ public class BlockType {
 		}
 		tr = new TextureRegion(new Texture(fh));
 		
+		inputs = parseInputs(block.getChildByName("inputs"));
+		requiredInputs = parseRequiredInputs(block.getChildByName("required-inputs"));
+	}
+	
+	private HashMap<Orientation, Array<Orientation>> parseInputs(Element inputsElement) {
+		if(inputsElement == null) {
+			return new HashMap<Orientation, Array<Orientation>>(0);
+		}
 		
-		//Element requiredInputsElement = block.getChildByName("required_inputs");
-		//Array<Element> requiredInputsElements = requiredInputsElement.getChildrenByName("input");
-		Element inputsElement = block.getChildByName("inputs");
 		Array<Element> inputElements = inputsElement.getChildrenByName("input");
-		inputs = new HashMap<Orientation, Array<Orientation>>(inputElements.size);
+		HashMap<Orientation, Array<Orientation>> inputs = new HashMap<Orientation, Array<Orientation>>(inputElements.size);
 		// for each intputElement
 		Array<Element> outputElements;
 		Array<Orientation> outputs;
@@ -57,6 +63,32 @@ public class BlockType {
 			orientation = Orientation.fromString(orientationStr);
 			inputs.put(orientation, outputs);
 		}
+		
+		return inputs;
+	}
+	
+	private Array<Orientation> parseRequiredInputs(Element inputsElement) {
+		if(inputsElement == null) {
+			return new Array<Orientation>(0);
+		}
+		
+		Array<Element> inputElements = inputsElement.getChildrenByName("input");
+		Array<Orientation> inputs = new Array<Orientation>(inputElements.size);
+		// for each intputElement
+		String orientationStr;
+		Orientation orientation;
+		
+		for(Element inputElement : inputElements) {
+			orientationStr = inputElement.getAttribute("orientation");
+			orientation = Orientation.fromString(orientationStr);
+			if(orientation == null) {
+				throw new GdxRuntimeException("No orientation "+orientationStr);
+			}
+			
+			inputs.add(orientation);
+		}
+		
+		return inputs;
 	}
 	
 	public TextureRegion getTextureRegion() {
@@ -76,5 +108,9 @@ public class BlockType {
 			orientations = new Array<Orientation>(0);
 		}
 		return orientations;
+	}
+	
+	public Array<Orientation> getRequiredInputs() {
+		return requiredInputs;
 	}
 }
