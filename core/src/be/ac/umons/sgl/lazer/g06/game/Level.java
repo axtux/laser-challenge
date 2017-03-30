@@ -319,8 +319,12 @@ public class Level extends Observable {
 		if(getRemainingTime() <= 0) {
 			return false;
 		}
-		// TODO check targets
-		return false;
+		
+		if(!map.hasRequiredInputs() || !inventory.hasRequiredInputs()) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public void timerTick() {
