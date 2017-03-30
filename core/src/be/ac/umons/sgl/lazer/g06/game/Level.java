@@ -258,7 +258,7 @@ public class Level extends Observable {
 	private void laserInput(Position position, Orientation inputFrom) {
 		Orientation inputTo = null;
 		if(inputFrom != null) {
-			Gdx.app.debug("Level.laser_input", position.toString()+" from "+inputFrom.toString());
+			//Gdx.app.debug("Level.laser_input", position.toString()+" from "+inputFrom.toString());
 			// display input on map
 			map.setLaserInput(position, inputFrom);
 			inputTo = inputFrom.reverse();
