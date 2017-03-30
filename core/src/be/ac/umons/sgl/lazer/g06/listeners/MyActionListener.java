@@ -43,6 +43,8 @@ public class MyActionListener implements ActionListener {
 		
 		// ACTIONs from headers
 		case "ACTION_EXIT":
+			game.setLevel(null);
+			game.setUser(null);
 			Gdx.app.exit();
 			break; // required
 		case "ACTION_LOGOUT":
