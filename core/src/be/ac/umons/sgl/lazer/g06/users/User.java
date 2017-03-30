@@ -1,6 +1,5 @@
 package be.ac.umons.sgl.lazer.g06.users;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
@@ -77,6 +76,7 @@ public class User {
 		return Files.putContent(historyPath(levelName), json_history);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Array<Switch> loadHistory(String levelName){
 		String json_history = Files.getContent(historyPath(levelName));
 		if(json_history == null) {
@@ -84,14 +84,6 @@ public class User {
 			return null;
 		}
 		
-		@SuppressWarnings("unchecked")
-		Array<Switch> history = json.fromJson(Array.class, Switch.class, json_history);
-		
-		//Gdx.app.debug("User.loadHistory", "size : "+Integer.toString(history.size));
-		for(Switch s : history) {
-			Gdx.app.debug("User.loadHistory", s.toString());
-		}
-		
-		return history;
+		return json.fromJson(Array.class, Switch.class, json_history);
 	}
 }
