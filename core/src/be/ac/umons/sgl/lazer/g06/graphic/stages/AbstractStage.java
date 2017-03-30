@@ -125,9 +125,9 @@ public abstract class AbstractStage extends Stage {
 		container.add(block).expand().fill();
 	}
 	
-	protected void addMenuButton(String text, String action) {
-		addButton(content, text, action).minSize(800, 80).pad(30);
+	protected Cell<TextButton> addMenuButton(String text, String action) {
 		content.row();
+		return addButton(content, text, action).minSize(800, 80).pad(30);
 	}
 	
 	protected Cell<TextButton> addButton(Table container, String text, String action) {
