@@ -73,21 +73,21 @@ public class User {
 	
 	public boolean saveHistory ( String levelName , Array<Switch> history){
 		String json_history = json.toJson(history);
-		Gdx.app.debug("User.saveHistory", json_history);
+		//Gdx.app.debug("User.saveHistory", json_history);
 		return Files.putContent(historyPath(levelName), json_history);
 	}
 	
 	public Array<Switch> loadHistory(String levelName){
 		String json_history = Files.getContent(historyPath(levelName));
 		if(json_history == null) {
-			Gdx.app.debug("User.loadHistory", "no file "+historyPath(levelName));
+			//Gdx.app.debug("User.loadHistory", "no file "+historyPath(levelName));
 			return null;
 		}
 		
 		@SuppressWarnings("unchecked")
 		Array<Switch> history = json.fromJson(Array.class, Switch.class, json_history);
 		
-		Gdx.app.debug("User.loadHistory", "size : "+Integer.toString(history.size));
+		//Gdx.app.debug("User.loadHistory", "size : "+Integer.toString(history.size));
 		for(Switch s : history) {
 			Gdx.app.debug("User.loadHistory", s.toString());
 		}
