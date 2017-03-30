@@ -14,21 +14,20 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 
 public class Map extends Observable {
-	static final String MAP_PATH = "maps";
-	public static final int GROUND_LAYER = 0;
-	public static final int BLOCKS_LAYER = 1;
-	public static final int LASERS_LAYER = 2;
+	private static final String MAP_PATH = "maps";
+	private static final int GROUND_LAYER = 0;
+	private static final int BLOCKS_LAYER = 1;
+	private static final int LASERS_LAYER = 2;
 	
 	private TiledMap map;
-	int mapWidth, mapHeight, tileSize;
-	Location loc;
-	
-	TiledMapTile inputTile, outputTile;
+	private int mapWidth, mapHeight, tileSize;
+	private Location loc;
 	/**
 	 * Create Map with references from an other Map instance
 	 * Usually used for inventory
@@ -104,9 +103,6 @@ public class Map extends Observable {
 				tmtl.setCell(x, y, new Lasers());
 			}
 		}
-	}
-	public void clearLasers() {
-		fillLasersLayer();
 	}
 	
 	private void setSizes() {
@@ -215,7 +211,7 @@ public class Map extends Observable {
 		return true;
 	}
 	
-	public TiledMapTileLayer getLayer(int i) {
+	private TiledMapTileLayer getLayer(int i) {
 		if(i < 0 || i >= map.getLayers().getCount()) {
 			return null;
 		}
@@ -223,7 +219,7 @@ public class Map extends Observable {
 		return (TiledMapTileLayer) map.getLayers().get(i);
 	}
 	
-	public Cell getCell(int layer, Position p) {
+	private Cell getCell(int layer, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		if(tmtl == null) {
 			return null;
@@ -293,10 +289,56 @@ public class Map extends Observable {
 		return true;
 	}
 	
-	public void changed() {
+	public void startLasers() {
+		// clear previous lasers
+		fillLasersLayer();
+		
+		Position pos;
+		for(int x = 0; x < mapWidth; ++x) {
+			for(int y = 0; y < mapHeight; ++y) {
+				pos = new Position(x, y);
+				laserInput(pos, null);
+			}
+		}
+		
+		changed();
+	}
+	
+	private void laserInput(Position position, Orientation inputFrom) {
+		if(!inMap(position)) {
+			return;
+		}
+		
+		Orientation inputTo = null;
+		if(inputFrom != null) {
+			// display input on map
+			addInputLaser(position, inputFrom);
+			inputTo = inputFrom.reverse();
+		}
+		
+		Block block = getBlock(position);
+		if(block == null) {
+			// empty case
+			if(inputFrom == null) {
+				return;
+			}
+			
+			// position on ground without block, continue with same inputFrom
+			addOutputLaser(position, inputTo);
+			laserInput(inputTo.nextPosition(position), inputFrom);
+			return;
+		}
+		
+		Array<Orientation> outputs = block.input(inputFrom);
+		for(Orientation output : outputs) {
+			addOutputLaser(position, output);
+			laserInput(output.nextPosition(position), output.reverse());
+		}
+	}
+	
+	private void changed() {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
 	
 }

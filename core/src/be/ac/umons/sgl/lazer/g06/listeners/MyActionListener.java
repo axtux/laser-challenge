@@ -124,7 +124,7 @@ public class MyActionListener implements ActionListener {
 			game.getLevel().rotateSelected();
 			break;
 		case "ACTION_LEVEL_LASER":
-			game.getLevel().startLaser();
+			game.getLevel().startLasers();
 			break;
 		
 		default:
