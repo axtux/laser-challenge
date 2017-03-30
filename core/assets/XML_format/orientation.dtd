@@ -1,0 +1,4 @@
+<!ELEMENT orientations (orientation+) >
+<!ELEMENT orientation (#PCDATA)>
+<!ATTLIST orientation x CDATA #IMPLIED y CDATA #IMPLIED>
+

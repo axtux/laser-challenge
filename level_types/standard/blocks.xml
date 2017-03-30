@@ -1,9 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!DOCTYPE blocks SYSTEM "../../core/assets/XML_format/blocks.dtd">
+
+
 <blocks>
 	<block>
 		<name>blocker</name>
 		<label>Bloqueur</label>
-		<inputs>
-		</inputs>
 	</block>
 	
 	<block>
