@@ -4,107 +4,117 @@
   <image source="terrain.png" width="1024" height="1024"/>
   <tile id="187">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="188">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="189">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="213">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="245">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="277">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="278">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="279">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
+   </properties>
+  </tile>
+  <tile id="309">
+   <properties>
+    <property name="restriction" value="unavailable"/>
+   </properties>
+  </tile>
+  <tile id="311">
+   <properties>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="341">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="342">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="343">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="565">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="597">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="620">
    <properties>
-    <property name="source" value="1"/>
+    <property name="restriction" value="source"/>
    </properties>
   </tile>
   <tile id="621">
    <properties>
-    <property name="target" value="1"/>
+    <property name="restriction" value="target"/>
    </properties>
   </tile>
   <tile id="629">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="630">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="631">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="693">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="694">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
   <tile id="695">
    <properties>
-    <property name="unavailable" value="1"/>
+    <property name="restriction" value="unavailable"/>
    </properties>
   </tile>
  </tileset>
