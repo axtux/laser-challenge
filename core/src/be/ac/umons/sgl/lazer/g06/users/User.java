@@ -12,10 +12,6 @@ public class User {
 	private String image;
 	private Json json;
 	
-	public User() {
-		this("Anonyme", "anonymous.png");
-	}
-	
 	public User(String username, String image) {
 		setUsername(username);
 		setImage(image);
@@ -29,10 +25,10 @@ public class User {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	public void logout() {
-		Gdx.app.debug("User.logout", "remove path "+userPath());
-	}
+	/**
+	 * Called when user is logged out
+	 */
+	public void logout() {}
 	
 	public String getUsername() {
 		return username;
@@ -41,7 +37,10 @@ public class User {
 	public String getImage() {
 		return image;
 	}
-	
+	/**
+	 * Default path to save files. Overwrite method to change path in subclasses.
+	 * @return
+	 */
 	protected String userPath() {
 		return "users/"+getUsername();
 	}
