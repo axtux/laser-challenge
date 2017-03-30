@@ -470,31 +470,15 @@ public class Level extends Observable {
 	}
 	
 	public Block getSelectedBlock() {
-		if(selected == null) {
-			//Gdx.app.log("Level.getSelectedBlock", "selected is null");
-			return null;
-		}
-		
 		return getBlock(selected);
 	}
 	
 	public void rotate(Position pos) {
-		if(pos == null) {
-			Gdx.app.error("Level.rotate", "pos is null");
-			return;
+		Block block = getBlock(pos);
+		if(block != null) {
+			block.rotate();
 		}
 		
-		if(pos.getLocation() == null) {
-			Gdx.app.error("Level.rotate", "no location");
-		}
-		switch(pos.getLocation()) {
-		case MAP:
-			map.rotate(pos);
-			break;
-		case INVENTORY:
-			inventory.rotate(pos);
-			break;
-		}
 		this.selected = pos;
 	}
 	
