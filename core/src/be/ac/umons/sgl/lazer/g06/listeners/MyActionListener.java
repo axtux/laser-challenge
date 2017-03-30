@@ -13,6 +13,7 @@ import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelsStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LocalLoginStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LoginsStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.ModesStage;
+import be.ac.umons.sgl.lazer.g06.users.AnonymousUser;
 import be.ac.umons.sgl.lazer.g06.users.LocalUser;
 import be.ac.umons.sgl.lazer.g06.users.User;
 import be.ac.umons.sgl.lazer.g06.users.LocalUser.LoginException;
@@ -57,7 +58,7 @@ public class MyActionListener implements ActionListener {
 			break;
 		// ACTIONs from MENU_LOGINS
 		case "ACTTION_LOGIN_ANONYMOUS":
-			game.setUser(new User());
+			game.setUser(new AnonymousUser());
 			act("MENU_MODES");
 			break;
 		case "ACTTION_LOGIN_LOCAL":
