@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!DOCTYPE blocks SYSTEM "../../core/assets/XML_format/blocks.dtd">
 <blocks>
 	<block>
 		<name>blocker</name>
@@ -32,57 +35,57 @@
 	<block>
 		<name>one-laser_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="UP"/>
-		</inputs>
+		</required-inputs>
 	</block>
 		
 	<block>
 		<name>two-laser_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="RIGHT"/>
 			<input orientation ="LEFT"/>
-		</inputs>
+		</required-inputs>
 	</block>
 			
 	<block>
 		<name>four-laser_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="UP"/>
 			<input orientation ="RIGHT"/>
 			<input orientation ="DOWN"/>
 			<input orientation ="LEFT"/>
-		</inputs>
+		</required-inputs>
 	</block>
 	
 	<block>
 		<name>one-laser-oriented_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="DOWN_RIGHT"/>
-		</inputs>
+		</required-inputs>
 	</block>
 	
 	<block>
 		<name>two-laser-oriented_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="DOWN_RIGHT"/>
 			<input orientation ="DOWN_LEFT"/>
-		</inputs>
+		</required-inputs>
 	</block>
 	
 	<block>
 		<name>four-laser-oriented_target</name>
 		<label>Cible</label>
-		<inputs>
+		<required-inputs>
 			<input orientation ="UP_LEFT"/>
 			<input orientation ="UP_RIGHT"/>
 			<input orientation ="DOWN_LEFT"/>
 			<input orientation ="DOWN_RIGHT"/>
-		</inputs>
+		</required-inputs>
 	</block>
 			
 	<block>

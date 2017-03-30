@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!DOCTYPE blocks SYSTEM "../../core/assets/XML_format/orientations.dtd">
+
 <orientations>
 	<orientation y="1">UP</orientation>
 	<orientation x="1">RIGHT</orientation>
