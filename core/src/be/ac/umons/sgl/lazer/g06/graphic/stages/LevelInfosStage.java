@@ -13,6 +13,7 @@ public class LevelInfosStage extends AbstractLevelStage {
 		int width = level.getMap().getWidth();
 		int height = level.getMap().getHeight();
 		addDoubleLabel("Taille", Integer.toString(width)+"x"+Integer.toString(height));
+		addDoubleLabel("Difficulté", level.getDifficulty().toString());
 		
 		addDoubleLabel("Mode", game.getMode().toString());
 		if(game.getMode().hasScore()) {
