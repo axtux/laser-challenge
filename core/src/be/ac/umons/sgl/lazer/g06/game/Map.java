@@ -14,7 +14,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
@@ -177,7 +176,7 @@ public class Map extends Observable {
 		return true;
 	}
 	
-	private boolean setCell(Cell cell, int layer, Position p, boolean notify) {
+	private boolean setCell(int layer, Cell cell, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		if(tmtl == null) {
 			return false;
@@ -189,15 +188,12 @@ public class Map extends Observable {
 		
 		tmtl.setCell(p.getX(), p.getY(), cell);
 		
-		// notify observers
-		if(notify) {
-			this.changed();
-		}
+		this.changed();
 		return true;
 	}
 	
 	public boolean setBlock(Block block, Position pos) {
-		return setCell(block, BLOCKS_LAYER, pos, true);
+		return setCell(BLOCKS_LAYER, block, pos);
 	}
 	
 	public boolean addInputLaser(Position position, Orientation fromOrientation) {
@@ -238,21 +234,6 @@ public class Map extends Observable {
 		}
 		
 		return tmtl.getCell(p.getX(), p.getY());
-	}
-	
-	public Array<Cell> getCells(Position pos) {
-		int size = map.getLayers().getCount();
-		Array<Cell> cells = new Array<Cell>(size);
-		
-		Cell tmp;
-		for(int i = 0; i < size; ++i) {
-			tmp = getCell(i, pos);
-			if(tmp != null) {
-				cells.add(tmp);
-			}
-		}
-		
-		return cells;
 	}
 	
 	public Cell getGround(Position pos) {
@@ -310,19 +291,6 @@ public class Map extends Observable {
 		}
 		
 		return true;
-	}
-	
-	public boolean rotate(Position pos) {
-		Block block = getBlock(pos);
-		if(block == null) {
-			return false;
-		}
-		
-		return block.rotate();
-	}
-	
-	public TiledMap getTiledMap() {
-		return map;
 	}
 	
 	public void changed() {
