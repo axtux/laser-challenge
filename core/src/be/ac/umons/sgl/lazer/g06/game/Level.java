@@ -162,6 +162,10 @@ public class Level extends Observable {
 			//Gdx.app.debug("Level.setBLocks", "Block "+blockType+" goes to "+Integer.toString(x)+"x"+Integer.toString(y));
 			// if x or y out of map, block goes to inventory
 			pos = new Position(x, y);
+			if(map.getBlock(pos) != null) {
+				Gdx.app.error("Level.setBlocks", "level "+name+" : position "+pos.toString()+" already taken");
+				invBlocks.add(block);
+			}
 			if(!map.setBlock(block, pos)) {
 				Gdx.app.error("Level.setBlocks", "level "+name+" : block "+blockType+" out of map");
 				invBlocks.add(block);
