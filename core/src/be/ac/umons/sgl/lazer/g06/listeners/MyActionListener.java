@@ -112,7 +112,7 @@ public class MyActionListener implements ActionListener {
 			break;
 		case "ACTION_LEVEL_STOP":
 			game.getLevel().stop();
-			act("ACTION_LEVEL_INFOS");
+			act("MENU_LEVEL_INFOS");
 			break;
 		
 		case "MENU_LEVEL_FINISHED":
