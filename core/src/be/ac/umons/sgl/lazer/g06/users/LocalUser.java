@@ -19,6 +19,7 @@ public class LocalUser extends User {
 	 * 		   if false, username and password will be used to login user
 	 */
 	public LocalUser(String username, String password, boolean create) throws LoginException {
+		super(username, "noimage");
 		if(username == null || username.isEmpty()) {
 			throw new LoginException("Le nom d'utilisateur ne peut être vide.");
 		}
@@ -51,12 +52,16 @@ public class LocalUser extends User {
 		
 	}
 	
-	private String filePath() {
-		return "users/local/"+getUsername()+"/user.xml";
+	protected String userPath() {
+		return "users/local/"+getUsername();
+	}
+	
+	private String xmlPath() {
+		return userPath()+"user.xml";
 	}
 	
 	private boolean exists() {
-		return Files.exists(filePath());
+		return Files.exists(xmlPath());
 	}
 	
 	private boolean saveToFile(String password) {
@@ -74,11 +79,11 @@ public class LocalUser extends User {
 			return false;
 		}
 		
-		return Files.putContent(filePath(), writer.toString());
+		return Files.putContent(xmlPath(), writer.toString());
 	}
 	
 	public boolean loadFromFile(String password) {
-		String xml = Files.getContent(filePath());
+		String xml = Files.getContent(xmlPath());
 		if(xml == null) {
 			Gdx.app.error("LocalUser.loadFromFile", "Reading file failed");
 			return false;
@@ -115,12 +120,6 @@ public class LocalUser extends User {
 			Gdx.app.error("UNKNOWN_HASH_TYPE", hashType);
 			return false;
 		}
-	}
-	
-	public class UserData {
-		String passwordHash;
-		String passwordHashType;
-		
 	}
 	
 	public class LoginException extends Exception {
