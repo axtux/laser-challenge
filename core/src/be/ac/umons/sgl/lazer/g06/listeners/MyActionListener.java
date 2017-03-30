@@ -98,6 +98,7 @@ public class MyActionListener implements ActionListener {
 			game.setStage(new LevelInfosStage());
 			break;
 		case "MENU_LEVEL_PLAY":
+			game.getLevel().reset();
 			game.setStage(new LevelPlayingStage());
 			break;
 		
