@@ -219,4 +219,19 @@ public class Files {
 		
 		return fileNames;
 	}
+	/**
+	 * Delete this file or directory and all children, recursively.
+	 * @param path Relative path to application root.
+	 * @return True on success, false on failure
+	 */
+	public static boolean delete(String path) {
+		FileHandle fh = Gdx.files.local(path);
+		
+		if(fh == null) {
+			Gdx.app.debug("Files.delete", "Got null pointer for path "+path);
+			return false;
+		}
+		
+		return fh.deleteDirectory();
+	}
 }
