@@ -180,7 +180,7 @@ public class Level extends Observable {
 	public void changed() {
 		// continuous laser
 		if(game.getMode() != null && !game.getMode().hasScore()) {
-			startLaser();
+			startLasers();
 		}
 		// notify observers
 		this.setChanged();
@@ -235,56 +235,12 @@ public class Level extends Observable {
 		}
 	}
 	
-	public void startLaser() {
-		map.clearLasers();
-		
-		Position pos;
-		for(int x = 0; x < map.getWidth(); ++x) {
-			for(int y = 0; y < map.getHeight(); ++y) {
-				pos = new Position(x, y, Position.Location.MAP);
-				laserInput(pos, null);
-			}
-		}
+	public void startLasers() {
+		map.startLasers();
 		
 		if(game.getMode().hasScore()) {
 			// one-time laser
 			end();
-		} else {
-			// notify map observers about new lasers
-			map.changed();
-		}
-	}
-	
-	private void laserInput(Position position, Orientation inputFrom) {
-		Orientation inputTo = null;
-		if(inputFrom != null) {
-			//Gdx.app.debug("Level.laser_input", position.toString()+" from "+inputFrom.toString());
-			// display input on map
-			map.addInputLaser(position, inputFrom);
-			inputTo = inputFrom.reverse();
-		}
-		
-		if(!map.inMap(position)) {
-			return;
-		}
-		
-		Block block = map.getBlock(position);
-		if(block == null) {
-			// empty case
-			if(inputFrom == null) {
-				return;
-			}
-			
-			// position on ground without block, continue with same inputFrom
-			map.addOutputLaser(position, inputTo);
-			laserInput(inputTo.nextPosition(position), inputFrom);
-			return;
-		}
-		
-		Array<Orientation> outputs = block.input(inputFrom);
-		for(Orientation output : outputs) {
-			map.addOutputLaser(position, output);
-			laserInput(output.nextPosition(position), output.reverse());
 		}
 	}
 	
@@ -299,7 +255,7 @@ public class Level extends Observable {
 			}, 1, 1, this.time-1);
 		} else {
 			// training mode, continuous laser
-			startLaser();
+			startLasers();
 		}
 		changed();
 	}
@@ -470,31 +426,15 @@ public class Level extends Observable {
 	}
 	
 	public Block getSelectedBlock() {
-		if(selected == null) {
-			//Gdx.app.log("Level.getSelectedBlock", "selected is null");
-			return null;
-		}
-		
 		return getBlock(selected);
 	}
 	
 	public void rotate(Position pos) {
-		if(pos == null) {
-			Gdx.app.error("Level.rotate", "pos is null");
-			return;
+		Block block = getBlock(pos);
+		if(block != null) {
+			block.rotate();
 		}
 		
-		if(pos.getLocation() == null) {
-			Gdx.app.error("Level.rotate", "no location");
-		}
-		switch(pos.getLocation()) {
-		case MAP:
-			map.rotate(pos);
-			break;
-		case INVENTORY:
-			inventory.rotate(pos);
-			break;
-		}
 		this.selected = pos;
 	}
 	

@@ -20,16 +20,14 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 
 public class Map extends Observable {
-	static final String MAP_PATH = "maps";
-	public static final int GROUND_LAYER = 0;
-	public static final int BLOCKS_LAYER = 1;
-	public static final int LASERS_LAYER = 2;
+	private static final String MAP_PATH = "maps";
+	private static final int GROUND_LAYER = 0;
+	private static final int BLOCKS_LAYER = 1;
+	private static final int LASERS_LAYER = 2;
 	
 	private TiledMap map;
-	int mapWidth, mapHeight, tileSize;
-	Location loc;
-	
-	TiledMapTile inputTile, outputTile;
+	private int mapWidth, mapHeight, tileSize;
+	private Location loc;
 	/**
 	 * Create Map with references from an other Map instance
 	 * Usually used for inventory
@@ -106,9 +104,6 @@ public class Map extends Observable {
 			}
 		}
 	}
-	public void clearLasers() {
-		fillLasersLayer();
-	}
 	
 	private void setSizes() {
 		// extract size from map properties
@@ -177,7 +172,7 @@ public class Map extends Observable {
 		return true;
 	}
 	
-	private boolean setCell(Cell cell, int layer, Position p, boolean notify) {
+	private boolean setCell(int layer, Cell cell, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		if(tmtl == null) {
 			return false;
@@ -189,15 +184,12 @@ public class Map extends Observable {
 		
 		tmtl.setCell(p.getX(), p.getY(), cell);
 		
-		// notify observers
-		if(notify) {
-			this.changed();
-		}
+		this.changed();
 		return true;
 	}
 	
 	public boolean setBlock(Block block, Position pos) {
-		return setCell(block, BLOCKS_LAYER, pos, true);
+		return setCell(BLOCKS_LAYER, block, pos);
 	}
 	
 	public boolean addInputLaser(Position position, Orientation fromOrientation) {
@@ -219,7 +211,7 @@ public class Map extends Observable {
 		return true;
 	}
 	
-	public TiledMapTileLayer getLayer(int i) {
+	private TiledMapTileLayer getLayer(int i) {
 		if(i < 0 || i >= map.getLayers().getCount()) {
 			return null;
 		}
@@ -227,7 +219,7 @@ public class Map extends Observable {
 		return (TiledMapTileLayer) map.getLayers().get(i);
 	}
 	
-	public Cell getCell(int layer, Position p) {
+	private Cell getCell(int layer, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		if(tmtl == null) {
 			return null;
@@ -238,21 +230,6 @@ public class Map extends Observable {
 		}
 		
 		return tmtl.getCell(p.getX(), p.getY());
-	}
-	
-	public Array<Cell> getCells(Position pos) {
-		int size = map.getLayers().getCount();
-		Array<Cell> cells = new Array<Cell>(size);
-		
-		Cell tmp;
-		for(int i = 0; i < size; ++i) {
-			tmp = getCell(i, pos);
-			if(tmp != null) {
-				cells.add(tmp);
-			}
-		}
-		
-		return cells;
 	}
 	
 	public Cell getGround(Position pos) {
@@ -312,23 +289,61 @@ public class Map extends Observable {
 		return true;
 	}
 	
-	public boolean rotate(Position pos) {
-		Block block = getBlock(pos);
-		if(block == null) {
-			return false;
+	public void startLasers() {
+		// clear previous lasers
+		fillLasersLayer();
+		
+		Position pos;
+		for(int x = 0; x < mapWidth; ++x) {
+			for(int y = 0; y < mapHeight; ++y) {
+				pos = new Position(x, y);
+				laserInput(pos, null);
+			}
 		}
 		
-		return block.rotate();
+		changed();
 	}
 	
-	public TiledMap getTiledMap() {
-		return map;
+	private void laserInput(Position position, Orientation inputFrom) {
+		if(!inMap(position)) {
+			return;
+		}
+		
+		Orientation inputTo = null;
+		if(inputFrom != null) {
+			// display input on map
+			addInputLaser(position, inputFrom);
+			inputTo = inputFrom.reverse();
+		}
+		
+		Block block = getBlock(position);
+		if(block == null) {
+			// empty case, no block here
+			if(inputFrom == null) {
+				return;
+			}
+			
+			// don't accept crossing lasers
+			if(getLasers(position).getInputs().size > 1) {
+				return;
+			}
+			
+			// continue with same inputFrom
+			addOutputLaser(position, inputTo);
+			laserInput(inputTo.nextPosition(position), inputFrom);
+			return;
+		}
+		
+		Array<Orientation> outputs = block.input(inputFrom);
+		for(Orientation output : outputs) {
+			addOutputLaser(position, output);
+			laserInput(output.nextPosition(position), output.reverse());
+		}
 	}
 	
-	public void changed() {
+	private void changed() {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
 	
 }
