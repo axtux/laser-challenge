@@ -69,7 +69,7 @@ public class User {
 			}
 		}
 	}
-	/*public Array<Switch> loadHistory(String levelname){
-		
-	} */
+	public Array<Switch> loadHistory(String levelname){
+		return null;
+	}
 }

@@ -95,19 +95,25 @@ public class MyActionListener implements ActionListener {
 		
 		// ACTIONs from MENU_LEVELS
 		case "MENU_LEVEL_INFOS":
-			// reset level in case it has been played before
-			game.getLevel().reset();
 			game.setStage(new LevelInfosStage());
+			break;
+		case "MENU_LEVEL_PLAY":
+			game.getLevel().reset();
+			game.setStage(new LevelPlayingStage());
 			break;
 		
 		// ACTIONs from MENU_LEVEL_INFOS
 		case "MENU_LEVEL_LOAD":
-			// TODO load level
-			act("ACTION_LEVEL_LAUNCH");
+			act("MENU_LEVEL_PLAY");
+			game.getLevel().start(true);
 			break;
-		case "ACTION_LEVEL_LAUNCH":
-			game.setStage(new LevelPlayingStage());
-			game.getLevel().start();
+		case "ACTION_LEVEL_START":
+			act("MENU_LEVEL_PLAY");
+			game.getLevel().start(false);
+			break;
+		case "ACTION_LEVEL_STOP":
+			game.getLevel().stop();
+			act("MENU_LEVEL_INFOS");
 			break;
 		
 		case "MENU_LEVEL_FINISHED":

@@ -21,7 +21,8 @@ public class LevelInfosStage extends AbstractLevelStage {
 			addDoubleLabel("Score", Integer.toString(level.getScore()));
 		}
 		
-		addDoubleButton("Charger", "ACTION_LEVEL_LOAD", "Lancer", "ACTION_LEVEL_LAUNCH");
+		String style = level.canLoad() ? "menu" : "disabled-menu";
+		addDoubleButton("Charger", "ACTION_LEVEL_LOAD", style, "Lancer", "ACTION_LEVEL_START", "menu");
 	}
 	
 }

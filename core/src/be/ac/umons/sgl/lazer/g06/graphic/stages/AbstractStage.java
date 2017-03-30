@@ -125,9 +125,9 @@ public abstract class AbstractStage extends Stage {
 		container.add(block).expand().fill();
 	}
 	
-	protected void addMenuButton(String text, String action) {
-		addButton(content, text, action).minSize(800, 80).pad(30);
+	protected Cell<TextButton> addMenuButton(String text, String action) {
 		content.row();
+		return addButton(content, text, action).minSize(800, 80).pad(30);
 	}
 	
 	protected Cell<TextButton> addButton(Table container, String text, String action) {
@@ -186,19 +186,15 @@ public abstract class AbstractStage extends Stage {
 		return l2;
 	}
 	
-	protected void addDoubleButton(String label1, String action1, String label2, String action2) {
+	protected void addDoubleButton(String label1, String action1, String style1, String label2, String action2, String style2) {
 		content.row().fillX();
 
-		TextButton btn1 = new TextButton(label1, skin, "menu");
-		btn1.getLabelCell().pad(10);
-		btn1.addListener(new MyClickListener(Input.Buttons.LEFT, action1));
+		TextButton btn1 = getButton(label1, action1, style1);
 		Table container1 = new Table();
 		container1.add(btn1).pad(10).expandX();
 		content.add(container1).uniform();
 		
-		TextButton btn2 = new TextButton(label2, skin, "menu");
-		btn2.getLabelCell().pad(10);
-		btn2.addListener(new MyClickListener(Input.Buttons.LEFT, action2));
+		TextButton btn2 = getButton(label2, action2, style2);
 		Table container2 = new Table();
 		container2.add(btn2).pad(10).expandX();
 		content.add(container2).uniform();
