@@ -42,7 +42,7 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		setTitle(game.getMode().toString()+" : "+level.getName());
 		this.score = game.getMode().hasScore();
 		
-		addHeaderButton("Retour", "MENU_LEVEL_INFOS");
+		addHeaderButton("Retour", "MENU_LEVEL_STOP");
 		
 		content.row();
 		
