@@ -23,9 +23,7 @@ public class Map extends Observable {
 	static final String MAP_PATH = "maps";
 	public static final int GROUND_LAYER = 0;
 	public static final int BLOCKS_LAYER = 1;
-	public static final int INPUTS_LAYER = 2;
-	public static final int START_OUTPUTS_LAYER = 3;
-	public final int END_OUTPUTS_LAYER;
+	public static final int LASERS_LAYER = 2;
 	
 	private TiledMap map;
 	int mapWidth, mapHeight, tileSize;
@@ -54,8 +52,6 @@ public class Map extends Observable {
 		addLayer("ground");
 		fillLayer(GROUND_LAYER, getColorCell(Color.WHITE));
 		addLayer("blocks");
-		// not outputs layer
-		END_OUTPUTS_LAYER = -1;
 	}
 	
 	public Map(String tmx_map_name, Location loc) {
@@ -77,15 +73,8 @@ public class Map extends Observable {
 		
 		setSizes();
 		addLayer("blocks");
-		// laser layers
-		addLayer("input");
-		END_OUTPUTS_LAYER = START_OUTPUTS_LAYER+Orientation.values().length-1;
-		for(int i = 0; i <= END_OUTPUTS_LAYER; ++i) {
-			addLayer("output_"+Integer.toString(i));
-		}
-		// get link to texture regions
-		//inputTile = new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getInput());
-		//outputTile = new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getOutput());
+		addLayer("lasers");
+		fillLasersLayer();
 	}
 	
 	private void addLayer(String name) {
@@ -108,6 +97,17 @@ public class Map extends Observable {
 				tmtl.setCell(x, y, cell);
 			}
 		}
+	}
+	private void fillLasersLayer() {
+		TiledMapTileLayer tmtl = getLayer(LASERS_LAYER);
+		for(int x = 0; x < mapWidth; ++x) {
+			for(int y = 0; y < mapHeight; ++y) {
+				tmtl.setCell(x, y, new Lasers());
+			}
+		}
+	}
+	public void clearLasers() {
+		fillLasersLayer();
 	}
 	
 	private void setSizes() {
@@ -200,33 +200,23 @@ public class Map extends Observable {
 		return setCell(block, BLOCKS_LAYER, pos, true);
 	}
 	
-	public boolean setLaserInput(Position position, Orientation fromOrientation) {
-		if(!inMap(position) || fromOrientation == null) {
-			return false;
-		}
-		// laser input sprite comes from DOWN, fromOrientation from UP
-		fromOrientation = fromOrientation.reverse();
-		
-		Cell cell = new Cell();
-		//Texture
-		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getInput()));
-		cell.setRotation(fromOrientation.getAngle());
-		return this.setCell(cell, INPUTS_LAYER, position, false);
-	}
-	public boolean setLaserOutput(Position position, Orientation toOrientation) {
-		if(!inMap(position) || toOrientation == null) {
+	public boolean addInputLaser(Position position, Orientation fromOrientation) {
+		Lasers lasers = getLasers(position);
+		if(lasers == null) {
 			return false;
 		}
 		
-		Cell cell = new Cell();
-		cell.setTile(new StaticTiledMapTile(LazerChallenge.getInstance().getLevel().getType().getOutput()));
-		cell.setRotation(toOrientation.getAngle());
-		return this.setCell(cell, START_OUTPUTS_LAYER, position, false);
+		lasers.addInput(fromOrientation);
+		return true;
 	}
-	public void clearLasers() {
-		for(int layer = INPUTS_LAYER; layer <= END_OUTPUTS_LAYER; ++layer) {
-			fillLayer(layer, null);
+	public boolean addOutputLaser(Position position, Orientation toOrientation) {
+		Lasers lasers = getLasers(position);
+		if(lasers == null) {
+			return false;
 		}
+		
+		lasers.addOutput(toOrientation);
+		return true;
 	}
 	
 	public TiledMapTileLayer getLayer(int i) {
@@ -299,6 +289,10 @@ public class Map extends Observable {
 	
 	public Block getBlock(Position pos) {
 		return (Block) getCell(BLOCKS_LAYER, pos);
+	}
+	
+	public Lasers getLasers(Position pos) {
+		return (Lasers) getCell(LASERS_LAYER, pos);
 	}
 	
 	public boolean hasRequiredInputs() {
