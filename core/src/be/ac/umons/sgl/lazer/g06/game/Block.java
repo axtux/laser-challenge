@@ -4,16 +4,19 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 
 public class Block extends TiledMapTileLayer.Cell {
 	BlockType type;
 	Orientation orientation;
+	ObjectMap<Orientation, Boolean> originInputs;
 	
 	public Block(BlockType type, Orientation orientation) {
 		super();
 		this.type = type;
 		setTile(new StaticTiledMapTile(type.getTextureRegion()));
 		setOrientation(orientation);
+		clearInputs();
 	}
 	
 	public boolean getBoolProp(String name) {
@@ -58,6 +61,7 @@ public class Block extends TiledMapTileLayer.Cell {
 		if(originInput != null) {
 			// get unrotated input
 			originInput = originInput.unRotateBy(this.orientation);
+			originInputs.put(originInput, new Boolean(true));
 		}
 		
 		Array<Orientation> originOutputs = type.input(originInput);
@@ -68,6 +72,27 @@ public class Block extends TiledMapTileLayer.Cell {
 		}
 		
 		return outputs;
+	}
+	
+	private boolean hasOriginInput(Orientation input) {
+		if(!originInputs.containsKey(input)) {
+			return false;
+		}
+		
+		return originInputs.get(input).booleanValue();
+	}
+	
+	public boolean hasRequiredInputs() {
+		for(Orientation requiredInput : type.getRequiredInputs()) {
+			if(!hasOriginInput(requiredInput)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void clearInputs() {
+		originInputs = new ObjectMap<Orientation, Boolean>();
 	}
 	
 	public BlockType getType() {
