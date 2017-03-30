@@ -3,7 +3,7 @@
 		<block type="one-laser_source" fixedposition="true">
 			<position x="4" y="0"/>
 		</block>
-		<block type="one-laser-oriented_target" fixedposition="true" fixedorientation="true">
+		<block type="one-laser_target" fixedposition="true" fixedorientation="true" orientation="RIGHT">
 			<position x="0" y="4"/>
 		</block>
 		<block type="blocker">
@@ -15,9 +15,10 @@
 		<block type="blocker">
 			<position x="0" y="3"/>
 		</block>
-		<block type="blocker">
-			<position x="1" y="3"/>
+		<block type="one-way-oriented_mirror" fixedposition="true">
+			<position x="2" y="2"/>
 		</block>
+		<block type="one-way_mirror"/>
 		<block type="one-way_mirror"/>
 	</blocks>
 </level>

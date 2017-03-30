@@ -102,6 +102,20 @@
 	</block>
 
 	<block>
+		<name>one-way-oriented_mirror</name>
+		<label>Miroir</label>
+		<inputs>
+			<input orientation="UP">
+				<output orientation ="UP_RIGHT"/>
+			</input>
+			<input orientation="UP_RIGHT">
+				<output orientation="UP"/>
+			</input>
+		</inputs>
+	</block>
+
+
+	<block>
 		<name>two-way_mirror</name>
 		<label>Miroir</label>
 		<inputs>
