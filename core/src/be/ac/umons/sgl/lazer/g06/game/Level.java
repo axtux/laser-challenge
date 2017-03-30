@@ -291,12 +291,16 @@ public class Level extends Observable {
 	
 	public void start() {
 		if(game.getMode().hasScore()) {
+			// arcade mode with timer
 			this.elapsedTime = 0;
 			Timer.schedule(new Timer.Task() {
 				public void run() {
 					LazerChallenge.getInstance().getLevel().timerTick();
 				}
 			}, 1, 1, this.time-1);
+		} else {
+			// training mode, continuous laser
+			startLaser();
 		}
 		changed();
 	}
@@ -379,17 +383,19 @@ public class Level extends Observable {
 			return false;
 		}
 		
-		// restriction
+		// one-time
+		if(isOneTime(oldPos)) {
+			Gdx.app.debug("Level.moveTo", "old pos is one-time");
+			return false;
+		}
+		
+		// other restrictions
 		if(!isAllowed(oldPos, newBlock)) {
 			Gdx.app.debug("Level.moveTo", "new to old movement not allowed");
 			return false;
 		}
 		if(!isAllowed(newPos, oldBlock)) {
 			Gdx.app.debug("Level.moveTo", "old to  new movement not allowed");
-			return false;
-		}
-		if (!(oldPos.getLocation().equals(Position.Location.INVENTORY)) && getRestriction(newPos).equals("one-time")) {
-			Gdx.app.debug("Level.moveTo", "old not into inventary and new one-time");
 			return false;
 		}
 		
@@ -427,28 +433,23 @@ public class Level extends Observable {
 		return !map.getGroundBoolProp(pos, "unavailable");
 	}
 	
+	public boolean isOneTime(Position pos) {
+		String restriction = getRestriction(pos);
+		return restriction != null && restriction.equals("one-time");
+	}
+	
 	public boolean isAllowed(Position pos, Block block) {
-		// null block is allowed everywhere
-		if(block == null) {
+		// null block is allowed everywhere, don't test for one-time here
+		if(block == null || isOneTime(pos)) {
 			return true;
 		}
 		
-		if(pos == null) {
-			return false;
-		}
-		
-		if(pos.getLocation().equals(Position.Location.INVENTORY)) {
-			return true;
-		}
-		
-		String restriction = map.getGroundProp(pos, "restriction");
+		String restriction = getRestriction(pos);
 		// no restriction
 		if(restriction == null || restriction.isEmpty()) {
 			return true;
 		}
-		if (restriction.equals("one-time")){
-			return true;
-		}
+		
 		String name = block.getType().getName();
 		// name must contain restriction to be allowed
 		return name.contains(restriction);
