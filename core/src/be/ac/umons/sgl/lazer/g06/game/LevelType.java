@@ -39,20 +39,20 @@ public class LevelType {
 	public LevelType(String name) {
 		this.name = name;
 		
-		label = Files.getContent(dirPath()+"name.txt");
+		label = Files.getContent(dirPath()+"/name.txt");
 		if(label == null) {
-			throw new GdxRuntimeException("File "+dirPath()+"name.txt cannot be read.");
+			throw new GdxRuntimeException("File "+dirPath()+"/name.txt cannot be read.");
 		}
 		label = label.replaceAll("[\\r\\n]", "");
 		
-		String orientation = Files.getContent(dirPath()+"orientations.txt");
+		String orientation = Files.getContent(dirPath()+"/orientations.txt");
 		if(orientation != null && orientation.trim().equals("advanced")) {
 			orientationClass = AdvancedOrientation.staticFirst();
 		} else {
 			orientationClass = StandardOrientation.staticFirst();
 		}
 		
-		String blocksXml = dirPath()+"blocks.xml";
+		String blocksXml = dirPath()+"/blocks.xml";
 		String xml = Files.getContent(blocksXml);
 		if(xml == null) {
 			throw new GdxRuntimeException("File "+blocksXml+" cannot be read.");
@@ -61,23 +61,22 @@ public class LevelType {
 		XmlReader reader = new XmlReader();
 		Element blocksElement = reader.parse(xml);
 		Array<Element> blockElements = blocksElement.getChildrenByName("block");
-		String spritesPath = dirPath()+"/sprites";
 		blocks = new OrderedMap<String, BlockType>(blockElements.size);
 		
 		BlockType block;
 		for(Element blockElement : blockElements) {
-			block = new BlockType(orientationClass, spritesPath, blockElement);
+			block = new BlockType(this, blockElement);
 			blocks.put(block.getName(), block);
 		}
 		
-		String filename = spritesPath+"/laserInput.png";
+		String filename = spritesPath()+"/laserInput.png";
 		FileHandle fh = Gdx.files.local(filename);
 		if(fh == null) {
 			throw new GdxRuntimeException("404 File not found "+filename);
 		}
 		input = new TextureRegion(new Texture(fh));
 		
-		filename = spritesPath+"/laserOutput.png";
+		filename = spritesPath()+"/laserOutput.png";
 		fh = Gdx.files.local(filename);
 		if(fh == null) {
 			throw new GdxRuntimeException("404 File not found "+filename);
@@ -89,6 +88,12 @@ public class LevelType {
 	 */
 	private String dirPath() {
 		return LEVEL_TYPES_PATH+"/"+name+"/";
+	}
+	/**
+	 * @return Directory path relative to application root.
+	 */
+	public String spritesPath() {
+		return dirPath()+"/sprites";
 	}
 	
 	public Orientation getOrientation() {
