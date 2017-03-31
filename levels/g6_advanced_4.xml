@@ -1,4 +1,4 @@
-<level name="Level 4" map="g6_4a" difficulty="hard" type="advanced" time="100">
+<level name="Niveau 4" map="g6_4a" difficulty="hard" type="advanced" time="100">
 	<blocks>
 		<block type="one-laser_source" fixedposition="true">
 			<position x="2" y="0"/>
