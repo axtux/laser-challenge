@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.OrderedMap;
-import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
@@ -52,14 +51,11 @@ public class LevelType {
 			orientationClass = StandardOrientation.staticFirst();
 		}
 		
-		String blocksXml = dirPath()+"/blocks.xml";
-		String xml = Files.getContent(blocksXml);
-		if(xml == null) {
-			throw new GdxRuntimeException("File "+blocksXml+" cannot be read.");
+		Element blocksElement = Files.parseXML(dirPath()+"/blocks.xml");
+		if(blocksElement == null) {
+			throw new GdxRuntimeException("Error parsing "+dirPath()+"/blocks.xml");
 		}
 		
-		XmlReader reader = new XmlReader();
-		Element blocksElement = reader.parse(xml);
 		Array<Element> blockElements = blocksElement.getChildrenByName("block");
 		blocks = new OrderedMap<String, BlockType>(blockElements.size);
 		
