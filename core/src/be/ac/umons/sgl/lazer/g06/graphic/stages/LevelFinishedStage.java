@@ -1,6 +1,9 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 public class LevelFinishedStage extends AbstractLevelStage {
+	/**
+	 * Display a screen that contains informations when the level is finished
+	 */
 	public LevelFinishedStage() {
 		super("Niveau terminé");
 		
