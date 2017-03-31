@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
+import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
+import be.ac.umons.sgl.lazer.g06.game.orientations.StandardOrientation;
 /**
  * Types of block available for class Block
  */
@@ -22,6 +24,7 @@ public class LevelType {
 	 */
 	private static OrderedMap<String, LevelType> levelTypes;
 	
+	Orientation orientationClass;
 	private OrderedMap<String, BlockType> blocks;
 	String name;
 	String label;
@@ -41,6 +44,14 @@ public class LevelType {
 		}
 		label = label.replaceAll("[\\r\\n]", "");
 		
+		String orientation = Files.getContent(dirPath()+"orientations.txt");
+		if(orientation != null && orientation.equals("advanced")) {
+			// TODO change to advanced
+			orientationClass = StandardOrientation.staticFirst();
+		} else {
+			orientationClass = StandardOrientation.staticFirst();
+		}
+		
 		String blocksXml = dirPath()+"blocks.xml";
 		String xml = Files.getContent(blocksXml);
 		if(xml == null) {
@@ -55,7 +66,7 @@ public class LevelType {
 		
 		BlockType block;
 		for(Element blockElement : blockElements) {
-			block = new BlockType(spritesPath, blockElement);
+			block = new BlockType(orientationClass, spritesPath, blockElement);
 			blocks.put(block.getName(), block);
 		}
 		
@@ -78,6 +89,10 @@ public class LevelType {
 	 */
 	private String dirPath() {
 		return LEVEL_TYPES_PATH+"/"+name+"/";
+	}
+	
+	public Orientation getOrientation() {
+		return orientationClass;
 	}
 	/**
 	 * @return Name.

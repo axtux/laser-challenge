@@ -19,13 +19,15 @@ public class BlockType {
 	private final HashMap<Orientation, Array<Orientation>> inputs;
 	private final Array<Orientation> requiredInputs;
 	
+	Orientation first;
 	/**
 	 * 
 	 * @param spritesPath 
 	 * @param block
 	 * @throws GdxRuntimeException if picture of block does not exist
 	 */
-	public BlockType(String spritesPath, Element block) {
+	public BlockType(Orientation first, String spritesPath, Element block) {
+		this.first = first;
 		this.name = block.get("name");
 		this.label = block.get("label");
 		
@@ -59,7 +61,7 @@ public class BlockType {
 			outputs = new Array<Orientation>(outputElements.size);
 			for(Element outputElement : outputElements) {
 				orientationStr = outputElement.getAttribute("orientation");
-				orientation = Orientation.fromString(orientationStr);
+				orientation = first.fromString(orientationStr);
 				if(orientation == null) {
 					throw new GdxRuntimeException("No orientation "+orientationStr);
 				}
@@ -68,7 +70,7 @@ public class BlockType {
 			}
 			
 			orientationStr = inputElement.getAttribute("orientation", "");
-			orientation = Orientation.fromString(orientationStr);
+			orientation = first.fromString(orientationStr);
 			inputs.put(orientation, outputs);
 		}
 		
@@ -88,7 +90,7 @@ public class BlockType {
 		
 		for(Element inputElement : inputElements) {
 			orientationStr = inputElement.getAttribute("orientation");
-			orientation = Orientation.fromString(orientationStr);
+			orientation = first.fromString(orientationStr);
 			if(orientation == null) {
 				throw new GdxRuntimeException("No orientation "+orientationStr);
 			}
