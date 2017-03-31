@@ -7,12 +7,19 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
-
+/**
+ * Block to be inserted into map. Extends Cell to use already existing LibGDX map classes.
+ */
 public class Block extends TiledMapTileLayer.Cell {
 	BlockType type;
 	Orientation orientation;
 	ObjectMap<Orientation, Boolean> originInputs;
-	
+	/**
+	 * Create a block
+	 * @param type The type associated with this block.
+	 * This will define block sprite and laser input/output management.
+	 * @param orientation Orientation of this block.
+	 */
 	public Block(BlockType type, Orientation orientation) {
 		super();
 		this.type = type;
@@ -21,9 +28,9 @@ public class Block extends TiledMapTileLayer.Cell {
 		clearInputs();
 	}
 	/**
-	 * check if the block contain a property that prevent him to move or to rotate
-	 * @param name The name of the property 
-	 * @return true if the block contain the property, otherwise false
+	 * Get block boolean property.
+	 * @param name The name of the property.
+	 * @return True if the lower-cased property equals true or 1. False otherwise.
 	 */
 	public boolean getBoolProp(String name) {
 		MapProperties props = getTile().getProperties();
@@ -39,7 +46,7 @@ public class Block extends TiledMapTileLayer.Cell {
 		return false;
 	}
 	/**
-	 * check if the block can move
+	 * Check if the block can move using boolean property "fixedposition".
 	 * @return true if it can move, otherwise return false
 	 */
 	public boolean canMove() {
@@ -47,7 +54,7 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	
 	/**
-	 * check if the block can rotate
+	 * Check if the block can rotate using boolean property "fixedorientation"
 	 * @return true if it can rotate, otherwise return false
 	 */
 	public boolean canRotate() {
@@ -55,8 +62,8 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	
 	/**
-	 * move the block
-	 * @return true if the block is moved, otherwise return false
+	 * Rotate block to its next orientation.
+	 * @return True if the block is rotated, false otherwise
 	 */
 	public boolean rotate() {
 		if(!canRotate()) {
@@ -69,13 +76,17 @@ public class Block extends TiledMapTileLayer.Cell {
 	}
 	/**
 	 * Change the orientation of block
-	 * @param orientation Initial orientation of block
+	 * @param orientation New orientation of the block.
 	 */
 	private void setOrientation(Orientation orientation) {
 		this.orientation = orientation;
 		this.setRotation(orientation.getAngle());
 	}
-	
+	/**
+	 * Add input to this block.
+	 * @param originInput Orientation of laser input.
+	 * @return Outputs resulting from laser input originInput.
+	 */
 	public Array<Orientation> input(Orientation originInput) {
 		// input null to start source
 		if(originInput != null) {
@@ -93,8 +104,11 @@ public class Block extends TiledMapTileLayer.Cell {
 		
 		return outputs;
 	}
-	
-	
+	/**
+	 * Check if a laser input entered this block.
+	 * @param input Orientation of laser input.
+	 * @return True if input has been entered, false otherwise.
+	 */
 	private boolean hasOriginInput(Orientation input) {
 		if(!originInputs.containsKey(input)) {
 			return false;
@@ -102,8 +116,10 @@ public class Block extends TiledMapTileLayer.Cell {
 		
 		return originInputs.get(input).booleanValue();
 	}
-	
-	
+	/**
+	 * Check whether all required inputs by blockType has been satisfied.
+	 * @return True if all required inputs are satisfied, false otherwise.
+	 */
 	public boolean hasRequiredInputs() {
 		for(Orientation requiredInput : type.getRequiredInputs()) {
 			if(!hasOriginInput(requiredInput)) {
@@ -112,7 +128,9 @@ public class Block extends TiledMapTileLayer.Cell {
 		}
 		return true;
 	}
-	
+	/**
+	 * Clear entered laser inputs in this block.
+	 */
 	public void clearInputs() {
 		originInputs = new ObjectMap<Orientation, Boolean>();
 	}

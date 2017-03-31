@@ -5,7 +5,6 @@ import java.io.StringWriter;
 import java.util.regex.Pattern;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
@@ -106,14 +105,12 @@ public class LocalUser extends User {
 	 * @return false if the file does not exist, the password is missing, or the hash type is not md5. Otherwise, return true
 	 */
 	public boolean loadFromFile(String password) {
-		String xml = Files.getContent(xmlPath());
-		if(xml == null) {
-			Gdx.app.error("LocalUser.loadFromFile", "Reading file failed");
+		Element user = Files.parseXML(xmlPath());
+		if(user == null) {
+			Gdx.app.error("LocalUser.loadFromFile", "Error parsing file "+xmlPath());
 			return false;
 		}
 		
-		XmlReader reader = new XmlReader();
-		Element user = reader.parse(xml);
 		Element p = user.getChildByName("password");
 		if(p == null) {
 			Gdx.app.error("LocalUser.loadFromFile", "No password element inside user element.");

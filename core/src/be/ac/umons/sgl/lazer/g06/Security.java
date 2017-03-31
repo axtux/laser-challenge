@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 /**
- * Easily get hash functions of string.
+ * Easy interface to hash Strings.
  */
 public class Security {
 	/**
