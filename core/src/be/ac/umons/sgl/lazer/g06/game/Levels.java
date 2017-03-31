@@ -55,7 +55,7 @@ public class Levels {
 	/**
 	 * 
 	 * @param refresh whether or not refresh levels from disk
-	 * @return static levels or refreshed levels if @refresh is true
+	 * @return static levels or refreshed levels if refresh is true
 	 */
 	public static Array<Level> getLevels(boolean refresh) {
 		if(refresh || levels == null) {
@@ -64,18 +64,18 @@ public class Levels {
 		return levels;
 	}
 	/**
-	 * 
+	 * Filter levels without refreshing from disk.
 	 * @param type Only levels of this type will be returned
-	 * @return levels with type equals to @type
+	 * @return levels with type equals to type
 	 */
 	public static Array<Level> getLevels(LevelType type) {
 		return getLevels(type, false);
 	}
 	/**
-	 * 
+	 * Filter levels.
 	 * @param type Only levels of this type will be returned
 	 * @param refresh Whether or not refresh levels from disk
-	 * @return Levels with type equals to @type
+	 * @return Levels with type equals to type
 	 */
 	public static Array<Level> getLevels(LevelType type, boolean refresh) {
 		getLevels(refresh);
