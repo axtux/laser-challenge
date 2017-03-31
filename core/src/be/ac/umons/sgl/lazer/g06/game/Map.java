@@ -304,10 +304,17 @@ public class Map extends Observable {
 		return false;
 	}
 	
+	/**
+	 * @param pos in the layer
+	 * @return the block at this position
+	 */
 	public Block getBlock(Position pos) {
 		return (Block) getCell(BLOCKS_LAYER, pos);
 	}
-	
+	/**
+	 * @param pos the position in the layer
+	 * @return the laser at this position
+	 */
 	public Lasers getLasers(Position pos) {
 		return (Lasers) getCell(LASERS_LAYER, pos);
 	}
@@ -328,7 +335,9 @@ public class Map extends Observable {
 		
 		return true;
 	}
-	
+	/**
+	 * Launch laser on map
+	 */
 	public void startLasers() {
 		// clear previous lasers
 		fillLasersLayer();
