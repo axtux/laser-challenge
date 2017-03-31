@@ -71,7 +71,6 @@ public class Block extends TiledMapTileLayer.Cell {
 		}
 		
 		setOrientation(orientation.next());
-		LazerChallenge.getInstance().getLevel().changed();
 		return true;
 	}
 	/**

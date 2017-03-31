@@ -36,8 +36,6 @@ public class MapClickListener extends MyClickListener {
 			if(game.getLevel().moving()) {
 				Gdx.app.debug("MapClickListener.clicked", "Moving to position");
 				game.getLevel().moveSelectedTo(position);
-				game.getLevel().select(position);
-				game.getLevel().moving(false);
 			} else {
 				Gdx.app.debug("MapClickListener.clicked", "Selecting position");
 				game.getLevel().select(position);
@@ -45,7 +43,8 @@ public class MapClickListener extends MyClickListener {
 			break;
 		case "ACTION_LEVEL_ROTATE":
 			Gdx.app.debug("MapClickListener.clicked", "Rotating position");
-			game.getLevel().rotate(position);
+			game.getLevel().select(position);
+			game.getLevel().rotateSelected();
 			break;
 		}
 	}
