@@ -27,8 +27,14 @@ public class LevelType {
 	TextureRegion input;
 	TextureRegion output;
 	/**
-	 * Parse XML blocks file of levelType and create associated BlockType objects.
-	 * @param name LevelType name.
+	 * Create LevelType from directory name, located into level_types. At least 2 files are required :
+	 * - blocks.xml that describes blocks allowed for this LevelType. A DTD file describing XML format for blocks.xml is located at core/assets/XML_format/blocks.dtd
+	 * - label.txt that contains the name under which this type has to be displayed
+	 * A third file orientations.txt can be created with content "advanced" to get 8-directions orientations instead of 4-directions ones.
+	 * For each block, an image of the same name has to be located into subdirectory sprites with extension ".png". This image will be used to draw the block.
+	 * Laser input and output are respectively represented by laserInput.png and laserOutput.png, inside sprites directory.
+	 * @param name Directory name from which to load LevelType.
+	 * @throws GdxRuntimeException if any of the above requirements are not met.
 	 */
 	public LevelType(String name) {
 		this.name = name;
@@ -86,32 +92,38 @@ public class LevelType {
 	public String spritesPath() {
 		return dirPath()+"/sprites";
 	}
-	
+	/**
+	 * @return An instance of Orientation class used for this LevelType.
+	 */
 	public Orientation getOrientation() {
 		return orientationClass;
 	}
 	/**
-	 * @return Name.
+	 * @return Label is intended to be displayed to the used.
 	 */
 	public String getLabel() {
 		return label;
 	}
 	/**
-	 * @return Raw name.
+	 * @return Raw name (directory name).
 	 */
 	public String getName() {
 		return name;
 	}
-	
+	/**
+	 * @return TextureRegion representing laser input from first Orientation.
+	 */
 	public TextureRegion getInput() {
 		return input;
 	}
+	/**
+	 * @return TextureRegion representing laser output from first Orientation.
+	 */
 	public TextureRegion getOutput() {
 		return output;
 	}
 	/**
-	 * Get block types.
-	 * @return Valid types of block for this LevelType.
+	 * @return All possible block types for this LevelType.
 	 */
 	public Array<String> getBlockTypes() {
 		return blocks.orderedKeys();
