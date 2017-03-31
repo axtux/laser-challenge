@@ -6,21 +6,25 @@ import com.badlogic.gdx.utils.Json;
 import be.ac.umons.sgl.lazer.g06.Files;
 import be.ac.umons.sgl.lazer.g06.game.Switch;
 /**
- * create a new user
+ * Local user to manage level saved scores and histories.
  */
 public class User {
 	private String username;
 	private String image;
 	private Json json;
-	
+	/**
+	 * Create user.
+	 * @param username User name.
+	 * @param image Image.
+	 */
 	public User(String username, String image) {
 		setUsername(username);
 		setImage(image);
 		json = new Json();
 	}
-	
 	/**
-	 * define a name for the user
+	 * Set user name.
+	 * @param username User name.
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -51,8 +55,7 @@ public class User {
 		return image;
 	}
 	/**
-	 * Default path to save files. Overwrite method to change path in subclasses.
-	 * @return
+	 * @return Default path to save files. Overwrite method to change path in subclasses.
 	 */
 	protected String userPath() {
 		return "users/"+getUsername();
@@ -66,24 +69,22 @@ public class User {
 		return userPath()+"/"+levelName;
 	}
 	/**
-	 * Create a file score
-	 * @param levelName the level that contains the score to record
-	 * @return a path with the file created
+	 * @param levelName The level name.
+	 * @return Path to score file.
 	 */
 	private String scorePath(String levelName) {
 		return levelPath(levelName)+"/score.txt";
 	}
 	/**
-	 * create a XML file history
-	 * @param levelName the level that contains the history to record
-	 * @return a path with the XML history
+	 * @param levelName The level name.
+	 * @return Path to history file.
 	 */
 	private String historyPath(String levelName) {
-		return levelPath(levelName)+"/history.xml";
+		return levelPath(levelName)+"/history.json";
 	}
 	/**
-	 * try to save score in file
-	 * @param levelName the level associated to the score that will be recorded
+	 * Save score in file
+	 * @param levelName The level name.
 	 * @param score the score to record
 	 * @return result 
 	 */
@@ -93,7 +94,7 @@ public class User {
 	}
 	/**
 	 * Load score recorded in file score
-	 * @param levelName the level associated to the score recorded
+	 * @param levelName The level name.
 	 * @throws NumberFormatException if the file contain no score
 	 * @return the score 
 	 */
@@ -106,8 +107,8 @@ public class User {
 		}
 	}
 	/**
-	 * try to save history in XML file
-	 * @param levelName the level associated to the history that will be recorded
+	 * Save history in JSON file
+	 * @param levelName The level name.
 	 * @param history the history to record
 	 * @return result
 	 */
@@ -117,8 +118,8 @@ public class User {
 		return Files.putContent(historyPath(levelName), json_history);
 	}
 	/**
-	 * Load history recorded in XML file
-	 * @param levelName the level associated to the history that will be loaded
+	 * Load history recorded in JSON file
+	 * @param levelName The level name.
 	 * @return null if the history does not exist, or the history if it exists
 	 */
 	@SuppressWarnings("unchecked")

@@ -11,11 +11,20 @@ import be.ac.umons.sgl.lazer.g06.Files;
 import be.ac.umons.sgl.lazer.g06.Security;
 
 import com.badlogic.gdx.utils.XmlWriter;
-
+/**
+ * Local user to provide User's features on local machine.
+ */
 public class LocalUser extends User {
 	/**
 	 * @param create if true, user will be created
-	 * 		   if false, username and password will be used to login user
+	 * if false, username and password will be used to login user
+	 */
+	/**
+	 * Create or try to load user with username and associated password.
+	 * @param username User name. Must begin with a letter and can contain letters, digits, underscore _ and point ".".
+	 * @param password Password.
+	 * @param create If true, user will be created. If false, user will be logged in.
+	 * @throws LoginException If empty or invalid username, empty or not matching password, if trying to create existing user or if an error occurs creating user. Error message will be set accordingly.
 	 */
 	public LocalUser(String username, String password, boolean create) throws LoginException {
 		super(username, "noimage");
@@ -52,16 +61,16 @@ public class LocalUser extends User {
 	}
 	
 	/**
-	 * Define the path for the user's file
-	 * @return the path
+	 * Path to user's directory
+	 * @return Path relative to application root.
 	 */
 	protected String userPath() {
 		return "users/local/"+getUsername();
 	}
 	
 	/**
-	 * Define the path of user's files XML
-	 * @return the path
+	 * Path to user's XML file
+	 * @return Path relative to application root.
 	 */
 	private String xmlPath() {
 		return userPath()+"/user.xml";
@@ -69,7 +78,7 @@ public class LocalUser extends User {
 	
 	/**
 	 * Check if the local user exist
-	 * @return result
+	 * @return True if user exists, false otherwise.
 	 */
 	private boolean exists() {
 		return Files.exists(xmlPath());
@@ -78,8 +87,7 @@ public class LocalUser extends User {
 	/**
 	 * Try to create a new local user
 	 * @param password the password that want the user
-	 * @throws IOException if the file have not been created
-	 * @return result
+	 * @return True on success, false on error.
 	 */
 	private boolean saveToFile(String password) {
 		StringWriter writer = new StringWriter();
@@ -102,7 +110,7 @@ public class LocalUser extends User {
 	/**
 	 * Try to get back the data of user
 	 * @param password the user's password
-	 * @return false if the file does not exist, the password is missing, or the hash type is not md5. Otherwise, return true
+	 * @return True if user exists, and password match password. False otherwise.
 	 */
 	public boolean loadFromFile(String password) {
 		Element user = Files.parseXML(xmlPath());
@@ -131,8 +139,8 @@ public class LocalUser extends User {
 	 * Test if the password is hashed in md5
 	 * @param password the user's password
 	 * @param hashType the type of hash 
-	 * @param hash 
-	 * @return result
+	 * @param hash String representation of the hash
+	 * @return True if password matches, false otherwise.
 	 */
 	private boolean passwordMatch(String password, String hashType, String hash) {
 		switch(hashType) {
@@ -147,13 +155,15 @@ public class LocalUser extends User {
 			return false;
 		}
 	}
-	
+	/**
+	 * Exception thrown by constructor if an error occurs. Message will be set accordingly.
+	 */
 	public class LoginException extends Exception {
-		
-		/**
-		 * this class is called as soon as an error is detected in logging, or when an user try to register
-		 */
 		private static final long serialVersionUID = 1L;
+		/**
+		 * Create error with message.
+		 * @param message Message description of the error.
+		 */
 		public LoginException(String message) {
 			super(message);
 		}
