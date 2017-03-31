@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.XmlWriter;
 
 public class LocalUser extends User {
 	/**
-	 * @create if true, user will be created
+	 * @param create if true, user will be created
 	 * 		   if false, username and password will be used to login user
 	 */
 	public LocalUser(String username, String password, boolean create) throws LoginException {

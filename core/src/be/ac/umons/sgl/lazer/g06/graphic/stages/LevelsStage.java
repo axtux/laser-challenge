@@ -77,7 +77,7 @@ public class LevelsStage extends AbstractStage {
 	 * @param container
 	 * @param level
 	 * @param number
-	 * @param locked
+	 * @param unlocked
 	 * @return Whether score equals zero.
 	 */
 	protected boolean addLevelButton(Table container, Level level, int number, boolean unlocked) {

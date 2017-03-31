@@ -28,7 +28,7 @@ public class LevelType {
 	TextureRegion output;
 	/**
 	 * Parse XML blocks file of levelType and create associated BlockType objects.
-	 * @param levelType LevelType name.
+	 * @param name LevelType name.
 	 */
 	public LevelType(String name) {
 		this.name = name;
