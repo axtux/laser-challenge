@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.Level;
-import be.ac.umons.sgl.lazer.g06.game.LevelType;
+import be.ac.umons.sgl.lazer.g06.game.LevelTypes;
 import be.ac.umons.sgl.lazer.g06.game.Levels;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelFinishedStage;
 import be.ac.umons.sgl.lazer.g06.graphic.stages.LevelInfosStage;
@@ -39,7 +39,7 @@ public class MyActionListener implements ActionListener {
 			Levels.getLevels(true);
 			break;
 		case "ACTION_LOAD_LEVEL_TYPES":
-			LevelType.getLevelTypes(true);
+			LevelTypes.getLevelTypes(true);
 			break;
 		
 		// ACTIONs from headers

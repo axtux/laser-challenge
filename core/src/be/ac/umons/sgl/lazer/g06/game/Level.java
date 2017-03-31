@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
@@ -21,7 +20,7 @@ public class Level extends Observable {
 	static final Difficulty defaultDifficulty = Difficulty.MEDIUM;
 	static final String defaultOrientation = "UP";
 	
-	String xml;
+	Element level;
 	LazerChallenge game;
 	String name;
 	Map map;
@@ -44,9 +43,9 @@ public class Level extends Observable {
 	 * if any asset referenced into TMX file cannot be loaded.
 	 */
 	public Level(String file) {
-		xml = Files.getContent(file);
-		if(xml == null) {
-			throw new GdxRuntimeException("File "+file+" does not exists.");
+		level = Files.parseXML(file);
+		if(level == null) {
+			throw new GdxRuntimeException("Error parsing file "+file);
 		}
 		
 		game = LazerChallenge.getInstance();
@@ -57,8 +56,6 @@ public class Level extends Observable {
 	public void reset() {
 		stop();
 		
-		XmlReader reader = new XmlReader();
-		Element level = reader.parse(xml);
 		setName(level.getAttribute("name", ""));
 		setDifficulty(level.getAttribute("difficulty", ""));
 		setType(level.getAttribute("type", ""));
@@ -108,7 +105,7 @@ public class Level extends Observable {
 	 * @param type String representation of type, case sensitive
 	 */
 	private void setType(String type) {
-		this.type = LevelType.getLevelType(type);
+		this.type = LevelTypes.getLevelType(type);
 		if(this.type == null) {
 			throw new GdxRuntimeException("Type "+type+" not found");
 		}

@@ -12,6 +12,7 @@ import be.ac.umons.sgl.lazer.g06.game.Block;
 import be.ac.umons.sgl.lazer.g06.game.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
+import be.ac.umons.sgl.lazer.g06.game.LevelTypes;
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.orientations.StandardOrientation;
 
@@ -29,7 +30,7 @@ public class StandardBlockTest {
 		// initialize LazerChallenge
 		LazerChallenge.getInstance();
 		// initialize level type
-		standard = LevelType.getLevelType("standard");
+		standard = LevelTypes.getLevelType("standard");
 	}
 	
 	@Test
