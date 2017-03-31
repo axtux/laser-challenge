@@ -108,7 +108,7 @@ public class Level extends Observable {
 	 * @param type String representation of type, case sensitive
 	 */
 	private void setType(String type) {
-		this.type = LevelType.getLevelType(type);
+		this.type = LevelTypes.getLevelType(type);
 		if(this.type == null) {
 			throw new GdxRuntimeException("Type "+type+" not found");
 		}

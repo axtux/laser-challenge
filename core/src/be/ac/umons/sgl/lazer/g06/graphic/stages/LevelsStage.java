@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Level;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
+import be.ac.umons.sgl.lazer.g06.game.LevelTypes;
 import be.ac.umons.sgl.lazer.g06.game.Levels;
 import be.ac.umons.sgl.lazer.g06.listeners.LevelSelectorListener;
 
@@ -31,9 +32,9 @@ public class LevelsStage extends AbstractStage {
 		
 		addHeaderButton("Retour", "MENU_MODES");
 		
-		Array<String> types = LevelType.getLevelTypes();
+		Array<String> types = LevelTypes.getLevelTypes();
 		for(String type : types) {
-			addLevelsBlock(LevelType.getLevelType(type));
+			addLevelsBlock(LevelTypes.getLevelType(type));
 		}
 		
 		content.row();
