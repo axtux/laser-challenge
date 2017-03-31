@@ -42,7 +42,10 @@ public class LevelsStage extends AbstractStage {
 			addExpandingBlock(content);
 		}
 	}
-	
+	/**
+	 * Add level block
+	 * @param lt
+	 */
 	private void addLevelsBlock(LevelType lt) {
 		Table block = new Table();
 		
