@@ -179,7 +179,7 @@ public class Level extends Observable {
 	/**
 	 * Set state to changed and notify observers. Start laser if training mode.
 	 */
-	public void changed() {
+	private void changed() {
 		// continuous laser
 		if(game.getMode() != null && !game.getMode().hasScore()) {
 			startLasers();
