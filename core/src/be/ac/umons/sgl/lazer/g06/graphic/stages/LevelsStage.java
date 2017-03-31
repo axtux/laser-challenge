@@ -53,8 +53,9 @@ public class LevelsStage extends AbstractStage {
 		Table levelsContainer = new Table();
 		
 		int i = 1;
+		boolean unlocked = true;
 		for(Level level : Levels.getLevels(lt)) {
-			addLevelButton(levelsContainer, level, i++, false);
+			unlocked &= addLevelButton(levelsContainer, level, i++, unlocked);
 		}
 		
 		block.row();
@@ -67,14 +68,22 @@ public class LevelsStage extends AbstractStage {
 		content.row();
 		content.add(block).growX();
 	}
-	
-	protected void addLevelButton(Table container, Level level, int number, boolean locked) {
+	/**
+	 * Add level button
+	 * @param container
+	 * @param level
+	 * @param number
+	 * @param locked
+	 * @return Whether score equals zero.
+	 */
+	protected boolean addLevelButton(Table container, Level level, int number, boolean unlocked) {
 		String str_number = Integer.toString(number);
 		Table levelContainer = new Table();
+		unlocked = unlocked || !game.getMode().hasScore();
 		
-		TextButton btn = new TextButton(str_number, skin, locked ? "disabled-menu" : "menu");
+		TextButton btn = new TextButton(str_number, skin, unlocked ? "menu" : "disabled-menu");
 		btn.getLabelCell().pad(10);
-		if(!locked) {
+		if(unlocked) {
 			btn.addListener(new LevelSelectorListener(Input.Buttons.LEFT, "MENU_LEVEL_INFOS", level));
 			
 		}
@@ -85,13 +94,15 @@ public class LevelsStage extends AbstractStage {
 		levelContainer.add(subtitle);
 		levelContainer.row();
 		
+		int score = 0;
 		if(game.getMode().hasScore()) {
-			int score = game.getUser().loadScore(level.getName());
+			score = game.getUser().loadScore(level.getName());
 			Label label = new Label("Score : "+Integer.toString(score), skin, "small-label");
 			levelContainer.add(label);
 		}
 		
 		container.add(levelContainer).pad(20).left();
+		return score != 0;
 	}
 
 }

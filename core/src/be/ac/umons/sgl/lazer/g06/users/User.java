@@ -1,6 +1,5 @@
 package be.ac.umons.sgl.lazer.g06.users;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
@@ -11,10 +10,6 @@ public class User {
 	private String username;
 	private String image;
 	private Json json;
-	
-	public User() {
-		this("Anonyme", "anonymous.png");
-	}
 	
 	public User(String username, String image) {
 		setUsername(username);
@@ -29,10 +24,10 @@ public class User {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	public void logout() {
-		Gdx.app.debug("User.logout", "remove path "+userPath());
-	}
+	/**
+	 * Called when user is logged out
+	 */
+	public void logout() {}
 	
 	public String getUsername() {
 		return username;
@@ -41,7 +36,10 @@ public class User {
 	public String getImage() {
 		return image;
 	}
-	
+	/**
+	 * Default path to save files. Overwrite method to change path in subclasses.
+	 * @return
+	 */
 	protected String userPath() {
 		return "users/"+getUsername();
 	}
@@ -74,25 +72,18 @@ public class User {
 	
 	public boolean saveHistory ( String levelName , Array<Switch> history){
 		String json_history = json.toJson(history);
-		Gdx.app.debug("User.saveHistory", json_history);
+		//Gdx.app.debug("User.saveHistory", json_history);
 		return Files.putContent(historyPath(levelName), json_history);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Array<Switch> loadHistory(String levelName){
 		String json_history = Files.getContent(historyPath(levelName));
 		if(json_history == null) {
-			Gdx.app.debug("User.loadHistory", "no file "+historyPath(levelName));
+			//Gdx.app.debug("User.loadHistory", "no file "+historyPath(levelName));
 			return null;
 		}
 		
-		@SuppressWarnings("unchecked")
-		Array<Switch> history = json.fromJson(Array.class, Switch.class, json_history);
-		
-		Gdx.app.debug("User.loadHistory", "size : "+Integer.toString(history.size));
-		for(Switch s : history) {
-			Gdx.app.debug("User.loadHistory", s.toString());
-		}
-		
-		return history;
+		return json.fromJson(Array.class, Switch.class, json_history);
 	}
 }
