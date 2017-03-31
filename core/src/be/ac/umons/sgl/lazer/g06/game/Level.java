@@ -137,7 +137,7 @@ public class Level extends Observable {
 			blockType = blockElement.getAttribute("type", "");
 			
 			orientationStr = blockElement.getAttribute("orientation", defaultOrientation);
-			orientation = Orientation.valueOf(orientationStr);
+			orientation = type.getOrientation().fromString(orientationStr);
 			if(orientation == null) {
 				throw new GdxRuntimeException("No orientation "+orientationStr);
 			}

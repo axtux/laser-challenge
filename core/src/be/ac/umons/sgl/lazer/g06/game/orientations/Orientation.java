@@ -2,73 +2,48 @@ package be.ac.umons.sgl.lazer.g06.game.orientations;
 
 import be.ac.umons.sgl.lazer.g06.game.Position;
 
-public enum Orientation {
-	//* Standard orientations
-	UP(0, 1),
-	RIGHT(1, 0),
-	DOWN(0, -1),
-	LEFT(-1, 0);
-	//*/
-	/* Advanced orientations
-	UP(0, 1),
-	UP_RIGHT(1, 1),
-	RIGHT(1, 0),
-	DOWN_RIGHT(1, -1),
-	DOWN(0, -1),
-	DOWN_LEFT(-1, -1),
-	LEFT(-1, 0),
-	UP_LEFT(-1, 1);
-	//*/
-	
-	int x, y;
-	private Orientation(int x, int y) {
-		this.x = x;
-		this.y = y;
+public interface Orientation {
+	public default Orientation reverse() {
+		return fromInt(ordinal()+size()/2);
 	}
 	
-	public Orientation reverse() {
-		return fromInt(ordinal()+Orientation.values().length/2);
-	}
-	
-	public Orientation next() {
+	public default Orientation next() {
 		return fromInt(ordinal()+1);
 	}
 	
-	public Orientation prev() {
+	public default Orientation prev() {
 		return fromInt(ordinal()-1);
 	}
 	
-	public int getAngle() {
-		return ordinal()*(360/Orientation.values().length);
+	public default int getAngle() {
+		return ordinal()*(360/size());
 	}
 	
-	public Orientation rotateBy(Orientation other) {
+	public default Orientation rotateBy(Orientation other) {
 		return fromInt(this.ordinal()+other.ordinal());
 	}
 	
-	public Orientation unRotateBy(Orientation other) {
+	public default Orientation unRotateBy(Orientation other) {
 		return fromInt(this.ordinal()-other.ordinal());
 	}
 	
-	public Position nextPosition(Position position) {
-		return new Position(position.getX()+x, position.getY()+y, position.getLocation());
+	public default Position nextPosition(Position position) {
+		return new Position(position.getX()+getX(), position.getY()+getY(), position.getLocation());
 	}
 	
-	private static Orientation fromInt(int i) {
-		Orientation[] orientations = Orientation.values();
-		while(i < 0) i+= orientations.length;
-		return orientations[i%orientations.length];
-	}
 	/**
-	 * Get orientation from string
-	 * @param str String representation of orientation
-	 * @return null if orientation does not exists instead of throwing an exception
+	 * Integer representation of orientation
+	 * @return
 	 */
-	public static Orientation fromString(String str) {
-		try {
-			return Orientation.valueOf(str);
-		} catch (IllegalArgumentException e) {
-			return null;
-		}
-	}
+	public int ordinal();
+	/**
+	 * Size of all possible orientations of this type
+	 * @return
+	 */
+	public int size();
+	public int getX();
+	public int getY();
+	
+	public Orientation fromInt(int i);
+	public Orientation fromString(String str);
 }
