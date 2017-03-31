@@ -5,7 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 /**
- * To easily manage files using Gdx.files.local interface
+ * Easy interface to manage files. This class uses internally Gdx.files.local interface.
  */
 public class Files {
 	/**
@@ -37,7 +37,7 @@ public class Files {
 		return content;
 	}
 	/**
-	 * Call {@link #putContent(String, String, boolean)} with append value set to false
+	 * Call {@link #putContent(String, String, boolean)} with append value set to false.
 	 * @param path Relative path to application root.
 	 * @param content Whole file content as a string.
 	 * @return True on success, false on error.
@@ -131,9 +131,9 @@ public class Files {
 		return fh.exists();
 	}
 	/**
-	 * List directory.
+	 * List all entries into path directory.
 	 * @param path Relative path to application root.
-	 * @return Array of string filenames (relative to their own directory).
+	 * @return Array of string folder/file names, relative to their own directory.
 	 */
 	public static Array<String> list(String path) {
 		FileHandle fh = Gdx.files.local(path);
@@ -158,9 +158,9 @@ public class Files {
 		return fileNames;
 	}
 	/**
-	 * Just as {@link #list(String)} but make sure entries are real files (not directory).
+	 * List all files into path directory.
 	 * @param path Relative path to application root.
-	 * @return Array of string filenames (relative to their own directory).
+	 * @return Array of string file names, relative to their own directory.
 	 */
 	public static Array<String> listFiles(String path) {
 		FileHandle fh = Gdx.files.local(path);
@@ -189,9 +189,9 @@ public class Files {
 		return fileNames;
 	}
 	/**
-	 * Just as {@link #list(String)} but make sure entries are directories (not files).
+	 * List all directories into path directory.
 	 * @param path Relative path to application root.
-	 * @return Array of string filenames (relative to their own directory).
+	 * @return Array of string folder names, relative to their own directory.
 	 */
 	public static Array<String> listDirs(String path) {
 		FileHandle fh = Gdx.files.local(path);
@@ -220,7 +220,7 @@ public class Files {
 		return fileNames;
 	}
 	/**
-	 * Delete this file or directory and all children, recursively.
+	 * Delete this file or directory and all eventual children, recursively.
 	 * @param path Relative path to application root.
 	 * @return True on success, false on failure
 	 */
