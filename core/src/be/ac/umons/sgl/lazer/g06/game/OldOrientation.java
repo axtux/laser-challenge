@@ -44,14 +44,14 @@ public class OldOrientation {
 	}
 	
 	/**
-	 * @return the attribut orientationToIndice from object
+	 * @return the attribute orientationToIndice from object
 	 */
 	public Hashtable<String,Integer> getOrientationToIndice(){
 		return orientationToIndice;
 	}
 	
 	/**
-	 * @return the attribut indiceToOrientation from object
+	 * @return the attribute indiceToOrientation from object
 	 */
 	public String[] getIndiceToOrientation(){
 		return indiceToOrientation;

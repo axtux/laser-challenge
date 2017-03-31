@@ -1,7 +1,10 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 import be.ac.umons.sgl.lazer.g06.Time;
-
+/**
+ * create screen with description of level
+ *
+ */
 public class LevelInfosStage extends AbstractLevelStage {
 	public LevelInfosStage() {
 		super("Informations sur le niveau");

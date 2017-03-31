@@ -3,6 +3,9 @@ package be.ac.umons.sgl.lazer.g06.graphic.stages;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
+/**
+ * Display the screen that contains log in and log on
+ */
 public class LocalLoginStage extends AbstractStage {
 
 	public LocalLoginStage() {
