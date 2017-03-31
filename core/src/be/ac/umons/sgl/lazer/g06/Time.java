@@ -6,7 +6,7 @@ public class Time {
 	/**
 	 * Return a pretty representation of the time. E.g. 2jours 3heures 2minutes 35secondes.
 	 * @param seconds Time to represent in seconds.
-	 * @param displayall If false, units that equals 0 won't be represented e.g. 0jours.
+	 * @param displayall If false, units equal to 0 won't be represented e.g. 0jours.
 	 * @param longunits If true, long units will be used e.g. Xjours. If false, short units will be used e.g. Xj.
 	 * @return String representation of time.
 	 */
@@ -33,7 +33,7 @@ public class Time {
 		if(displayall || min != 0) {
 			pretty += Integer.toString(min)+(longunits ? "minutes " : "m ");
 		}
-		// also to display 0
+		// represent 0 seconds if no previous unit has been represented
 		if(displayall || seconds != 0 || pretty.length() < 1) {
 			pretty += Integer.toString(seconds)+(longunits ? "seconds" : "s ");
 		}
