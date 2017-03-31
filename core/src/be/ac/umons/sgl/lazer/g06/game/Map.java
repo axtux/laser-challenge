@@ -21,7 +21,7 @@ import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
 /**
  * Map containing a TiledMap with multiple layers and special methods to be used from LaserChallenge game.
- * The first layer is used for the ground, the second layer for {@link Block}s and third layer for {@link Layers}s.
+ * The first layer is used for the ground, the second layer for {@link Block}s and third layer for {@link Lasers}s.
  */
 public class Map extends Observable {
 	private static final String MAP_PATH = "maps";
