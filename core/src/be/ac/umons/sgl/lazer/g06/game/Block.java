@@ -11,7 +11,7 @@ import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
  * Block to be inserted into map. Extends Cell to use already existing LibGDX map classes.
  */
 public class Block extends TiledMapTileLayer.Cell {
-	private BlockType type;
+	private final BlockType type;
 	private Orientation orientation;
 	private ObjectMap<Orientation, Boolean> originInputs;
 	/**
