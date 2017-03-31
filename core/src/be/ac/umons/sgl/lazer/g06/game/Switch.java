@@ -13,11 +13,15 @@ public class Switch {
 		this.oldPos=oldPos;
 		this.newPos=newPos;
 	}
-	
+	/**
+	 * @return oldPos
+	 */
 	public Position getOldPos(){
 		return oldPos;
 	}
-	
+	/**
+	 * @return newPos
+	 */
 	public Position getNewPos(){
 		return newPos;
 	}
