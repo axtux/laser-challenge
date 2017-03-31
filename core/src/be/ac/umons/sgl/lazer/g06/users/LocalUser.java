@@ -14,7 +14,7 @@ import be.ac.umons.sgl.lazer.g06.Security;
 import com.badlogic.gdx.utils.XmlWriter;
 
 public class LocalUser extends User {
-	/*
+	/**
 	 * @create if true, user will be created
 	 * 		   if false, username and password will be used to login user
 	 */
@@ -52,18 +52,36 @@ public class LocalUser extends User {
 		
 	}
 	
+	/**
+	 * Define the path for the user's file
+	 * @return the path
+	 */
 	protected String userPath() {
 		return "users/local/"+getUsername();
 	}
 	
+	/**
+	 * Define the path of user's files XML
+	 * @return the path
+	 */
 	private String xmlPath() {
 		return userPath()+"/user.xml";
 	}
 	
+	/**
+	 * Check if the local user exist
+	 * @return result
+	 */
 	private boolean exists() {
 		return Files.exists(xmlPath());
 	}
 	
+	/**
+	 * Try to create a new local user
+	 * @param password the password that want the user
+	 * @throws IOException if the file have not been created
+	 * @return result
+	 */
 	private boolean saveToFile(String password) {
 		StringWriter writer = new StringWriter();
 		XmlWriter xml = new XmlWriter(writer);
@@ -82,6 +100,11 @@ public class LocalUser extends User {
 		return Files.putContent(xmlPath(), writer.toString());
 	}
 	
+	/**
+	 * Try to get back the data of user
+	 * @param password the user's password
+	 * @return false if the file does not exist, the password is missing, or the hash type is not md5. Otherwise, return true
+	 */
 	public boolean loadFromFile(String password) {
 		String xml = Files.getContent(xmlPath());
 		if(xml == null) {
@@ -107,7 +130,13 @@ public class LocalUser extends User {
 		setImage("");
 		return true;
 	}
-	
+	/**
+	 * Test if the password is hashed in md5
+	 * @param password the user's password
+	 * @param hashType the type of hash 
+	 * @param hash 
+	 * @return result
+	 */
 	private boolean passwordMatch(String password, String hashType, String hash) {
 		switch(hashType) {
 		case "md5":

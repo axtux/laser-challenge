@@ -63,7 +63,10 @@ public class MapButton extends Button {
 		drawBlock(batch);
 		drawLasers(batch);
 	}
-	
+	/**
+	 * draw the block on map if it exists
+	 * @param batch
+	 */
 	private void drawBlock(Batch batch) {
 		if(block == null) {
 			return;
@@ -71,6 +74,10 @@ public class MapButton extends Button {
 		
 		draw(batch, block.getTile().getTextureRegion(), block.getRotation());
 	}
+	/**
+	 * draw lasers on map if it exists
+	 * @param batch
+	 */
 	private void drawLasers(Batch batch) {
 		if(lasers == null) {
 			return;
