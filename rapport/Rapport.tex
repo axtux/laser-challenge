@@ -19,11 +19,11 @@
 \tableofcontents
 \newpage
 \section{Introduction}
-  Nous débutons notre rapport d'implémentation par un léger rappel du projet qui nous a été demandé initialement. 
+  Nous débutons notre rapport d'implémentation par un léger rappel du projet qui nous a, initialement, été demandé. 
 L'énoncé mis à notre disposition en début d'année parlait de la réalisation du jeu nommé ``Lazer Challenge'' en Java
 en nous aidant de la bibliothèque LibGDX. De plus , une extension était demandée individuellement à chaque étudiant .
 
-Pour pouvoir réaliser ce projet, plusieurs étapes ont dûes être nécessaires. La première consisait en la plannification de notre projet,
+Pour pouvoir réaliser ce projet, plusieurs étapes ont dûes être nécessaires. La première consisait en la plannification de ce dernier,
  cette étape comprenait la création d'un graphe Gantt ,PERT, ainsi qu'une gestion des risques, une répartition du travail,
  et de pouvoir déterminer les ressources qui allaient nous être nécessaires dans l'optique de nous préparer au mieux à d'éventuels
  obstacles, empêchements qui pourrait survenir. Ce qui nous aurait ralenti dans la conception de notre jeu.\\ La deuxième, quand à elle, nous a amenée
@@ -35,7 +35,7 @@ Pour pouvoir réaliser ce projet, plusieurs étapes ont dûes être nécessaires
  pourrions apporter dans le futur.
 \section{Préparatifs}
 \subsection{Changement de groupe} 
-Dès le début de la phase d'implémentation , suite a plusieurs abandons dans les groupes, un membre de notre goupe a été annexé dans un autre groupe.
+Dès le début de la phase d'implémentation , suite a plusieurs abandons dans les autres groupes, le notre a dû se voir séparé de l'un de ses membres.
 En conséquence , nous avons dû immédiatement revoir notre diagramme de classe et la maquette graphique afin de pouvoir nous baser directement sur quelque chose
 de concret. Le nouveau diagramme de classe se trouve dans l'archive .jar et est donc à votre disposition (core/assets/images/ClassDiagram.png).
 \section{Conception}
@@ -44,7 +44,7 @@ Nous allons ici , essayer d'argumenter de la meilleure manières nos choix d'imp
 Un des choix les plus importants concerne les propriétés disponibles sur les tuiles. Au départ, nous avions respecté les consignes qui nous
 avaient été données , mais après quelques soucis d'implémentation ( pas adapté à notre Design, quelques bugs également difficiles à régler ), nous
 avons opté pour un mécanisme de restriction , autrement dit, chaque tuile possédera, ou non, une propriété appelé restriction. Cette dernière aura
-comme valeur le nom d'un bloc, exemple , si une tuile possède une restriction ayant comme valeur source, seul une source pourra être déposée sur cette tuile.
+comme valeur le nom d'un bloc. Par exemple, si une tuile possède une restriction ayant comme valeur source, seul une source pourra être déposée sur cette tuile.
 Si elle ne possède aucune restriction, tout type de blocs pourront y être déposés. 
 \\
 Concernant la bibliothèque LibGDX, n'ayant que peu de connaissance au début du projet, nous étions partis sur une interface graphique composée de sprites qui faisaient
@@ -64,10 +64,10 @@ De plus, nous avons pris la peine de fournir des fichier .dtd afin de vérifier 
 \\
 Par ailleurs, l'énoncé parlait d'un mode ``arcade/practice'' ainsi que d'un mode 'continuous laser beam/one-time-only laser beam``. Concernant les
 deux premiers modes , nous n'avons à noter aucun changement par rapport a l'énoncé initial. Cependant, nous n'avons autorisé que le mode ''one-time-only laser beam``
-en mode arcade et que le mode ''continuous laser beam`` en mode ''practice``( mode ''entrainement`` dans notre interface graphique).
+en mode arcade. Le mode ''continuous laser beam``, est quand à lui, exclusif au mode ''practice``( mode ''entrainement`` dans notre interface graphique).
 Nous en parlions déjà dans notre rapport de modélisation.
 \\
-Un mode Pause nous était aussi demandé. Nous n'avons pas souhaité l'implémenter car étant donné qu'en mode ''entrainement``, aucune limite de
+Un mode Pause nous était aussi demandé. Cependant, nous n'avons pas souhaité l'implémenter. Etant donné qu'en mode ''entrainement``, aucune limite de
 temps n'est fixée , nous ne voyons donc pas l'intérêt d'un tel mode. En mode ''arcade``, une limite de temps est fixée, de ce fait, un mode pause entrainerait
 également la pause du timer ... Ce que nous considérons comme étant de la triche.
 
@@ -82,13 +82,12 @@ textures.
 \\
 Concernant l'extension ``Diagonal Directions'', une difficulté nous est apparue en fin de projet. En effet, nous avions utilisé des énumérations pour
 les orientations. De ce fait , afin de pouvoir implémenter les orientations diagonales pour notre extension, il nous aurait fallu hériter notre énumération,
- ce qu'il n'est pas permis par Java .
+ ce qui n'est pas permis par Java .
 \subsection{Concessions}
 
 Nous parlions, dans la section \textbf{Difficultés}, de l'extension ``Diagonal Directions'' et des difficultés que nous avions rencontré avec notre
-choix des énumérations concernant les orientations. Suite à un manque de temps, ce problème n'a pas su être régler, de ce fait, l'extension ne sera pas disponible
-dans la remise du projet. Mais nous vous proposerons tout de même une vidéo explicative sur le jeu de base, mais aussi une autre, contenant notre extension
-afin de vous montrer le travail accompli sur cette dernière.
+choix des énumérations concernant les orientations. Malheureusement, celà a pris un certain temps à régler, de ce fait, l'intensité n'a pas pu être implémentée
+correctement.
 
 
 \section{Eventuelles Améliorations}
@@ -96,14 +95,14 @@ Malgré le fait que l'on avait un énoncé contenant les consignes pour la réal
 améliorations que l'on pourrait apporter à notre jeu après sa remise.\\
 Tout d'abord , on sait que LibGDX possède quelques classes liés à l'implémentation de sons, de musiques qui apporteraient un plus
 non négligeable à notre jeu, bien qu'esthétiques.\\
-On pourrait également remanié notre interface graphique, ainsi, au lieu de devoir cliquer sur un bloc, cliquer sur un bouton déplacement
-et choisir la case où l'on sohaiterai déposer notre bloc; on implémenterait un système de ``drag and drop'' où il suffirait de prendre le bloc,
+On pourrait également remanié notre interface graphique, ainsi, au lieu de devoir cliquer sur un bloc, de cliquer ensuite sur un bouton déplacement
+et choisir la case où l'on souhaiterai déposer notre bloc; on implémenterait un système de ``drag and drop'' où il suffirait de prendre le bloc,
 et de le glisser sur la case voulue sur la map. On considère cette façon de faire plus intuitive et elle pourrait faire gagner du temps au joueur
 en mode arcade.\\
 Pour le score, notre jeu le calcule seulement en fonction du temps qui s'écoule, on pourrait aussi le calculer en fonction du nombre de blocs allant
 de l'inventaire à la zone de jeu. Ainsi, plus nous mettrions de bloc en jeu, plus le score aura diminué. \\
 Nous avons aussi pensé à inclure un ``Redo'', vu que nous avons pris la peine d'implémenter un ``Undo'' qui permet de garder un historique des coups en
-mémoire. De ce fait, le joueur peut revenir à d'anciennes étape en jeu. \\
+mémoire. \\
 De plus , nous avons intégrer une sauvegarde pour les niveaux en mode entrainement, cependant seul la position des blocs sur la carte a été sauvegardé.
 Autrement dit, à chaque recharge du niveau, les orientations des blocs, que le joueur avait placé au préalable sur la carte, reprendront leur 
 orientations par défaut. 
@@ -112,7 +111,7 @@ orientations par défaut.
 Pour la réalisation de ce projet, nous avons utilisé plusieurs outils mis à notre disposition, certains étaient demandés par les professeurs et assistants,
 tel que Git qui nous a grandement aidé dans la gestion de notre projet, Gradle qui nous a permis de compiler le programme facilement et d'effectuer les tests unitaires
 avec JUnit.\\
-La création des maps s'est faites avec l'outil Tiled, comme, également demandé par les professeurs et assistants. \\
+La création des maps s'est faites avec l'outil Tiled, comme également, demandé par les professeurs et assistants. \\
 
 Par ailleurs, nous avons utilisé certains outils qui n'étaient pas demandés explicitement, tel que Gimp pour la création des sprites de tous les blocs et lasers,
 la capture de la vidéo explicative s'est faite avec le logiciel de capture Kazam et le son avec le logiciel Audacity.\\
@@ -121,7 +120,6 @@ Qui plus est, ce rapport a été rédigé avec le langage LaTex ( avec comme com
 Vous pouvez visualiser un aperçu commenté de notre jeu en cliquant sur l'URL ci-dessous.
 \\
 
-Nous mettons également, à votre disposition, le lien URL d'une vidéo contenant notre extension ``Diagonal Directions''.
 
 \section{Remarques}
 Nous parlions d'une première version de l'interface graphique dans la section \textbf{Choix d'implémentation}, Maazouz Mehdi s'était occupé majoritairement
