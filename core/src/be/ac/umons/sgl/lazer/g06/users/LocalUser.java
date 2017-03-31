@@ -149,8 +149,11 @@ public class LocalUser extends User {
 	}
 	
 	public class LoginException extends Exception {
-		private static final long serialVersionUID = 1L;
 		
+		/**
+		 * this class is called as soon as an error is detected in logging, or when an user try to register
+		 */
+		private static final long serialVersionUID = 1L;
 		public LoginException(String message) {
 			super(message);
 		}

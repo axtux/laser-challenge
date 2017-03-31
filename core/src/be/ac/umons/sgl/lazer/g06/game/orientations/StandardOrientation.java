@@ -1,15 +1,25 @@
 package be.ac.umons.sgl.lazer.g06.game.orientations;
 
+/**
+ * create an enumeration with the standard orientation
+ *
+ */
 public enum StandardOrientation implements Orientation {
 	UP(0, 1),
 	RIGHT(1, 0),
 	DOWN(0, -1),
 	LEFT(-1, 0);
 	
+	/**
+	 * @return the orientation at default
+	 */
 	public static Orientation staticFirst() {
 		return UP;
 	}
 	
+	/**
+	 * @return the orientation at default
+	 */
 	public Orientation first() {
 		return UP;
 	}
