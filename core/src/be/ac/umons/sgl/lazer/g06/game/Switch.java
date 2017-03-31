@@ -1,5 +1,10 @@
 package be.ac.umons.sgl.lazer.g06.game;
 
+/**
+ * 
+ *To keep an history of positions in memory
+ */
+
 public class Switch {
 	private Position oldPos;
 	private Position newPos;
@@ -14,13 +19,13 @@ public class Switch {
 		this.newPos=newPos;
 	}
 	/**
-	 * @return oldPos
+	 * @return the old position
 	 */
 	public Position getOldPos(){
 		return oldPos;
 	}
 	/**
-	 * @return newPos
+	 * @return the new position
 	 */
 	public Position getNewPos(){
 		return newPos;

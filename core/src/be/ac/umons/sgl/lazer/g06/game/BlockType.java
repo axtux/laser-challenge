@@ -17,6 +17,12 @@ public class BlockType {
 	private final HashMap<Orientation, Array<Orientation>> inputs;
 	private final Array<Orientation> requiredInputs;
 	
+	/**
+	 * 
+	 * @param spritesPath 
+	 * @param block
+	 * @throws GdxRuntimeException if picture of block does not exist
+	 */
 	public BlockType(String spritesPath, Element block) {
 		this.name = block.get("name");
 		this.label = block.get("label");
@@ -90,14 +96,22 @@ public class BlockType {
 		
 		return inputs;
 	}
-	
+	/**
+	 * @return the sprite of block
+	 */
 	public TextureRegion getTextureRegion() {
 		return tr;
 	}
 	
+	/**
+	 * @return the name of block
+	 */
 	public String getName() {
 		return name;
 	}
+	/**
+	 * @return the label of block
+	 */
 	public String getLabel() {
 		return label;
 	}
