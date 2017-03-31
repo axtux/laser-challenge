@@ -31,19 +31,53 @@ public interface Orientation {
 		return new Position(position.getX()+getX(), position.getY()+getY(), position.getLocation());
 	}
 	
+	public default Orientation fromInt(int i) {
+		Orientation[] orientations = first().getValues();
+		while(i < 0) i+= orientations.length;
+		return orientations[i%orientations.length];
+	}
 	/**
-	 * Integer representation of orientation
-	 * @return
+	 * Get orientation from string
+	 * @param str String representation of orientation
+	 * @return null if orientation does not exists instead of throwing an exception
+	 */
+	public default Orientation fromString(String str) {
+		try {
+			return first().getValueOf(str);
+		} catch (IllegalArgumentException e) {
+			return null;
+		}
+	}
+	/**
+	 * Method to get size of enumeration
+	 */
+	public default int size() {
+		return this.getValues().length;
+	}
+	/**
+	 * Methods overridden by enumeration
 	 */
 	public int ordinal();
+	/*
+	 * Start methods to implement yourself, with recommended code
+	 */
 	/**
-	 * Size of all possible orientations of this type
+	 * Method to get first instance of enumeration
+	 */
+	public Orientation first();
+	/**
+	 * Get special values, implement yourself
 	 * @return
 	 */
-	public int size();
 	public int getX();
 	public int getY();
-	
-	public Orientation fromInt(int i);
-	public Orientation fromString(String str);
+	/**
+	 * Method to get all enumerations values, should call static values()
+	 */
+	public Orientation[] getValues();
+	/**
+	 * Method to get all enumeration from string, should call static valueOf(String)
+	 */
+	public Orientation getValueOf(String s);
+
 }

@@ -6,7 +6,7 @@ public enum StandardOrientation implements Orientation {
 	DOWN(0, -1),
 	LEFT(-1, 0);
 	
-	public static Orientation first() {
+	public Orientation first() {
 		return UP;
 	}
 	
@@ -14,11 +14,6 @@ public enum StandardOrientation implements Orientation {
 	private StandardOrientation(int x, int y) {
 		this.x = x;
 		this.y = y;
-	}
-	
-	
-	public int size() {
-		return values().length;
 	}
 	
 	public int getX() {
@@ -29,21 +24,12 @@ public enum StandardOrientation implements Orientation {
 		return y;
 	}
 	
-	public Orientation fromInt(int i) {
-		Orientation[] orientations = StandardOrientation.values();
-		while(i < 0) i+= orientations.length;
-		return orientations[i%orientations.length];
+	public Orientation[] getValues() {
+		return values();
 	}
-	/**
-	 * Get orientation from string
-	 * @param str String representation of orientation
-	 * @return null if orientation does not exists instead of throwing an exception
-	 */
-	public Orientation fromString(String str) {
-		try {
-			return StandardOrientation.valueOf(str);
-		} catch (IllegalArgumentException e) {
-			return null;
-		}
+	
+	public Orientation getValueOf(String s) {
+		return valueOf(s);
 	}
+	
 }
