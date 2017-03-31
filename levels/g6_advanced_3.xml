@@ -27,7 +27,7 @@
 		<block type="blocker" fixedposition="true" fixedorientation="true">
 			<position x="6" y="2"/>
 		</block>
-		<block type="amplifier" fixedposition="true">
+		<block type="blocker" fixedposition="true" fixedorientation="true">
 			<position x="5" y="5"/>
 		</block>
 		<block type="one-way_mirror"/>

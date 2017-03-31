@@ -48,10 +48,10 @@
 		<block type="two-way-big-angled_splitter" fixedposition="true" fiedorientation="true">
 			<position x="13" y="1"/>
 		</block>
-		<block type="amplifier" fixedposition="true">
+		<block type="blocker" fixedposition="true" fixedorientation="true">
 			<position x="1" y="5"/>
 		</block>
-		<block type="amplifier" fixedposition="true">
+		<block type="blocker" fixedposition="true" fixedorientation="true">
 			<position x="14" y="5"/>
 		</block>
 		<block type="blocker"/>
