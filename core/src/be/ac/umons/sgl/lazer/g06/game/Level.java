@@ -36,7 +36,7 @@ public class Level extends Observable {
 	private Array<Switch> history;
 	/**
 	 * Create level from XML file.
-	 * @param file XML filename from which to load level.
+	 * @param name XML filename from which to load level, without extension.
 	 * @throws GdxRuntimeException if file does not exists in levels directory,
 	 * if XML format is not valid (description into level_desc.txt),
 	 * if map TMX file referenced into XML is not fount or is not valid,
@@ -578,8 +578,8 @@ public class Level extends Observable {
 		return this.selected;
 	}
 	/**
--	 * @return Level name which is the name of the file within which the level has been loaded.
- 	 */
+	 * @return Level name which is the name of the file within which the level has been loaded.
+	 */
 	public String getName() {
 		return name;
 	}
