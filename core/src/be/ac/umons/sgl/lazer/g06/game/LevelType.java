@@ -38,7 +38,7 @@ public class LevelType {
 	public LevelType(String name) {
 		this.name = name;
 		
-		label = Files.getContent(dirPath()+"/name.txt");
+		label = Files.getContent(dirPath()+"/label.txt");
 		if(label == null) {
 			throw new GdxRuntimeException("File "+dirPath()+"/name.txt cannot be read.");
 		}
