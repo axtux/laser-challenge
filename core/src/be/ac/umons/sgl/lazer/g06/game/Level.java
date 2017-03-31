@@ -14,29 +14,28 @@ import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
 /**
  * Class that manages the game part of the LazerChallenge
- * Notify observers about selected level, time and score updates
+ * Notify observers about selected position, time and score updates.
  */
 public class Level extends Observable {
-	static final Difficulty defaultDifficulty = Difficulty.MEDIUM;
-	static final String defaultOrientation = "UP";
-	
-	Element level;
-	LazerChallenge game;
-	String name;
-	Map map;
-	Map inventory;
-	Difficulty difficulty;
-	LevelType type;
-	int time;
-	int elapsedTime;
-	// state for interaction, maybe they should go elsewhere
-	Position selected;
-	boolean moving;
-	Array<Switch> history;
-	
+	// reference to main class
+	private LazerChallenge game;
+	// keep element in memory for faster reset
+	private Element level;
+	// level attributes
+	private String name;
+	private Map map;
+	private Map inventory;
+	private Difficulty difficulty;
+	private LevelType type;
+	private int time;
+	private int elapsedTime;
+	// state for interaction with user, maybe they should go elsewhere
+	private Position selected;
+	private boolean moving;
+	private Array<Switch> history;
 	/**
-	 * Create level from file
-	 * @param file XML filename from which to load level
+	 * Create level from XML file.
+	 * @param file XML filename from which to load level.
 	 * @throws GdxRuntimeException if file does not exists in levels directory,
 	 * if XML format is not valid (description into level_desc.txt),
 	 * if map TMX file referenced into XML is not fount or is not valid,
@@ -52,7 +51,10 @@ public class Level extends Observable {
 		Gdx.app.debug("Level.Level", "creating level from file "+file);
 		reset();
 	}
-	
+	/**
+	 * Reset level. Useful if this level has already been played and you want to start over without reloading everything.
+	 * This reset level from saved level XML Element.
+	 */
 	public void reset() {
 		stop();
 		
@@ -63,9 +65,9 @@ public class Level extends Observable {
 		
 		setMap(level.getAttribute("map", ""));
 		setBlocks(level.getChildByName("blocks"));
-		history= new Array<Switch>();
 		// changed during game
-		moving  = false;
+		history = new Array<Switch>();
+		moving = false;
 		selected = null;
 	}
 	/**
@@ -90,14 +92,14 @@ public class Level extends Observable {
 		}
 	}
 	/**
-	 * Set difficulty. defaultDifficulty is used if argument is not valid
+	 * Set difficulty. Default Difficulty is used if argument is not valid.
 	 * @param difficulty String representation of difficulty, case insensitive
 	 */
 	private void setDifficulty(String difficulty) {
 		try {
 			this.difficulty = Difficulty.valueOf(difficulty.toUpperCase());
 		} catch (IllegalArgumentException e) {
-			this.difficulty = defaultDifficulty;
+			this.difficulty = Difficulty.getDefault();
 		}
 	}
 	/**
@@ -120,6 +122,10 @@ public class Level extends Observable {
 		}
 		this.time = time;
 	}
+	/**
+	 * Parse blocksElement and add blocks in map or in inventory.
+	 * @param blocksElement XML Element
+	 */
 	private void setBlocks(Element blocksElement) {
 		Array<Element> blockElements = blocksElement.getChildrenByName("block");
 		
@@ -133,7 +139,7 @@ public class Level extends Observable {
 		for(Element blockElement : blockElements) {
 			blockType = blockElement.getAttribute("type", "");
 			
-			orientationStr = blockElement.getAttribute("orientation", defaultOrientation);
+			orientationStr = blockElement.getAttribute("orientation", type.getOrientation().first().toString());
 			orientation = type.getOrientation().fromString(orientationStr);
 			if(orientation == null) {
 				throw new GdxRuntimeException("No orientation "+orientationStr);
@@ -171,7 +177,7 @@ public class Level extends Observable {
 		addInventoryBlocks(invBlocks);
 	}
 	/**
-	 * Set state to changed and notify observers
+	 * Set state to changed and notify observers. Start laser if training mode.
 	 */
 	public void changed() {
 		// continuous laser
@@ -182,7 +188,10 @@ public class Level extends Observable {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+	/**
+	 * Add blocks into inventory.
+	 * @param blocks Block objects.
+	 */
 	private void addInventoryBlocks(Array<Block> blocks) {
 		inventory = new Map(5, blocks.size, map.getTileSize(), Location.INVENTORY);
 		
@@ -194,7 +203,11 @@ public class Level extends Observable {
 			inventory.setBlock(blocks.get(i), pos);
 		}
 	}
-	
+	/**
+	 * Get position from map or inventory.
+	 * @param pos Position to look at.
+	 * @return Block at position pos or null there is no block there.
+	 */
 	public Block getBlock(Position pos) {
 		if(pos == null) {
 			Gdx.app.debug("Level.getBlock", "pos is null");
@@ -215,7 +228,12 @@ public class Level extends Observable {
 			return null;
 		}
 	}
-	
+	/**
+	 * Set block to map or inventory.
+	 * @param block Block to set.
+	 * @param pos Position at which to set the Block.
+	 * @return True on success, false on error.
+	 */
 	private boolean setBlock(Block block, Position pos) {
 		if(pos.getLocation() == null) {
 			Gdx.app.error("Level.setBlock", "location cannot be null");
@@ -230,7 +248,9 @@ public class Level extends Observable {
 			return false;
 		}
 	}
-	
+	/**
+	 * Start lasers on the map. End game if arcade mode.
+	 */
 	public void startLasers() {
 		map.startLasers();
 		
@@ -239,7 +259,10 @@ public class Level extends Observable {
 			end();
 		}
 	}
-	
+	/**
+	 * Start level. If arcade mode, activate timer. If training mode, activate continuous laser.
+	 * @param load If true, call {@link #load()} method.
+	 */
 	public void start(boolean load) {
 		if(load) {
 			load();
@@ -259,11 +282,17 @@ public class Level extends Observable {
 		}
 		changed();
 	}
-	
+	/**
+	 * @return True if an history of this level can be loaded for current user.
+	 */
 	public boolean canLoad() {
 		Array<Switch> userHistory = game.getUser().loadHistory(name);
 		return userHistory != null && userHistory.size > 0;
 	}
+	/**
+	 * Load history from current user.
+	 * @return True on success, false on error.
+	 */
 	public boolean load() {
 		Gdx.app.debug("Level.load", "trying to load");
 		if(!canLoad()) {
@@ -280,7 +309,9 @@ public class Level extends Observable {
 		
 		return true;
 	}
-	
+	/**
+	 * Clear timer and save history if training mode.
+	 */
 	public void stop() {
 		if(game.getMode() != null && game.getMode().hasScore()) {
 			Timer.instance().clear();
@@ -289,7 +320,9 @@ public class Level extends Observable {
 			game.getUser().saveHistory(name, history);
 		}
 	}
-	// only called in arcade mode
+	/**
+	 * Only called in arcade mode. Saves score if level is won and load display LevelFinishedStage.
+	 */
 	private void end() {
 		stop();
 		if(isWon()) {
@@ -297,7 +330,10 @@ public class Level extends Observable {
 		}
 		game.act("MENU_LEVEL_FINISHED");
 	}
-	
+	/**
+	 * Check that the level is won.
+	 * @return True if all blocks has their required inputs satisfied.
+	 */
 	public boolean isWon() {
 		if(getRemainingTime() <= 0) {
 			return false;
@@ -309,7 +345,9 @@ public class Level extends Observable {
 		
 		return true;
 	}
-	
+	/**
+	 * Called by timer every second.
+	 */
 	public void timerTick() {
 		this.elapsedTime += 1;
 		if(getRemainingTime() == 0) {
@@ -317,12 +355,18 @@ public class Level extends Observable {
 		}
 		changed();
 	}
-	
+	/**
+	 * Select a position. To be used later with {@link #moveSelectedTo(Position)} and {@link #rotateSelected()}.
+	 * @param pos Position to select.
+	 */
 	public void select(Position pos) {
 		this.selected = pos;
 		changed();
 	}
-	
+	/**
+	 * Moving setter. Only set moving if selected block can move.
+	 * @param moving Desired moving value.
+	 */
 	public void moving(boolean moving) {
 		if(moving) {
 			Block block = getSelectedBlock();
@@ -332,15 +376,34 @@ public class Level extends Observable {
 		}
 		this.moving = moving;
 	}
-	
+	/**
+	 * Moving getter.
+	 * @return Moving state.
+	 */
 	public boolean moving() {
 		return moving;
 	}
-	
+	/**
+	 * Move selected block to newPos and remove moving state. On success, select new position.
+	 * @param newPos New position to which block will be moved if allowed.
+	 * @return True on success, false on error.
+	 */
 	public boolean moveSelectedTo(Position newPos) {
-		return moveTo(selected, newPos);
+		boolean r = moveTo(selected, newPos);
+		// select newPos on success
+		if(r) {
+			select(newPos);
+		}
+		// TODO maybe only remove moving state when move was successful
+		moving(false);
+		return r;
 	}
-	
+	/**
+	 * Check permissions and switch blocks.
+	 * @param oldPos Old position.
+	 * @param newPos New Position.
+	 * @return True on success, false on error.
+	 */
 	private boolean moveTo(Position oldPos, Position newPos) {
 		if(oldPos == null) {
 			Gdx.app.error("Level.moveTo", "oldPos is null");
@@ -389,11 +452,16 @@ public class Level extends Observable {
 		
 		return setBlock(oldBlock, newPos) && setBlock(newBlock, oldPos);
 	}
-	
+	/**
+	 * @return True if undo is available.
+	 */
 	public boolean canUndo() {
 		return history.size > 0 && !isOneTime(history.get(history.size-1).getNewPos());
 	}
-	
+	/**
+	 * Undo last move operation.
+	 * @return True on success, false on error.
+	 */
 	public boolean undo() {
 		if(!canUndo()) {
 			return false;
@@ -410,7 +478,11 @@ public class Level extends Observable {
 		
 		return true;
 	}
-	
+	/**
+	 * Check unavailable property on map ground tile.
+	 * @param pos Position to check.
+	 * @return Whether position is available.
+	 */
 	public boolean isAvailable(Position pos) {
 		if(pos == null) {
 			return false;
@@ -420,12 +492,21 @@ public class Level extends Observable {
 		}
 		return !map.getGroundBoolProp(pos, "unavailable");
 	}
-	
+	/**
+	 * Check restriction property on map ground tile.
+	 * @param pos Position to check.
+	 * @return Whether restriction is one-time.
+	 */
 	public boolean isOneTime(Position pos) {
 		String restriction = getRestriction(pos);
 		return restriction != null && restriction.equals("one-time");
 	}
-	
+	/**
+	 * Check restriction property on map ground tile.
+	 * @param pos Position to check.
+	 * @param block Block that may be allowed on position pos.
+	 * @return Whether block is allowed on ground tile pos.
+	 */
 	public boolean isAllowed(Position pos, Block block) {
 		// null block is allowed everywhere, don't test for one-time here
 		if(block == null || isOneTime(pos)) {
@@ -442,79 +523,93 @@ public class Level extends Observable {
 		// name must contain restriction to be allowed
 		return name.contains(restriction);
 	}
-	
+	/**
+	 * Get map restriction property.
+	 * @param pos Position to check.
+	 * @return restriction as String. Can be null or empty.
+	 */
 	public String getRestriction(Position pos) {
 		if(pos == null || pos.getLocation().equals(Position.Location.INVENTORY)) {
 			return null;
 		}
 		return map.getGroundProp(pos, "restriction");
 	}
-	
+	/**
+	 * Rotate selected block.
+	 */
 	public void rotateSelected() {
 		rotate(selected);
 	}
-	
+	/**
+	 * @return Selected block. Can be null.
+	 */
 	public Block getSelectedBlock() {
 		return getBlock(selected);
 	}
-	
-	public void rotate(Position pos) {
+	/**
+	 * Rotate block at position pos.
+	 * @param pos Position of the block.
+	 */
+	private void rotate(Position pos) {
 		Block block = getBlock(pos);
 		if(block != null) {
 			block.rotate();
 		}
 		
-		this.selected = pos;
+		changed();
 	}
-	
+	/**
+	 * @return Selected position. Can be null.
+	 */
 	public Position getSelected() {
 		return this.selected;
 	}
 	/**
-	 * @return name
+	 * @return Level name which is the name of the file within which the level has been loaded.
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
-	 * @return map
+	 * @return Playing map.
 	 */
 	public Map getMap() {
 		return map;
 	}
 	/**
-	 * @return inventory
+	 * @return Inventory
 	 */
 	public Map getInventory() {
 		return inventory;
 	}
 	/**
-	 * @return difficulty
+	 * @return Difficulty
 	 */
 	public Difficulty getDifficulty() {
 		return difficulty;
 	}
 	/**
-	 * @return type
+	 * @return LevelType
 	 */
 	public LevelType getType() {
 		return type;
 	}
 	/**
 	 * 
-	 * @return time
+	 * @return Maximum time to play this level in arcade mode.
 	 */
 	public int getTime() {
 		return time;
 	}
 	/**
-	 * Can be negative
-	 * @return
+	 * @return Get remaining time until level is ended in arcade mode.
 	 */
 	public int getRemainingTime() {
 		return time-elapsedTime;
 	}
-	
+	/**
+	 * @return Score that depends on time and elapsedTime in arcade mode.
+	 */
 	public int getScore() {
 		return time*time-elapsedTime*elapsedTime;
 	}
@@ -540,7 +635,7 @@ public class Level extends Observable {
 		}
 	}
 	/**
-	 * Difficulty of the game, information for the user from XML file.
+	 * Difficulty of the game, information for the user from XML file. Default is {@link #MEDIUM}
 	 */
 	public enum Difficulty {
 		EASY("facile"),
@@ -553,6 +648,10 @@ public class Level extends Observable {
 		}
 		public String toString() {
 			return s;
+		}
+		
+		public static Difficulty getDefault() {
+			return MEDIUM;
 		}
 	}
 	
