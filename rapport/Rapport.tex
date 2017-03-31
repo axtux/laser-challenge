@@ -11,7 +11,7 @@
     \end{minipage}
     }
 \author{Maazouz Mehdi, Lecocq Alexis}
-
+\usepackage{hyperref}
 \begin{document}
 
 \maketitle
@@ -44,7 +44,7 @@ En conséquence , nous avons dû immédiatement revoir notre diagramme de classe
 de concret. Le nouveau diagramme de classe se trouve dans l'archive .jar et est donc à votre disposition (core/assets/images/ClassDiagram.png).
 \section{Conception}
 \subsection{Choix d'Implémentation}
-Nous allons ici , essayer d'argumenter de la meilleure manières nos choix d'imp-\\lémentations que nous avons pris lors de cette phase.
+Nous allons ici , essayer d'argumenter de la meilleure manière nos choix d'imp-\\lémentations que nous avons pris lors de cette phase.
 Un des choix les plus importants concerne les propriétés disponibles sur les tuiles. Au départ, nous avions respecté les consignes qui nous
 avaient été données , mais après quelques soucis d'implémentation ( pas adapté à notre Design, quelques bugs également difficiles à régler ), nous
 avons opté pour un mécanisme de restriction , autrement dit, chaque tuile possédera, ou non, une propriété appelé restriction. Cette dernière aura
@@ -53,7 +53,7 @@ Si elle ne possède aucune restriction, tout type de blocs pourront y être dép
 \\
 Concernant la bibliothèque LibGDX, n'ayant que peu de connaissance au début du projet, nous étions partis sur une interface graphique composée de sprites qui faisaient
 office de boutons. C'était une solution facile à mettre en oeuvre , qui nous avait permis de pouvoir passer à d'autres étapes dans notre projet.\\
-Ceppendant, le fait de créer des images de boutons devenaient redondants et après réflexion, nous nous sommes dit que si nous voulions, dans un futur
+Cependant, le fait de créer des images de boutons devenaient redondants et après réflexion, nous nous sommes dit que si nous voulions, dans un futur
 hypothétique, traduire notre jeu. Il nous aurait fallu refaire tous les sprites. La décision de revenir en arrière et de recréer entièrement nos menus 
 du jeu a été prise en exploitant au mieux les propriétés de LibGDX. 
 \\
