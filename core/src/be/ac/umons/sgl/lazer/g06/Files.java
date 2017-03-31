@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlReader.Element;
 /**
  * Easy interface to manage files. This class uses internally Gdx.files.local interface.
  */
@@ -233,5 +235,19 @@ public class Files {
 		}
 		
 		return fh.deleteDirectory();
+	}
+	/**
+	 * Parse XML file.
+	 * @param path Relative path to application root.
+	 * @return XML Element on success, null on error.
+	 */
+	public static Element parseXML(String path) {
+		String xml = getContent(path);
+		if(xml == null) {
+			return null;
+		}
+		
+		XmlReader reader = new XmlReader();
+		return reader.parse(xml);
 	}
 }
