@@ -5,21 +5,21 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import be.ac.umons.sgl.lazer.g06.game.Position;
-import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
+import be.ac.umons.sgl.lazer.g06.game.orientations.StandardOrientation;
 
 public class OrientationRIGHTTests {
-	Orientation o = Orientation.RIGHT;
+	StandardOrientation o = StandardOrientation.RIGHT;
 	@Test
 	public void reverseTest() {
-		assertEquals(Orientation.LEFT, o.reverse());
+		assertEquals(StandardOrientation.LEFT, o.reverse());
 	}
 	@Test
 	public void nextTest() {
-		assertEquals(Orientation.DOWN, o.next());
+		assertEquals(StandardOrientation.DOWN, o.next());
 	}
 	@Test
 	public void prevTest() {
-		assertEquals(Orientation.UP, o.prev());
+		assertEquals(StandardOrientation.UP, o.prev());
 	}
 	@Test
 	public void angleTest() {
@@ -27,35 +27,35 @@ public class OrientationRIGHTTests {
 	}
 	@Test
 	public void rotateUPTest() {
-		assertEquals(Orientation.RIGHT, o.rotateBy(Orientation.UP));
+		assertEquals(StandardOrientation.RIGHT, o.rotateBy(StandardOrientation.UP));
 	}
 	@Test
 	public void rotateRIGHTTest() {
-		assertEquals(Orientation.DOWN, o.rotateBy(Orientation.RIGHT));
+		assertEquals(StandardOrientation.DOWN, o.rotateBy(StandardOrientation.RIGHT));
 	}
 	@Test
 	public void rotateDOWNTest() {
-		assertEquals(Orientation.LEFT, o.rotateBy(Orientation.DOWN));
+		assertEquals(StandardOrientation.LEFT, o.rotateBy(StandardOrientation.DOWN));
 	}
 	@Test
 	public void rotateLEFTTest() {
-		assertEquals(Orientation.UP, o.rotateBy(Orientation.LEFT));
+		assertEquals(StandardOrientation.UP, o.rotateBy(StandardOrientation.LEFT));
 	}
 	@Test
 	public void unRotateUPTest() {
-		assertEquals(Orientation.RIGHT, o.unRotateBy(Orientation.UP));
+		assertEquals(StandardOrientation.RIGHT, o.unRotateBy(StandardOrientation.UP));
 	}
 	@Test
 	public void unRotateRIGHTTest() {
-		assertEquals(Orientation.UP, o.unRotateBy(Orientation.RIGHT));
+		assertEquals(StandardOrientation.UP, o.unRotateBy(StandardOrientation.RIGHT));
 	}
 	@Test
 	public void unRotateDOWNTest() {
-		assertEquals(Orientation.LEFT, o.unRotateBy(Orientation.DOWN));
+		assertEquals(StandardOrientation.LEFT, o.unRotateBy(StandardOrientation.DOWN));
 	}
 	@Test
 	public void unRotateLEFTTest() {
-		assertEquals(Orientation.DOWN, o.unRotateBy(Orientation.LEFT));
+		assertEquals(StandardOrientation.DOWN, o.unRotateBy(StandardOrientation.LEFT));
 	}
 	@Test
 	public void nextPositionTest() {

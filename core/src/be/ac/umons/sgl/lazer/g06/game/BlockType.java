@@ -18,20 +18,19 @@ public class BlockType {
 	private final String label;
 	private final HashMap<Orientation, Array<Orientation>> inputs;
 	private final Array<Orientation> requiredInputs;
-	
-	Orientation first;
+	private final LevelType levelType;
 	/**
 	 * 
 	 * @param spritesPath 
 	 * @param block
 	 * @throws GdxRuntimeException if picture of block does not exist
 	 */
-	public BlockType(Orientation first, String spritesPath, Element block) {
-		this.first = first;
+	public BlockType(LevelType levelType, Element block) {
+		this.levelType = levelType;
 		this.name = block.get("name");
 		this.label = block.get("label");
 		
-		String filename = spritesPath+"/"+name+".png";
+		String filename = levelType.spritesPath()+"/"+name+".png";
 		FileHandle fh = Gdx.files.local(filename);
 		if(fh == null) {
 			throw new GdxRuntimeException("404 File not found "+filename);
@@ -61,7 +60,7 @@ public class BlockType {
 			outputs = new Array<Orientation>(outputElements.size);
 			for(Element outputElement : outputElements) {
 				orientationStr = outputElement.getAttribute("orientation");
-				orientation = first.fromString(orientationStr);
+				orientation = levelType.getOrientation().fromString(orientationStr);
 				if(orientation == null) {
 					throw new GdxRuntimeException("No orientation "+orientationStr);
 				}
@@ -70,7 +69,7 @@ public class BlockType {
 			}
 			
 			orientationStr = inputElement.getAttribute("orientation", "");
-			orientation = first.fromString(orientationStr);
+			orientation = levelType.getOrientation().fromString(orientationStr);
 			inputs.put(orientation, outputs);
 		}
 		
@@ -90,7 +89,7 @@ public class BlockType {
 		
 		for(Element inputElement : inputElements) {
 			orientationStr = inputElement.getAttribute("orientation");
-			orientation = first.fromString(orientationStr);
+			orientation = levelType.getOrientation().fromString(orientationStr);
 			if(orientation == null) {
 				throw new GdxRuntimeException("No orientation "+orientationStr);
 			}

@@ -13,6 +13,7 @@ import be.ac.umons.sgl.lazer.g06.game.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
+import be.ac.umons.sgl.lazer.g06.game.orientations.StandardOrientation;
 
 @RunWith(GdxTestRunner.class)
 public class StandardBlockTest {
@@ -35,7 +36,7 @@ public class StandardBlockTest {
 	public void BlockerTest() {
 		// initialization
 		BlockType blockType = standard.getBlockType("blocker");
-		Block block = new Block(blockType, Orientation.UP);
+		Block block = new Block(blockType, StandardOrientation.UP);
 		Array<Orientation> outputs;
 		// check type
 		assertEquals(blockType, block.getType());
@@ -43,16 +44,16 @@ public class StandardBlockTest {
 		outputs = block.input(null);
 		assertEquals("From null size", 0, outputs.size);
 		// from UP
-		outputs = block.input(Orientation.UP);
+		outputs = block.input(StandardOrientation.UP);
 		assertEquals("From UP size", 0, outputs.size);
 		// from DOWN
-		outputs = block.input(Orientation.DOWN);
+		outputs = block.input(StandardOrientation.DOWN);
 		assertEquals("From DOWN size", 0, outputs.size);
 		// FROM RIGHT
-		outputs = block.input(Orientation.RIGHT);
+		outputs = block.input(StandardOrientation.RIGHT);
 		assertEquals("From RIGHT size", 0, outputs.size);
 		// FROM LEFT
-		outputs = block.input(Orientation.LEFT);
+		outputs = block.input(StandardOrientation.LEFT);
 		assertEquals("From LEFT size", 0, outputs.size);
 	}
 	
@@ -60,7 +61,7 @@ public class StandardBlockTest {
 	public void GateTest() {
 		// initialization
 		BlockType blockType = standard.getBlockType("gate");
-		Block block = new Block(blockType, Orientation.UP);
+		Block block = new Block(blockType, StandardOrientation.UP);
 		Array<Orientation> outputs;
 		// check type
 		assertEquals(blockType, block.getType());
@@ -68,18 +69,18 @@ public class StandardBlockTest {
 		outputs = block.input(null);
 		assertEquals("From null size", 0, outputs.size);
 		// from UP
-		outputs = block.input(Orientation.UP);
+		outputs = block.input(StandardOrientation.UP);
 		assertEquals("From UP size", 1, outputs.size);
-		assertEquals("From UP Orientation", Orientation.DOWN, outputs.get(0));
+		assertEquals("From UP Orientation", StandardOrientation.DOWN, outputs.get(0));
 		// from DOWN
-		outputs = block.input(Orientation.DOWN);
+		outputs = block.input(StandardOrientation.DOWN);
 		assertEquals("From DOWN size", 1, outputs.size);
-		assertEquals("From DOWN Orientation", Orientation.UP, outputs.get(0));
+		assertEquals("From DOWN Orientation", StandardOrientation.UP, outputs.get(0));
 		// FROM RIGHT
-		outputs = block.input(Orientation.RIGHT);
+		outputs = block.input(StandardOrientation.RIGHT);
 		assertEquals("From RIGHT size", 0, outputs.size);
 		// FROM LEFT
-		outputs = block.input(Orientation.LEFT);
+		outputs = block.input(StandardOrientation.LEFT);
 		assertEquals("From LEFT size", 0, outputs.size);
 	}
 	
@@ -87,7 +88,7 @@ public class StandardBlockTest {
 	public void OneWayMirrorTest() {
 		// initialization
 		BlockType blockType = standard.getBlockType("one-way_mirror");
-		Block block = new Block(blockType, Orientation.UP);
+		Block block = new Block(blockType, StandardOrientation.UP);
 		Array<Orientation> outputs;
 		// check type
 		assertEquals(blockType, block.getType());
@@ -95,18 +96,18 @@ public class StandardBlockTest {
 		outputs = block.input(null);
 		assertEquals("From null size", 0, outputs.size);
 		// from UP
-		outputs = block.input(Orientation.UP);
+		outputs = block.input(StandardOrientation.UP);
 		assertEquals("From UP size", 1, outputs.size);
-		assertEquals("From UP Orientation", Orientation.RIGHT, outputs.get(0));
+		assertEquals("From UP Orientation", StandardOrientation.RIGHT, outputs.get(0));
 		// FROM RIGHT
-		outputs = block.input(Orientation.RIGHT);
+		outputs = block.input(StandardOrientation.RIGHT);
 		assertEquals("From RIGHT size", 1, outputs.size);
-		assertEquals("From RIGHT Orientation", Orientation.UP, outputs.get(0));
+		assertEquals("From RIGHT Orientation", StandardOrientation.UP, outputs.get(0));
 		// from DOWN
-		outputs = block.input(Orientation.DOWN);
+		outputs = block.input(StandardOrientation.DOWN);
 		assertEquals("From DOWN size", 0, outputs.size);
 		// FROM LEFT
-		outputs = block.input(Orientation.LEFT);
+		outputs = block.input(StandardOrientation.LEFT);
 		assertEquals("From LEFT size", 0, outputs.size);
 	}
 }
