@@ -12,7 +12,7 @@ public class AbstractLevelStage extends AbstractStage {
 	 * Empty constructor
 	 */
 	protected AbstractLevelStage() {
-		super();
+		this("");
 	}
 	/**
 	 * Create stage with title.
