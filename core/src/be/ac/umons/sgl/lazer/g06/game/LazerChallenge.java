@@ -15,7 +15,7 @@ import be.ac.umons.sgl.lazer.g06.users.User;
 
 /**
  * Controller of the game.
- * Contains skin, actual displayed stage, actual connected user, actual more and actual selected level.
+ * Contains skin, current displayed stage, current connected user, current mode and current selected level.
  */
 public class LazerChallenge extends Game {
 	// default to fullHD resolution
@@ -23,24 +23,24 @@ public class LazerChallenge extends Game {
 	public static int HEIGHT = 1080;
 	// singleton pattern instance
 	private static LazerChallenge instance;
-	// perform actions from UI, pattern strategy
-	ActionListener al;
 	
-	MySkin skin;
-	AbstractStage stage;
-	User user;
-	Level.Mode mode;
-	Level level;
+	// perform actions from UI
+	private ActionListener al;
+	// contains drawables
+	private MySkin skin;
+	// state management
+	private AbstractStage stage;
+	private User user;
+	private Level.Mode mode;
+	private Level level;
 	/**
 	 * Check single instance and save it statically.
-	 * Initialize action listener.
 	 */
 	public LazerChallenge() {
 		if(instance != null) {
 			throw new GdxRuntimeException("Singleton pattern does not allow multiple intances.");
 		}
 		LazerChallenge.instance = this;
-		al = new MyActionListener();
 	}
 	/**
 	 * @return Singleton pattern instance.
@@ -52,38 +52,39 @@ public class LazerChallenge extends Game {
 		return instance;
 	}
 	/**
-	 * Set debug values, create application skin and display login menu.
+	 * Set log level, create application skin, set action listener, load LevelTypes, Levels and display login menu.
 	 */
 	public void create () {
 		/*
 		Gdx.app.setLogLevel(Application.LOG_NONE);
 		//*/Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		
+		// know where you are
 		Gdx.app.debug("LOCAL_PATH", Gdx.files.getLocalStoragePath());
 		
 		skin = new MySkin("josefin_sans_bold");
-		// change UI
-		act("MENU_LOGINS");
-		//act("ACTION_LEVEL_PLAY");
+		al = new MyActionListener();
+		
 		// load files from disk
 		act("ACTION_LOAD_LEVEL_TYPES");
 		act("ACTION_LOAD_LEVELS");
 		
+		// display login menu
+		act("MENU_LOGINS");
 	}
 	/**
-	 * @return Skin created by constructor and containing all UI @Drawable
+	 * @return MySkin instance created at the beginning.
 	 */
 	public MySkin getSkin() {
 		return skin;
 	}
 	/**
-	 * @return Current stage displayed on screen.
+	 * @return Currently displayed stage.
 	 */
 	public AbstractStage getStage() {
 		return stage;
 	}
 	/**
-	 * @return Current user playing game.
+	 * @return Current user.
 	 */
 	public User getUser() {
 		return user;
@@ -95,7 +96,7 @@ public class LazerChallenge extends Game {
 		return mode;
 	}
 	/**
-	 * Save mode here because mode is selected before level is created
+	 * Save mode here because mode is selected before level is created.
 	 * @param mode The mode within which the player want to play.
 	 */
 	public void setMode(Level.Mode mode) {
@@ -108,7 +109,7 @@ public class LazerChallenge extends Game {
 		return level;
 	}
 	/**
-	 * Log out old user (if it exists) and set new user.
+	 * Set new user and log out old one if not null.
 	 * @param user New user
 	 */
 	public void setUser(User user) {
@@ -119,7 +120,7 @@ public class LazerChallenge extends Game {
 		this.user = user;
 	}
 	/**
-	 * Change current level
+	 * Set new level and stop old one if not null.
 	 * @param level New level
 	 */
 	public void setLevel(Level level) {
@@ -130,7 +131,7 @@ public class LazerChallenge extends Game {
 		this.level = level;
 	}
 	/**
-	 * Called when window is resized. Ask stage viewport to resize.
+	 * Propagates resize to stage viewport.
 	 */
 	public void resize (int width, int height) {
 		stage.getViewport().update(width, height, true);
@@ -154,7 +155,7 @@ public class LazerChallenge extends Game {
 		skin.dispose();
 	}
 	/**
-	 * Free resources of old stage (if exists) and set new stage.
+	 * Set new stage to be displayed and dispose old one if not null.
 	 * @param newStage New Stage
 	 */
 	public void setStage(AbstractStage newStage) {
@@ -171,7 +172,6 @@ public class LazerChallenge extends Game {
 		if(oldStage != null) {
 			oldStage.dispose();
 		}
-		
 	}
 	/**
 	 * Called by UI elements to make action
