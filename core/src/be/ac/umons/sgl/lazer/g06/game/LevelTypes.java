@@ -6,7 +6,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import be.ac.umons.sgl.lazer.g06.Files;
-
+/**
+ * Class to manage {@link LevelType} instances
+ */
 public class LevelTypes {
 	static final String LEVEL_TYPES_PATH = "level_types";
 	/**
@@ -14,7 +16,7 @@ public class LevelTypes {
 	 */
 	private static OrderedMap<String, LevelType> levelTypes;
 	/**
-	 * Refresh levelTypes from disk. LevelType directory is scanned and all valid levels are loaded into static array.
+	 * Refresh levelTypes from disk. LevelType directory is scanned and all valid LevelTypes are loaded into static array.
 	 */
 	private static void refresh() {
 		Array<String> names = Files.listDirs(LEVEL_TYPES_PATH);
@@ -39,15 +41,14 @@ public class LevelTypes {
 		
 	}
 	/**
-	 * Get level types from disk.
-	 * @return Level types.
+	 * @return All available {@link LevelType} names.
 	 */
 	public static Array<String> getLevelTypes() {
 		return getLevelTypes(false);
 	}
 	/**
-	 * Get level types from disk.
-	 * @return Level types.
+	 * @param refresh Whether or not refresh from disk.
+	 * @return {@link LevelType} names.
 	 */
 	public static Array<String> getLevelTypes(boolean refresh) {
 		if(refresh || levelTypes == null) {
@@ -56,15 +57,16 @@ public class LevelTypes {
 		return levelTypes.orderedKeys();
 	}
 	/**
-	 * Get level types from disk.
-	 * @return Level types.
+	 * @param name Name of the LevelType.
+	 * @return LevelType corresponding to name.
 	 */
 	public static LevelType getLevelType(String name) {
 		return getLevelType(name, false);
 	}
 	/**
-	 * Get level types from disk.
-	 * @return Level types.
+	 * @param name Name of the LevelType.
+	 * @param refresh Whether or not refresh from disk.
+	 * @return LevelType corresponding to name.
 	 */
 	public static LevelType getLevelType(String name, boolean refresh) {
 		getLevelTypes(refresh);
