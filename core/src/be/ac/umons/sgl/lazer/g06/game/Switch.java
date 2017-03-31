@@ -1,10 +1,7 @@
 package be.ac.umons.sgl.lazer.g06.game;
-
 /**
- * 
- *To keep an history of positions in memory
+ * A switch represent a move executed by user. It contains an old position and a new position.
  */
-
 public class Switch {
 	private Position oldPos;
 	private Position newPos;
@@ -13,7 +10,11 @@ public class Switch {
 	 */
 	@SuppressWarnings(value = { "unused" })
 	private Switch() {}
-	
+	/**
+	 * Create switch.
+	 * @param oldPos Old position.
+	 * @param newPos New position.
+	 */
 	public Switch(Position oldPos, Position newPos){
 		this.oldPos=oldPos;
 		this.newPos=newPos;
@@ -30,7 +31,9 @@ public class Switch {
 	public Position getNewPos(){
 		return newPos;
 	}
-	
+	/**
+	 * String representation of this switch.
+	 */
 	public String toString() {
 		return "oldPos="+oldPos.toString()+", newPos="+newPos.toString();
 	}
