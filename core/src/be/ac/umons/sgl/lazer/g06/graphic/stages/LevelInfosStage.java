@@ -11,7 +11,7 @@ public class LevelInfosStage extends AbstractLevelStage {
 		
 		addHeaderButton("Retour", "MENU_LEVELS");
 		
-		addDoubleLabel("Nom", level.getName());
+		addDoubleLabel("Nom", level.getLabel());
 		
 		int width = level.getMap().getWidth();
 		int height = level.getMap().getHeight();
@@ -20,7 +20,7 @@ public class LevelInfosStage extends AbstractLevelStage {
 		
 		addDoubleLabel("Mode", game.getMode().toString());
 		if(game.getMode().hasScore()) {
-			int score = game.getUser().loadScore(level.getName());
+			int score = game.getUser().loadScore(level.getLabel());
 			addDoubleLabel("Temps", Time.prettyTime(level.getTime(), false, false));
 			addDoubleLabel("Score", Integer.toString(score));
 		}
