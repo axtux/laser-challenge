@@ -580,8 +580,8 @@ public class Level extends Observable {
 	/**
 -	 * @return Level name which is the name of the file within which the level has been loaded.
  	 */
--	public String getName() {
--		return name;
+	public String getName() {
+		return name;
 	}
 	/**
 	 * @return Level label which is parsed from XML.
