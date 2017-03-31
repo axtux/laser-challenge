@@ -23,6 +23,7 @@ public class Level extends Observable {
 	private Element level;
 	// level attributes
 	private String name;
+	private String label;
 	private Map map;
 	private Map inventory;
 	private Difficulty difficulty;
@@ -41,7 +42,9 @@ public class Level extends Observable {
 	 * if map TMX file referenced into XML is not fount or is not valid,
 	 * if any asset referenced into TMX file cannot be loaded.
 	 */
-	public Level(String file) {
+	public Level(String name) {
+		setName(name);
+		String file = Levels.LEVELS_PATH+"/"+name+".xml";
 		level = Files.parseXML(file);
 		if(level == null) {
 			throw new GdxRuntimeException("Error parsing file "+file);
@@ -58,7 +61,7 @@ public class Level extends Observable {
 	public void reset() {
 		stop();
 		
-		setName(level.getAttribute("name", ""));
+		setLabel(level.getAttribute("name", ""));
 		setDifficulty(level.getAttribute("difficulty", ""));
 		setType(level.getAttribute("type", ""));
 		setTime(level.getIntAttribute("time", 0));
@@ -79,6 +82,16 @@ public class Level extends Observable {
 			throw new GdxRuntimeException("Name cannot be null or empty.");
 		}
 		this.name = name;
+	}
+	/**
+	 * Set level label
+	 * @param label Label of the level
+	 */
+	private void setLabel(String label) {
+		if(label == null || label.isEmpty()) {
+			throw new GdxRuntimeException("Label cannot be null or empty.");
+		}
+		this.label = label;
 	}
 	/**
 	 * Set game map
@@ -565,10 +578,10 @@ public class Level extends Observable {
 		return this.selected;
 	}
 	/**
-	 * @return Level name which is the name of the file within which the level has been loaded.
+	 * @return Level label which is parsed from XML.
 	 */
-	public String getName() {
-		return name;
+	public String getLabel() {
+		return label;
 	}
 	/**
 	 * @return Playing map.

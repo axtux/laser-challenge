@@ -27,13 +27,15 @@ public class Levels {
 		
 		levels = new Array<Level>(levelFiles.size);
 		Level tmp;
+		String name;
 		for(String file : levelFiles) {
 			if(!file.endsWith(".xml")) {
 				continue;
 			}
 			
 			try {
-				tmp = new Level(LEVELS_PATH+"/"+file);
+				name = file.substring(0, file.indexOf("."));
+				tmp = new Level(name);
 			} catch (GdxRuntimeException e) {
 				Gdx.app.error("Level.getLevels", "Unable to create level with file "+file+" :\n"+e.getMessage());
 				continue;
