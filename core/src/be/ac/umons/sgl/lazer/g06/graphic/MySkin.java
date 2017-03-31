@@ -12,12 +12,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-
+/**
+ * Initialize and manage all drawables.
+ */
 public class MySkin extends Skin {
-	
-	MyFonts fonts;
-	String defaultFont;
-	
+	private MyFonts fonts;
+	private String defaultFont;
+	/**
+	 * Initialize all drawables.
+	 * @param defaultFont Default font name to use if none specified.
+	 */
 	public MySkin(String defaultFont) {
 		super();
 		// Generate a 1x1 white texture and store it in the skin named "white".
@@ -39,7 +43,12 @@ public class MySkin extends Skin {
 		// custom styles
 		createStyles();
 	}
-	
+	/**
+	 * Get texture from color with size.
+	 * @param c Color of the texture
+	 * @param size Size of the texture
+	 * @return Texture
+	 */
 	public Texture getTexture(Color c, int size) {
 		Pixmap pixmap = new Pixmap(size, size, Format.RGBA8888);
 		pixmap.setColor(c);
@@ -48,11 +57,20 @@ public class MySkin extends Skin {
 		pixmap.dispose();
 		return texture;
 	}
-	
+	/**
+	 * Get drawable from color.
+	 * @param c Color
+	 * @return Drawable filled with color c.
+	 */
 	public Drawable getColor(Color c) {
 		return this.newDrawable("white", c);
 	}
-	
+	/**
+	 * Get drawable from color with size.
+	 * @param c Color
+	 * @param size Size of the drawable
+	 * @return Drawable filled with color c.
+	 */
 	public Drawable getColor(Color c, int size) {
 		String name = Integer.toString(size)+"x"+Integer.toString(size);
 		
@@ -65,15 +83,29 @@ public class MySkin extends Skin {
 		
 		return this.newDrawable(name, c);
 	}
-	
+	/**
+	 * Get font
+	 * @param size Size of the font in pixels.
+	 * @param internal Internal font color.
+	 * @return Font
+	 */
 	public BitmapFont getFont(int size, Color internal) {
 		return this.getFont(size, internal, 0, null);
 	}
-	
+	/**
+	 * Get font
+	 * @param size Size of the font in pixels.
+	 * @param color Internal font color.
+	 * @param border Border size in pixels.
+	 * @param borderColor Color of the border.
+	 * @return Font
+	 */
 	public BitmapFont getFont(int size, Color color, int border, Color borderColor) {
 		return fonts.getFont(defaultFont, size, color, border, borderColor);
 	}
-	
+	/**
+	 * Initialize all drawables.
+	 */
 	private void createStyles() {
 		int defaultBorder = 2;
 		int bigFont = 100;
