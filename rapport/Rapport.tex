@@ -11,10 +11,11 @@
     \end{minipage}
     }
 \author{Maazouz Mehdi, Lecocq Alexis}
-
+\usepackage{hyperref}
 \begin{document}
 
 \maketitle
+\textbf{Annee Academique 2016-2017}\\
 \textbf{Groupe 6}
 \tableofcontents
 \newpage
@@ -30,8 +31,11 @@ Pour pouvoir réaliser ce projet, plusieurs étapes ont dûes être nécessaires
  à créer une maquette permettant aux professeurs et assistants d'avoir un aperçu de la forme que prendrai notre jeu , c'est à dire de la partie graphique.
  Mais nous avons dû également travailler sur plusieurs diagrammes UML , notamment un diagramme de classe qui a permis de montrer le fond de notre jeu , autrement dit les classes
  qui formeraient notre projet.\\
- Nous voici désormais à l'étape de l'implémentation où nous allons maintenant vous expliquer notre travail dans son ensemble,
- les difficultés et problèmes survenus, nos choix d'implémentations, quelques concessions faites également mais aussi quelques améliorations que nous
+ Nous voici désormais à l'étape de l'implémentation, où il nous était demandé d'implémenter le jeu LazerChallenge ainsi que nos deux extensions
+ ``Diagonal Directions'' et ``Saving + Multiple Users + Social Network''. Mais egalement un rapport d'implémentation, des tests unitaires,
+ une vidéo explicative et une javadoc complète.\\
+ Nous pouvons désormais vous décrire notre travail dans son ensemble,
+ les difficultés et problèmes survenus, nos choix d'implémentations, quelques concessions faites également mais aussi les améliorations que nous
  pourrions apporter dans le futur.
 \section{Préparatifs}
 \subsection{Changement de groupe} 
@@ -40,7 +44,7 @@ En conséquence , nous avons dû immédiatement revoir notre diagramme de classe
 de concret. Le nouveau diagramme de classe se trouve dans l'archive .jar et est donc à votre disposition (core/assets/images/ClassDiagram.png).
 \section{Conception}
 \subsection{Choix d'Implémentation}
-Nous allons ici , essayer d'argumenter de la meilleure manières nos choix d'imp-\\lémentations que nous avons pris lors de cette phase.
+Nous allons ici , essayer d'argumenter de la meilleure manière nos choix d'imp-\\lémentations que nous avons pris lors de cette phase.
 Un des choix les plus importants concerne les propriétés disponibles sur les tuiles. Au départ, nous avions respecté les consignes qui nous
 avaient été données , mais après quelques soucis d'implémentation ( pas adapté à notre Design, quelques bugs également difficiles à régler ), nous
 avons opté pour un mécanisme de restriction , autrement dit, chaque tuile possédera, ou non, une propriété appelé restriction. Cette dernière aura
@@ -49,7 +53,7 @@ Si elle ne possède aucune restriction, tout type de blocs pourront y être dép
 \\
 Concernant la bibliothèque LibGDX, n'ayant que peu de connaissance au début du projet, nous étions partis sur une interface graphique composée de sprites qui faisaient
 office de boutons. C'était une solution facile à mettre en oeuvre , qui nous avait permis de pouvoir passer à d'autres étapes dans notre projet.\\
-Ceppendant, le fait de créer des images de boutons devenaient redondants et après réflexion, nous nous sommes dit que si nous voulions, dans un futur
+Cependant, le fait de créer des images de boutons devenaient redondants et après réflexion, nous nous sommes dit que si nous voulions, dans un futur
 hypothétique, traduire notre jeu. Il nous aurait fallu refaire tous les sprites. La décision de revenir en arrière et de recréer entièrement nos menus 
 du jeu a été prise en exploitant au mieux les propriétés de LibGDX. 
 \\
@@ -76,7 +80,7 @@ Une des difficultés principale concernant le projet est la capacité à nous ad
 n'avaient utilisés cette bibliothèque aupparavent , cependant nous regrettons un manque de documentation accessible sur internet, que ce soit sur 
 le site contenant la documentation officielle de LibGDX  ou bien sur des sites tierces ....
 \\
-Une autre difficulté vient du fait qu'une méthode renderer venant de Tiled et qui permet d'afficher correctement les maps n'est pas compatible avec
+Une autre difficulté vient du fait que notre objet Orthogonal TileMap Renderer qui permettais d'afficher correctement les maps n'est pas compatible avec
 l'API sceneUI.2D utilisée pour l'interface graphique. Une solution a été de créer une table contenant des boutons qui ont permis d'afficher plusieurs
 textures.
 \\
@@ -122,7 +126,7 @@ Qui plus est, ce rapport a été rédigé avec le langage LaTex ( avec comme com
 Vous pouvez visualiser un aperçu commenté de notre jeu en cliquant sur l'URL ci-dessous.
 \\
 \\
-https://youtu.be/g6LNEMpNLb8
+https://youtu.be/0XHIiyTEw3s
 
 
 \section{Remarques}
@@ -131,13 +135,14 @@ de cette version en ayant fait une vingtaine de commits, cependant, aucun de ses
 de graphiques, ... ) . Il faut donc intégralement remonter la liste contenant tous les commits pour les retrouver .\\
 
 
-Alexis Lecocq devait initialement, s'occuper de l'extension ``Saving + Multiple users + Social network''. Après réflexion, son choix
-s'est tourné vers le réseau social Twitter ( à noter que ce choix est différent de clui qui avait été préconisé dans le diagramme de classe)
+Alexis Lecocq devait initialement, s'occuper de l'extension ``Saving + Multiple users + Social network''. En discutant avec l'assistant M.Devillez,
+ce dernier lui a conseillé de se tourner vers le réseau social Twitter ( à noter que ce choix est différent de celui qui avait été préconisé dans le diagramme de classe)\\
 . Suite à quelques problèmes, il est venu trouver les assistants et professeurs afin d'obtenir un hébergement,
-malheureusement , il semblerait que ca n'est pas été le cas .\\
+malheureusement , ces derniers n'ont pas répondu a sa demande. .\\
 Nous avons donc pris la décision de nous occuper, ensemble de l'extension ``Diagonal Directions''
 \section{Conclusion}
-En conclusion, ce projet fût long , laborieux mais il nous a permis de nous apprivoiser avec les outils cités plus haut. Ils n'ont pas
+En conclusion, ce projet fût long , laborieux, mais nous pensons avoir implémenté tout ce qui nous était demandé.\\
+De plus, il nous a permis de nous apprivoiser avec les outils cités plus haut. Ils n'ont pas
 forcément été facile à maitriser mais une fois une certaine maîtrise acquise, ces derniers se sont révélés très utile pour la conception de 
 notre projet et sans doute, d'autres projets futurs. 
 \\
