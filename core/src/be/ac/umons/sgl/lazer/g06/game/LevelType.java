@@ -24,7 +24,7 @@ public class LevelType {
 	 */
 	private static OrderedMap<String, LevelType> levelTypes;
 	
-	Orientation first;
+	Orientation orientationClass;
 	private OrderedMap<String, BlockType> blocks;
 	String name;
 	String label;
@@ -47,9 +47,9 @@ public class LevelType {
 		String orientation = Files.getContent(dirPath()+"orientations.txt");
 		if(orientation != null && orientation.equals("advanced")) {
 			// TODO change to advanced
-			first = StandardOrientation.first();
+			orientationClass = StandardOrientation.staticFirst();
 		} else {
-			first = StandardOrientation.first();
+			orientationClass = StandardOrientation.staticFirst();
 		}
 		
 		String blocksXml = dirPath()+"blocks.xml";
@@ -66,7 +66,7 @@ public class LevelType {
 		
 		BlockType block;
 		for(Element blockElement : blockElements) {
-			block = new BlockType(first, spritesPath, blockElement);
+			block = new BlockType(orientationClass, spritesPath, blockElement);
 			blocks.put(block.getName(), block);
 		}
 		
@@ -92,7 +92,7 @@ public class LevelType {
 	}
 	
 	public Orientation getOrientation() {
-		return first;
+		return orientationClass;
 	}
 	/**
 	 * @return Name.

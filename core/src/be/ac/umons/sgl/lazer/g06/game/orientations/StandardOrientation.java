@@ -6,6 +6,10 @@ public enum StandardOrientation implements Orientation {
 	DOWN(0, -1),
 	LEFT(-1, 0);
 	
+	public static Orientation staticFirst() {
+		return UP;
+	}
+	
 	public Orientation first() {
 		return UP;
 	}

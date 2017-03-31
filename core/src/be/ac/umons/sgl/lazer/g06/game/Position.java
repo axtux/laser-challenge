@@ -22,15 +22,21 @@ public class Position {
 		this(x, y);
 		this.loc = loc;
 	}
-	
+	/**
+	 * @return the attribute x of object Position
+	 */
 	public int getX() {
 		return x;
 	}
-	
+	/**
+	 * @return the attribute y of object Position
+	 */
 	public int getY() {
 		return y;
 	}
-	
+	/**
+	 * @return the Location object 
+	 */
 	public Location getLocation() {
 		return loc;
 	}

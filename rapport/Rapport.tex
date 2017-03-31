@@ -39,7 +39,7 @@ Dès le début de la phase d'implémentation , suite a plusieurs abandons dans l
 En conséquence , nous avons dû immédiatement revoir notre diagramme de classe et la maquette graphique afin de pouvoir nous baser directement sur quelque chose
 de concret. Le nouveau diagramme de classe se trouve dans l'archive .jar et est donc à votre disposition (core/assets/images/ClassDiagram.png).
 \section{Conception}
-\subsection{Choix d'implémentation}
+\subsection{Choix d'Implémentation}
 Nous allons ici , essayer d'argumenter de la meilleure manières nos choix d'imp-\\lémentations que nous avons pris lors de cette phase.
 Un des choix les plus importants concerne les propriétés disponibles sur les tuiles. Au départ, nous avions respecté les consignes qui nous
 avaient été données , mais après quelques soucis d'implémentation ( pas adapté à notre Design, quelques bugs également difficiles à régler ), nous
@@ -74,7 +74,7 @@ temps n'est fixée , nous ne voyons donc pas l'intérêt d'un tel mode. En mode 
 \subsection{Difficultés}
 Une des difficultés principale concernant le projet est la capacité à nous adapter à la bibliothèque LibGDX, ce qui est normal étant donné , qu'aucun des membres
 n'avaient utilisés cette bibliothèque aupparavent , cependant nous regrettons un manque de documentation accessible sur internet, que ce soit sur 
-le site contenant la documentation LibGDX officielle ou bien sur des sites tierces ....
+le site contenant la documentation officielle de LibGDX  ou bien sur des sites tierces ....
 \\
 Une autre difficulté vient du fait qu'une méthode renderer venant de Tiled et qui permet d'afficher correctement les maps n'est pas compatible avec
 l'API sceneUI.2D utilisée pour l'interface graphique. Une solution a été de créer une table contenant des boutons qui ont permis d'afficher plusieurs
@@ -84,11 +84,11 @@ Concernant l'extension ``Diagonal Directions'', une difficulté nous est apparue
 les orientations. De ce fait , afin de pouvoir implémenter les orientations diagonales pour notre extension, il nous aurait fallu hériter notre énumération,
  ce qu'il n'est pas permis par Java .
 \subsection{Concessions}
-A propos de l'extension ``Diagonal Directions'', par manque de temps , nous n'avons pas su implémenter la notion d'intensité comme demandé dans 
-l'énoncé.\\
 
-A propos de la version de base, nous voulions empêcher le joueur de pouvoir accéder à tous les niveaux immédiatement en mode arcade, malheureusement, par manque
-de temps, cela n'a pas pu être fait.
+Nous parlions, dans la section \textbf{Difficultés}, de l'extension ``Diagonal Directions'' et des difficultés que nous avions rencontré avec notre
+choix des énumérations concernant les orientations. Suite à un manque de temps, ce problème n'a pas su être régler, de ce fait, l'extension ne sera pas disponible
+dans la remise du projet. Mais nous vous proposerons tout de même une vidéo explicative sur le jeu de base, mais aussi une autre, contenant notre extension
+afin de vous montrer le travail accompli sur cette dernière.
 
 
 \section{Eventuelles Améliorations}
@@ -103,7 +103,10 @@ en mode arcade.\\
 Pour le score, notre jeu le calcule seulement en fonction du temps qui s'écoule, on pourrait aussi le calculer en fonction du nombre de blocs allant
 de l'inventaire à la zone de jeu. Ainsi, plus nous mettrions de bloc en jeu, plus le score aura diminué. \\
 Nous avons aussi pensé à inclure un ``Redo'', vu que nous avons pris la peine d'implémenter un ``Undo'' qui permet de garder un historique des coups en
-mémoire. De ce fait, le joueur peut revenir à d'anciennes étape en jeu.
+mémoire. De ce fait, le joueur peut revenir à d'anciennes étape en jeu. \\
+De plus , nous avons intégrer une sauvegarde pour les niveaux en mode entrainement, cependant seul la position des blocs sur la carte a été sauvegardé.
+Autrement dit, à chaque recharge du niveau, les orientations des blocs, que le joueur avait placé au préalable sur la carte, reprendront leur 
+orientations par défaut. 
 
 \section{Outils Utilisés}
 Pour la réalisation de ce projet, nous avons utilisé plusieurs outils mis à notre disposition, certains étaient demandés par les professeurs et assistants,
@@ -116,6 +119,9 @@ la capture de la vidéo explicative s'est faite avec le logiciel de capture Kaza
 Qui plus est, ce rapport a été rédigé avec le langage LaTex ( avec comme complément, l'IDE Kile).
 \section{Visuel Du Jeu}
 Vous pouvez visualiser un aperçu commenté de notre jeu en cliquant sur l'URL ci-dessous.
+\\
+
+Nous mettons également, à votre disposition, le lien URL d'une vidéo contenant notre extension ``Diagonal Directions''.
 
 \section{Remarques}
 Nous parlions d'une première version de l'interface graphique dans la section \textbf{Choix d'implémentation}, Maazouz Mehdi s'était occupé majoritairement

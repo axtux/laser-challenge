@@ -20,7 +20,11 @@ public class Block extends TiledMapTileLayer.Cell {
 		setOrientation(orientation);
 		clearInputs();
 	}
-	
+	/**
+	 * check if the block contain a property that prevent him to move or to rotate
+	 * @param name The name of the property 
+	 * @return true if the block contain the property, otherwise false
+	 */
 	public boolean getBoolProp(String name) {
 		MapProperties props = getTile().getProperties();
 		if(!props.containsKey(name)) {
@@ -34,15 +38,26 @@ public class Block extends TiledMapTileLayer.Cell {
 		
 		return false;
 	}
-	
+	/**
+	 * check if the block can move
+	 * @return true if it can move, otherwise return false
+	 */
 	public boolean canMove() {
 		return !getBoolProp("fixedposition");
 	}
 	
+	/**
+	 * check if the block can rotate
+	 * @return true if it can rotate, otherwise return false
+	 */
 	public boolean canRotate() {
 		return !getBoolProp("fixedorientation");
 	}
 	
+	/**
+	 * move the block
+	 * @return true if the block is moved, otherwise return false
+	 */
 	public boolean rotate() {
 		if(!canRotate()) {
 			return false;
@@ -52,7 +67,10 @@ public class Block extends TiledMapTileLayer.Cell {
 		LazerChallenge.getInstance().getLevel().changed();
 		return true;
 	}
-	
+	/**
+	 * Change the orientation of block
+	 * @param orientation Initial orientation of block
+	 */
 	private void setOrientation(Orientation orientation) {
 		this.orientation = orientation;
 		this.setRotation(orientation.getAngle());
@@ -76,6 +94,7 @@ public class Block extends TiledMapTileLayer.Cell {
 		return outputs;
 	}
 	
+	
 	private boolean hasOriginInput(Orientation input) {
 		if(!originInputs.containsKey(input)) {
 			return false;
@@ -83,6 +102,7 @@ public class Block extends TiledMapTileLayer.Cell {
 		
 		return originInputs.get(input).booleanValue();
 	}
+	
 	
 	public boolean hasRequiredInputs() {
 		for(Orientation requiredInput : type.getRequiredInputs()) {
@@ -96,7 +116,9 @@ public class Block extends TiledMapTileLayer.Cell {
 	public void clearInputs() {
 		originInputs = new ObjectMap<Orientation, Boolean>();
 	}
-	
+	/**
+	 * @return the type of block
+	 */
 	public BlockType getType() {
 		return type;
 	}
