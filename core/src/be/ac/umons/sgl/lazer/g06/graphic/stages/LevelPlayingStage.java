@@ -36,7 +36,9 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	TextButton undoButton;
 	TextButton moveButton;
 	TextButton rotateButton;
-	
+	/**
+	 * Display whole game screen
+	 */
 	public LevelPlayingStage() {
 		super();
 		setTitle(game.getMode().toString()+" : "+level.getName());
@@ -64,7 +66,10 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		// get updated
 		level.addObserver(this);
 	}
-	
+	/**
+	 * Display the legend with all blocks on game screen
+	 * @param container
+	 */
 	private void addLegend(Table container) {
 		container.row();
 		Label label = new Label("Légende", skin, "label");
@@ -78,7 +83,11 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 			addLegendEntry(container, bt);
 		}
 	}
-	
+	/**
+	 * Display the pictures of blocks in the legend on the game screen
+	 * @param container
+	 * @param bt
+	 */
 	private void addLegendEntry(Table container, BlockType bt) {
 		container.row();
 		
@@ -118,7 +127,10 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		
 		return content;
 	}
-	
+	/**
+	 * Display informations of score and time on game screen
+	 * @param container
+	 */
 	private void addInfos(Table container) {
 		if(!score) return;
 		
@@ -154,7 +166,11 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		buttons.row();
 		buttons.add(undoButton).pad(5);
 	}
-	
+	/**
+	 * Add  launch laser button
+	 * @param container
+	 * @param box
+	 */
 	private void addLaserButton(Table container, boolean box) {
 		// no button in training mode
 		if(!score) return;
