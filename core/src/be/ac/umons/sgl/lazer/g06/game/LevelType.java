@@ -35,7 +35,7 @@ public class LevelType {
 		
 		label = Files.getContent(dirPath()+"/label.txt");
 		if(label == null) {
-			throw new GdxRuntimeException("File "+dirPath()+"/name.txt cannot be read.");
+			throw new GdxRuntimeException("File "+dirPath()+"/label.txt cannot be read.");
 		}
 		label = label.replaceAll("[\\r\\n]", "");
 		
