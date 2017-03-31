@@ -3,6 +3,8 @@ package be.ac.umons.sgl.lazer.g06.game;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.utils.Array;
 
+import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
+
 public class Lasers extends Cell {
 	Array<Orientation> inputs;
 	Array<Orientation> outputs;

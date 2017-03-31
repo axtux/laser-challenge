@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
+import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
+
 public class BlockType {
 	private final TextureRegion tr;
 	private final String name;
