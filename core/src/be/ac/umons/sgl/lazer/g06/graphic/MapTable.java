@@ -12,15 +12,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.game.Position;
-
+/**
+ * Class used to display a {@link Map} into scene2d user interface.
+ * Automatic OrthogonalTiledMapRenderer could not be used in this case.
+ */
 public class MapTable extends Table implements Observer {
-	Map map;
+	private Map map;
 	/* Auto renderer but not movable
 	OrthogonalTiledMapRenderer renderer;
 	//*/
 	
-	MapButton[][] buttons;
-	
+	private MapButton[][] buttons;
+	/**
+	 * Create Table representing {@link Map} map fill it with {@link MapButton}s.
+	 * @param map Map to display.
+	 */
 	public MapTable(Map map) {
 		this.map = map;
 		map.addObserver(this);
@@ -40,8 +46,13 @@ public class MapTable extends Table implements Observer {
 		//this.setTransform(true);
 		//this.rotateBy(90);
 	}
-	
-	public MapButton addMapButton(int x, int y) {
+	/**
+	 * Add map button with coordinates.
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 * @return Created MapButton.
+	 */
+	private MapButton addMapButton(int x, int y) {
 		Position pos = new Position(x, y, map.getLocation());
 		MapButton button = new MapButton(map, pos);
 		
@@ -51,8 +62,10 @@ public class MapTable extends Table implements Observer {
 		
 		return button;
 	}
-	
-	public void refreshAll() {
+	/**
+	 * Call refresh for all positions.
+	 */
+	private void refreshAll() {
 		Gdx.app.debug("MapTable.refreshAll", "ALL");
 		int h = map.getHeight();
 		int w = map.getWidth();
@@ -64,8 +77,12 @@ public class MapTable extends Table implements Observer {
 			this.row();
 		}
 	}
-	
-	public void refresh(int x, int y) {
+	/**
+	 * Call update on button.
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 */
+	private void refresh(int x, int y) {
 		buttons[y][x].update();
 	}
 	
@@ -84,12 +101,9 @@ public class MapTable extends Table implements Observer {
 			renderer.setView(camera);
 	}
 	//*/
-	
-	public void rotationChanged() {
-		super.rotationChanged();
-		
-	}
-	// Observer method
+	/**
+	 * Refresh all buttons
+	 */
 	public void update(Observable o, Object arg) {
 		this.refreshAll();
 	}
