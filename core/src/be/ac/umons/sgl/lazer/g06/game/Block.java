@@ -11,9 +11,9 @@ import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
  * Block to be inserted into map. Extends Cell to use already existing LibGDX map classes.
  */
 public class Block extends TiledMapTileLayer.Cell {
-	BlockType type;
-	Orientation orientation;
-	ObjectMap<Orientation, Boolean> originInputs;
+	private BlockType type;
+	private Orientation orientation;
+	private ObjectMap<Orientation, Boolean> originInputs;
 	/**
 	 * Create a block
 	 * @param type The type associated with this block.
@@ -32,7 +32,7 @@ public class Block extends TiledMapTileLayer.Cell {
 	 * @param name The name of the property.
 	 * @return True if the lower-cased property equals true or 1. False otherwise.
 	 */
-	public boolean getBoolProp(String name) {
+	private boolean getBoolProp(String name) {
 		MapProperties props = getTile().getProperties();
 		if(!props.containsKey(name)) {
 			return false;
