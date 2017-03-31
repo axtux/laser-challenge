@@ -1,5 +1,8 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
+/**
+ * Display a menu that contains game modes
+ */
 public class ModesStage extends AbstractStage {
 	
 	public ModesStage() {
