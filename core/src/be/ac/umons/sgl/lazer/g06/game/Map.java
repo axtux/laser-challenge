@@ -78,7 +78,10 @@ public class Map extends Observable {
 		addLayer("lasers");
 		fillLasersLayer();
 	}
-	
+	/**
+	 * add layer
+	 * @param name of the layer
+	 */
 	private void addLayer(String name) {
 		TiledMapTileLayer layer = new TiledMapTileLayer(mapWidth, mapHeight, tileSize, tileSize);
 		layer.setName(name);
@@ -219,7 +222,12 @@ public class Map extends Observable {
 	public boolean setBlock(Block block, Position pos) {
 		return setCell(BLOCKS_LAYER, block, pos);
 	}
-	
+	/**
+	 * 
+	 * @param position
+	 * @param fromOrientation
+	 * @return
+	 */
 	public boolean addInputLaser(Position position, Orientation fromOrientation) {
 		Lasers lasers = getLasers(position);
 		if(lasers == null) {
@@ -259,7 +267,11 @@ public class Map extends Observable {
 		
 		return tmtl.getCell(p.getX(), p.getY());
 	}
-	
+	/**
+	 * Get the cell 
+	 * @param pos the position of the cell
+	 * @return the cell
+	 */
 	public Cell getGround(Position pos) {
 		return getCell(GROUND_LAYER, pos);
 	}
