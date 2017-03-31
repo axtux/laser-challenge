@@ -19,13 +19,13 @@ import be.ac.umons.sgl.lazer.g06.game.orientations.StandardOrientation;
 public class LevelType {
 	static final String defaultType = "standard";
 	
-	Orientation orientationClass;
+	private Orientation orientationClass;
 	private OrderedMap<String, BlockType> blocks;
-	String name;
-	String label;
+	private String name;
+	private String label;
 	
-	TextureRegion input;
-	TextureRegion output;
+	private TextureRegion input;
+	private TextureRegion output;
 	/**
 	 * Create LevelType from directory name, located into level_types. At least 2 files are required :
 	 * - blocks.xml that describes blocks allowed for this LevelType. A DTD file describing XML format for blocks.xml is located at core/assets/XML_format/blocks.dtd

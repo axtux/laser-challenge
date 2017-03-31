@@ -16,15 +16,21 @@ import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.game.Position;
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
 import be.ac.umons.sgl.lazer.g06.listeners.MapClickListener;
-
+/**
+ * Display multiple layers of cell and run action on click.
+ */
 public class MapButton extends Button {
-	Map map;
-	Position pos;
-	TextureRegion inputTR;
-	TextureRegion outputTR;
-	Block block;
-	Lasers lasers;
-	
+	private Map map;
+	private Position pos;
+	private TextureRegion inputTR;
+	private TextureRegion outputTR;
+	private Block block;
+	private Lasers lasers;
+	/**
+	 * Create button representing position pos on map map.
+	 * @param map Map from which get cells and other displaying options.
+	 * @param pos Position on map to display.
+	 */
 	public MapButton(Map map, Position pos) {
 		super();
 		this.map = map;
@@ -35,17 +41,14 @@ public class MapButton extends Button {
 		
 		this.addListener(new MapClickListener(Input.Buttons.LEFT, pos, "ACTION_LEVEL_SELECT"));
 		this.addListener(new MapClickListener(Input.Buttons.RIGHT, pos, "ACTION_LEVEL_ROTATE"));
-		
+
+		updateBackground();
 		update();
-		setBackground();
 	}
-	
-	public void update() {
-		block = map.getBlock(pos);
-		lasers = map.getLasers(pos);
-	}
-	
-	public void setBackground() {
+	/**
+	 * Update background from map.
+	 */
+	private void updateBackground() {
 		Cell bg = map.getGround(pos);
 		TextureRegionDrawable d = new TextureRegionDrawable(bg.getTile().getTextureRegion());
 		
@@ -56,7 +59,16 @@ public class MapButton extends Button {
 		
 		this.setStyle(style);
 	}
-	
+	/**
+	 * Update display elements from map.
+	 */
+	public void update() {
+		block = map.getBlock(pos);
+		lasers = map.getLasers(pos);
+	}
+	/**
+	 * Draw block and lasers above background.
+	 */
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 		
@@ -64,8 +76,8 @@ public class MapButton extends Button {
 		drawLasers(batch);
 	}
 	/**
-	 * draw the block on map if it exists
-	 * @param batch
+	 * Draw the block from map if not null
+	 * @param batch Batch on which to draw.
 	 */
 	private void drawBlock(Batch batch) {
 		if(block == null) {
@@ -75,8 +87,8 @@ public class MapButton extends Button {
 		draw(batch, block.getTile().getTextureRegion(), block.getRotation());
 	}
 	/**
-	 * draw lasers on map if it exists
-	 * @param batch
+	 * Draw lasers from map if not null
+	 * @param batch Batch on which to draw.
 	 */
 	private void drawLasers(Batch batch) {
 		if(lasers == null) {
@@ -90,15 +102,28 @@ public class MapButton extends Button {
 			drawOutput(batch, output);
 		}
 	}
+	/**
+	 * Draw input
+	 * @param batch Batch on which to draw.
+	 */
 	private void drawInput(Batch batch, Orientation inputFrom) {
 		// laser input sprite comes from DOWN, inputFrom from UP
 		inputFrom = inputFrom.reverse();
 		draw(batch, inputTR, inputFrom.getAngle());
 	}
+	/**
+	 * Draw outputs
+	 * @param batch Batch on which to draw.
+	 */
 	private void drawOutput(Batch batch, Orientation outputTo) {
 		draw(batch, outputTR, outputTo.getAngle());
 	}
-	
+	/**
+	 * Draw a TextureRegion on batch with clockwise rotation.
+	 * @param batch Batch on which to draw.
+	 * @param tr TextureRegion to draw.
+	 * @param rotation Angle in degrees counted clockwise to rotate TextureRegion.
+	 */
 	private void draw(Batch batch, TextureRegion tr, int rotation) {
 		setOrigin(Align.center);
 		batch.draw(tr, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), 1, 1, -rotation);
