@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.Files;
+import be.ac.umons.sgl.lazer.g06.game.orientations.AdvancedOrientation;
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.orientations.StandardOrientation;
 /**
@@ -45,9 +46,8 @@ public class LevelType {
 		label = label.replaceAll("[\\r\\n]", "");
 		
 		String orientation = Files.getContent(dirPath()+"orientations.txt");
-		if(orientation != null && orientation.equals("advanced")) {
-			// TODO change to advanced
-			orientationClass = StandardOrientation.staticFirst();
+		if(orientation != null && orientation.trim().equals("advanced")) {
+			orientationClass = AdvancedOrientation.staticFirst();
 		} else {
 			orientationClass = StandardOrientation.staticFirst();
 		}
