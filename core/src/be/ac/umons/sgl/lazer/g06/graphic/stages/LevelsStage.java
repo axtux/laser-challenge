@@ -94,7 +94,7 @@ public class LevelsStage extends AbstractStage {
 		levelContainer.add(btn).minSize(80, 80).pad(10);
 		levelContainer.row();
 		
-		Label subtitle = new Label(level.getName(), skin, "small-label");
+		Label subtitle = new Label(level.getLabel(), skin, "small-label");
 		levelContainer.add(subtitle);
 		levelContainer.row();
 		

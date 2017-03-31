@@ -19,7 +19,10 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 import be.ac.umons.sgl.lazer.g06.game.Position.Location;
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
-
+/**
+ * Map containing a TiledMap with multiple layers and special methods to be used from LaserChallenge game.
+ * The first layer is used for the ground, the second layer for {@link Block}s and third layer for {@link Lasers}s.
+ */
 public class Map extends Observable {
 	private static final String MAP_PATH = "maps";
 	private static final int GROUND_LAYER = 0;
@@ -30,12 +33,11 @@ public class Map extends Observable {
 	private int mapWidth, mapHeight, tileSize;
 	private Location loc;
 	/**
-	 * Create Map with references from an other Map instance
-	 * Usually used for inventory
-	 * @param width
-	 * @param minSize
-	 * @param tileSize
-	 * @param loc
+	 * Create Map with fixed width, minimum size, tile size and a location. Used to create LaserChallenge inventory.
+	 * @param width Fixed map width.
+	 * @param minSize Minimum size. Height will be adapted to get at least minSize cells available per layer.
+	 * @param tileSize Size of the square tile in pixels.
+	 * @param loc Location of this map.
 	 */
 	public Map(int width, int minSize, int tileSize, Location loc) {
 		this.loc = loc;
@@ -55,7 +57,11 @@ public class Map extends Observable {
 		fillLayer(GROUND_LAYER, getColorCell(Color.WHITE));
 		addLayer("blocks");
 	}
-	
+	/**
+	 * Create map loading a TiledMap from tmx_map_name with location loc. Used for LaserChallenge playing map.
+	 * @param tmx_map_name Map file located in maps directory, without extension.
+	 * @param loc Location of this map.
+	 */
 	public Map(String tmx_map_name, Location loc) {
 		this.loc = loc;
 		
@@ -79,15 +85,18 @@ public class Map extends Observable {
 		fillLasersLayer();
 	}
 	/**
-	 * add layer
-	 * @param name of the layer
+	 * Add layer to the tiled map with the name name.
+	 * @param name Name of the newly created layer.
 	 */
 	private void addLayer(String name) {
 		TiledMapTileLayer layer = new TiledMapTileLayer(mapWidth, mapHeight, tileSize, tileSize);
 		layer.setName(name);
 		map.getLayers().add(layer);
 	}
-	
+	/**
+	 * @param c Color used to fill cell background.
+	 * @return Cell with TextureRegion matching color c.
+	 */
 	private Cell getColorCell(Color c) {
 		Texture tex = LazerChallenge.getInstance().getSkin().getTexture(c, tileSize);
 		TiledMapTile tile = new StaticTiledMapTile(new TextureRegion(tex));
@@ -95,6 +104,11 @@ public class Map extends Observable {
 		cell.setTile(tile);
 		return cell;
 	}
+	/**
+	 * Make all cells of the layer to be cell.
+	 * @param layer Layer to change cells from.
+	 * @param cell The cell to place on the layer.
+	 */
 	private void fillLayer(int layer, Cell cell) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		for(int x = 0; x < mapWidth; ++x) {
@@ -103,6 +117,9 @@ public class Map extends Observable {
 			}
 		}
 	}
+	/**
+	 * Fill laser layer with Lasers cells.
+	 */
 	private void fillLasersLayer() {
 		TiledMapTileLayer tmtl = getLayer(LASERS_LAYER);
 		for(int x = 0; x < mapWidth; ++x) {
@@ -111,7 +128,9 @@ public class Map extends Observable {
 			}
 		}
 	}
-	
+	/**
+	 * Check that map sizes match layer sizes and check that tile is squared.
+	 */
 	private void setSizes() {
 		// extract size from map properties
 		MapProperties props = map.getProperties();
@@ -148,25 +167,25 @@ public class Map extends Observable {
 		}
 	}
 	/**
-	 * @return the width
+	 * @return Map width.
 	 */
 	public int getWidth() {
 		return mapWidth;
 	}
 	/**
-	 * @return the height
+	 * @return Map height.
 	 */
 	public int getHeight() {
 		return mapHeight;
 	}
 	/**
-	 * @return the size of tile
+	 * @return Tile size in pixels.
 	 */
 	public int getTileSize() {
 		return tileSize;
 	}
 	/** 
-	 * @return the location
+	 * @return Location of this map.
 	 */
 	public Location getLocation() {
 		return loc;
@@ -174,8 +193,8 @@ public class Map extends Observable {
 	
 	/**
 	 * Check if the position is in the map
-	 * @param position
-	 * @return result
+	 * @param position Position to check.
+	 * @return True if position is in the map, false otherwise.
 	 */
 	public boolean inMap(Position position) {
 		if(position == null) {
@@ -192,11 +211,11 @@ public class Map extends Observable {
 		return true;
 	}
 	/**
-	 * Try to place a cell in map
-	 * @param layer
-	 * @param cell
-	 * @param p the position where the cell will be placed
-	 * @return false if the layer does not exist, or the position is not in map. Otherwise return true
+	 * Set a cell at position p on layer layer.
+	 * @param layer Layer on which to set the cell.
+	 * @param cell The cell to set.
+	 * @param p The position where the cell will be placed.
+	 * @return True on success, false on error.
 	 */
 	private boolean setCell(int layer, Cell cell, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
@@ -214,19 +233,19 @@ public class Map extends Observable {
 		return true;
 	}
 	/**
-	 * Try to place a block 
-	 * @param block
-	 * @param pos
-	 * @return result
+	 * Set a block at position pos on blocks layer.
+	 * @param block The block to set.
+	 * @param pos The position where to set the block.
+	 * @return True on success, false on error.
 	 */
 	public boolean setBlock(Block block, Position pos) {
 		return setCell(BLOCKS_LAYER, block, pos);
 	}
 	/**
-	 * 
-	 * @param position
-	 * @param fromOrientation
-	 * @return
+	 * Add input laser.
+	 * @param position Position on which to add the laser.
+	 * @param fromOrientation Orientation from which the laser is coming from.
+	 * @return True on success, false on error.
 	 */
 	public boolean addInputLaser(Position position, Orientation fromOrientation) {
 		Lasers lasers = getLasers(position);
@@ -237,6 +256,12 @@ public class Map extends Observable {
 		lasers.addInput(fromOrientation);
 		return true;
 	}
+	/**
+	 * Add output laser.
+	 * @param position Position on which to add the laser.
+	 * @param toOrientation Orientation to which the laser is going.
+	 * @return True on success, false on error.
+	 */
 	public boolean addOutputLaser(Position position, Orientation toOrientation) {
 		Lasers lasers = getLasers(position);
 		if(lasers == null) {
@@ -246,7 +271,10 @@ public class Map extends Observable {
 		lasers.addOutput(toOrientation);
 		return true;
 	}
-	
+	/**
+	 * @param i Layer number.
+	 * @return The layer associated with the number i or null if this layer does not exists.
+	 */
 	private TiledMapTileLayer getLayer(int i) {
 		if(i < 0 || i >= map.getLayers().getCount()) {
 			return null;
@@ -255,10 +283,9 @@ public class Map extends Observable {
 		return (TiledMapTileLayer) map.getLayers().get(i);
 	}
 	/**
-	 * Get the cell in the layer
-	 * @param layer
-	 * @param p the position of the cell
-	 * @return null if the layer is null or the position is not in map, otherwise return true
+	 * @param layer The layer on which to get the cell.
+	 * @param p The position of the cell
+	 * @return The cell at position p on layer layer or null on error.
 	 */
 	private Cell getCell(int layer, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
@@ -273,14 +300,18 @@ public class Map extends Observable {
 		return tmtl.getCell(p.getX(), p.getY());
 	}
 	/**
-	 * Get the cell 
-	 * @param pos the position of the cell
-	 * @return the cell
+	 * Get cell on ground layer.
+	 * @param pos The position of the cell
+	 * @return Cell representing ground of position pos or null on error.
 	 */
 	public Cell getGround(Position pos) {
 		return getCell(GROUND_LAYER, pos);
 	}
-	
+	/**
+	 * @param pos Position at which to get property.
+	 * @param name Name if the property.
+	 * @return String property from ground layer cell.
+	 */
 	public String getGroundProp(Position pos, String name) {
 		Cell cell = getCell(GROUND_LAYER, pos);
 		if(cell == null) {
@@ -294,7 +325,12 @@ public class Map extends Observable {
 		
 		return props.get(name).toString();
 	}
-	
+	/**
+	 * 
+	 * @param pos Position at which to get property.
+	 * @param name Name if the property.
+	 * @return True if property exists and has value of 1 or true, false otherwise.
+	 */
 	public boolean getGroundBoolProp(Position pos, String name) {
 		String value = getGroundProp(pos, name);
 		if(value == null) {
@@ -310,8 +346,9 @@ public class Map extends Observable {
 	}
 	
 	/**
-	 * @param pos in the layer
-	 * @return the block at this position
+	 * Get cell on blocks layer and cast it into Block object.
+	 * @param pos Position of the block.
+	 * @return The block at position pos or null on error.
 	 */
 	public Block getBlock(Position pos) {
 		return (Block) getCell(BLOCKS_LAYER, pos);
@@ -320,10 +357,17 @@ public class Map extends Observable {
 	 * @param pos the position in the layer
 	 * @return the laser at this position
 	 */
+	/**
+	 * Get cell on lasers layer and cast it into Lasers object.
+	 * @param pos Position of the lasers.
+	 * @return The lasers at position pos or null on error.
+	 */
 	public Lasers getLasers(Position pos) {
 		return (Lasers) getCell(LASERS_LAYER, pos);
 	}
-	
+	/**
+	 * @return Whether or not all blocks on this map have required inputs.
+	 */
 	public boolean hasRequiredInputs() {
 		Block block;
 		Position pos;
@@ -341,7 +385,7 @@ public class Map extends Observable {
 		return true;
 	}
 	/**
-	 * Launch laser on map
+	 * Launch lasers on map
 	 */
 	public void startLasers() {
 		// clear previous lasers
@@ -357,7 +401,11 @@ public class Map extends Observable {
 		
 		changed();
 	}
-	
+	/**
+	 * Simulate laser input on a position.
+	 * @param position Position on which the laser is coming.
+	 * @param inputFrom Orientation from which the laser is coming.
+	 */
 	private void laserInput(Position position, Orientation inputFrom) {
 		if(!inMap(position)) {
 			return;
@@ -394,7 +442,9 @@ public class Map extends Observable {
 			laserInput(output.nextPosition(position), output.reverse());
 		}
 	}
-	
+	/**
+	 * Notify observers because this object has been changed.
+	 */
 	private void changed() {
 		this.setChanged();
 		this.notifyObservers();

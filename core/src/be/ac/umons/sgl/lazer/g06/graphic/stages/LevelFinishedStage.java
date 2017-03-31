@@ -7,7 +7,7 @@ public class LevelFinishedStage extends AbstractLevelStage {
 	public LevelFinishedStage() {
 		super("Niveau terminé");
 		
-		addDoubleLabel("Niveau", level.getName());
+		addDoubleLabel("Niveau", level.getLabel());
 		if(game.getMode().hasScore()) {
 			addDoubleLabel("Statut", level.isWon() ? "Gagné" : "Perdu");
 			addDoubleLabel("Score", level.isWon() ? Integer.toString(level.getScore()) : "0");

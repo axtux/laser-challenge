@@ -1,6 +1,11 @@
 package be.ac.umons.sgl.lazer.g06.game;
-
+/**
+ * Position on map.
+ */
 public class Position {
+	/**
+	 * Location used to separate positions from map and inventory.
+	 */
 	public enum Location {
 		MAP, INVENTORY;
 	}
@@ -12,35 +17,46 @@ public class Position {
 	 */
 	@SuppressWarnings(value = { "unused" })
 	private Position() {}
-	
+	/**
+	 * Create position without location.
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 */
 	public Position(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
+	/**
+	 * Create position with location.
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 * @param loc Map location.
+	 */
 	public Position(int x, int y, Location loc) {
 		this(x, y);
 		this.loc = loc;
 	}
 	/**
-	 * @return the attribute x of object Position
+	 * @return X coordinate of this position
 	 */
 	public int getX() {
 		return x;
 	}
 	/**
-	 * @return the attribute y of object Position
+	 * @return Y coordinate of this position
 	 */
 	public int getY() {
 		return y;
 	}
 	/**
-	 * @return the Location object 
+	 * @return Map Location of this position
 	 */
 	public Location getLocation() {
 		return loc;
 	}
-	
+	/**
+	 * String representation of this position.
+	 */
 	public String toString() {
 		String s = "Position("+Integer.toString(x)+", "+Integer.toString(y);
 		if(loc != null) {
@@ -49,7 +65,9 @@ public class Position {
 		s += ")";
 		return s;
 	}
-	
+	/**
+	 * Test equality with another Position object.
+	 */
 	public boolean equals(Object o) {
 		if(o == null) {
 			return false;
