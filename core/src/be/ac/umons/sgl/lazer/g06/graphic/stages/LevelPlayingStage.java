@@ -19,23 +19,25 @@ import be.ac.umons.sgl.lazer.g06.game.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.game.Map;
 import be.ac.umons.sgl.lazer.g06.graphic.MapTable;
-
+/**
+ * Stage containing all required tools to play LaserChallenge 
+ */
 public class LevelPlayingStage extends AbstractLevelStage implements Observer {
-	boolean score;
+	private boolean score;
 	
-	Table mapTable;
-	Table leftTable;
-	Table rightTable;
+	private Table mapTable;
+	private Table leftTable;
+	private Table rightTable;
 	
-	Label scoreLabel;
-	Label timeLabel;
-	Label blockLabel;
-	Label restrictionLabel;
-	Table selectionContent;
+	private Label scoreLabel;
+	private Label timeLabel;
+	private Label blockLabel;
+	private Label restrictionLabel;
+	private Table selectionContent;
 	
-	TextButton undoButton;
-	TextButton moveButton;
-	TextButton rotateButton;
+	private TextButton undoButton;
+	private TextButton moveButton;
+	private TextButton rotateButton;
 	/**
 	 * Display whole game screen
 	 */
@@ -181,7 +183,9 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 		container.row();
 		addButton(container, "Lancer le lazer", "ACTION_LEVEL_LASER", "small-menu").pad(box ? 5 : 10);
 	}
-	
+	/**
+	 * Update eventual time and score, selected block, restriction, undo, move and rotate buttons state
+	 */
 	public void update(Observable o, Object arg) {
 		if(score) {
 			timeLabel.setText(Time.prettyTime(level.getRemainingTime(), false, false));

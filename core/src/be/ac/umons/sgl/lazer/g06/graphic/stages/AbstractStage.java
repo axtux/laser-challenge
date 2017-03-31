@@ -17,21 +17,28 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.graphic.MySkin;
 import be.ac.umons.sgl.lazer.g06.listeners.MyClickListener;
-
+/**
+ * Stage providing methods to easily create UI stages
+ */
 public abstract class AbstractStage extends Stage {
-	LazerChallenge game;
-	MySkin skin;
-	Hashtable<String, TextField> fields;
+	protected LazerChallenge game;
+	protected MySkin skin;
+	protected Hashtable<String, TextField> fields;
 	
-	Label title;
-	Table container;
-	Table leftHeader;
-	Table content;
-
+	protected Label title;
+	protected Table container;
+	protected Table leftHeader;
+	protected Table content;
+	/**
+	 * Create stage with empty title.
+	 */
 	public AbstractStage() {
 		this("");
 	}
-	
+	/**
+	 * Create stage with header.
+	 * @param title Title to be displayed into stage header.
+	 */
 	public AbstractStage(String title) {
 		// use ScreenViewport instead of ScalingViewport for elements to keep their size
 		super(new ScreenViewport());
@@ -45,7 +52,10 @@ public abstract class AbstractStage extends Stage {
 		addSubHeader(title);
 		initContent();
 	}
-	
+	/**
+	 * Set stage header text.
+	 * @param title Title
+	 */
 	protected void setTitle(String title) {
 		this.title.setText(title);
 	}

@@ -2,16 +2,22 @@ package be.ac.umons.sgl.lazer.g06.graphic.stages;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-
 /**
- * Display the screen that contains log in and log on
+ * Stage that allows user to log in/sign up containing fields USERNAME and PASSWORD
  */
 public class LocalLoginStage extends AbstractStage {
-
+	/**
+	 * Create stage with all values set to empty strings
+	 */
 	public LocalLoginStage() {
 		this("", "", "");
 	}
-	
+	/**
+	 * Create stage with predefined values.
+	 * @param usernameFieldValue Value to set on user name field.
+	 * @param passwordFieldValue Value to set on password field.
+	 * @param errorMessage Error message to be displayed in red at the bottom of the stage.
+	 */
 	public LocalLoginStage(String usernameFieldValue, String passwordFieldValue, String errorMessage) {
 		super("Connexion locale");
 		addHeaderButton("Retour", "MENU_LOGINS");

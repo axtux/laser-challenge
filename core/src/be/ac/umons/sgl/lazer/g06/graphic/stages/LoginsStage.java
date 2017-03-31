@@ -1,8 +1,6 @@
 package be.ac.umons.sgl.lazer.g06.graphic.stages;
-
 /**
  * Display a menu that contains all modes of connections
- *
  */
 public class LoginsStage extends AbstractStage {
 	

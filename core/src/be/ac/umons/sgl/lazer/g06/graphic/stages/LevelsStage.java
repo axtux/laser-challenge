@@ -12,14 +12,18 @@ import be.ac.umons.sgl.lazer.g06.game.LevelType;
 import be.ac.umons.sgl.lazer.g06.game.LevelTypes;
 import be.ac.umons.sgl.lazer.g06.game.Levels;
 import be.ac.umons.sgl.lazer.g06.listeners.LevelSelectorListener;
-
+/**
+ * Stage containing informations about all levels
+ */
 public class LevelsStage extends AbstractStage {
-	boolean center;
+	private boolean center;
 	
 	public LevelsStage() {
 		this(true);
 	}
-	
+	/**
+	 * @param center Whether level buttons have to be centered. Default is true.
+	 */
 	public LevelsStage(boolean center) {
 		super();
 		
@@ -74,13 +78,13 @@ public class LevelsStage extends AbstractStage {
 	}
 	/**
 	 * Add level button
-	 * @param container
-	 * @param level
-	 * @param number
-	 * @param unlocked
+	 * @param container Container in which to add button.
+	 * @param level Level to add.
+	 * @param number Number to display on button.
+	 * @param unlocked Whether this level is unlocked.
 	 * @return Whether score equals zero.
 	 */
-	protected boolean addLevelButton(Table container, Level level, int number, boolean unlocked) {
+	private boolean addLevelButton(Table container, Level level, int number, boolean unlocked) {
 		String str_number = Integer.toString(number);
 		Table levelContainer = new Table();
 		unlocked = unlocked || !game.getMode().hasScore();

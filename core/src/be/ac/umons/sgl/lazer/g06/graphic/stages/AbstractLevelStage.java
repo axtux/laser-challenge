@@ -7,12 +7,17 @@ import be.ac.umons.sgl.lazer.g06.game.Level;
  * To be used by UI stages that needs a level
  */
 public class AbstractLevelStage extends AbstractStage {
-	Level level;
-
+	protected Level level;
+	/**
+	 * Empty constructor
+	 */
 	protected AbstractLevelStage() {
-		this("");
+		super();
 	}
-	
+	/**
+	 * Create stage with title.
+	 * @param title Title to display on stage.
+	 */
 	protected AbstractLevelStage(String title) {
 		super(title);
 		if(game.getMode() == null) {
