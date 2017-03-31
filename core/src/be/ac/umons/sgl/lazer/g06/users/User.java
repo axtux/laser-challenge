@@ -92,7 +92,7 @@ public class User {
 		return Files.putContent(scorePath(levelName), str_score);
 	}
 	/**
-	 * Load score recored in file score
+	 * Load score recorded in file score
 	 * @param levelName the level associated to the score recorded
 	 * @throws NumberFormatException if the file contain no score
 	 * @return the score 
@@ -116,7 +116,11 @@ public class User {
 		//Gdx.app.debug("User.saveHistory", json_history);
 		return Files.putContent(historyPath(levelName), json_history);
 	}
-	
+	/**
+	 * Load history recorded in XML file
+	 * @param levelName the level associated to the history that will be loaded
+	 * @return null if the history does not exist, or the history if it exists
+	 */
 	@SuppressWarnings("unchecked")
 	public Array<Switch> loadHistory(String levelName){
 		String json_history = Files.getContent(historyPath(levelName));
