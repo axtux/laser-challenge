@@ -21,8 +21,10 @@ import be.ac.umons.sgl.lazer.g06.users.LocalUser.LoginException;
  * Manage actions from UI
  */
 public class MyActionListener implements ActionListener {
-	LazerChallenge game;
-	
+	private LazerChallenge game;
+	/**
+	 * Save LazerChallenge instance.
+	 */
 	public MyActionListener() {
 		this.game = LazerChallenge.getInstance();
 	}

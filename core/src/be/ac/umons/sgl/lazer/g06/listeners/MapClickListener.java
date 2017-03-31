@@ -9,21 +9,29 @@ import be.ac.umons.sgl.lazer.g06.game.Position;
  * Listener to keep track of tile clicks.
  */
 public class MapClickListener extends MyClickListener {
-	Position position;
+	/**
+	 * Keep track of last pressed button to check it out
+	 */
 	static Button previous;
 	/**
-	 * Create listener.
-	 * @param mouseButton Button from @Input.Buttons
-	 * @param position Position of tile.
-	 * @param action Action to send to game when mouseButton is clicked.
+	 * Position of the button to send to application.
+	 */
+	private Position position;
+	/**
+	 * Create listener of mouseButton to perform action with position.
+	 * @param mouseButton Mouse button that has to be pressed for this listener to be called, from {@link com.badlogic.gdx.Input.Buttons}
+	 * @param position Position to run action on.
+	 * @param action Action to run with position.
 	 */
 	public MapClickListener(int mouseButton, Position position, String action) {
 		super(mouseButton, action);
 		this.position = position;
 	}
-	
+	/**
+	 * Run action on position.
+	 */
 	public void clicked(InputEvent event, float x, float y) {
-		// uncheck previous checked button
+		// check out previously checked button
 		if(previous != null) {
 			previous.setChecked(false);
 		}
