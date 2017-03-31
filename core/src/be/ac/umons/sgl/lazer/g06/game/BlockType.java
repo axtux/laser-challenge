@@ -11,7 +11,11 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader.Element;
 
 import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
-
+/**
+ * BlockType defines displayed sprite, and input management of the associated block
+ * The design chosen is to have BlockType read from XML files and not defined programmatically.
+ * Informations about XML format can be found into {@link LevelType}.
+ */
 public class BlockType {
 	private final TextureRegion tr;
 	private final String name;
@@ -20,10 +24,11 @@ public class BlockType {
 	private final Array<Orientation> requiredInputs;
 	private final LevelType levelType;
 	/**
-	 * 
-	 * @param spritesPath 
-	 * @param block
-	 * @throws GdxRuntimeException if picture of block does not exist
+	 * Create BlockType.
+	 * @param levelType LevelType associated to this BlockType. Used for sprite path and for orientation instance.
+	 * @param block XML Element from which this BlockType has to be created. Informations about XML format can be found into {@link LevelType}.
+	 * @throws GdxRuntimeException if sprite cannot be accessed,
+	 * if block Element format is not valid or if an orientation used does not exists.
 	 */
 	public BlockType(LevelType levelType, Element block) {
 		this.levelType = levelType;
@@ -40,7 +45,11 @@ public class BlockType {
 		inputs = parseInputs(block.getChildByName("inputs"));
 		requiredInputs = parseRequiredInputs(block.getChildByName("required-inputs"));
 	}
-	
+	/**
+	 * Parsing method.
+	 * @param inputsElement XML Element
+	 * @return Parsed inputs in required format to be added as attribute.
+	 */
 	private HashMap<Orientation, Array<Orientation>> parseInputs(Element inputsElement) {
 		if(inputsElement == null) {
 			return new HashMap<Orientation, Array<Orientation>>(0);
@@ -75,7 +84,11 @@ public class BlockType {
 		
 		return inputs;
 	}
-	
+	/**
+	 * Parsing method.
+	 * @param inputsElement XML Element
+	 * @return Parsed inputs in required format to be added as attribute.
+	 */
 	private Array<Orientation> parseRequiredInputs(Element inputsElement) {
 		if(inputsElement == null) {
 			return new Array<Orientation>(0);
@@ -100,7 +113,7 @@ public class BlockType {
 		return inputs;
 	}
 	/**
-	 * @return the sprite of block
+	 * @return TextureRegion representing the sprite of block
 	 */
 	public TextureRegion getTextureRegion() {
 		return tr;
@@ -118,7 +131,11 @@ public class BlockType {
 	public String getLabel() {
 		return label;
 	}
-	
+	/**
+	 * Simulate laser input into this type of block.
+	 * @param orientation Laser input orientation.
+	 * @return Laser output orientations going out of this block because of input.
+	 */
 	public Array<Orientation> input(Orientation orientation) {
 		Array<Orientation> orientations = inputs.get(orientation);
 		if(orientations == null) {
@@ -126,7 +143,10 @@ public class BlockType {
 		}
 		return orientations;
 	}
-	
+	/**
+	 * Required inputs must be satisfied for a level to be won.
+	 * @return Required input orientations.
+	 */
 	public Array<Orientation> getRequiredInputs() {
 		return requiredInputs;
 	}
