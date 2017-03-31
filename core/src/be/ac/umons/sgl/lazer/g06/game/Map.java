@@ -254,7 +254,12 @@ public class Map extends Observable {
 		
 		return (TiledMapTileLayer) map.getLayers().get(i);
 	}
-	
+	/**
+	 * Get the cell in the layer
+	 * @param layer
+	 * @param p the position of the cell
+	 * @return null if the layer is null or the position is not in map, otherwise return true
+	 */
 	private Cell getCell(int layer, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		if(tmtl == null) {
