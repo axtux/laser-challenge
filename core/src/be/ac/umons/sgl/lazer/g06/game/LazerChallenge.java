@@ -14,7 +14,8 @@ import be.ac.umons.sgl.lazer.g06.listeners.MyActionListener;
 import be.ac.umons.sgl.lazer.g06.users.User;
 
 /**
- * Controller of the game
+ * Controller of the game.
+ * Contains skin, actual displayed stage, actual connected user, actual more and actual selected level.
  */
 public class LazerChallenge extends Game {
 	// default to fullHD resolution
