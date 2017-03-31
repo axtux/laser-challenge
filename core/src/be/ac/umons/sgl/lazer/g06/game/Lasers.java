@@ -9,8 +9,8 @@ import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
  * Can contain multiple input/output orientations.
  */
 public class Lasers extends Cell {
-	Array<Orientation> inputs;
-	Array<Orientation> outputs;
+	private Array<Orientation> inputs;
+	private Array<Orientation> outputs;
 	/**
 	 * Default constructor initialize inputs and outputs Arrays.
 	 */
