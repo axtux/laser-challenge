@@ -36,7 +36,9 @@ public class LevelPlayingStage extends AbstractLevelStage implements Observer {
 	TextButton undoButton;
 	TextButton moveButton;
 	TextButton rotateButton;
-	
+	/**
+	 * Display whole game screen
+	 */
 	public LevelPlayingStage() {
 		super();
 		setTitle(game.getMode().toString()+" : "+level.getName());

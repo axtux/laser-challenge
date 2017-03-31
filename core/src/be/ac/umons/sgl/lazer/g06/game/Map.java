@@ -32,7 +32,10 @@ public class Map extends Observable {
 	/**
 	 * Create Map with references from an other Map instance
 	 * Usually used for inventory
-	 * @param reference
+	 * @param width
+	 * @param minSize
+	 * @param tileSize
+	 * @param loc
 	 */
 	public Map(int width, int minSize, int tileSize, Location loc) {
 		this.loc = loc;
@@ -141,23 +144,36 @@ public class Map extends Observable {
 			throw new GdxRuntimeException("ground tile size must equal map tile size");
 		}
 	}
-	
+	/**
+	 * @return the width
+	 */
 	public int getWidth() {
 		return mapWidth;
 	}
-	
+	/**
+	 * @return the height
+	 */
 	public int getHeight() {
 		return mapHeight;
 	}
-	
+	/**
+	 * @return the size of tile
+	 */
 	public int getTileSize() {
 		return tileSize;
 	}
-	
+	/** 
+	 * @return the location
+	 */
 	public Location getLocation() {
 		return loc;
 	}
 	
+	/**
+	 * Check if the position is in the map
+	 * @param position
+	 * @return result
+	 */
 	public boolean inMap(Position position) {
 		if(position == null) {
 			return false;
@@ -172,7 +188,13 @@ public class Map extends Observable {
 		
 		return true;
 	}
-	
+	/**
+	 * Try to place a cell in map
+	 * @param layer
+	 * @param cell
+	 * @param p the position where the cell will be placed
+	 * @return false if the layer does not exist, or the position is not in map. Otherwise return true
+	 */
 	private boolean setCell(int layer, Cell cell, Position p) {
 		TiledMapTileLayer tmtl = getLayer(layer);
 		if(tmtl == null) {
@@ -188,7 +210,12 @@ public class Map extends Observable {
 		this.changed();
 		return true;
 	}
-	
+	/**
+	 * Try to place a block 
+	 * @param block
+	 * @param pos
+	 * @return result
+	 */
 	public boolean setBlock(Block block, Position pos) {
 		return setCell(BLOCKS_LAYER, block, pos);
 	}
