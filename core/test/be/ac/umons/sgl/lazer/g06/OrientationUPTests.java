@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import be.ac.umons.sgl.lazer.g06.game.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position;
+import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
 
 public class OrientationUPTests {
 	Orientation o = Orientation.UP;

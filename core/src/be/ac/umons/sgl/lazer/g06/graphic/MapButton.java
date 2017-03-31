@@ -13,8 +13,8 @@ import be.ac.umons.sgl.lazer.g06.game.Block;
 import be.ac.umons.sgl.lazer.g06.game.Lasers;
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.Map;
-import be.ac.umons.sgl.lazer.g06.game.Orientation;
 import be.ac.umons.sgl.lazer.g06.game.Position;
+import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
 import be.ac.umons.sgl.lazer.g06.listeners.MapClickListener;
 
 public class MapButton extends Button {

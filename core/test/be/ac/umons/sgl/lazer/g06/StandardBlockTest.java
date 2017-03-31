@@ -12,7 +12,7 @@ import be.ac.umons.sgl.lazer.g06.game.Block;
 import be.ac.umons.sgl.lazer.g06.game.BlockType;
 import be.ac.umons.sgl.lazer.g06.game.LazerChallenge;
 import be.ac.umons.sgl.lazer.g06.game.LevelType;
-import be.ac.umons.sgl.lazer.g06.game.Orientation;
+import be.ac.umons.sgl.lazer.g06.game.orientations.Orientation;
 
 @RunWith(GdxTestRunner.class)
 public class StandardBlockTest {
