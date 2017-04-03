@@ -418,15 +418,7 @@ public class Level extends Observable {
 	 * @return True on success, false on error.
 	 */
 	private boolean moveTo(Position oldPos, Position newPos) {
-		if(oldPos == null) {
-			Gdx.app.error("Level.moveTo", "oldPos is null");
-			return false;
-		}
-		if(newPos == null) {
-			Gdx.app.error("Level.moveTo", "newPos is null");
-			return false;
-		}
-		// unavailable
+		// check null or unavailable property
 		if(!isAvailable(oldPos) || !isAvailable(newPos)) {
 			Gdx.app.debug("Level.moveTo", "one pos not available");
 			return false;
@@ -446,8 +438,13 @@ public class Level extends Observable {
 		}
 		
 		// one-time
-		if(isOneTime(oldPos)) {
+		if(oldBlock != null && isOneTime(oldPos)) {
 			Gdx.app.debug("Level.moveTo", "old pos is one-time");
+			return false;
+		}
+		// one-time
+		if(newBlock != null && isOneTime(newPos)) {
+			Gdx.app.debug("Level.moveTo", "new pos is one-time");
 			return false;
 		}
 		
