@@ -1,0 +1,6 @@
+*.aux
+*.log
+*.gz
+*.gz(busy)
+*.out
+*.pdf
