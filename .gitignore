@@ -101,10 +101,10 @@ nb-configuration.xml
 /local.properties
 .gradle/
 gradle-app.setting
-/build/
+/implementation/build/
 /android/build/
-/core/build/
-/desktop/build/
+/implementation/core/build/
+/implementation/desktop/build/
 /html/build/
 /ios/build/
 /ios-moe/build/
@@ -129,3 +129,4 @@ users/
 *.cb
 *.cb2
 *tex.gz
+
